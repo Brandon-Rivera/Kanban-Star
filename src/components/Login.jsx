@@ -1,9 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ErrorModal from "./ErrorModal";
+import './Login.css'
 
 
 export const Login = (props) => {
     const navigate = useNavigate();
+    const [modalShow, setModalShow] = useState(false);
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
 
@@ -26,8 +29,13 @@ export const Login = (props) => {
 
         const data = await response.json();
 
-        localStorage.setItem('apikey', data.apikey);
-        navigate('/workspace'); 
+        if (data.response === 'Invalid email or password.') {
+            setModalShow(true);
+        }
+        else {
+            localStorage.setItem('apikey', data.apikey);
+            navigate('/workspace');
+        }
 
         console.log(data);
     }
@@ -43,6 +51,7 @@ export const Login = (props) => {
                 <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="pass" name="pass" />
                 <button type="submit">Iniciar sesión</button>
             </form>
+            <ErrorModal show={modalShow} title='Error master!' message='Usuario o contraseña incorrectos' onHide={() => setModalShow(false)} />
         </div>
     )
 }
