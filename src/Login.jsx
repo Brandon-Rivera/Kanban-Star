@@ -25,6 +25,10 @@ export const Login = (props) => {
             });
 
         const data = await response.json();
+
+        localStorage.setItem('apikey', data.apikey);
+        navigate('/workspace'); 
+
         console.log(data);
     }
 
