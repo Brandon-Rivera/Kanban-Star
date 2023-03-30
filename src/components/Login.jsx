@@ -9,12 +9,15 @@ export const Login = (props) => {
     const [modalShow, setModalShow] = useState(false);
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+    const [domain, setDomain] = useState('');
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const values = {
             email: email,
-            pass: pass
+            pass: pass,
+            domain: domain
         };
         console.log(values);
 
@@ -45,10 +48,12 @@ export const Login = (props) => {
             <h1>¡Bienvenido!</h1>
             <h2>Introduce tus credenciales de Kanbanize</h2>
             <form className="login-form" onSubmit={handleSubmit}>
-                <label htmlFor="email">correo electrónico</label>
+                <label htmlFor="email">Correo electrónico</label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="tucorreo@gmail.com" id="email" name="email" />
-                <label htmlFor="password">contraseña</label>
+                <label htmlFor="password">Contraseña</label>
                 <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="pass" name="pass" />
+                <label htmlFor="username">Dominio</label>
+                <input value={domain} onChange={(e) => setDomain(e.target.value)} type="username" placeholder="domino" id="domain" name="domain" />
                 <button type="submit">Iniciar sesión</button>
             </form>
             <ErrorModal show={modalShow} title='Error master!' message='Usuario o contraseña incorrectos' onHide={() => setModalShow(false)} />
