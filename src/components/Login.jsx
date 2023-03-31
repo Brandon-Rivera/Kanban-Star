@@ -45,9 +45,9 @@ export const Login = (props) => {
             <h1>¡Bienvenido!</h1>
             <h2>Introduce tus credenciales de Kanbanize</h2>
             <form className="login-form" onSubmit={handleSubmit}>
-                <label htmlFor="email">correo electrónico</label>
+                <label htmlFor="email">Correo electrónico</label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="tucorreo@gmail.com" id="email" name="email" />
-                <label htmlFor="password">contraseña</label>
+                <label htmlFor="password">Contraseña</label>
                 <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="pass" name="pass" />
                 <button type="submit">Iniciar sesión</button>
             </form>
