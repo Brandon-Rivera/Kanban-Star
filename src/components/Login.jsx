@@ -9,12 +9,15 @@ export const Login = (props) => {
     const [modalShow, setModalShow] = useState(false);
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+    const [domain, setDomain] = useState('');
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const values = {
             email: email,
-            pass: pass
+            pass: pass,
+            domain: domain
         };
         console.log(values);
 
@@ -29,7 +32,7 @@ export const Login = (props) => {
 
         const data = await response.json();
 
-        if (data.response === 'Invalid email or password.') {
+        if (data.status === false) {
             setModalShow(true);
         }
         else {
@@ -49,9 +52,12 @@ export const Login = (props) => {
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="tucorreo@gmail.com" id="email" name="email" />
                 <label htmlFor="password">Contraseña</label>
                 <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="pass" name="pass" />
+                <label htmlFor="username">Dominio</label>
+                <input value={domain} onChange={(e) => setDomain(e.target.value)} type="username" placeholder="domino" id="domain" name="domain" />
+                <label/>
                 <button type="submit">Iniciar sesión</button>
             </form>
-            <ErrorModal show={modalShow} title='Error master!' message='Usuario o contraseña incorrectos' onHide={() => setModalShow(false)} />
+            <ErrorModal show={modalShow} title='Error máster!' message='Usuario, contraseña o dominio incorrectos' onHide={() => setModalShow(false)} />
         </div>
     )
 }
