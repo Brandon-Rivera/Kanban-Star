@@ -1,0 +1,13 @@
+{
+    "login":{
+        "hello": "Hello",
+        "welcome": "Welcome!",
+        "login-with-credentials": "Login with your Kanbanize credentials",
+        "e-mail": "E-mail",
+        "e-mail-placeholder": "yourmail@gmail.com",
+        "password": "Password",
+        "domain": "Domain",
+        "domain-placeholder":"domain",
+        "login": "Login"
+    }
+}
