@@ -9,5 +9,9 @@
         "domain": "Dominio",
         "domain-placeholder":"dominio",
         "login": "Iniciar sesión"
+    },
+
+    "workspace":{
+        "workspace": "Espacio de trabajo"
     }
 }

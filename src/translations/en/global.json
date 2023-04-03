@@ -9,5 +9,9 @@
         "domain": "Domain",
         "domain-placeholder":"domain",
         "login": "Login"
+    },
+
+    "workspace":{
+        "workspace": "Workspace"
     }
 }

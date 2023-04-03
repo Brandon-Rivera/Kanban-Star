@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorModal from "./ErrorModal";
 import './Login.css'
@@ -13,18 +13,24 @@ export const Login = (props) => {
     const [pass, setPass] = useState('');
     const [domain, setDomain] = useState('');
     const [t, i18n] = useTranslation("global");
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(() => {
+        const savedState = JSON.parse(localStorage.getItem('isChecked'));
+        return savedState ?? false;
+      });  
 
     function handleCheckboxChange(event) {
         setIsChecked(event.target.checked);
         if (event.target.checked) {
-          // Do something when the checkbox is checked
             i18n.changeLanguage("en");
         }
         else{
             i18n.changeLanguage("es");
         }
     }
+
+    useEffect(() => {
+        localStorage.setItem('isChecked', JSON.stringify(isChecked));
+      }, [isChecked]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -61,12 +67,12 @@ export const Login = (props) => {
 
     return (
         <div className="auth-form-container">
-        <center className="right">
-            <label class="switch">
-                <input id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} ></input>
+        <center className="language-button">
+            <label className="switch">
+                <input id="language-toggle" className="check-toggle check-toggle-round-flat" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} ></input>
                 <label for="language-toggle"></label>
-                <span class="on">ES</span>
-                <span class="off">EN</span>
+                <span className="on">ES</span>
+                <span className="off">EN</span>
             </label>
         </center>
             <h1 className="derecha">{t("login.hello")}</h1>

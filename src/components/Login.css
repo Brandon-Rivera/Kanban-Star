@@ -71,7 +71,7 @@ button {
   
   .switch > span.on {
     left: 0;
-    padding-left: 2px;
+    padding-left: 4px;
     color: #000000;
   }
   
@@ -142,17 +142,13 @@ button {
     transition: margin 0.2s;
   }
   
-  input.check-toggle-round-flat:checked + label {
-  }
+  /*input.check-toggle-round-flat:checked + label {
+  }*/
   
   input.check-toggle-round-flat:checked + label:after {
     margin-left: 44px;
   }
 
-.right {
+.language-button {
     text-align: right;
-}
-
-.left {
-    text-align: left;
 }
