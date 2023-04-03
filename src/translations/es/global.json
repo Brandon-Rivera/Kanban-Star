@@ -1,0 +1,17 @@
+{
+    "login":{
+        "hello": "Hola",
+        "welcome": "¡Bienvenido!",
+        "login-with-credentials": "Introduce tus credenciales de Kanbanize",
+        "e-mail": "Correo electrónico",
+        "e-mail-placeholder": "tucorreo@gmail.com",
+        "password": "Contraseña",
+        "domain": "Dominio",
+        "domain-placeholder":"dominio",
+        "login": "Iniciar sesión"
+    },
+
+    "workspace":{
+        "workspace": "Espacio de trabajo"
+    }
+}
