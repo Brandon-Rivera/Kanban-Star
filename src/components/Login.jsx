@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ErrorModal from "./ErrorModal";
 import './Login.css'
 import { useTranslation } from "react-i18next";
-import { changeLanguage } from "i18next";
+//import { changeLanguage } from "i18next";
 
 
 export const Login = (props) => {
@@ -66,6 +66,7 @@ export const Login = (props) => {
     
 
     return (
+        <div className="App">
         <div className="auth-form-container">
         <center className="language-button">
             <label className="switch">
@@ -89,6 +90,7 @@ export const Login = (props) => {
                 <button type="submit">{t("login.login")}</button>
             </form>
             <ErrorModal show={modalShow} title='Error máster!' message='Usuario, contraseña o dominio incorrectos' onHide={() => setModalShow(false)} />
+        </div>
         </div>
     )
 }
