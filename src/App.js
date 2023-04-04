@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from "./components/Login";
@@ -9,13 +9,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
+  const [apikey, setApikey] = useState('false');
+
+  useEffect(() => {
+    const token = localStorage.getItem('apikey');
+    if (token !== 'false') setApikey(token);
+    else setApikey('false');
+    console.log('apikey: ', apikey);
+  }, [apikey]);
+
   return (
     <div>
       <Router>
-        <Navbar/>
+        { apikey !== 'false' && <Navbar />}
         <Routes>
+
+
           <Route path="/" element={<Login />}></Route>
-          <Route path="/workspace" element={<Workspace />}></Route>
+          <Route path="/workspace" element={apikey !== 'false' && <Workspace />}></Route>
+
         </Routes>
       </Router>
     </div>

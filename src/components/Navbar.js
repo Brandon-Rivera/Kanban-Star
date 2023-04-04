@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
+
+//Importaciones de bootstrap
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+
+//Importaciones de iconos
 import { AiFillMessage } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { BsFillGearFill } from "react-icons/bs";
@@ -9,8 +13,10 @@ import { BsFillGearFill } from "react-icons/bs";
 export const NavBar = () => {
 
 	const navigate = useNavigate();
+	
+	//Funcion para cerrar sesion
 	const handleLogout = () => {
-		localStorage.setItem("apikey", null);
+		localStorage.setItem("apikey", 'false');
 		navigate('/')
 	}
 
