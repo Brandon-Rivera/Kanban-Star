@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import ErrorModal from "./ErrorModal";
 import './Login.css'
 import { useTranslation } from "react-i18next";
-
+import { useNavigate } from "react-router-dom";
+import ErrorModal from "./ErrorModal";
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
@@ -11,11 +10,13 @@ import Collapse from 'react-bootstrap/Collapse';
 
 
 export const Login = (props) => {
-    const [open, setOpen] = useState(false);
+
+    // Asignacion de variables y hooks
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
     const [modalShow, setModalShow] = useState(false);
-    const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+    const [email, setEmail] = useState('');
     const [domain, setDomain] = useState('');
     const [t, i18n] = useTranslation("global");
     const [isChecked, setIsChecked] = useState(() => {
@@ -23,6 +24,7 @@ export const Login = (props) => {
         return savedState ?? false;
     });
 
+    //
     function handleCheckboxChange(event) {
         setIsChecked(event.target.checked);
         if (event.target.checked) {
@@ -33,10 +35,12 @@ export const Login = (props) => {
         }
     }
 
+    //
     useEffect(() => {
         localStorage.setItem('isChecked', JSON.stringify(isChecked));
     }, [isChecked]);
 
+    //Funcion para mandar peticion de login al API
     const handleSubmit = async (e) => {
         e.preventDefault();
         const values = {
@@ -95,7 +99,6 @@ export const Login = (props) => {
                     <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="pass" name="pass" />
                     <label htmlFor="username">{t("login.domain")}</label>
                     <input value={domain} onChange={(e) => setDomain(e.target.value)} type="username" placeholder={t("login.domain-placeholder")} id="domain" name="domain" />
-                    <label />
                     <Button type="submit" variant="dark">{t("login.login")}</Button>
                 </form>
 

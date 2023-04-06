@@ -27,11 +27,12 @@
 
 label {
     text-align: left;
-    padding: 0.25rem 0;
+    padding: 0.25rem auto;
+    margin: 0.5rem;
 }
 
 input {
-    margin: 0.5rem 0;
+    margin: 0.5rem;
     padding: 1rem;
     border: none;
     border-radius: 10px;
