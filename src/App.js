@@ -11,21 +11,35 @@ function App() {
 
   const [apikey, setApikey] = useState('false');
 
+  setTimeout(() => {
+    localStorage.removeItem('apikey');
+  }, 36000000);
+
   useEffect(() => {
-    const token = localStorage.getItem('apikey');
-    if (token !== 'false') setApikey(token);
-    else setApikey('false');
-    console.log('apikey: ', apikey);
-  }, [apikey]);
+
+    //Funcion para obtener el Apikey
+    const getApikey = () => {
+      const token = localStorage.getItem('apikey');
+      if (token !== 'false') {
+        setApikey(token);
+      }
+      else {
+        setApikey('false');
+      }
+    }
+
+    getApikey()
+
+  }, []);
 
   return (
     <div>
       <Router>
-        { apikey !== 'false' && <Navbar />}
+        {apikey !== 'false' && <Navbar />}
         <Routes>
 
 
-          <Route path="/" element={<Login />}></Route>
+          <Route path="/" element={apikey === 'false' && <Login />}></Route>
           <Route path="/workspace" element={apikey !== 'false' && <Workspace />}></Route>
 
         </Routes>

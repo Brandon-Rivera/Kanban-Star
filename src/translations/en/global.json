@@ -8,7 +8,9 @@
         "password": "Password",
         "domain": "Domain",
         "domain-placeholder":"domain",
-        "login": "Login"
+        "login": "Login",
+        "WhatDomain": "What is domain?",
+        "DescDomain": "In your Kanbanize link you have this: https://[DOMAIN].kanbanize.com/"
     },
 
     "workspace":{

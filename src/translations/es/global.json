@@ -8,7 +8,9 @@
         "password": "Contraseña",
         "domain": "Dominio",
         "domain-placeholder":"dominio",
-        "login": "Iniciar sesión"
+        "login": "Iniciar sesión",
+        "WhatDomain": "¿Qué es el dominio?",
+        "DescDomain": "En tu link de Kanbanize tienes esto: https://[DOMINIO].kanbanize.com/"
     },
 
     "workspace":{
