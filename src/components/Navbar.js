@@ -9,7 +9,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { BiLogOut } from "react-icons/bi";
 import { BsFillGearFill } from "react-icons/bs";
 
-export const NavBar = () => {
+const NavBar = () => {
 
 	const navigate = useNavigate();
 	
@@ -36,8 +36,8 @@ export const NavBar = () => {
 					<Nav className="me-auto">
 					</Nav>
 					<Nav>
-						<Nav.Link><BsFillGearFill size={45} color={'white'}/></Nav.Link>
-						<Nav.Link onClick={() => handleLogout()}><BiLogOut size={45} color={'white'}/></Nav.Link>	
+						<Nav.Link><BsFillGearFill size={45} color={'white'}/> Configuración</Nav.Link>
+						<Nav.Link onClick={() => handleLogout()}><BiLogOut size={45} color={'white'}/> Cerrar sesión</Nav.Link>	
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

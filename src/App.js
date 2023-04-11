@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from "./components/Login";
 import { Workspace } from "./components/Workspace";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import Navbar from "./components/Navbar";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { MainLayout } from "./components/MainLayout";
 
 function App() {
 
@@ -14,18 +14,14 @@ function App() {
   }, 36000000);
 
   return (
-    <div>
-      <Router>
-        {/* Condicion para que muestre un componente dependiendo si hay APIKEY o no */}
-        <ProtectedRoute><Navbar /></ProtectedRoute>
+    <Router>
         <Routes>
-
           <Route path="/" element={<Login />}></Route>
-          <Route path="/workspace" element={<ProtectedRoute><Workspace /></ProtectedRoute>}></Route>
-
+          <Route path="/workspace" element={<ProtectedRoute><MainLayout/></ProtectedRoute>}>
+            <Route index element={<Workspace/>}></Route>
+          </Route>
         </Routes>
-      </Router>
-    </div>
+    </Router>
   );
 }
 
