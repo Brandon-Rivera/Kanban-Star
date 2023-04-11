@@ -48,7 +48,7 @@ export const Login = (props) => {
             pass: pass,
             domain: domain
         };
-        console.log(values);
+        //console.log(values);
 
         const response = await fetch(`http://localhost:3001/login`,
             {
@@ -69,7 +69,7 @@ export const Login = (props) => {
             navigate('/workspace');
         }
 
-        console.log(data);
+        //console.log(data);
     }
 
 
@@ -82,7 +82,7 @@ export const Login = (props) => {
                 <center className="language-button">
                     <label className="switch">
                         <input id="language-toggle" className="check-toggle check-toggle-round-flat" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} ></input>
-                        <label for="language-toggle"></label>
+                        <label htmlFor="language-toggle"></label>
                         <span className="on">ES</span>
                         <span className="off">EN</span>
                     </label>

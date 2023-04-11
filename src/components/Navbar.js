@@ -6,7 +6,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 //Importaciones de iconos
-import { AiFillMessage } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { BsFillGearFill } from "react-icons/bs";
 
@@ -16,7 +15,7 @@ export const NavBar = () => {
 	
 	//Funcion para cerrar sesion
 	const handleLogout = () => {
-		localStorage.setItem("apikey", 'false');
+		localStorage.removeItem('apikey');
 		navigate('/')
 	}
 
@@ -38,7 +37,6 @@ export const NavBar = () => {
 					</Nav>
 					<Nav>
 						<Nav.Link><BsFillGearFill size={45} color={'white'}/></Nav.Link>
-						<Nav.Link><AiFillMessage size={45} color={'white'}/></Nav.Link>
 						<Nav.Link onClick={() => handleLogout()}><BiLogOut size={45} color={'white'}/></Nav.Link>	
 					</Nav>
 				</Navbar.Collapse>
