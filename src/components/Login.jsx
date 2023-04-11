@@ -48,9 +48,10 @@ export const Login = (props) => {
             pass: pass,
             domain: domain
         };
-        //console.log(values);
 
-        const response = await fetch(`http://localhost:3001/login`,
+        const api = "http://localhost:3001";
+
+        const response = await fetch(`${api}/login`,
             {
                 method: 'POST',
                 headers: {
@@ -69,7 +70,6 @@ export const Login = (props) => {
             navigate('/workspace');
         }
 
-        //console.log(data);
     }
 
 
@@ -113,7 +113,7 @@ export const Login = (props) => {
                 </Collapse>
 
                 {/* Modal que avisa al usuario cuando tiene un error en el inicio de sesión */}
-                <ErrorModal show={modalShow} title='Error máster!' message='Usuario, contraseña o dominio incorrectos' onHide={() => setModalShow(false)} />
+                <ErrorModal show={modalShow} title='Error de inicio de sesión!' message='Usuario, contraseña o dominio incorrectos' onHide={() => setModalShow(false)} />
             </div>
         </div>
     )
