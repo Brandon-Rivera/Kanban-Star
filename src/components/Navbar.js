@@ -16,13 +16,13 @@ const NavBar = () => {
 	//Funcion para cerrar sesion
 	const handleLogout = () => {
 		localStorage.removeItem('apikey');
-		navigate('/')
+		navigate('/login')
 	}
 
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
 			<Container>
-				<Navbar.Brand onClick={() => navigate('/')}>
+				<Navbar.Brand onClick={() => navigate('/workspace')}>
 					<img
 						src="/assets/Kanbanize-blanco.png"
 						width="150"
@@ -33,8 +33,6 @@ const NavBar = () => {
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
-					<Nav className="me-auto">
-					</Nav>
 					<Nav>
 						<Nav.Link><BsFillGearFill size={45} color={'white'}/> Configuración</Nav.Link>
 						<Nav.Link onClick={() => handleLogout()}><BiLogOut size={45} color={'white'}/> Cerrar sesión</Nav.Link>	
