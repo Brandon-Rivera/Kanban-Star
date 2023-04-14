@@ -5,7 +5,7 @@ export const Board = () => {
     return (
         <>
             <ListGroup as="ul">
-                <ListGroup.Item as="li" active>
+                <ListGroup.Item className='title' as="li" active>
                     Cras justo odio
                 </ListGroup.Item>
             </ListGroup>
