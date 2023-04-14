@@ -55,15 +55,13 @@ import './Workspace.css'
 
 export function Workspace() {
 
+    const [dataBoard, setDataBoard] = useState({ data: []});
+
     const values = {
         domain: "university6y",
         userid: 7,
         apikey: localStorage.getItem('apikey')
     }
-
-    useEffect(() => {
-        getBoards()
-    }, [])
 
     const getBoards = async () => {
 
@@ -75,24 +73,32 @@ export function Workspace() {
             body: JSON.stringify(values)
         })
         const data = await response.json()
+        console.log('data', data)
+        setDataBoard(data)
     }
 
+    useEffect(() => {
+        getBoards()
+    }, [dataBoard])
+
+    console.log('databoard', dataBoard)
+    console.log('databoard.data[0].name', dataBoard.data[0].name)
 
     return (
         <div className="box">
             {
-                data.map(data => (
+                Array.isArray(dataBoard) && dataBoard.data.map(dataBoard => (
                     <div className='workspaceItem rounded'>
-                        <h2 key={data.workspace_id}>{data.name}</h2>
-                        <div className="row w-100">
+                        <h2 key={dataBoard.data.workspace_id}>{dataBoard.data.name}</h2>
+                        {/* <div className="row w-100">
                             {
-                                data.boards.map(board => (
+                                dataBoard.data[0].board.map(board => (
                                     <div className="col-md-4 mb-3" key={board.board_id}>
                                         <WorkCard title={board.name} />
                                     </div>
                                 ))
                             }
-                        </div>
+                        </div> */}
                     </div>
                 ))
             }
@@ -123,3 +129,4 @@ export default Workspace
         </div>
     </div>
 */
+
