@@ -57,7 +57,7 @@ export function Workspace() {
 
     const values = {
         domain: "university6y",
-        userid: "7",
+        userid: 7,
         apikey: localStorage.getItem('apikey')
     }
 
@@ -68,18 +68,19 @@ export function Workspace() {
     const getBoards = async () => {
 
         const response = await fetch(`http://localhost:3001/dashboard/`, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
             method: 'POST',
             body: JSON.stringify(values)
         })
         const data = await response.json()
-        console.log('data', data)
-        console.log('apikey', values.apikey)
     }
 
 
     return (
         <div className="box">
-            {/* {
+            {
                 data.map(data => (
                     <div className='workspaceItem rounded'>
                         <h2 key={data.workspace_id}>{data.name}</h2>
@@ -94,7 +95,7 @@ export function Workspace() {
                         </div>
                     </div>
                 ))
-            } */}
+            }
         </div>
 
     )
