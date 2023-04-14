@@ -1,7 +1,19 @@
-.custom{
-    height: 85vh;
-    display: flex;
+.box{
     justify-content: center;
     align-items: center;
-    background-color: aqua;
+    background-color: rgb(156, 240, 168);
+    display: grid;
+    place-items: center;
+    width: 100vw;
+    padding: 1rem;
+}
+
+.workspaceItem{
+    background-color: rgb(46, 167, 237);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    width: 80vw;
+    margin: 1rem;
 }
