@@ -66,6 +66,8 @@ export const Login = (props) => {
         }
         else {
             localStorage.setItem('apikey', data.apikey);
+            localStorage.setItem('domain', data.companyname);
+            localStorage.setItem('userid', data.userid);
             navigate('/workspace');
         }
 
