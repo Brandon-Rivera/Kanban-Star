@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 //Importaciones de bootstrap
 import Container from 'react-bootstrap/Container';
@@ -10,6 +11,8 @@ import { BiLogOut } from "react-icons/bi";
 import { BsFillGearFill } from "react-icons/bs";
 
 const NavBar = () => {
+
+	const [t] = useTranslation("global");
 
 	const navigate = useNavigate();
 	
@@ -36,8 +39,8 @@ const NavBar = () => {
 					<Nav className="me-auto">
 					</Nav>
 					<Nav>
-						<Nav.Link><BsFillGearFill size={45} color={'white'}/> Configuración</Nav.Link>
-						<Nav.Link onClick={() => handleLogout()}><BiLogOut size={45} color={'white'}/> Cerrar sesión</Nav.Link>	
+						<Nav.Link><BsFillGearFill size={45} color={'white'}/> {t("navbar.config")} </Nav.Link>
+						<Nav.Link onClick={() => handleLogout()}><BiLogOut size={45} color={'white'}/> {t("navbar.logout")} </Nav.Link>	
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

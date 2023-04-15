@@ -15,5 +15,10 @@
 
     "workspace":{
         "workspace": "Espacio de trabajo"
+    },
+
+    "navbar":{
+        "config": "Configuración",
+        "logout": "Cerrar sesión"
     }
 }

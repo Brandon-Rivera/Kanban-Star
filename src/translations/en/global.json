@@ -15,5 +15,10 @@
 
     "workspace":{
         "workspace": "Workspace"
+    },
+
+    "navbar":{
+        "config": "Settings",
+        "logout": "Logout"
     }
 }
