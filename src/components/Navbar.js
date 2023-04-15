@@ -16,6 +16,8 @@ const NavBar = () => {
 	//Funcion para cerrar sesion
 	const handleLogout = () => {
 		localStorage.removeItem('apikey');
+		localStorage.removeItem('domain');
+		localStorage.removeItem('userid');
 		navigate('/')
 	}
 
