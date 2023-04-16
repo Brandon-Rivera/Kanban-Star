@@ -5,7 +5,7 @@ import { Workspace } from "./components/Workspace";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { MainLayout } from "./components/MainLayout";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 function App() {
 
@@ -15,14 +15,14 @@ function App() {
   }, 36000000);
 
   return (
-    <Router>
+      <Router>
         <Routes>
           <Route path="/" element={<Login />}></Route>
-          <Route path="/workspace" element={<ProtectedRoute><MainLayout/></ProtectedRoute>}>
-            <Route index element={<Workspace/>}></Route>
+          <Route path="/workspace" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
+            <Route index element={<Workspace />}></Route>
           </Route>
         </Routes>
-    </Router>
+      </Router>
   );
 }
 

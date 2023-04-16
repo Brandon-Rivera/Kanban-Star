@@ -5,14 +5,14 @@ import './LanguageCheckbox.css'
 const LanguageCheckbox = () => {
 
     const [t, i18n] = useTranslation("global"); 
-    const [isChecked, setIsChecked] = useState(() => {
-        const savedState = JSON.parse(localStorage.getItem('isChecked'));
+    const [LanguageChecked, setLanguageChecked] = useState(() => {
+        const savedState = JSON.parse(localStorage.getItem('LanguageChecked'));
         return savedState ?? false;
     });
 
     //
     function handleCheckboxChange(event) {
-        setIsChecked(event.target.checked);
+        setLanguageChecked(event.target.checked);
         if (event.target.checked) {
             i18n.changeLanguage("en");
         }
@@ -23,13 +23,13 @@ const LanguageCheckbox = () => {
 
     //
     useEffect(() => {
-        localStorage.setItem('isChecked', JSON.stringify(isChecked));
-    }, [isChecked]);
+        localStorage.setItem('LanguageChecked', JSON.stringify(LanguageChecked));
+    }, [LanguageChecked]);
 
   return (
     <div>
         <label className="switch">
-            <input id="language-toggle" className="check-toggle check-toggle-round-flat" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} ></input>
+            <input id="language-toggle" className="check-toggle check-toggle-round-flat" type="checkbox" checked={LanguageChecked} onChange={handleCheckboxChange} ></input>
             <label htmlFor="language-toggle"></label>
             <span className="on">ES</span>
             <span className="off">EN</span>
