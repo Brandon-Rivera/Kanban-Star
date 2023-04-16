@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import WorkCard from './WorkCard'
 import './Workspace.css'
+import { Modal, Button, Table } from 'react-bootstrap';
+import { useTranslation } from "react-i18next";
+
+//Importación de componentes
+import WorkCard from './WorkCard'
+
 
 export function Workspace() {
 
@@ -35,23 +40,30 @@ export function Workspace() {
     }, [])
 
     return (
-        <div className="box">
-            {
-                dataBoard.data.map(data => (
-                    <div className='workspaceItem rounded'>
-                        <h2 key={data.workspace_id}>{data.name}</h2>
-                        <div className="row w-100">
-                            {
-                                data.boards.map(boards => (
-                                    <div className="col-md-4 mb-3" key={boards.board_id}>
-                                        <WorkCard title={boards.name}/>
-                                    </div>
-                                ))
-                            }
+        <div>
+            {/* <div>
+                {<SettingsModal/>}
+            </div> */}
+
+            <div className="box">
+                
+                {
+                    dataBoard.data.map(data => (
+                        <div className='workspaceItem rounded'>
+                            <h2 key={data.workspace_id}>{data.name}</h2>
+                            <div className="row w-100">
+                                {
+                                    data.boards.map(boards => (
+                                        <div className="col-md-4 mb-3" key={boards.board_id}>
+                                            <WorkCard title={boards.name}/>
+                                        </div>
+                                    ))
+                                }
+                            </div>
                         </div>
-                    </div>
-                ))
-            }
+                    ))
+                }
+            </div>
         </div>
     )
 }

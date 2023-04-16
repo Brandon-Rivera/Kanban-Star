@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './Login.css'
+import LanguageCheckbox from "./LanguageCheckbox";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ErrorModal from "./ErrorModal";
@@ -18,27 +19,7 @@ export const Login = (props) => {
     const [pass, setPass] = useState('');
     const [email, setEmail] = useState('');
     const [domain, setDomain] = useState('');
-    const [t, i18n] = useTranslation("global");
-    const [isChecked, setIsChecked] = useState(() => {
-        const savedState = JSON.parse(localStorage.getItem('isChecked'));
-        return savedState ?? false;
-    });
-
-    //
-    function handleCheckboxChange(event) {
-        setIsChecked(event.target.checked);
-        if (event.target.checked) {
-            i18n.changeLanguage("en");
-        }
-        else {
-            i18n.changeLanguage("es");
-        }
-    }
-
-    //
-    useEffect(() => {
-        localStorage.setItem('isChecked', JSON.stringify(isChecked));
-    }, [isChecked]);
+    const [t] = useTranslation("global");
 
     //Funcion para mandar peticion de login al API
     const handleSubmit = async (e) => {
@@ -81,13 +62,8 @@ export const Login = (props) => {
             <div className="auth-form-container">
 
                 {/* Boton para cambiar de español a ingles */}
-                <center className="language-button">
-                    <label className="switch">
-                        <input id="language-toggle" className="check-toggle check-toggle-round-flat" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} ></input>
-                        <label htmlFor="language-toggle"></label>
-                        <span className="on">ES</span>
-                        <span className="off">EN</span>
-                    </label>
+                <center className="language-checkbox">
+                    <LanguageCheckbox/>
                 </center>
 
                 {/* Formulario de inicio de sesion */}

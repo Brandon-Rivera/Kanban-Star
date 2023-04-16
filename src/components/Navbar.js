@@ -1,21 +1,34 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 //Importaciones de bootstrap
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Button } from "react-bootstrap";
 
 //Importaciones de iconos
 import { BiLogOut } from "react-icons/bi";
 import { BsFillGearFill } from "react-icons/bs";
 
-const NavBar = () => {
+
+
+
+
+
+
+const NavBar = ({onClickSettings}) => {
+
+	//const [showModal, setShowModal] = useState(false);
 
 	const [t] = useTranslation("global");
 
 	const navigate = useNavigate();
-	
+
+	// const handleSettings = () =>{
+	// 	setShowModal(true);
+	// }	
 	//Funcion para cerrar sesion
 	const handleLogout = () => {
 		localStorage.removeItem('apikey');
@@ -41,8 +54,8 @@ const NavBar = () => {
 					<Nav className="me-auto">
 					</Nav>
 					<Nav>
-						<Nav.Link><BsFillGearFill size={45} color={'white'}/> {t("navbar.config")} </Nav.Link>
-						<Nav.Link onClick={() => handleLogout()}><BiLogOut size={45} color={'white'}/> {t("navbar.logout")} </Nav.Link>	
+						<Button onClick={onClickSettings}><BsFillGearFill size={45} color={'white'}/> {t("navbar.config")} </Button>
+						<Button onClick={() => handleLogout()}><BiLogOut size={45} color={'white'}/> {t("navbar.logout")} </Button>	
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

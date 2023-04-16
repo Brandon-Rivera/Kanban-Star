@@ -20,5 +20,12 @@
     "navbar":{
         "config": "Configuración",
         "logout": "Cerrar sesión"
+    },
+
+    "settings":{
+        "lang": "Idioma",
+        "palette": "Paleta de colores",
+        "view": "Vista",
+        "save": "Guardar cambios"
     }
 }
