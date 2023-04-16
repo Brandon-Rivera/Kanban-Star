@@ -1,6 +1,7 @@
 import React from 'react'
 import './WorkCard.css'
 
+//Funcion para crear los botones de cada tablero
 function WorkCard({title}) {
   return (
     <div className="card text-center bg-dark">
@@ -10,7 +11,6 @@ function WorkCard({title}) {
             </div>
         </a>
     </div>
-    
   )
 }
 

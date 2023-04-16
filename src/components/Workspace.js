@@ -1,43 +1,60 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import WorkCard from './WorkCard'
 import './Workspace.css'
 
-
-const xd = [
-    {
-        id: 1,
-        title: 'xd1'
-    },
-    {
-        id: 2,
-        title: 'xd2'
-    },
-    {
-        id: 3,
-        title: 'xd3'
-    }
-]
-
 export function Workspace() {
-  return (
-    <div className="custom">
-        <div className="row w-100">
+
+    //Variable para obtener los datos del workspace en un hook
+    const [dataBoard, setDataBoard] = useState({ data: [] });
+
+    useEffect(() => {
+        
+        //Valores necesarios para la peticion get de workspace
+        const values = {
+            domain: localStorage.getItem('domain'),
+            userid: localStorage.getItem('userid'),
+            apikey: localStorage.getItem('apikey')
+        }
+        
+        //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
+        const getBoards = async () => {
+
+            const response = await fetch(`http://3.86.115.127:3001/dashboard/`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(values)
+            })
+            const data = await response.json()
+            setDataBoard(data)
+        }
+
+        //llamada a la funcion
+        getBoards()
+    }, [])
+
+    return (
+        <div className="box">
             {
-                xd.map(xd => (
-                    <div className = "col-md-4 mb-3" key={xd.id}>
-                        <WorkCard title={xd.title}/>
-                    </div> 
+                dataBoard.data.map(data => (
+                    <div className='workspaceItem rounded'>
+                        <h2 key={data.workspace_id}>{data.name}</h2>
+                        <div className="row w-100">
+                            {
+                                data.boards.map(boards => (
+                                    <div className="col-md-4 mb-3" key={boards.board_id}>
+                                        <WorkCard title={boards.name}/>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
                 ))
             }
         </div>
-    </div>
-  )
+    )
 }
 
 export default Workspace
 
-/*
-            <div className = "col-md-4 mb-2">
-                <WorkCard/>
-            </div> 
-*/

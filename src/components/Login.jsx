@@ -49,7 +49,7 @@ export const Login = (props) => {
             domain: domain
         };
 
-        const api = "http://localhost:3001";
+        const api = "http://3.86.115.127:3001";
 
         const response = await fetch(`${api}/login`,
             {
@@ -67,6 +67,8 @@ export const Login = (props) => {
         }
         else {
             localStorage.setItem('apikey', data.apikey);
+            localStorage.setItem('domain', data.companyname);
+            localStorage.setItem('userid', data.userid);
             navigate('/workspace');
         }
 
