@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './Workspace.css'
-import { Modal, Button, Table } from 'react-bootstrap';
-import { useTranslation } from "react-i18next";
 
 //Importación de componentes
 import WorkCard from './WorkCard'
@@ -24,7 +22,7 @@ export function Workspace() {
         //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
         const getBoards = async () => {
 
-            const response = await fetch(`http://localhost:3001/dashboard/`, {
+            const response = await fetch(`http://52.90.57.129:3001/dashboard/`, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -41,10 +39,6 @@ export function Workspace() {
 
     return (
         <div>
-            {/* <div>
-                {<SettingsModal/>}
-            </div> */}
-
             <div className="box">
                 
                 {

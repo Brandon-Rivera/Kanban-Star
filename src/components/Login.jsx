@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './Login.css'
 import LanguageCheckbox from "./LanguageCheckbox";
 import { useTranslation } from "react-i18next";
@@ -31,7 +31,7 @@ export const Login = (props) => {
         };
         //console.log(values);
 
-        const response = await fetch(`http://localhost:3001/login`,
+        const response = await fetch(`http://52.90.57.129:3001/login`,
             {
                 method: 'POST',
                 headers: {
@@ -54,8 +54,6 @@ export const Login = (props) => {
 
         //console.log(data);
     }
-
-
 
     return (
         <div className="App">
