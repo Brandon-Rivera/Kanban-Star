@@ -15,5 +15,22 @@
 
     "workspace":{
         "workspace": "Workspace"
+    },
+
+    "navbar":{
+        "config": "Settings",
+        "logout": "Logout"
+    },
+
+    "settings":{
+        "lang": "Language",
+        "palette": "Color palette",
+        "view": "View",
+        "save": "Save changes"
+    },
+
+    "langcheck":{
+        "en": "EN",
+        "es": "ES"
     }
 }
