@@ -4,12 +4,13 @@ import {CiViewTable, CiViewList} from 'react-icons/ci'
 
 const ViewCheckbox = () => {
 
+    //Recuperamos el estado del Local Storage para que se mantenga así después de renderizar de nuevo el componente.
     const [viewChecked, setViewChecked] = useState(() => {
         const savedState = JSON.parse(localStorage.getItem('viewChecked'));
         return savedState ?? false;
     });
 
-    //
+    //Función para cambiar la vista de las tarjetas dependiendo de si el checkbox está checked/unchecked
     function handleViewCheckboxChange(event) {
         setViewChecked(event.target.checked);
         if (event.target.checked) {
@@ -20,7 +21,7 @@ const ViewCheckbox = () => {
         }
     }
 
-    //
+    //Función para guardar el estado del checkbox en el Local Storage, para que se mantenga.
     useEffect(() => {
         localStorage.setItem('viewChecked', JSON.stringify(viewChecked));
     }, [viewChecked]);

@@ -10,25 +10,14 @@ import { Button } from "react-bootstrap";
 
 //Importaciones de iconos
 import { BiLogOut } from "react-icons/bi";
-import { BsFillGearFill } from "react-icons/bs";
-
-
-
-
-
-
+import { BsFillGearFill } from "react-icons/bs"
 
 const NavBar = ({onClickSettings}) => {
-
-	//const [showModal, setShowModal] = useState(false);
 
 	const [t] = useTranslation("global");
 
 	const navigate = useNavigate();
 
-	// const handleSettings = () =>{
-	// 	setShowModal(true);
-	// }	
 	//Funcion para cerrar sesion
 	const handleLogout = () => {
 		localStorage.removeItem('apikey');

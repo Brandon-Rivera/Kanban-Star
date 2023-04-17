@@ -27,5 +27,10 @@
         "palette": "Color palette",
         "view": "View",
         "save": "Save changes"
+    },
+
+    "langcheck":{
+        "en": "EN",
+        "es": "ES"
     }
 }
