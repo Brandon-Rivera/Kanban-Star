@@ -15,7 +15,7 @@ function App() {
   }, 36000000);
 
   return (
-    <Router>
+      <Router>
         <Routes>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/" element={<ProtectedRoute><MainLayout/></ProtectedRoute>}>
@@ -23,7 +23,7 @@ function App() {
             <Route path="board" index element={<Board/>}></Route>
           </Route>
         </Routes>
-    </Router>
+      </Router>
   );
 }
 
