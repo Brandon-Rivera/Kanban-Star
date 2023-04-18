@@ -57,3 +57,17 @@ button {
 .language-checkbox{
   text-align: right;
 }
+
+@font-face {
+  font-family: mont;
+  src: url(../fonts/montHeavy.otf);
+}
+
+.mont{
+  font-family: mont;
+}
+
+.kanbanStarLogo{
+  max-width: 10%;
+  height: auto;
+}
