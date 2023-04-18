@@ -29,9 +29,8 @@ export const Login = (props) => {
             pass: pass,
             domain: domain
         };
-        //console.log(values);
 
-        const response = await fetch(`http://52.90.57.129:3001/login`,
+        const response = await fetch(`http://3.228.121.10:3001/login`,
             {
                 method: 'POST',
                 headers: {
@@ -52,7 +51,6 @@ export const Login = (props) => {
             navigate('/workspace');
         }
 
-        //console.log(data);
     }
 
     return (
@@ -89,7 +87,7 @@ export const Login = (props) => {
                 </Collapse>
 
                 {/* Modal que avisa al usuario cuando tiene un error en el inicio de sesión */}
-                <ErrorModal show={modalShow} title='Error máster!' message='Usuario, contraseña o dominio incorrectos' onHide={() => setModalShow(false)} />
+                <ErrorModal show={modalShow} title='Error de inicio de sesión!' message='Usuario, contraseña o dominio incorrectos' onHide={() => setModalShow(false)} />
             </div>
         </div>
     )

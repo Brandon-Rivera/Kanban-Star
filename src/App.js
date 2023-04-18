@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from "./components/Login";
 import { Workspace } from "./components/Workspace";
+import { Board } from "./components/Board";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { MainLayout } from "./components/MainLayout";
@@ -16,9 +17,10 @@ function App() {
   return (
       <Router>
         <Routes>
-          <Route path="/" element={<Login />}></Route>
-          <Route path="/workspace" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
-            <Route index element={<Workspace />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/" element={<ProtectedRoute><MainLayout/></ProtectedRoute>}>
+            <Route path="workspace" index element={<Workspace/>}></Route>
+            <Route path="board" index element={<Board/>}></Route>
           </Route>
         </Routes>
       </Router>

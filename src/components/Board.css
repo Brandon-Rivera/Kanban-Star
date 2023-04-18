@@ -1,0 +1,13 @@
+.title {
+    text-align: center !important;
+    align-items: center !important;
+    margin: 1rem !important;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;  
+}
+
+.search{
+    margin: 0px !important;   
+}
+
