@@ -4,16 +4,10 @@
     margin: 1rem !important;
     padding: 1rem;
     border: none;
-    border-radius: 10px;
+    border-radius: 10px;  
 }
 
-.Search {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    width: auto;
-    /* margin: 0.5rem !important;
-    padding: 1rem;
-    border: none;
-    border-radius: 10px; */
+.search{
+    margin: 0px !important;   
 }
+
