@@ -22,7 +22,7 @@ export function Workspace() {
         //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
         const getBoards = async () => {
 
-            const response = await fetch(`http://52.90.57.129:3001/dashboard/`, {
+            const response = await fetch(`http://localhost:3001/dashboard/`, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -36,14 +36,17 @@ export function Workspace() {
         //llamada a la funcion
         getBoards()
     }, [])
-
+    const colorRandom = () => {
+        const color = Array(("#E4186A"), ("#F08830"), ("#2665BB"), ("#42AD49"))
+        return color[Math.floor(Math.random()*color.length)]
+    }
     return (
         <div>
             <div className="box">
-                
+
                 {
                     dataBoard.data.map(data => (
-                        <div className='workspaceItem rounded'>
+                        <div className='workspaceItem rounded' style={{backgroundColor: colorRandom()}}>
                             <h2 key={data.workspace_id}>{data.name}</h2>
                             <div className="row w-100">
                                 {
