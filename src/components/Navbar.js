@@ -22,13 +22,13 @@ const NavBar = ({onClickSettings}) => {
 		localStorage.removeItem('apikey');
 		localStorage.removeItem('domain');
 		localStorage.removeItem('userid');
-		navigate('/')
+		navigate('/login')
 	}
 
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
 			<Container>
-				<Navbar.Brand onClick={() => navigate('/')}>
+				<Navbar.Brand onClick={() => navigate('/workspace')}>
 					<img
 						src="/assets/Kanbanize-blanco.png"
 						width="150"
@@ -39,8 +39,6 @@ const NavBar = ({onClickSettings}) => {
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
-					<Nav className="me-auto">
-					</Nav>
 					<Nav>
 						<Button onClick={onClickSettings}><BsFillGearFill size={45} color={'white'}/> {t("navbar.config")} </Button>
 						<Button onClick={() => handleLogout()}><BiLogOut size={45} color={'white'}/> {t("navbar.logout")} </Button>	
