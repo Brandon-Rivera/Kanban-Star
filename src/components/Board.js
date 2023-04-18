@@ -1,5 +1,8 @@
 import React from 'react'
 import "./Board.css"
+
+import Workflow from './Workflow.js'
+
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -26,6 +29,7 @@ export const Board = () => {
                 </ListGroup.Item>
             </ListGroup>
 
+            <Workflow title={"Entregables"}/>
             
             
         </>

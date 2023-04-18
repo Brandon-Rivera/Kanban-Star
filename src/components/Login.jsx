@@ -30,7 +30,7 @@ export const Login = (props) => {
             domain: domain
         };
 
-        const response = await fetch(`http://52.90.57.129:3001/login`,
+        const response = await fetch(`http://3.228.121.10:3001/login`,
             {
                 method: 'POST',
                 headers: {
