@@ -1,0 +1,12 @@
+.App2 {
+    min-height: 100vh;
+}
+
+#light{
+    background-color: #f3f3f3;
+}
+
+#dark{
+    color: white;
+    background-color: #484f5d;
+}

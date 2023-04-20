@@ -2,6 +2,22 @@
     text-align: center;
 }
 
+
+
+.modal-backdrop{
+    background-color: gray;
+}
+
+
+
+#dark .modal-content{
+    background-color: steelblue;
+}
+
+#light .modal-content{
+    background-color: white;
+}
+
 th {
     vertical-align: middle;
 }

@@ -22,7 +22,7 @@ export function Workspace() {
         //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
         const getBoards = async () => {
 
-            const response = await fetch(`http://44.212.8.18:3001/dashboard/`, {
+            const response = await fetch(`http://localhost:3001/dashboard/`, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
