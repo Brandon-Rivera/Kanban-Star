@@ -13,7 +13,7 @@ const SettingsModal = ({show, onHide}) => {
     const [t] = useTranslation("global");
 
     return (
-        <div className="modal">
+        <div className="modall">
             <Modal show={show} onHide={onHide}>
                 <Modal.Header closeButton>
                     <Modal.Title className="title">{t("navbar.config")}</Modal.Title>

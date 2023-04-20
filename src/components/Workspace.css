@@ -1,7 +1,6 @@
 .box{
     justify-content: center;
     align-items: center;
-    
     display: grid;
     place-items: center;
     width: 100vw;

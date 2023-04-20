@@ -6,11 +6,12 @@ import { useNavigate } from "react-router-dom";
 import ErrorModal from "./ErrorModal";
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
+import ColorCheckbox from "./ColorCheckbox";
 
 //import { changeLanguage } from "i18next";
 
 
-export const Login = (props) => {
+export const Login = () => {
 
     // Asignacion de variables y hooks
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ export const Login = (props) => {
             domain: domain
         };
 
-        const response = await fetch(`http://44.212.8.18:3001/login`,
+        const response = await fetch(`http://localhost:3001/login`,
             {
                 method: 'POST',
                 headers: {
@@ -56,9 +57,9 @@ export const Login = (props) => {
     return (
         <div className="App">
             <div className="auth-form-container">
-
-                {/* Boton para cambiar de español a ingles */}
                 <center className="language-checkbox">
+                {/* Boton para cambiar de español a ingles */}
+                    <ColorCheckbox/>
                     <LanguageCheckbox/>
                 </center>
 
