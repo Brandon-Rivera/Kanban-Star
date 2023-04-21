@@ -8,9 +8,6 @@ import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ColorCheckbox from "./ColorCheckbox";
 
-//import { changeLanguage } from "i18next";
-
-
 export const Login = () => {
 
     // Asignacion de variables y hooks
