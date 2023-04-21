@@ -36,14 +36,15 @@ export function Workspace() {
         //llamada a la funcion
         getBoards()
     }, [])
+
     const colorRandom = () => {
-        const color = Array(("#E4186A"), ("#F08830"), ("#2665BB"), ("#42AD49"))
+        const color =[("#E4186A"), ("#F08830"), ("#2665BB"), ("#42AD49")]
         return color[Math.floor(Math.random()*color.length)]
     }
+    
     return (
         <div>
             <div className="box">
-
                 {
                     dataBoard.data.map(data => (
                         <div className='workspaceItem rounded' style={{backgroundColor: colorRandom()}}>

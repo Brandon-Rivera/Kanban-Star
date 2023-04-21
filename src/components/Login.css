@@ -45,7 +45,7 @@ button {
   border-radius: 10px;
   cursor: pointer;
   color: white;
-  margin: 0.5em !important;
+  /* margin: 0.5em !important; */
 }
 
 .link-btn {
