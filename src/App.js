@@ -17,10 +17,13 @@ function App() {
     localStorage.removeItem('apikey');
   }, 36000000);
 
+  //Link del api
+  const apiLink = "https://kvxrvsgw6c.execute-api.us-east-1.amazonaws.com"
+
   const [theme, setTheme] = useState(() => {
     const savedState = JSON.parse(localStorage.getItem('Theme'));
     return savedState ?? false;
-});
+  });
 
   const setDark = () => {
     setTheme("dark");
@@ -32,17 +35,16 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('Theme', JSON.stringify(theme));
-}, [theme]);
+  }, [theme]);
 
   return (
-
-    <ThemeContext.Provider value={{theme, setDark, setLight}}>
+    <ThemeContext.Provider value={{ theme, setDark, setLight }}>
       <div className="App2" id={theme}>
         <Router>
           <Routes>
-            <Route path="/login" element={<Login/>}></Route>
-            <Route path="/" element={<ProtectedRoute><MainLayout/></ProtectedRoute>}>
-              <Route path="workspace" index element={<Workspace/>}></Route>
+            <Route path="/login" element={<Login api = {apiLink}/>}></Route>
+            <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
+              <Route path="workspace" index element={<Workspace api = {apiLink}/>}></Route>
               <Route path="board" index element={<Board />}></Route>
             </Route>
           </Routes>
