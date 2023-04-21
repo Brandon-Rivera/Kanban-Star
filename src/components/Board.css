@@ -7,6 +7,16 @@
     border-radius: 10px;  
 }
 
+#light .title{
+    background-color: #0d6efd;
+    color: black
+}
+
+#dark .title{
+    background-color: #212529;
+    color: white;
+}
+
 .search{
     margin: 0px !important;   
 }

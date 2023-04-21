@@ -30,7 +30,7 @@ const LanguageCheckbox = () => {
 
   return (
     <div>
-        <label className="switch">
+        <label className="switch" id="">
             <input id="language-toggle" className="check-toggle check-toggle-round-flat" type="checkbox" checked={LanguageChecked} onChange={handleCheckboxChange} ></input>
             <label htmlFor="language-toggle"></label>
             <span className="on">{t("langcheck.es")}</span>

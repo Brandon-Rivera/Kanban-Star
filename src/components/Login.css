@@ -4,8 +4,16 @@
   min-height: 100vh;
   align-items: center;
   justify-content: center;
+}
+
+#light .App{
   color: black;
   background-color: #f3f3f3;
+}
+
+#dark .App{
+  color: white;
+  background-color: #484f5d;
 }
 
 .auth-form-container,

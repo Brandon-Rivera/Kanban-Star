@@ -1,8 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import './ColorCheckbox.css'
 import {RiSunLine, RiMoonLine} from 'react-icons/ri'
+//import { hasFormSubmit } from '@testing-library/user-event/dist/utils';
+import { ThemeContext } from '../App';
+import { ToggleButton } from 'react-bootstrap';
 
 const ColorCheckbox = () => {
+
+    const {theme, setDark, setLight} = useContext(ThemeContext);
 
     //Recuperamos el estado del Local Storage para que se mantenga así después de renderizar de nuevo el componente.
     const [ColorChecked, setColorChecked] = useState(() => {
@@ -13,11 +18,21 @@ const ColorCheckbox = () => {
     //Función para cambiar la paleta de colores dependiendo de si el checkbox está checked/unchecked
     function handleColorCheckboxChange(event) {
         setColorChecked(event.target.checked);
-        if (event.target.checked) {
-            console.log("Color checked")
+        if(event.target.checked) {
+            setDark();
         }
-        else {
-            console.log("Color unchecked")
+        else{
+            setLight();
+        }
+    }
+
+    const showCurrentTheme = () => {
+        if(theme === "dark"){
+            return <RiMoonLine size={20}/>
+        }
+
+        else{
+            return <RiSunLine size={20}/>
         }
     }
 
@@ -28,12 +43,18 @@ const ColorCheckbox = () => {
     
   return (
     <div>
-        <label className="switch">
-            <input id="color-toggle" className="check-toggle check-toggle-round-flat" type="checkbox" checked={ColorChecked} onChange={handleColorCheckboxChange} ></input>
-            <label htmlFor="color-toggle"></label>
-            <span className="on"><RiSunLine size = {16}/></span>
-            <span className="off"><RiMoonLine size={16}/></span>
-        </label>
+        <ToggleButton
+            className="mb-2"
+            id="toggle-check"
+            type="checkbox"
+            variant="outline-dark"
+            checked={ColorChecked}
+          
+            size={20}
+            onChange={handleColorCheckboxChange}
+      >
+        {showCurrentTheme()}
+      </ToggleButton>
     </div>
   )
 }

@@ -45,15 +45,20 @@ export const Board = () => {
     return (
         <>
             <ListGroup>
-                <ListGroup.Item className='title' active>
-                    <h4>Tablero 1</h4>
-                    <InputGroup className="mb-6">
-                        <Button variant="dark" className="search">
-                            <BiSearchAlt size={25} color={'white'} />
-                        </Button>
-                        <Form.Control className="search" aria-label="Example text with button addon" aria-describedby="basic-addon1" />
-                    </InputGroup>
-                </ListGroup.Item>
+                    <ListGroup.Item className='title'>
+                        <h4>Tablero 1</h4>
+                        <InputGroup className="mb-6">
+                            <Button variant="dark" className = "search">
+                                <BiSearchAlt size={25} color={'white'}/>
+                            </Button>
+                            <Form.Control
+                                className = "search"
+                                aria-label="Example text with button addon"
+                                aria-describedby="basic-addon1"
+                            />
+                        </InputGroup>
+                    </ListGroup.Item>
+        
             </ListGroup>
             <Container fluid>
                 {
