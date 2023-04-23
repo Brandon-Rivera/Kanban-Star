@@ -12,7 +12,7 @@ function Test() {
 
             <Button onClick={() => setModalShow(true)}>Menu tarjetas</Button>
 
-            <MenuTarjetas show={modalShow} title='Error de inicio de sesión!' message='Usuario, contraseña o dominio incorrectos' onHide={() => setModalShow(false)} />
+            <MenuTarjetas show={modalShow} title='¿Qué gustas hacer?' message='Usuario, contraseña o dominio incorrectos' onHide={() => setModalShow(false)} />
 
         </div>
     )

@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ColorCheckbox from "./ColorCheckbox";
 
-export const Login = () => {
+export const Login = ( { api }) => {
 
     // Asignacion de variables y hooks
     const navigate = useNavigate();
@@ -28,7 +28,7 @@ export const Login = () => {
             domain: domain
         };
 
-        const response = await fetch(`http://localhost:3001/login`,
+        const response = await fetch(`${api}/login`,
             {
                 method: 'POST',
                 headers: {
