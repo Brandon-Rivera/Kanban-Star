@@ -1,0 +1,55 @@
+.btn-flat{
+    background-color: rgb(56, 101, 182);
+    color: rgb(97, 171, 85);
+    border-radius: 50%;
+    width: fit-content;
+    border-color: white;
+}
+
+.cardInput{
+    margin: 0px !important;
+}
+
+.prop1{
+    margin: 0px !important;
+    font-size: small;
+}
+
+.modalHeader{
+    background-color: rgb(97, 171, 85);
+}
+
+.modalFooter{
+    background-color: rgb(56, 101, 182) !important;
+    align-items: center !important;
+}
+
+.cardInputBox{
+    margin: 0px !important;
+    padding: 3% !important;
+    background-color: rgb(97, 171, 85) !important;
+    border-width: 1px !important;
+    border-color: rgba(1, 1, 1, 0.1) !important;
+    color: black !important;
+}
+
+.cardInputBox::placeholder{
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.drop1{
+    margin: 0px !important;
+    padding: 3%;
+    background-color: rgb(209, 52, 106);
+    color: white;
+    border-radius: .5rem;
+}
+
+.cardDescriptionBox{
+    margin: 0px !important;
+    padding: 3% !important;
+}
+
+.cardDescriptionBox::placeholder{
+    color: rgb(49, 108, 244) !important;
+}

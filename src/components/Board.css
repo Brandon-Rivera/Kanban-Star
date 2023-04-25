@@ -11,3 +11,17 @@
     margin: 0px !important;   
 }
 
+.btn-flat {
+    display: block !important;
+    border-radius: 50% !important;
+    padding: 0.9rem !important;
+    border-color: white !important;
+    background-color: rgb(209, 52, 106) !important;
+}
+.btn-flat:hover {
+    background: rgb(209, 52, 106) !important;
+}
+.btn-flat:active {
+    border-color: white !important;
+    background-color: rgb(209, 52, 106) !important;
+}

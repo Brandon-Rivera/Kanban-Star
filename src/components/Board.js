@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Board.css"
 
 import Workflow from './Workflow.js'
+import InsertCardModal from './InsertCardModal';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
@@ -9,8 +10,11 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 import { BiSearchAlt } from "react-icons/bi";
+import { ImPlus } from "react-icons/im";
 
 export const Board = () => {
+    const [modalShow, setModalShow] = useState(false);
+
     return (
         <>
             <ListGroup>
@@ -30,8 +34,20 @@ export const Board = () => {
             </ListGroup>
 
             <Workflow title={"Entregables"}/>
-            
-            
+
+            <Button
+                onClick={() => setModalShow(true)}
+                variant='flat'
+                className='position-absolute bottom-0 end-0'
+                
+            >
+                <ImPlus size={40} color={'white'}/>
+            </Button>
+
+            <InsertCardModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
         </>
     )
 }
