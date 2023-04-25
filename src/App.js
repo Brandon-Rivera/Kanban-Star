@@ -42,7 +42,7 @@ function App() {
       <div className="App2" id={theme}>
         <Router>
           <Routes>
-            <Route path="/login" element={<Login api = {apiLink}/>}></Route>
+            <Route path="/" element={<Login api = {apiLink}/>}></Route>
             <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
               <Route path="workspace" index element={<Workspace api = {apiLink}/>}></Route>
               <Route path="board" index element={<Board />}></Route>
