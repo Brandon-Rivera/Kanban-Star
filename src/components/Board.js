@@ -11,6 +11,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { BiSearchAlt } from "react-icons/bi";
 
 export const Board = () => {
+    //Prueba frank
     return (
         <>
             <ListGroup>
@@ -27,6 +28,7 @@ export const Board = () => {
                             />
                         </InputGroup>
                     </ListGroup.Item>
+                    
         
             </ListGroup>
 
