@@ -5,7 +5,7 @@ import './Workspace.css'
 import WorkCard from './WorkCard'
 
 
-export function Workspace() {
+export function Workspace( {api} ) {
 
     //Variable para obtener los datos del workspace en un hook
     const [dataBoard, setDataBoard] = useState({ data: [] });
@@ -22,7 +22,7 @@ export function Workspace() {
         //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
         const getBoards = async () => {
 
-            const response = await fetch(`http://3.228.121.10:3001/dashboard/`, {
+            const response = await fetch(`${api}/dashboard`, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -35,7 +35,7 @@ export function Workspace() {
 
         //llamada a la funcion
         getBoards()
-    }, [])
+    }, [api])
 
     return (
         <div>

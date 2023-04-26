@@ -1,17 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ThemeContext } from '../App';
 
 //Importaciones de bootstrap
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Button } from "react-bootstrap";
+import './Navbar.css'
 
 //Importaciones de iconos
 import { BiLogOut } from "react-icons/bi";
 import { BsFillGearFill } from "react-icons/bs"
+import { useContext } from "react";
+
 
 const NavBar = ({onClickSettings}) => {
+
+	const {theme} = useContext(ThemeContext);
 
 	const [t] = useTranslation("global");
 
@@ -25,8 +31,27 @@ const NavBar = ({onClickSettings}) => {
 		navigate('/login')
 	}
 
+	const navBarTheme = () => {
+		if(theme === "dark") {
+			return theme;
+		}
+		else{
+			return "primary";
+		}
+	}
+
+	const buttonsTheme = () => {
+		if(theme === "dark") {
+			return theme;
+		}
+		else{
+			return "primary";
+		}
+	}
+
 	return (
-		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+		<div className="Navbar">
+		<Navbar collapseOnSelect expand="lg" bg={navBarTheme()} >
 			<Container>
 				<Navbar.Brand onClick={() => navigate('/workspace')}>
 					<img
@@ -40,12 +65,18 @@ const NavBar = ({onClickSettings}) => {
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav>
-						<Button onClick={onClickSettings}><BsFillGearFill size={45} color={'white'}/> {t("navbar.config")} </Button>
-						<Button onClick={() => handleLogout()}><BiLogOut size={45} color={'white'}/> {t("navbar.logout")} </Button>	
+						
+							<Button variant={buttonsTheme()} onClick={onClickSettings}><BsFillGearFill size={45} variant={theme} /> {t("navbar.config")} </Button>
+						
+						
+							<Button variant={buttonsTheme()} onClick={() => handleLogout()}><BiLogOut size={45} variant={theme}/> {t("navbar.logout")} </Button>	
+					
+						
 					</Nav>
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>
+		</div>
 	);
 }
 

@@ -7,11 +7,12 @@ import ErrorModal from "./ErrorModal";
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ksLogo from '../images/ksLogo.PNG'
+import ColorCheckbox from "./ColorCheckbox";
 
 //import { changeLanguage } from "i18next";
 
 
-export const Login = (props) => {
+export const Login = ( { api }) => {
 
     // Asignacion de variables y hooks
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ export const Login = (props) => {
             domain: domain
         };
 
-        const response = await fetch(`http://3.228.121.10:3001/login`,
+        const response = await fetch(`${api}/login`,
             {
                 method: 'POST',
                 headers: {
@@ -57,9 +58,9 @@ export const Login = (props) => {
     return (
         <div className="App">
             <div className="auth-form-container">
-
-                {/* Boton para cambiar de español a ingles */}
                 <center className="language-checkbox">
+                {/* Boton para cambiar de español a ingles */}
+                    <ColorCheckbox/>
                     <LanguageCheckbox/>
                 </center>
 
