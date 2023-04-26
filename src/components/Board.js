@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { Container, ListGroup, Button, Form, InputGroup } from 'react-bootstrap';
+import { BiSearchAlt } from "react-icons/bi";
+
 import Workflow from './Workflow.js'
 import "./Board.css"
-
-import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-
-import { BiSearchAlt } from "react-icons/bi";
-import { Container } from 'react-bootstrap';
 
 export const Board = ({ api }) => {
 
@@ -21,13 +16,13 @@ export const Board = ({ api }) => {
         const values = {
             domain: localStorage.getItem('domain'),
             apikey: localStorage.getItem('apikey'),
-            boardid: "19"
+            boardid: localStorage.getItem('boardid')
         }
 
         //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
         const getWorkSpace = async () => {
 
-            const response = await fetch(`http://localhost:3001/board/`, {
+            const response = await fetch(`${api}/board`, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -77,7 +72,12 @@ export const Board = ({ api }) => {
                                             }
                                         </div>
                                         
-                                    ) : (<Workflow title={columns.name} col={columns}></Workflow>)
+                                    ) : (
+                                    <div>
+                                        <h3 className="text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
+                                        <Workflow title={columns.name} col={columns}></Workflow>
+                                    </div>
+                                    )
                                 ))
                             }
                         </div>

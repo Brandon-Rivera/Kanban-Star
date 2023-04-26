@@ -54,7 +54,7 @@ export function Workspace({ api }) {
                             {
                                 data.boards.map(boards => (
                                     <div className="col-md-4 mb-3" key={boards.board_id}>
-                                        <WorkCard title={boards.name} />
+                                        <WorkCard title={boards.name} id={boards.board_id}/>
                                     </div>
                                 ))
                             }

@@ -45,7 +45,7 @@ function App() {
             <Route path="/" element={<Login api = {apiLink}/>}></Route>
             <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
               <Route path="workspace" index element={<Workspace api = {apiLink}/>}></Route>
-              <Route path="board" index element={<Board />}></Route>
+              <Route path="board" index element={<Board api = {apiLink}/>}></Route>
             </Route>
           </Routes>
         </Router>
