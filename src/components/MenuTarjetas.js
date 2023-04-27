@@ -3,11 +3,15 @@ import { Modal } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 
+import { useTranslation } from "react-i18next";
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function MenuTarjetas({ show, title, onHide }) {
+
+  const [t] = useTranslation("global");
 
   const consultar = () => {
     console.log("Consultar")
@@ -38,16 +42,16 @@ function MenuTarjetas({ show, title, onHide }) {
         <Modal.Body className='p-1'>
           <Container>
             <Row>
-              <Col className='p-1 m-1 d-flex justify-content-center'><Button className='fw-bold text-dark border border-3 border-dark d-block w-100' onClick={() => consultar()}>Consultar</Button></Col>
-              <Col className='p-1 m-1 d-flex justify-content-center'><Button className='fw-bold text-dark border border-3 border-dark d-block w-100' onClick={() => mover()}>Mover</Button></Col>
+              <Col className='p-1 m-1 d-flex justify-content-center'><Button className='fw-bold text-dark border border-3 border-dark d-block w-100' onClick={() => consultar()}>{t("cardMenu.show")}</Button></Col>
+              <Col className='p-1 m-1 d-flex justify-content-center'><Button className='fw-bold text-dark border border-3 border-dark d-block w-100' onClick={() => mover()}>{t("cardMenu.move")}</Button></Col>
             </Row>
             <Row>
-              <Col className='p-1 m-1 d-flex justify-content-center'><Button className='fw-bold text-dark border border-3 border-dark d-block w-100' onClick={() => actualizar()}>Actualizar</Button></Col>
-              <Col className='p-1 m-1 d-flex justify-content-center'><Button className='fw-bold text-dark border border-3 border-dark d-block w-100' onClick={() => comentarios()}>Comentarios</Button></Col>
+              <Col className='p-1 m-1 d-flex justify-content-center'><Button className='fw-bold text-dark border border-3 border-dark d-block w-100' onClick={() => actualizar()}>{t("cardMenu.update")}</Button></Col>
+              <Col className='p-1 m-1 d-flex justify-content-center'><Button className='fw-bold text-dark border border-3 border-dark d-block w-100' onClick={() => comentarios()}>{t("cardMenu.comment")}</Button></Col>
             </Row>
             <Row className='d-flex justify-content-center'>
               <Col className='p-0'></Col>
-              <Col><Button variant='danger' className='fw-bold text-white border border-3 border-dark pl-5 pr-5' onClick={() => eliminar()}>Eliminar</Button></Col>
+              <Col><Button variant='danger' className='fw-bold text-white border border-3 border-dark pl-5 pr-5' onClick={() => eliminar()}>{t("cardMenu.delete")}</Button></Col>
               <Col className='p-0'></Col>
             </Row>
           </Container>

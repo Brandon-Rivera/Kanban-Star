@@ -32,5 +32,14 @@
     "langcheck":{
         "en": "EN",
         "es": "ES"
+    },
+
+    "cardMenu":{
+        "title": "What you like to do?",
+        "show": "Show",
+        "move": "Move",
+        "update": "Update",
+        "comment": "Comment",
+        "delete": "Delete"
     }
 }

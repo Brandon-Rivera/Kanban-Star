@@ -32,5 +32,14 @@
     "langcheck":{
         "en": "EN",
         "es": "ES"
+    },
+
+    "cardMenu":{
+        "title": "¿Qué gustas hacer?",
+        "show": "Consultar",
+        "move": "Mover",
+        "update": "Actualizar",
+        "comment": "Comentar",
+        "delete": "Eliminar"
     }
 }

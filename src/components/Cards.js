@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import { Button, ListGroup } from 'react-bootstrap'
 
+import { useTranslation } from "react-i18next";
+
 import MenuTarjetas from './MenuTarjetas';
 
 function Cards({ nCard, duedate }) {
 
     //Vaiable para mostrar modal de menu de opciones
     const [modalShow, setModalShow] = useState(false);
+
+    const [t] = useTranslation("global");
 
     return (
         <>
@@ -21,7 +25,7 @@ function Cards({ nCard, duedate }) {
             </ListGroup>
 
             {/* Modales */}
-            <MenuTarjetas show={modalShow} title='¿Qué gustas hacer?' onHide={() => setModalShow(false)} />
+            <MenuTarjetas show={modalShow} title={t("cardMenu.title")} onHide={() => setModalShow(false)} />
         </>
     )
 }

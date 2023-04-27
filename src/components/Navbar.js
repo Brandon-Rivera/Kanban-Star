@@ -28,7 +28,7 @@ const NavBar = ({onClickSettings}) => {
 		localStorage.removeItem('apikey');
 		localStorage.removeItem('domain');
 		localStorage.removeItem('userid');
-		navigate('/login')
+		navigate('/')
 	}
 
 	const navBarTheme = () => {
