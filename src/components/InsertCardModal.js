@@ -16,12 +16,32 @@ function InsertCardModal({show, onHide}) {
   // Variable que contiene el mapa de traducciones
   const [t] = useTranslation("global")
 
-  // Asignar variables y su respectivo hook
+  let currDate = new Date();
+  let calendarDate = '';
+  let currDay = currDate.getDate();
+  let currMonth = currDate.getMonth() + 1;
+  let currYear = currDate.getFullYear();
+
+  if(currDay < 10){
+    currDay = '0' + currDay;
+  }
+
+  if(currMonth < 10){
+    currMonth = '0' + currMonth;
+  }
+  
+  calendarDate = currYear.toString() + '-' + currMonth.toString() + '-' + currDay.toString();
+  localStorage.setItem('calendarDate', calendarDate);
+
+  // Asignar variables
   const [cardName, setCardName] = useState('');
   const [cardOwner, setCardOwner] = useState('');
-  const [cardDueDate, setCardDueDate] = useState('');
+  const [cardDueDate, setCardDueDate] = useState(calendarDate);
   const [cardWorkflow, setCardWorkflow] = useState('');
   const [cardDescription, setCardDescription] = useState('');
+
+  //
+  const [resModal, setResModal] = useState(false);
 
   // Funcion para asignar los valores a las keys
   const handleCardSubmit = async (e) =>{
@@ -60,6 +80,7 @@ function InsertCardModal({show, onHide}) {
     return (
       // Creacion del modal que contiene el formulario de insercion de tarjetas
       <Modal
+        backdrop="static"
         show={show}
         onHide={onHide}
         aria-labelledby="contained-modal-title-vcenter"

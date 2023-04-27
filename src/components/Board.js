@@ -13,7 +13,7 @@ import { BiSearchAlt } from "react-icons/bi";
 import { ImPlus } from "react-icons/im";
 
 export const Board = () => {
-    const [modalShow, setModalShow] = useState(false);
+    const [insertModalShow, setInsertModalShow] = useState(false);
 
     return (
         <>
@@ -36,7 +36,7 @@ export const Board = () => {
             <Workflow title={"Entregables"}/>
 
             <Button
-                onClick={() => setModalShow(true)}
+                onClick={() => setInsertModalShow(true)}
                 variant='flat'
                 className='position-absolute bottom-0 end-0'
                 
@@ -45,8 +45,8 @@ export const Board = () => {
             </Button>
 
             <InsertCardModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
+                show={insertModalShow}
+                onHide={() => setInsertModalShow(false)}
             />
         </>
     )
