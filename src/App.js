@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from "./components/Login";
 import { Workspace } from "./components/Workspace";
 import { Board } from "./components/Board";
-import Test from "./components/Test";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { MainLayout } from "./components/MainLayout";
@@ -43,11 +42,10 @@ function App() {
       <div className="App2" id={theme}>
         <Router>
           <Routes>
-            <Route path="/login" element={<Login api = {apiLink}/>}></Route>
+            <Route path="/" element={<Login api = {apiLink}/>}></Route>
             <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
               <Route path="workspace" index element={<Workspace api = {apiLink}/>}></Route>
-              <Route path="board" index element={<Board />}></Route>
-              <Route path="test" index element={<Test />}></Route>
+              <Route path="board" index element={<Board api = {apiLink}/>}></Route>
             </Route>
           </Routes>
         </Router>

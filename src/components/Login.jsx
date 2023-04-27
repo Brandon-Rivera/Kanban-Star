@@ -71,11 +71,11 @@ export const Login = ( { api }) => {
                     <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="pass" name="pass" />
                     <label htmlFor="username">{t("login.domain")}</label>
                     <input value={domain} onChange={(e) => setDomain(e.target.value)} type="username" placeholder={t("login.domain-placeholder")} id="domain" name="domain" />
-                    <Button type="submit" variant="dark">{t("login.login")}</Button>
+                    <Button type="submit" variant="dark" className="m-2">{t("login.login")}</Button>
                 </form>
 
                 {/* Boton para explicar el dominio */}
-                <Button variant="dark" onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open}>
+                <Button variant="dark" onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open} className="m-2">
                     {t("login.WhatDomain")}
                 </Button>
                 <Collapse in={open}>
