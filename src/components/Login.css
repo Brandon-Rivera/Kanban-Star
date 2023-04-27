@@ -42,7 +42,7 @@ label {
 input {
   margin: 0.5rem !important;
   padding: 1rem;
-  border: 2px solid black;
+  border: 2px solid #484f5d;
   border-radius: 10px;
 }
 
@@ -53,7 +53,6 @@ button {
   border-radius: 10px;
   cursor: pointer;
   color: white;
-  /* margin: 0.5em !important; */
 }
 
 .link-btn {
