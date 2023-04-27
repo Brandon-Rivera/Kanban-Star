@@ -1,11 +1,31 @@
 import React from 'react'
+import { Container, Accordion, Button } from 'react-bootstrap';
+import Cards from "./Cards.js"
+import "./Workflow.css"
 
-function Workflow( {title} ) {
+
+
+function Workflow({ title, col }) {
+
   return (
-    <div className="border border-secondary rounded m-3 p-2 text-center bg-white text-secondary">
-        <h4>{title}</h4>
-    </div>
+    <>
+      <Container fluid="xs">
+        <Accordion alwaysOpen>
+          <Accordion.Item eventKey="0" >
+            <Accordion.Header>{title}</Accordion.Header>
+            <Accordion.Body>
+              {col.mycards.map(col => (
+                <Cards nCard={col.name} duedate={col.duedate}></Cards>
+              ))
+              }
+              <Button className='d-flex w-100 text-center'>Agregar tarjetas</Button>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      </Container>
+    </>
   )
 }
 
 export default Workflow
+
