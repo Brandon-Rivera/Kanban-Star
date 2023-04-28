@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Container, ListGroup, Button, Form, InputGroup } from 'react-bootstrap';
 import { BiSearchAlt } from "react-icons/bi";
-import { ImPlus } from "react-icons/im";
 
 import Workflow from './Workflow.js'
-import InsertCardModal from './InsertCardModal';
-import "./Board.css"
+import "./css/Board.css"
 
 export const Board = ({ api }) => {
 
@@ -34,13 +32,10 @@ export const Board = ({ api }) => {
             const data = await response.json()
             setDataWorkspace(data)
         }
-        
+
         //llamada a la funcion
         getWorkSpace()
     }, [api])
-
-export const Board = () => {
-    const [insertModalShow, setInsertModalShow] = useState(false);
 
     return (
         <>
@@ -58,6 +53,7 @@ export const Board = () => {
                         />
                     </InputGroup>
                 </ListGroup.Item>
+
             </ListGroup>
             <Container fluid>
                 {
@@ -89,22 +85,6 @@ export const Board = () => {
                     ))
                 }
             </Container>
-
-            <Workflow title={"Entregables"}/>
-
-            <Button
-                onClick={() => setInsertModalShow(true)}
-                variant='flat'
-                className='position-absolute bottom-0 end-0'
-                
-            >
-                <ImPlus size={40} color={'white'}/>
-            </Button>
-
-            <InsertCardModal
-                show={insertModalShow}
-                onHide={() => setInsertModalShow(false)}
-            />
         </>
     )
 }

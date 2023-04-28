@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
-
 import { useTranslation } from "react-i18next";
-
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import MoveCardModal from './MoveCardModal';
 
-function MenuTarjetas({ show, title, onHide }) {
+function CardMenu({ show, title, onHide }) {
 
   const [t] = useTranslation("global");
+  const [modalShowMove, setModalShowMove] = useState(false);
 
   const consultar = () => {
     console.log("Consultar")
@@ -19,6 +19,7 @@ function MenuTarjetas({ show, title, onHide }) {
 
   const mover = () => {
     console.log("Mover")
+    setModalShowMove(true)
   }
 
   const actualizar = () => {
@@ -57,8 +58,11 @@ function MenuTarjetas({ show, title, onHide }) {
           </Container>
         </Modal.Body>
       </Modal>
+
+      {/* Modales */}
+      <MoveCardModal show={modalShowMove} onHide={() => setModalShowMove(false)} />
     </>
   )
 }
 
-export default MenuTarjetas
+export default CardMenu

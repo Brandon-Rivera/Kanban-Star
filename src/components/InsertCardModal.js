@@ -1,5 +1,5 @@
 // Se importan las librerías y componentes necesarios
-import "./InsertCardModal.css"
+import "./css/InsertCardModal.css"
 import React, { useState }  from "react";
 import { useTranslation } from "react-i18next"
 import Button from 'react-bootstrap/Button';

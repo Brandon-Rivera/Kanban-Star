@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Accordion, Button } from 'react-bootstrap';
 import Cards from "./Cards.js"
-import "./Workflow.css"
+import "./css/Workflow.css"
 
 
 

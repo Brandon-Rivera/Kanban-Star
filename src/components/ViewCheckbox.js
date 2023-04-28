@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import './ViewCheckbox.css'
+import './css/ViewCheckbox.css'
 import {CiViewTable, CiViewList} from 'react-icons/ci'
 
 const ViewCheckbox = () => {

@@ -3,7 +3,7 @@ import { Button, ListGroup } from 'react-bootstrap'
 
 import { useTranslation } from "react-i18next";
 
-import MenuTarjetas from './MenuTarjetas';
+import CardMenu from './CardMenu';
 
 function Cards({ nCard, duedate }) {
 
@@ -25,7 +25,7 @@ function Cards({ nCard, duedate }) {
             </ListGroup>
 
             {/* Modales */}
-            <MenuTarjetas show={modalShow} title={t("cardMenu.title")} onHide={() => setModalShow(false)} />
+            <CardMenu show={modalShow} title={t("cardMenu.title")} onHide={() => setModalShow(false)} />
         </>
     )
 }
