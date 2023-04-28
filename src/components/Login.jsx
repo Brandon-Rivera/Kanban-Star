@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import ErrorModal from "./ErrorModal";
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
+import ksLogo from '../images/ksLogo.PNG'
 import ColorCheckbox from "./ColorCheckbox";
 
 export const Login = ( { api }) => {
@@ -61,7 +62,7 @@ export const Login = ( { api }) => {
                 </center>
 
                 {/* Formulario de inicio de sesion */}
-                <h1 className="derecha">{t("login.hello")}</h1>
+                <h1 className="mont"><img className="kanbanStarLogo" src={ksLogo} alt="KanbanStar Logo"></img>kanban star</h1>
                 <h1>{t("login.welcome")}</h1>
                 <h2>{t("login.login-with-credentials")}</h2>
                 <form className="login-form" onSubmit={handleSubmit}>
