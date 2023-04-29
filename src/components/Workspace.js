@@ -38,26 +38,34 @@ export function Workspace({ api }) {
     }, [api])
 
     //Función que ayuda a dar color random al background del tablero
-    const colorRandom = () => {
-        const color = [("#E4186A"), ("#F08830"), ("#2665BB"), ("#42AD49")]
-        return color[Math.floor(Math.random() * color.length)]
-    }
+    const color = (() => {
+        const colors = ['#42AD49', '#E4186A', '#2665BB', '#F08830'];
+        let index = 0;
+        return () => {
+            const color = colors[index];
+            index = (index + 1) % colors.length;
+            return color;
+        };
+    })();
+
 
     //Función que crea y hace dinamica la presentación de tableros
     return (
         <div className="box">
             {
                 dataBoard.data.map(data => (
-                    <div className='workspaceItem rounded' style={{ backgroundColor: colorRandom() }}>
-                        <h2 key={data.workspace_id}>{data.name}</h2>
-                        <div className="row w-100">
-                            {
-                                data.boards.map(boards => (
-                                    <div className="col-md-4 mb-3" key={boards.board_id}>
-                                        <WorkCard title={boards.name} id={boards.board_id}/>
-                                    </div>
-                                ))
-                            }
+                    <div className="m-2 rounded" style={{ backgroundColor: color() }}>
+                        <h2 className='text-center text-light' key={data.workspace_id}>{data.name}</h2>
+                        <div className='workspaceItem rounded-bottom p-3' >
+                            <div className="row w-100">
+                                {
+                                    data.boards.map(boards => (
+                                        <div className="col-md-4 mb-3" key={boards.board_id}>
+                                            <WorkCard title={boards.name} id={boards.board_id} />
+                                        </div>
+                                    ))
+                                }
+                            </div>
                         </div>
                     </div>
                 ))

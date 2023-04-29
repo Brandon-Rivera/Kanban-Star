@@ -13,14 +13,15 @@ function WorkCard({ title, id }) {
   }
 
   return (
-    <div className="card text-center bg-dark">
-      <a href={() => navigate('/board')} onClick={() => GotoBoard()} className="btn btn-outline-secondary">
-        <div className="card-body text-light">
+    <div className="card text-center">
+      <div onClick={() => GotoBoard()} className="btn btn-dark">
+        <div className="card-body">
           <h4 className="card-title">{title}</h4>
         </div>
-      </a>
+      </div>
     </div>
   )
 }
 
 export default WorkCard
+
