@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Button } from "react-bootstrap";
-import './Navbar.css'
+import './css/Navbar.css'
 
 //Importaciones de iconos
 import { BiLogOut } from "react-icons/bi";
@@ -28,7 +28,7 @@ const NavBar = ({onClickSettings}) => {
 		localStorage.removeItem('apikey');
 		localStorage.removeItem('domain');
 		localStorage.removeItem('userid');
-		navigate('/login')
+		navigate('/')
 	}
 
 	const navBarTheme = () => {

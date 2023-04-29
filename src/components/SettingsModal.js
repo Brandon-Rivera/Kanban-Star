@@ -1,4 +1,4 @@
-import "./SettingsModal.css";
+import "./css/SettingsModal.css";
 import { useTranslation } from "react-i18next";
 import { Modal, Button, Table } from "react-bootstrap";
 import { IoLanguage, IoColorPalette } from "react-icons/io5";
