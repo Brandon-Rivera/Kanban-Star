@@ -7,6 +7,7 @@ import MoveColumn from './MoveColumn';
 function MoveCardModal({ show, onHide, dataWorkspace, workflowPos }) {
 
     const [wPos, setWPos] = useState(0);
+    const colors = ["FFFFFF","#545454", "#2665BB", "#F08830", "#42AD49", "5E17EB"]
 
     useEffect(() => {
         setWPos(workflowPos)
@@ -22,19 +23,19 @@ function MoveCardModal({ show, onHide, dataWorkspace, workflowPos }) {
                 {
                     <>
                         {
-                            dataWorkspace.data[wPos].columns.map(columns => (
+                            dataWorkspace.data[wPos].columns.map((columns, index) => (
                                 columns.kids.length > 0 ? (
                                     <>
-                                        <MoveColumn title={columns.name} tabCol1={2} tabCol2={8} />
+                                        <MoveColumn title={columns.name} tabCol1={2} tabCol2={8} dotColor={colors[columns.sec]}/>
                                         {
                                             columns.kids.map(kids => (
-                                                <MoveColumn title={kids.name} tabCol1={4} tabCol2={6}/>
+                                                <MoveColumn title={kids.name} tabCol1={4} tabCol2={6} dotColor={colors[columns.sec]}/>
                                             ))
                                         }
                                     </>
                                 ) : (
                                     <>
-                                        <MoveColumn title={columns.name} tabCol1={2} tabCol2={8}/>
+                                        <MoveColumn title={columns.name} tabCol1={2} tabCol2={8} dotColor={colors[columns.sec]}/>
                                     </>
                                 )
                             ))
