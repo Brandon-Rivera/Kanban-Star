@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import './WorkCard.css'
+import './css/WorkCard.css'
 
 //Funcion para crear los botones de cada tablero
 function WorkCard({ title, id }) {

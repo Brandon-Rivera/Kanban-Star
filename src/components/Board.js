@@ -3,7 +3,7 @@ import { Container, ListGroup, Button, Form, InputGroup } from 'react-bootstrap'
 import { BiSearchAlt } from "react-icons/bi";
 
 import Workflow from './Workflow.js'
-import "./Board.css"
+import "./css/Board.css"
 
 export const Board = ({ api }) => {
 
@@ -35,7 +35,7 @@ export const Board = ({ api }) => {
 
         //llamada a la funcion
         getWorkSpace()
-    }, [])
+    }, [api])
 
     return (
         <>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from "./Navbar";
 import SettingsModal from './SettingsModal';
-import './MainLayout.css'
+import './css/MainLayout.css'
 
 
 export const MainLayout = () => {
