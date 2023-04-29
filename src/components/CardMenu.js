@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MoveCardModal from './MoveCardModal';
 
-function CardMenu({ show, title, onHide }) {
+function CardMenu({ show, title, onHide, dataWorkspace, workflowPos }) {
 
   const [t] = useTranslation("global");
   const [modalShowMove, setModalShowMove] = useState(false);
@@ -18,7 +18,6 @@ function CardMenu({ show, title, onHide }) {
   }
 
   const mover = () => {
-    console.log("Mover")
     setModalShowMove(true)
   }
 
@@ -60,7 +59,7 @@ function CardMenu({ show, title, onHide }) {
       </Modal>
 
       {/* Modales */}
-      <MoveCardModal show={modalShowMove} onHide={() => setModalShowMove(false)} />
+      <MoveCardModal show={modalShowMove} onHide={() => setModalShowMove(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos}/>
     </>
   )
 }

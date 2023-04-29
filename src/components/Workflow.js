@@ -5,7 +5,7 @@ import "./css/Workflow.css"
 
 
 
-function Workflow({ title, col }) {
+function Workflow({ title, col, dataWorkspace, workflowPos }) {
 
   return (
     <>
@@ -15,7 +15,7 @@ function Workflow({ title, col }) {
             <Accordion.Header>{title}</Accordion.Header>
             <Accordion.Body>
               {col.mycards.map(col => (
-                <Cards nCard={col.name} duedate={col.duedate}></Cards>
+                <Cards nCard={col.name} duedate={col.duedate} dataWorkspace={dataWorkspace} workflowPos={workflowPos}></Cards>
               ))
               }
               <Button className='d-flex w-100 text-center'>Agregar tarjetas</Button>

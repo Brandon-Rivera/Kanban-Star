@@ -67,7 +67,7 @@ export const Board = ({ api }) => {
                                             <h3 className="text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
                                             {
                                                 columns.kids.map(kids => (
-                                                    <Workflow title={kids.name} col={kids}></Workflow>
+                                                    <Workflow title={kids.name} col={kids} dataWorkspace={dataWorkspace} workflowPos={data.pos}></Workflow>
                                                 ))
                                             }
                                         </div>
@@ -75,7 +75,7 @@ export const Board = ({ api }) => {
                                     ) : (
                                     <div>
                                         <h3 className="text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
-                                        <Workflow title={columns.name} col={columns}></Workflow>
+                                        <Workflow title={columns.name} col={columns} dataWorkspace={dataWorkspace} workflowPos={data.pos}></Workflow>
                                     </div>
                                     )
                                 ))
