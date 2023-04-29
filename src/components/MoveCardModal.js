@@ -15,27 +15,26 @@ function MoveCardModal({ show, onHide }) {
             <Modal.Header className='bg-success'>
                 <Modal.Title className='fw-bold text-white'>Selecciona carril</Modal.Title><CloseButton onClick={onHide} />
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className='p-1'>
 
+                {/* Componente */}
                 <Form>
-                    {['checkbox'].map((type) => (
-                        <div key={`reverse-${type}`} className="mb-3">
-                            <Row>
-                                <Col className='d-flex justify-content-center m-0 p-0' centered>
-                                    <BsRecordCircleFill className='d-flex justify-content-center m-1' size={25}/>
-                                    <h3>hola</h3>
-                                </Col>
-                                <Col className='m-0 p-0'>
-                                    <Form.Check
-                                        reverse
-                                        name="group1"
-                                        type={type}
-                                        id={`reverse-${type}-1`}
-                                    />
-                                </Col>
-                            </Row>
-                        </div>
-                    ))}
+                    <div key={`reverse-checkbox`} className="mb-3">
+                        <Row className='d-flex align-items-center'>
+                            <Col className='d-flex justify-content-center m-0 p-0'>
+                                <BsRecordCircleFill color='gray' className='d-inline justify-content-center align-self-end m-1' size={25} />
+                                <h3 className='d-inline justify-content-center m-1'>Backlog</h3>
+                            </Col>
+                            <Col className='d-flex justify-content-center m-0 p-0'>
+                                <Form.Check
+                                    reverse
+                                    name="group1"
+                                    type='checkbox'
+                                    id={`reverse-checkbox-1`}
+                                />
+                            </Col>
+                        </Row>
+                    </div>
                 </Form>
 
             </Modal.Body>
