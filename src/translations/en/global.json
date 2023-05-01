@@ -44,6 +44,12 @@
         "description-placeholder": "Enter card description",
         "add-card": "Add card",
         "choose-owner": "None",
-        "choose-workflow": "Backlog"
+        "choose-workflow": "Backlog",
+        "insert-success": "Oparation result",
+        "insert-message": "The card was successfully added.",
+        "insert-button": "Dismiss",
+        "insert-success-er": "Operation result",
+        "insert-message-er": "The card was not added.",
+        "insert-button-er": "Dismiss"
     }
 }

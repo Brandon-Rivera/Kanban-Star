@@ -1,6 +1,6 @@
 // Se importan las librerías y componentes necesarios
 import "./InsertCardModal.css"
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -10,47 +10,32 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal'
+import ResInsertCardModal from "./ResInsertCardModal";
+import ErrInsertCardModal from "./ErrInsertCardModal"
 
 // Funcion que contiene el componente del formulario para la creación de tarjetas
-function InsertCardModal({show, onHide}) {
+function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }) {
   // Variable que contiene el mapa de traducciones
   const [t] = useTranslation("global")
-
-  let currDate = new Date();
-  let calendarDate = '';
-  let currDay = currDate.getDate();
-  let currMonth = currDate.getMonth() + 1;
-  let currYear = currDate.getFullYear();
-
-  if(currDay < 10){
-    currDay = '0' + currDay;
-  }
-
-  if(currMonth < 10){
-    currMonth = '0' + currMonth;
-  }
-  
-  calendarDate = currYear.toString() + '-' + currMonth.toString() + '-' + currDay.toString();
-  localStorage.setItem('calendarDate', calendarDate);
 
   // Asignar variables
   const [cardName, setCardName] = useState('');
   const [cardOwner, setCardOwner] = useState('');
-  const [cardDueDate, setCardDueDate] = useState(calendarDate);
-  const [cardWorkflow, setCardWorkflow] = useState('');
+  const [cardDueDate, setCardDueDate] = useState('');
   const [cardDescription, setCardDescription] = useState('');
 
   //
   const [resModal, setResModal] = useState(false);
+  const [errModal, setErrModal] = useState(false);
 
   // Funcion para asignar los valores a las keys
-  const handleCardSubmit = async (e) =>{
+  const handleCardSubmit = async (e) => {
     e.preventDefault();
     const values = {
       domain: localStorage.getItem('domain'),
       apikey: localStorage.getItem('apikey'),
-      columnid: 106,
-      workflowid: 22,
+      columnid: columnID,
+      workflowid: workflowID,
       title: cardName,
       description: cardDescription,
       ownerid: localStorage.getItem('userid'),
@@ -59,26 +44,27 @@ function InsertCardModal({show, onHide}) {
 
     // Funcion que manda la petición tipo POST para insertar la tarjeta
     const response = await fetch('http://localhost:3001/create',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(values)
-    });
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+      });
 
-    //console.log(values);
-    const data = await response.json;
+    const data = await response.json();
+    console.log(data);
 
-    if(data.status === false){
-      console.log("Error")
+    if (data.error) {
+      setErrModal(true);
     }
-    else{
-      console.log("Card Inserted")
+    else {
+      setResModal(true);
     }
   }
-    return (
-      // Creacion del modal que contiene el formulario de insercion de tarjetas
+  return (
+    // Creacion del modal que contiene el formulario de insercion de tarjetas
+    <>
       <Modal
         backdrop="static"
         show={show}
@@ -91,15 +77,15 @@ function InsertCardModal({show, onHide}) {
           {/* Componente Header del modal, contiene cuadro de texto tipo input y botón de cierre */}
           <Modal.Header closeButton className='modalHeader'>
             <Modal.Title id="contained-modal-title-vcenter">
-            <Form.Control
-              value={cardName}
-              onChange={(e) => setCardName(e.target.value)}
-              className='cardInputBox'
-              type='text'
-              placeholder={t("insertcard.card-title")}
-              size='lg'
-              autoFocus
-            />
+              <Form.Control
+                value={cardName}
+                onChange={(e) => setCardName(e.target.value)}
+                className='cardInputBox'
+                type='text'
+                placeholder={t("insertcard.card-title")}
+                size='lg'
+                autoFocus
+              />
             </Modal.Title>
           </Modal.Header>
           {/* Componente Body del modal, incluyendo el resto del formulario */}
@@ -114,22 +100,22 @@ function InsertCardModal({show, onHide}) {
               <DropdownButton
                 title="Jonathan Maya"
                 bsPrefix='drop1'>
-                  <Dropdown.Item href="#/action-1">
-                    Jonathan Maya
-                  </Dropdown.Item>
+                <Dropdown.Item href="#/action-1">
+                  Jonathan Maya
+                </Dropdown.Item>
               </DropdownButton>
             </InputGroup>
             {/* Componente que contiene el date picker */}
             <InputGroup className="mb-2">
               <InputGroup.Text
                 id="basic-addon1">
-                  {t("insertcard.due-date")}
+                {t("insertcard.due-date")}
               </InputGroup.Text>
-              <div id = "datepicker"
+              <div id="datepicker"
                 value={cardDueDate}
                 onChange={(e) => setCardDueDate(e.target.value)}
                 type='date'>
-                <DatePickerComponent/>
+                <DatePickerComponent />
               </div>
             </InputGroup>
             {/* Componente que contiene el dropdown para elegir carril */}
@@ -138,10 +124,10 @@ function InsertCardModal({show, onHide}) {
                 {t("insertcard.workflow")}
               </InputGroup.Text>
               <DropdownButton
-                title={t("insertcard.choose-workflow")}
+                title={columnName}
                 bsPrefix='drop1'>
                   <Dropdown.Item href="#/action-1">
-                    Backlog
+                    {columnName}
                   </Dropdown.Item>
               </DropdownButton>
             </InputGroup>
@@ -171,7 +157,14 @@ function InsertCardModal({show, onHide}) {
           </Modal.Footer>
         </Form>
       </Modal>
-    );
-  }
+      <ResInsertCardModal
+        show={resModal}
+        onHide={() => setResModal(false)} />
+      <ErrInsertCardModal
+        show={errModal}
+        onHide={() => setErrModal(false)} />
+    </>
+  );
+}
 
-  export default InsertCardModal;
+export default InsertCardModal;

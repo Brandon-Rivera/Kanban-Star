@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Container, ListGroup, Button, Form, InputGroup } from 'react-bootstrap';
 import { BiSearchAlt } from "react-icons/bi";
-import { ImPlus } from "react-icons/im";
+
 
 import Workflow from './Workflow.js'
-import InsertCardModal from './InsertCardModal';
+
 import "./Board.css"
 
 export const Board = ({ api }) => {
@@ -37,10 +37,7 @@ export const Board = ({ api }) => {
         
         //llamada a la funcion
         getWorkSpace()
-    }, [])
-
-export const Board = () => {
-    const [insertModalShow, setInsertModalShow] = useState(false);
+    }, [api])
 
     return (
         <>
@@ -90,22 +87,6 @@ export const Board = () => {
                     ))
                 }
             </Container>
-
-            <Workflow title={"Entregables"}/>
-
-            <Button
-                onClick={() => setInsertModalShow(true)}
-                variant='flat'
-                className='position-absolute bottom-0 end-0'
-                
-            >
-                <ImPlus size={40} color={'white'}/>
-            </Button>
-
-            <InsertCardModal
-                show={insertModalShow}
-                onHide={() => setInsertModalShow(false)}
-            />
         </>
     )
 }
