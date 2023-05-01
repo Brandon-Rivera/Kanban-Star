@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Container, Accordion, Button } from 'react-bootstrap';
 import InsertCardModal from './InsertCardModal.js';
 import Cards from "./Cards.js"
-import "./Workflow.css"
+import "./css/Workflow.css"
 
 
 

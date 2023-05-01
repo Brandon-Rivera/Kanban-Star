@@ -4,8 +4,7 @@ import { BiSearchAlt } from "react-icons/bi";
 
 
 import Workflow from './Workflow.js'
-
-import "./Board.css"
+import "./css/Board.css"
 
 export const Board = ({ api }) => {
 

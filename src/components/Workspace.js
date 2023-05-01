@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './Workspace.css'
+import './css/Workspace.css'
 
 //Importación de componentes
 import WorkCard from './WorkCard'
