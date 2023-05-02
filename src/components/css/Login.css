@@ -68,7 +68,7 @@ button {
 
 @font-face {
   font-family: mont;
-  src: url(../fonts/montHeavy.otf);
+  src: url(../../fonts/montHeavy.otf);
 }
 
 .mont{

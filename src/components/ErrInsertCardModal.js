@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import './ErrInsertCardModal.css'
+import './css/ErrInsertCardModal.css'
 
+// Funcion que contiene el componente del modal de error al insertar una tarjeta
 function ErrInsertCardModal({ show, onHide }) {
 
     const [t] = useTranslation("global")

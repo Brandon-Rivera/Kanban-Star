@@ -7,6 +7,7 @@ import "./css/Workflow.css"
 
 
 function Workflow({ title, col }) {
+  // Hook para el modal de insertar tarjetas
   const [insertModalShow, setInsertModalShow] = useState(false);
 
   return (
@@ -26,6 +27,7 @@ function Workflow({ title, col }) {
                 >
                   Agregar tarjetas
               </Button>
+              {/* Modal para insertar tarjetas */}
               <InsertCardModal
                 show={insertModalShow}
                 onHide={() => setInsertModalShow(false)}

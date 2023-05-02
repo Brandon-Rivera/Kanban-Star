@@ -39,9 +39,9 @@
 
 .drop1{
     margin: 0px !important;
-    padding: 3%;
-    background-color: rgb(209, 52, 106);
-    color: white;
+    padding: 3% !important;
+    background-color: rgb(209, 52, 106) !important;
+    color: white !important;
     border-radius: .5rem;
 }
 

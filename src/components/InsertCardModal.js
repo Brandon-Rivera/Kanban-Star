@@ -1,5 +1,5 @@
 // Se importan las librerías y componentes necesarios
-import "./InsertCardModal.css"
+import "./css/InsertCardModal.css"
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next"
 import Button from 'react-bootstrap/Button';
@@ -7,7 +7,6 @@ import Form from 'react-bootstrap/Form';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import DatePickerComponent from './DatePicker';
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal'
 import ResInsertCardModal from "./ResInsertCardModal";
@@ -18,17 +17,21 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
   // Variable que contiene el mapa de traducciones
   const [t] = useTranslation("global")
 
-  // Asignar variables
+  // Asignar variables y hooks
   const [cardName, setCardName] = useState('');
   const [cardOwner, setCardOwner] = useState('');
   const [cardDueDate, setCardDueDate] = useState('');
   const [cardDescription, setCardDescription] = useState('');
+  const [selectedOwner, setSelectedOwner] = useState(localStorage.getItem('realname'));
 
-  //
+  // Modales de respuesta y error
   const [resModal, setResModal] = useState(false);
   const [errModal, setErrModal] = useState(false);
 
-  // Funcion para asignar los valores a las keys
+  // Variable que contiene los owners del board
+  const cardOwners = JSON.parse(localStorage.getItem('owners'));
+
+  // Funcion para hacer la peticion POST para insertar la tarjeta
   const handleCardSubmit = async (e) => {
     e.preventDefault();
     const values = {
@@ -38,8 +41,8 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
       workflowid: workflowID,
       title: cardName,
       description: cardDescription,
-      ownerid: localStorage.getItem('userid'),
-      duedate: cardDueDate + "T20:20:20.727Z"
+      ownerid: cardOwner,
+      duedate: cardDueDate + "T23:59:59.727Z"
     };
 
     // Funcion que manda la petición tipo POST para insertar la tarjeta
@@ -62,6 +65,15 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
       setResModal(true);
     }
   }
+
+  const nameShortener = (name) => {;
+    const maxLength = 15;
+    if (name.length >= maxLength) {
+      name = name.substring(0, maxLength) + '...';
+    }
+    return name;
+  }
+
   return (
     // Creacion del modal que contiene el formulario de insercion de tarjetas
     <>
@@ -97,13 +109,26 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
                 className='insertDropdown'>
                 {t("insertcard.card-owner")}
               </InputGroup.Text>
-              <DropdownButton
-                title="Jonathan Maya"
-                bsPrefix='drop1'>
-                <Dropdown.Item href="#/action-1">
-                  Jonathan Maya
-                </Dropdown.Item>
-              </DropdownButton>
+                <Dropdown>
+                  <Dropdown.Toggle
+                    title={localStorage.getItem('realname')}
+                    variant="primary drop1"
+                    style={{ width: 'auto', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                    >
+                     {nameShortener(selectedOwner)} 
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '24em' }} >
+                    {
+                      cardOwners.data.map(data => (
+                        <Dropdown.Item key={data.user_id} onClick={() => {setCardOwner(data.user_id); setSelectedOwner(data.realname)}} >
+                          <div style={{ width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {data.realname}
+                          </div>
+                        </Dropdown.Item>
+                      ))
+                    }
+                  </Dropdown.Menu>
+                </Dropdown>
             </InputGroup>
             {/* Componente que contiene el date picker */}
             <InputGroup className="mb-2">
@@ -123,13 +148,24 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
               <InputGroup.Text>
                 {t("insertcard.workflow")}
               </InputGroup.Text>
-              <DropdownButton
-                title={columnName}
-                bsPrefix='drop1'>
-                  <Dropdown.Item href="#/action-1">
-                    {columnName}
-                  </Dropdown.Item>
-              </DropdownButton>
+              <Dropdown>
+                  <Dropdown.Toggle
+                    title={columnName}
+                    variant="primary drop1"
+                    style={{ width: 'auto', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                    >
+                     {nameShortener(columnName)} 
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '24em' }} >
+                    {
+                      <Dropdown.Item >
+                        <div style={{ width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          {columnName}
+                        </div>
+                      </Dropdown.Item>
+                    }
+                  </Dropdown.Menu>
+                </Dropdown>
             </InputGroup>
             {/* Componente que contiene el cuadro de texto para escribir el comentario de la tarjeta */}
             <InputGroup className="mb-2">

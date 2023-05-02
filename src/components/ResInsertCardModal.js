@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import './ResInsertCardModal.css'
+import './css/ResInsertCardModal.css'
 
+// Funcion que contiene el componente del modal de exito al insertar una tarjeta
 function ResInsertCardModal({ show, onHide }) {
 
     const [t] = useTranslation("global")
