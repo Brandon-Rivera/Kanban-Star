@@ -16,14 +16,14 @@ function MoveCardModal({ show, onHide, dataWorkspace, workflowPos }) {
     return (
         <Modal show={show} onHide={onHide} size='lg' centered>
             <Modal.Header className='bg-success'>
-                <Modal.Title className='fw-bold text-white'>Selecciona carril</Modal.Title><CloseButton onClick={onHide} />
+                <Modal.Title className='fw-bold text-white'>Selecciona columna</Modal.Title><CloseButton onClick={onHide} />
             </Modal.Header>
             <Modal.Body className='p-1'>
 
                 {
                     <>
                         {
-                            dataWorkspace.data[wPos].columns.map((columns, index) => (
+                            dataWorkspace.data[wPos].columns.map(columns => (
                                 columns.kids.length > 0 ? (
                                     <>
                                         <MoveColumn title={columns.name} tabCol1={2} tabCol2={8} dotColor={colors[columns.sec]}/>
