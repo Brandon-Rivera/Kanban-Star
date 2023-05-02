@@ -15,25 +15,27 @@ function WorkCard({ title, id }) {
   // Funcion para obtener los owners de un board
   const getBoardOwners = async () => {
     const response = await fetch('http://localhost:3001/owners', {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify(
-          {
-            boardid: id,
-            domain: localStorage.getItem('domain'),
-            apikey: localStorage.getItem('apikey')
-          }
-        )
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(
+        {
+          boardid: id,
+          domain: localStorage.getItem('domain'),
+          apikey: localStorage.getItem('apikey')
+        }
+      )
     })
     const data = await response.json()
     localStorage.setItem('owners', JSON.stringify(data))
-}
+
+    GotoBoard()
+  }
 
   return (
     <div className="card text-center bg-dark">
-      <a href={() => navigate('/board')} onClick={() => {GotoBoard(); getBoardOwners();}} className="btn btn-outline-secondary">
+      <a href={() => navigate('/board')} onClick={() => { getBoardOwners() }} className="btn btn-outline-secondary">
         <div className="card-body text-light">
           <h4 className="card-title">{title}</h4>
         </div>

@@ -59,7 +59,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
     console.log(data);
 
     if (data.error) {
-      setErrModal(true);
+      setErrModal(true)
     }
     else {
       setResModal(true);

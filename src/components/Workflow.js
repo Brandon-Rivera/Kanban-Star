@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Container, Accordion, Button } from 'react-bootstrap';
 import InsertCardModal from './InsertCardModal.js';
 import Cards from "./Cards.js"
 import "./css/Workflow.css"
 
 
-
+//Esto en realidad es la columna, NO EL WORKFLOW
 function Workflow({ title, col }) {
   // Hook para el modal de insertar tarjetas
   const [insertModalShow, setInsertModalShow] = useState(false);
