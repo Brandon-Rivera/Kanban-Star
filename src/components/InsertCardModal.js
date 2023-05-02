@@ -66,6 +66,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
     }
   }
 
+  // Funcion para limitar el tamaño del texto mostrado en la tarjeta
   const nameShortener = (name) => {;
     const maxLength = 15;
     if (name.length >= maxLength) {
