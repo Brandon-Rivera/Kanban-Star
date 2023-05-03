@@ -29,9 +29,8 @@ function WorkCard({ title, id }) {
     })
     const data = await response.json()
     localStorage.setItem('owners', JSON.stringify(data))
-
-    GotoBoard()
-  }
+    GotoBoard();
+}
 
   return (
     <div className="card text-center bg-dark">

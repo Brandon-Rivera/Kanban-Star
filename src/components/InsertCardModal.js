@@ -11,6 +11,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal'
 import ResInsertCardModal from "./ResInsertCardModal";
 import ErrInsertCardModal from "./ErrInsertCardModal"
+import getCorrectDate from "../utils/getCorrectDay";
 
 // Funcion que contiene el componente del formulario para la creación de tarjetas
 function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }) {
@@ -19,10 +20,10 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
 
   // Asignar variables y hooks
   const [cardName, setCardName] = useState('');
-  const [cardOwner, setCardOwner] = useState('');
-  const [cardDueDate, setCardDueDate] = useState('');
+  const [cardOwner, setCardOwner] = useState(null);
+  const [cardDueDate, setCardDueDate] = useState(null);
   const [cardDescription, setCardDescription] = useState('');
-  const [selectedOwner, setSelectedOwner] = useState(localStorage.getItem('realname'));
+  const [selectedOwner, setSelectedOwner] = useState(`${t("insertcard.choose-owner")}`);
 
   // Modales de respuesta y error
   const [resModal, setResModal] = useState(false);
@@ -42,7 +43,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
       title: cardName,
       description: cardDescription,
       ownerid: cardOwner,
-      duedate: cardDueDate + "T23:59:59.727Z"
+      duedate: getCorrectDate(cardDueDate)
     };
 
     // Funcion que manda la petición tipo POST para insertar la tarjeta
@@ -56,7 +57,6 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
       });
 
     const data = await response.json();
-    console.log(data);
 
     if (data.error) {
       setErrModal(true)
@@ -112,7 +112,8 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
               </InputGroup.Text>
                 <Dropdown>
                   <Dropdown.Toggle
-                    title={localStorage.getItem('realname')}
+                    title={selectedOwner}
+                    value={cardOwner}
                     variant="primary drop1"
                     style={{ width: 'auto', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
                     >
@@ -141,7 +142,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
                 value={cardDueDate}
                 onChange={(e) => setCardDueDate(e.target.value)}
                 type='date'>
-                <DatePickerComponent />
+                <DatePickerComponent/>
               </div>
             </InputGroup>
             {/* Componente que contiene el dropdown para elegir carril */}
