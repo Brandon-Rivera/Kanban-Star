@@ -47,7 +47,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
     };
 
     // Funcion que manda la petición tipo POST para insertar la tarjeta
-    const response = await fetch('http://localhost:3001/create',
+    const response = await fetch(`${api}/create`,
       {
         method: 'POST',
         headers: {
