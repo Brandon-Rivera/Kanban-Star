@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Container, Accordion, Button } from 'react-bootstrap';
 import InsertCardModal from './InsertCardModal.js';
 import Cards from "./Cards.js"
 import "./css/Workflow.css"
-import { ThemeContext } from '../Contexts/ThemeContext.js';
 import { useTranslation } from 'react-i18next';
 
 
@@ -12,17 +11,7 @@ function Workflow({ title, col, api }) {
   // Hook para el modal de insertar tarjetas
   const [insertModalShow, setInsertModalShow] = useState(false);
 
-  //const {theme} = useContext(ThemeContext);
   const [t] = useTranslation("global");
-
-  // const buttonsTheme = () => {
-	// 	if(theme === "dark") {
-	// 		return theme;
-	// 	}
-	// 	else{
-	// 		return "primary";
-	// 	}
-	// }
 
   return (
     <>
