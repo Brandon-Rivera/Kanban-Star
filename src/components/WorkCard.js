@@ -14,7 +14,7 @@ function WorkCard({ title, id, api }) {
 
   // Funcion para obtener los owners de un board
   const getBoardOwners = async () => {
-    const response = await fetch(`http://apikan1-env.eba-radpkqas.us-east-1.elasticbeanstalk.com/owners`, {
+    const response = await fetch(`${api}/owners`, {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -30,7 +30,7 @@ function WorkCard({ title, id, api }) {
     const data = await response.json()
     localStorage.setItem('owners', JSON.stringify(data))
     GotoBoard();
-}
+  }
 
   return (
     <div className="card text-center">

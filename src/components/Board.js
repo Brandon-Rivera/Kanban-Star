@@ -33,7 +33,7 @@ export const Board = ({ api }) => {
             const data = await response.json()
             setDataWorkspace(data)
         }
-        
+
         //llamada a la funcion
         getWorkSpace()
     }, [api])
@@ -72,12 +72,12 @@ export const Board = ({ api }) => {
                                                 ))
                                             }
                                         </div>
-                                        
+
                                     ) : (
-                                    <div>
-                                        <h3 className="text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
-                                        <Workflow title={columns.name} col={columns} api={api}></Workflow>
-                                    </div>
+                                        <div>
+                                            <h3 className="text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
+                                            <Workflow title={columns.name} col={columns} api={api}></Workflow>
+                                        </div>
                                     )
                                 ))
                             }
