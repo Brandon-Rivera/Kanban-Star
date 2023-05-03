@@ -6,7 +6,7 @@ import "./css/Workflow.css"
 
 
 //Esto en realidad es la columna, NO EL WORKFLOW
-function Workflow({ title, col }) {
+function Workflow({ title, col, api }) {
   // Hook para el modal de insertar tarjetas
   const [insertModalShow, setInsertModalShow] = useState(false);
 
@@ -34,6 +34,7 @@ function Workflow({ title, col }) {
                 columnID={col.id}
                 columnName={col.name}
                 workflowID={col.workflow_id}
+                api={api}
             />
             </Accordion.Body>
           </Accordion.Item>
