@@ -32,5 +32,9 @@
     "langcheck":{
         "en": "EN",
         "es": "ES"
+    },
+
+    "cards":{
+        "add": "Add a card"
     }
 }

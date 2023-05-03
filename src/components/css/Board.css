@@ -9,12 +9,22 @@
 
 #light .title{
     background-color: #0d6efd;
-    color: black
+    color: white;
 }
 
 #dark .title{
     background-color: #212529;
     color: white;
+}
+
+#dark .cont{
+    background-color: #212529;
+    color: white;
+}
+
+#light .cont{
+    background-color: white;
+    color: #464f57;
 }
 
 .search{

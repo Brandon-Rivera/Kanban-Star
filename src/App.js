@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "./components/Login";
 import { Workspace } from "./components/Workspace";
@@ -7,9 +7,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MainLayout } from "./components/MainLayout";
 import "./App.css";
-
-
-export const ThemeContext = createContext(null);
+import { ThemeContext } from "./Contexts/ThemeContext";
 
 
 function App() {
@@ -19,41 +17,23 @@ function App() {
   }, 36000000);
 
   //Link del api
-  const apiLink = "https://kvxrvsgw6c.execute-api.us-east-1.amazonaws.com";
+  //const apiLink = "https://kvxrvsgw6c.execute-api.us-east-1.amazonaws.com";
+  const apiLink = "http://localhost:3001";
 
-  //Estado del tema de la aplicación
-  const [theme, setTheme] = useState(() => {
-    const savedState = JSON.parse(localStorage.getItem("Theme"));
-    return savedState ?? false;
-  });
-
-  const setDark = () => {
-    setTheme("dark");
-  };
-
-  const setLight = () => {
-    setTheme("light");
-  };
-
-  useEffect(() => {
-    localStorage.setItem("Theme", JSON.stringify(theme));
-  }, [theme]);
-
+  const { theme } = useContext(ThemeContext);
 
   return (
-    <ThemeContext.Provider value={{ theme, setDark, setLight }}>
-      <div className="App2" id={theme}>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Login api = {apiLink}/>}></Route>
-            <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
-              <Route path="workspace" index element={<Workspace api = {apiLink}/>}></Route>
-              <Route path="board" index element={<Board api = {apiLink}/>}></Route>
-            </Route>
-          </Routes>
-        </Router>
-      </div>
-    </ThemeContext.Provider>
+    <div className="App2" id={theme}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login api={apiLink} />}></Route>
+          <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
+            <Route path="workspace" index element={<Workspace api={apiLink} />}></Route>
+            <Route path="board" index element={<Board api={apiLink} />}></Route>
+          </Route>
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
