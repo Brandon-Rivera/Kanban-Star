@@ -4,6 +4,7 @@ import { Login } from "./components/Login";
 import { Workspace } from "./components/Workspace";
 import { Board } from "./components/Board";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import InsertCardModal from "./components/InsertCardModal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { MainLayout } from "./components/MainLayout";
 import './App.css'
@@ -42,10 +43,11 @@ function App() {
       <div className="App2" id={theme}>
         <Router>
           <Routes>
-            <Route path="/" element={<Login api = {apiLink}/>}></Route>
+            <Route path="/login" element={<Login api = {apiLink}/>}></Route>
             <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
               <Route path="workspace" index element={<Workspace api = {apiLink}/>}></Route>
               <Route path="board" index element={<Board api = {apiLink}/>}></Route>
+              <Route path="/" index element={<InsertCardModal api = {apiLink}/>}></Route>
             </Route>
           </Routes>
         </Router>
