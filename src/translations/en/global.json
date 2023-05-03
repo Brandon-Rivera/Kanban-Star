@@ -2,15 +2,15 @@
     "login":{
         "hello": "Hello",
         "welcome": "Welcome!",
-        "login-with-credentials": "Log in with your Kanbanize credentials",
+        "login-with-credentials": "Log in with your Kanbanize account",
         "e-mail": "E-mail",
-        "e-mail-placeholder": "yourmail@gmail.com",
+        "e-mail-placeholder": "yourmail@mail.com",
         "password": "Password",
         "domain": "Domain",
         "domain-placeholder":"domain",
-        "login": "Login",
+        "login": "Log in",
         "WhatDomain": "What is domain?",
-        "DescDomain": "In your Kanbanize link you have this: https://[DOMAIN].kanbanize.com/"
+        "DescDomain": "You should find it in your Kanbanize link: https://[DOMAIN].kanbanize.com/"
     },
 
     "workspace":{
@@ -19,7 +19,7 @@
 
     "navbar":{
         "config": "Settings",
-        "logout": "Logout"
+        "logout": "Log out"
     },
 
     "settings":{
@@ -32,5 +32,24 @@
     "langcheck":{
         "en": "EN",
         "es": "ES"
+    },
+
+    "insertcard":{
+        "card-title": "Enter card title",
+        "card-owner": "Owner",
+        "due-date": "Deadline",
+        "workflow": "Workflow",
+        "swimlane": "Swimlane",
+        "description": "Description",
+        "description-placeholder": "Enter card description",
+        "add-card": "Add card",
+        "choose-owner": "None",
+        "choose-workflow": "Backlog",
+        "insert-success": "Oparation result",
+        "insert-message": "The card was successfully added.",
+        "insert-button": "Dismiss",
+        "insert-success-er": "Operation result",
+        "insert-message-er": "The card was not added.",
+        "insert-button-er": "Dismiss"
     }
 }

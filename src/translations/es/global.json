@@ -2,15 +2,15 @@
     "login":{
         "hello": "Hola",
         "welcome": "¡Bienvenido!",
-        "login-with-credentials": "Introduce tus credenciales de Kanbanize",
+        "login-with-credentials": "Ingresa con tu cuenta de Kanbanize",
         "e-mail": "Correo electrónico",
-        "e-mail-placeholder": "tucorreo@gmail.com",
+        "e-mail-placeholder": "tucorreo@mail.com",
         "password": "Contraseña",
         "domain": "Dominio",
         "domain-placeholder":"dominio",
         "login": "Iniciar sesión",
         "WhatDomain": "¿Qué es el dominio?",
-        "DescDomain": "En tu link de Kanbanize tienes esto: https://[DOMINIO].kanbanize.com/"
+        "DescDomain": "En tu enlace de Kanbanize encontrarás esto: https://[DOMINIO].kanbanize.com/"
     },
 
     "workspace":{
@@ -32,5 +32,24 @@
     "langcheck":{
         "en": "EN",
         "es": "ES"
+    },
+
+    "insertcard":{
+        "card-title": "Introduce título de la tarjeta",
+        "card-owner": "Propietario",
+        "due-date": "Fecha límite",
+        "workflow": "Flujo de trabajo",
+        "swimlane": "Carril",
+        "description": "Descripción",
+        "description-placeholder": "Ingrese la descripción de la tarjeta",
+        "add-card": "Añadir tarjeta",
+        "choose-owner": "Ninguno",
+        "choose-workflow": "Backlog",
+        "insert-success": "Resultado de la operación",
+        "insert-message": "La tarjeta fue añadida exitosamente.",
+        "insert-button": "Aceptar",
+        "insert-success-er": "Resultado de la operación",
+        "insert-message-er": "La tarjeta no fue añadida.",
+        "insert-button-er": "Aceptar"
     }
 }

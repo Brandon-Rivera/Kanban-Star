@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container, ListGroup, Button, Form, InputGroup } from 'react-bootstrap';
 import { BiSearchAlt } from "react-icons/bi";
 
+
 import Workflow from './Workflow.js'
 import "./css/Board.css"
 
@@ -32,7 +33,7 @@ export const Board = ({ api }) => {
             const data = await response.json()
             setDataWorkspace(data)
         }
-
+        
         //llamada a la funcion
         getWorkSpace()
     }, [api])
