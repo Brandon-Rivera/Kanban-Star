@@ -11,9 +11,7 @@
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-items: center;
+    place-items: center;
     width: 90vw;
-    margin: 0.4rem;
 }
 

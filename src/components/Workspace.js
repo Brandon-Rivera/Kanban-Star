@@ -54,9 +54,9 @@ export function Workspace({ api }) {
         <div className="box">
             {
                 dataBoard.data.map(data => (
-                    <div className="m-2 rounded" style={{ backgroundColor: color() }}>
+                    <div className="m-2 rounded workspaceItem" style={{ backgroundColor: color() }}>
                         <h2 className='text-center text-light' key={data.workspace_id}>{data.name}</h2>
-                        <div className='workspaceItem rounded-bottom p-3' >
+                        
                             <div className="row w-100">
                                 {
                                     data.boards.map(boards => (
@@ -66,7 +66,7 @@ export function Workspace({ api }) {
                                     ))
                                 }
                             </div>
-                        </div>
+                        
                     </div>
                 ))
             }
