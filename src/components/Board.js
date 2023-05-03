@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, ListGroup, Button, Form, InputGroup } from 'react-bootstrap';
 import { BiSearchAlt } from "react-icons/bi";
-
 import Workflow from './Workflow.js'
 import "./css/Board.css"
 

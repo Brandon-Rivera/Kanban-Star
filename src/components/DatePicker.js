@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form } from 'react-bootstrap';
- 
+
+// Componente para seleccionar la fecha de vencimiento de una tarjeta
 class DatePickerComponent extends React.Component{
  
     render(){
@@ -11,10 +12,8 @@ class DatePickerComponent extends React.Component{
                     <div className="col-md-4">
                         <Form.Group controlId="dob">
                             <Form.Control
-                                value={localStorage.getItem('calendarDate')}
                                 className='text-primary bg-light m-0 p-2 border-left-0'
                                 type="date"
-                                name="dob"
                                  />
                         </Form.Group>
                     </div>
