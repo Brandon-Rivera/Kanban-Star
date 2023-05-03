@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container, ListGroup, Button, Form, InputGroup } from 'react-bootstrap';
 import { BiSearchAlt } from "react-icons/bi";
 
+
 import Workflow from './Workflow.js'
 import "./css/Board.css"
 
@@ -32,7 +33,7 @@ export const Board = ({ api }) => {
             const data = await response.json()
             setDataWorkspace(data)
         }
-
+        
         //llamada a la funcion
         getWorkSpace()
     }, [api])
@@ -67,7 +68,7 @@ export const Board = ({ api }) => {
                                             <h3 className="cont text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
                                             {
                                                 columns.kids.map(kids => (
-                                                    <Workflow title={kids.name} col={kids}></Workflow>
+                                                    <Workflow title={kids.name} col={kids} api={api}></Workflow>
                                                 ))
                                             }
                                         </div>
@@ -75,7 +76,7 @@ export const Board = ({ api }) => {
                                     ) : (
                                     <div>
                                         <h3 className="text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
-                                        <Workflow title={columns.name} col={columns}></Workflow>
+                                        <Workflow title={columns.name} col={columns} api={api}></Workflow>
                                     </div>
                                     )
                                 ))
