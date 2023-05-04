@@ -4,7 +4,39 @@ import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { BsRecordCircleFill } from "react-icons/bs"
 
-function MoveColumn({title, tabCol1, tabCol2, dotColor}) {
+function MoveColumn({ title, tabCol1, tabCol2, dotColor, api }) {
+
+    const handleCardMove = async (e) => {
+        e.preventDefault();
+        const values = {
+            domain: localStorage.getItem('domain'),
+            apikey: localStorage.getItem('apikey'),
+            cardid: 12,
+            columnid: 12,
+            workflowid: 12,
+        };
+
+        // Funcion que manda la petición tipo POST para insertar la tarjeta
+        const response = await fetch(`${api}/update/move`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+            });
+
+        const data = await response.json();
+
+        if (data.error) {
+            console.log('Error al mover');
+        }
+        else {
+            console.log('Todo chill');
+        }
+    }
+
+
     return (
         <div>
             <Form>
@@ -23,6 +55,7 @@ function MoveColumn({title, tabCol1, tabCol2, dotColor}) {
                                 name="group1"
                                 type='checkbox'
                                 id={`reverse-checkbox-1`}
+                                onClick={() => handleCardMove()}
                             />
                         </Col>
                     </Row>
