@@ -28,8 +28,7 @@ function Workflow({ title, col, api }) {
                   Agregar tarjetas
               </Button>
               {/* Modal para insertar tarjetas */}
-              <InsertCardModal
-                show={insertModalShow}
+              <InsertCardModal show={insertModalShow}
                 onHide={() => setInsertModalShow(false)}
                 columnID={col.id}
                 columnName={col.name}

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from "./components/Login";
 import { Workspace } from "./components/Workspace";
 import { Board } from "./components/Board";
+import { BoardTable } from "./components/BoardTable";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { MainLayout } from "./components/MainLayout";
@@ -46,7 +47,9 @@ function App() {
             <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
               <Route path="workspace" index element={<Workspace api = {apiLink}/>}></Route>
               <Route path="board" index element={<Board api = {apiLink}/>}></Route>
+              
             </Route>
+            <Route path="/newboard" index element={<BoardTable/>}></Route>
           </Routes>
         </Router>
       </div>
