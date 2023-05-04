@@ -1,5 +1,6 @@
 .App2 {
     min-height: 100vh;
+    padding-top: 12vh;
 }
 
 #light{
@@ -8,5 +9,6 @@
 
 #dark{
     color: white;
-    background-color: #484f5d;
+    background-color:#495057;
 }
+
