@@ -12,7 +12,7 @@ export const MainLayout = () => {
 
   const {theme} = useContext(ThemeContext);
 
-  const [i18n] = useTranslation("global");
+  const [t,i18n] = useTranslation("global");
 
   console.log('t Main Layout',t)
 
