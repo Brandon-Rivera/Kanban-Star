@@ -3,3 +3,21 @@
     --bs-accordion-btn-bg: #59d099;
     --bs-accordion-btn-color: white;
 } 
+
+.acc2{
+    color: white;
+    --bs-accordion-btn-focus-box-shadow: 0 
+}
+
+#dark .acc-body{
+    background-color: #484f5d;
+}
+
+#light .acc-body{
+    background-color: rgb(231, 231, 234);
+}
+
+#dark .accordion-button:not(.collapsed){
+    color: white;
+}
+

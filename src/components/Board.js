@@ -59,16 +59,16 @@ export const Board = ({ api }) => {
             <Container fluid>
                 {
                     dataWorkspace.data.map(data => (
-                        <div className="border border-secondary rounded my-3 p-2 bg-white text-secondary">
-                            <h4 className='text-center' key={data.id}>{data.name}</h4>
+                        <div className="cont border border-secondary rounded my-3 p-2 text-secondary">
+                            <h4 className='cont text-center' key={data.id}>{data.name}</h4>
                             {
                                 data.columns.map(columns => (
                                     columns.kids.length > 0 ? (
                                         <div>
-                                            <h3 className="text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
+                                            <h3 className="cont text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
                                             {
                                                 columns.kids.map(kids => (
-                                                    <Workflow title={kids.name} col={kids}></Workflow>
+                                                    <Workflow title={kids.name} col={kids} api={api}></Workflow>
                                                 ))
                                             }
                                         </div>
@@ -76,7 +76,7 @@ export const Board = ({ api }) => {
                                     ) : (
                                     <div>
                                         <h3 className="text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
-                                        <Workflow title={columns.name} col={columns}></Workflow>
+                                        <Workflow title={columns.name} col={columns} api={api}></Workflow>
                                     </div>
                                     )
                                 ))

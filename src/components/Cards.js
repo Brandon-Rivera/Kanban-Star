@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, ListGroup } from 'react-bootstrap'
+import { ThemeContext } from '../Contexts/ThemeContext';
+import './css/Cards.css'
 import ViewCardModal from './ViewCardModal';
 
 function Cards({ nCard, duedate, idCard, cCard }) {
@@ -25,6 +27,18 @@ function Cards({ nCard, duedate, idCard, cCard }) {
         setViewModalShow(true);
     }
 
+
+    const {theme} = useContext(ThemeContext)
+
+    const buttonsTheme = () => {
+		if(theme === "dark") {
+			return theme;
+		}
+		else{
+			return "primary";
+		}
+	}
+
     return (
         <>
         <ListGroup as="ol">
@@ -33,7 +47,7 @@ function Cards({ nCard, duedate, idCard, cCard }) {
                     <div className="fw-bold">{nCard}</div>
                     {duedate}
                 </div>
-                <Button>Menu</Button>
+                <Button variant={buttonsTheme()}>Menu</Button>
             </ListGroup.Item>
         </ListGroup>
         <ViewCardModal 

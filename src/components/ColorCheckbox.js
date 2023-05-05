@@ -1,28 +1,25 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useContext} from 'react'
 import './css/ColorCheckbox.css'
 import {RiSunLine, RiMoonLine} from 'react-icons/ri'
 //import { hasFormSubmit } from '@testing-library/user-event/dist/utils';
-import { ThemeContext } from '../App';
+import { ColorCheckedContext} from '../Contexts/ColorCheckedContext';
+import { ThemeContext } from '../Contexts/ThemeContext';
 import { ToggleButton } from 'react-bootstrap';
 
 const ColorCheckbox = () => {
 
-    const {theme, setDark, setLight} = useContext(ThemeContext);
-
-    //Recuperamos el estado del Local Storage para que se mantenga así después de renderizar de nuevo el componente.
-    const [ColorChecked, setColorChecked] = useState(() => {
-        const savedState = JSON.parse(localStorage.getItem('ColorChecked'));
-        return savedState ?? false;
-    });
+    const {theme, setTheme} = useContext(ThemeContext)
+    const {colorChecked, setColorChecked} = useContext(ColorCheckedContext);
 
     //Función para cambiar la paleta de colores dependiendo de si el checkbox está checked/unchecked
     function handleColorCheckboxChange(event) {
         setColorChecked(event.target.checked);
+        localStorage.setItem('ColorChanged', "true");
         if(event.target.checked) {
-            setDark();
+            setTheme("dark");
         }
         else{
-            setLight();
+            setTheme("light");
         }
     }
 
@@ -36,11 +33,6 @@ const ColorCheckbox = () => {
         }
     }
 
-    //Función para guardar el estado del checkbox en el Local Storage, para que se mantenga.
-    useEffect(() => {
-        localStorage.setItem('ColorChecked', JSON.stringify(ColorChecked));
-    }, [ColorChecked]);
-    
   return (
     <div>
         <ToggleButton
@@ -48,7 +40,7 @@ const ColorCheckbox = () => {
             id="toggle-check"
             type="checkbox"
             variant="outline-dark"
-            checked={ColorChecked}
+            checked={colorChecked}
           
             size={20}
             onChange={handleColorCheckboxChange}
