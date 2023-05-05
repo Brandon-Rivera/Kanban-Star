@@ -12,6 +12,7 @@ import Modal from 'react-bootstrap/Modal'
 import ResInsertCardModal from "./ResInsertCardModal";
 import ErrInsertCardModal from "./ErrInsertCardModal"
 import getCorrectDate from "../utils/getCorrectDay";
+import getNameShort from "../utils/getNameShort";
 
 // Funcion que contiene el componente del formulario para la creación de tarjetas
 function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }) {
@@ -32,6 +33,13 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
   // Variable que contiene los owners del board
   const cardOwners = JSON.parse(localStorage.getItem('owners'));
 
+  function insertInitialState(){
+    setCardName('');
+    setSelectedOwner(`${t("insertcard.choose-owner")}`);
+    setCardDueDate(null);
+    setCardDescription('');
+  }
+
   // Funcion para hacer la peticion POST para insertar la tarjeta
   const handleCardSubmit = async (e) => {
     e.preventDefault();
@@ -41,7 +49,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
       columnid: columnID,
       workflowid: workflowID,
       title: cardName,
-      description: cardDescription,
+      description: '<p>' + cardDescription + '</p>',
       ownerid: cardOwner,
       duedate: getCorrectDate(cardDueDate)
     };
@@ -57,7 +65,8 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
       });
 
     const data = await response.json();
-
+    insertInitialState();
+    
     if (data.error) {
       setErrModal(true)
     }
@@ -66,22 +75,13 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
     }
   }
 
-  // Funcion para limitar el tamaño del texto mostrado en la tarjeta
-  const nameShortener = (name) => {;
-    const maxLength = 15;
-    if (name.length >= maxLength) {
-      name = name.substring(0, maxLength) + '...';
-    }
-    return name;
-  }
-
   return (
     // Creacion del modal que contiene el formulario de insercion de tarjetas
     <>
       <Modal
         backdrop="static"
         show={show}
-        onHide={onHide}
+        onHide={() => {onHide(); insertInitialState();}}
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -117,14 +117,14 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
                     variant="primary drop1"
                     style={{ width: 'auto', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
                     >
-                     {nameShortener(selectedOwner)} 
+                      { getNameShort(selectedOwner) }
                   </Dropdown.Toggle>
                   <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '24em' }} >
                     {
                       cardOwners.data.map(data => (
-                        <Dropdown.Item key={data.user_id} onClick={() => {setCardOwner(data.user_id); setSelectedOwner(data.realname)}} >
+                        <Dropdown.Item key={data.user_id} onClick={() => {setCardOwner(data.user_id); setSelectedOwner(data.username)}} >
                           <div style={{ width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                            {data.realname}
+                            {data.username}
                           </div>
                         </Dropdown.Item>
                       ))
@@ -156,7 +156,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
                     variant="primary drop1"
                     style={{ width: 'auto', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
                     >
-                     {nameShortener(columnName)} 
+                     { getNameShort(columnName) }
                   </Dropdown.Toggle>
                   <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '24em' }} >
                     {
@@ -195,6 +195,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
           </Modal.Footer>
         </Form>
       </Modal>
+      {/* Modales de respuesta y error */}
       <ResInsertCardModal
         show={resModal}
         onHide={() => setResModal(false)} />

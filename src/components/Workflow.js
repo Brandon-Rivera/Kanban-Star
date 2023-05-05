@@ -18,7 +18,7 @@ function Workflow({ title, col }) {
             <Accordion.Header>{title}</Accordion.Header>
             <Accordion.Body>
               {col.mycards.map(col => (
-                <Cards nCard={col.name} duedate={col.duedate} ></Cards>
+                <Cards nCard={col.name} duedate={col.duedate} idCard={col.id} cCard={title} ></Cards>
               ))
               }
               <Button 
