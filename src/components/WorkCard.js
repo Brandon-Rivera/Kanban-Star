@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import './css/WorkCard.css'
 
 //Funcion para crear los botones de cada tablero
-function WorkCard({ title, id, api }) {
+function WorkCard({ title, id, api}) {
 
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ function WorkCard({ title, id, api }) {
 
   // Funcion para obtener los owners de un board
   const getBoardOwners = async () => {
-    const response = await fetch(`https://kvxrvsgw6c.execute-api.us-east-1.amazonaws.com/owners`, {
+    const response = await fetch(`${api}/owners`, {
       headers: {
         'Content-Type': 'application/json'
       },

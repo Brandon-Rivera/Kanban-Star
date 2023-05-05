@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, ListGroup } from 'react-bootstrap'
+import { ThemeContext } from '../Contexts/ThemeContext';
+import './css/Cards.css'
 
 import { useTranslation } from "react-i18next";
 
@@ -12,6 +14,22 @@ function Cards({ nCard, duedate, dataWorkspace, workflowPos, api }) {
 
     const [t] = useTranslation("global");
 
+    const {theme} = useContext(ThemeContext)
+
+    const MenuClick = () => {
+        buttonsTheme()
+        setModalShow(true)
+    }
+
+    const buttonsTheme = () => {
+		if(theme === "dark") {
+			return theme;
+		}
+		else{
+			return "primary";
+		}
+	}
+
     return (
         <>
             <ListGroup as="ol">
@@ -20,7 +38,7 @@ function Cards({ nCard, duedate, dataWorkspace, workflowPos, api }) {
                         <div className="fw-bold">{nCard}</div>
                         {duedate}
                     </div>
-                    <Button onClick={() => setModalShow(true)}>Menu</Button>
+                    <Button onClick={() => MenuClick()}>Menu</Button>
                 </ListGroup.Item>
             </ListGroup>
 
