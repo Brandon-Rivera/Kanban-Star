@@ -12,7 +12,7 @@ export const MainLayout = () => {
 
   const {theme} = useContext(ThemeContext);
 
-  const [t,i18n] = useTranslation("global");
+  const [i18n] = useTranslation("global");
 
   const [showSettingsModal, setShowSettingsModal] = useState(false);
 
