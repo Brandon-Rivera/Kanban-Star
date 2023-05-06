@@ -6,12 +6,16 @@ import { useTranslation } from "react-i18next";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import MoveCardModal from './MoveCardModal';
 
-function CardMenu({ show, title, onHide, dataWorkspace, workflowPos, api }) {
+import MoveCardModal from './MoveCardModal';
+import CommentsModal from './CommentsModal';
+
+function CardMenu({ show, title, onHide, cardID, dataWorkspace, workflowPos, api }) {
 
   const [t] = useTranslation("global");
   const [modalShowMove, setModalShowMove] = useState(false);
+  const [modalShowComments, setModalShowComments] = useState(false);
+
 
   const consultar = () => {
     console.log("Consultar")
@@ -26,7 +30,7 @@ function CardMenu({ show, title, onHide, dataWorkspace, workflowPos, api }) {
   }
 
   const comentarios = () => {
-    console.log("Comentarios")
+    setModalShowComments(true);
   }
 
   const eliminar = () => {
@@ -60,6 +64,7 @@ function CardMenu({ show, title, onHide, dataWorkspace, workflowPos, api }) {
 
       {/* Modales */}
       <MoveCardModal show={modalShowMove} onHide={() => setModalShowMove(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} api={api}/>
+      <CommentsModal show={modalShowComments} onHide = {() => setModalShowComments(false)} cardID = {cardID} api={api} />
     </>
   )
 }
