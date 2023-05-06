@@ -60,5 +60,13 @@
         "insert-success-er": "Operation result",
         "insert-message-er": "The card was not added.",
         "insert-button-er": "Dismiss"
+    },
+
+    "viewcard":{
+        "no-title": "No title",
+        "no-description": "No description",
+        "btn-accept": "Accept",
+        "btn-edit": "Edit card",
+        "card-blocked": "Card is blocked"
     }
 }

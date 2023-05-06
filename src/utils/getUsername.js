@@ -7,5 +7,8 @@ export default function getUsername(user_id){
                 return owners.data[i].username;
             }
         }
-    } 
+    }
+    else if(user_id === null || user_id === undefined){
+        return '';
+    }
 }

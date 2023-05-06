@@ -60,5 +60,13 @@
         "insert-success-er": "Resultado de la operación",
         "insert-message-er": "La tarjeta no fue añadida.",
         "insert-button-er": "Aceptar"
+    },
+
+    "viewcard":{
+        "no-title": "Sin título",
+        "no-description": "Sin descripción",
+        "btn-accept": "Aceptar",
+        "btn-edit": "Editar tarjeta",
+        "card-blocked": "Tarjeta bloqueada"
     }
 }
