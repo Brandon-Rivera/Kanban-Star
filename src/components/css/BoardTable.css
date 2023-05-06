@@ -1,0 +1,15 @@
+.carousel .carousel-control-prev {
+    position: absolute;
+    left: -5%;
+    z-index: 1;
+    color: #0a0a0a !important;
+    font-weight: bold;
+  }
+  
+  .carousel .carousel-control-next {
+    position: absolute;
+    right: -5%;
+    z-index: 1;
+    color: #0a0a0a !important;
+    font-weight: bold;
+  }

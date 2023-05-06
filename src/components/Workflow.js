@@ -21,20 +21,12 @@ function Workflow({ title, col, api }) {
                 <Cards nCard={col.name} duedate={col.duedate} ></Cards>
               ))
               }
-              <Button 
-                className='d-flex w-100 text-center'
-                onClick={() => setInsertModalShow(true)}
-                >
+              <Button className='d-flex w-100 text-center' onClick={() => setInsertModalShow(true)}>
                   Agregar tarjetas
               </Button>
               {/* Modal para insertar tarjetas */}
-              <InsertCardModal show={insertModalShow}
-                onHide={() => setInsertModalShow(false)}
-                columnID={col.id}
-                columnName={col.name}
-                workflowID={col.workflow_id}
-                api={api}
-            />
+              <InsertCardModal show={insertModalShow} onHide={() => setInsertModalShow(false)} columnID={col.id} columnName={col.name} workflowID={col.workflow_id} api={api} />
+              
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
