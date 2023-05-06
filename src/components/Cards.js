@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 import CardMenu from './CardMenu';
 
-function Cards({ nCard, duedate, dataWorkspace, workflowPos, api }) {
+function Cards({ nCard, cardid, duedate, dataWorkspace, workflowPos, api }) {
 
     //Vaiable para mostrar modal de menu de opciones
     const [modalShow, setModalShow] = useState(false);
@@ -43,7 +43,7 @@ function Cards({ nCard, duedate, dataWorkspace, workflowPos, api }) {
             </ListGroup>
 
             {/* Modales */}
-            <CardMenu show={modalShow} title={t("cardMenu.title")} onHide={() => setModalShow(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} api={api}/>
+            <CardMenu show={modalShow} title={t("cardMenu.title")} onHide={() => setModalShow(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} cardid={cardid} api={api}/>
         </>
     )
 }
