@@ -26,7 +26,8 @@
         "lang": "Language",
         "palette": "Color palette",
         "view": "View",
-        "save": "Save changes"
+        "save": "Save changes",
+        "close": "Don't save"
     },
 
     "langcheck":{
