@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 
 //Esto en realidad es la columna, NO EL WORKFLOW
-function Workflow({ title, col, api }) {
+function Workflow({ title, col, dataWorkspace, workflowPos, api}) {
   // Hook para el modal de insertar tarjetas
   const [insertModalShow, setInsertModalShow] = useState(false);
 
@@ -21,7 +21,7 @@ function Workflow({ title, col, api }) {
             <Accordion.Header>{title}</Accordion.Header>
             <Accordion.Body className='acc-body'>
               {col.mycards.map(col => (
-                <Cards nCard={col.name} duedate={col.duedate} ></Cards>
+                <Cards nCard={col.name} duedate={col.duedate} dataWorkspace={dataWorkspace} workflowPos={workflowPos} api={api}></Cards>
               ))
               }
               <Button 
