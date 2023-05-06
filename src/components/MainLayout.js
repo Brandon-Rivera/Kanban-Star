@@ -14,6 +14,8 @@ export const MainLayout = () => {
 
   const [t,i18n] = useTranslation("global");
 
+  console.log('t Main Layout',t)
+
   const [showSettingsModal, setShowSettingsModal] = useState(false);
 
   //Método para mostrar el modal de configuración en el layout. 
