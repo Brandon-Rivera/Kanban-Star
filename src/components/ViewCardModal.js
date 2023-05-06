@@ -7,7 +7,6 @@ import { Dropdown } from "react-bootstrap";
 import { InputGroup } from "react-bootstrap";
 import DatePickerComponent from './DatePicker';
 import getNameShort from "../utils/getNameShort";
-import checkTypeError from "../utils/checkTypeError";
 import getUsername from '../utils/getUsername'
 import getCorrectDescription from "../utils/getCorrectDescription";
 
@@ -23,9 +22,10 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }){
                 centered>
                     <Form>
                         <fieldset disabled='false'>
-                            <Modal.Header>
+                            <Modal.Header className='modalHeader'>
                                 <Modal.Title>
                                     <Form.Control
+                                        readOnly
                                         value={cardDetails.data ? cardDetails.data.title : ''}
                                         className='cardInputBox'
                                         type='text'
@@ -55,11 +55,12 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }){
                                         {t("insertcard.due-date")}
                                     </InputGroup.Text>
                                     <div id="datepicker"
-                                        value='05-08-2000'
+                                        value={cardDetails.data ? cardDetails.data.deadline : ''}
                                         type='date'
                                         tabindex="-1"
-                                        aria-disabled="disabled">
-                                        <DatePickerComponent/>
+                                        aria-disabled="true"
+                                         >
+                                        <DatePickerComponent readMode={true} />
                                     </div>
                                 </InputGroup>
                                 <InputGroup className="mb-2">
@@ -80,6 +81,7 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }){
                                         {t("insertcard.description")}
                                     </InputGroup.Text>
                                     <Form.Control
+                                        readOnly
                                         value={cardDetails.data ? getCorrectDescription(cardDetails.data.description) : ''}
                                         className='cardDescriptionBox'
                                         type="text"

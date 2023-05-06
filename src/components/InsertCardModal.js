@@ -142,7 +142,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
                 value={cardDueDate}
                 onChange={(e) => setCardDueDate(e.target.value)}
                 type='date'>
-                <DatePickerComponent/>
+                <DatePickerComponent readMode={false} />
               </div>
             </InputGroup>
             {/* Componente que contiene el dropdown para elegir carril */}

@@ -4,12 +4,22 @@ import { ThemeContext } from '../Contexts/ThemeContext';
 import './css/Cards.css'
 import ViewCardModal from './ViewCardModal';
 
-function Cards({ nCard, duedate, idCard, cCard }) {
+function Cards({ nCard, duedate, idCard, cCard, api }) {
     const [viewModalShow, setViewModalShow] = useState(false);
     const [cardDetails, setCardDetails] = useState({});
+    const {theme} = useContext(ThemeContext)
+
+    const buttonsTheme = () => {
+		if(theme === "dark") {
+			return theme;
+		}
+		else{
+			return "primary";
+		}
+	}
 
     const getCardDetails = async (cardID) => {
-        const response = await fetch('http://localhost:3001/card', {
+        const response = await fetch(`${api}/card`, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -27,18 +37,6 @@ function Cards({ nCard, duedate, idCard, cCard }) {
         setViewModalShow(true);
     }
 
-
-    const {theme} = useContext(ThemeContext)
-
-    const buttonsTheme = () => {
-		if(theme === "dark") {
-			return theme;
-		}
-		else{
-			return "primary";
-		}
-	}
-
     return (
         <>
         <ListGroup as="ol">
@@ -47,7 +45,7 @@ function Cards({ nCard, duedate, idCard, cCard }) {
                     <div className="fw-bold">{nCard}</div>
                     {duedate}
                 </div>
-                <Button variant={buttonsTheme()}>Menu</Button>
+                <Button variant={buttonsTheme()} onClick={() => getCardDetails(idCard)} >Menu</Button>
             </ListGroup.Item>
         </ListGroup>
         <ViewCardModal 
