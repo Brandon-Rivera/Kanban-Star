@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../Contexts/ThemeContext";
-import './css/Navbar.css'
+import "./css/Navbar.css"
 
 //Importaciones de bootstrap
 import Container from "react-bootstrap/Container";
