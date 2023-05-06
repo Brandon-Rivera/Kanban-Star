@@ -34,6 +34,15 @@
         "es": "ES"
     },
 
+    "cardMenu":{
+        "title": "¿Qué gustas hacer?",
+        "show": "Consultar",
+        "move": "Mover",
+        "update": "Actualizar",
+        "comment": "Comentar",
+        "delete": "Eliminar"
+    },
+    
     "insertcard":{
         "card-title": "Introduce título de la tarjeta",
         "card-owner": "Propietario",

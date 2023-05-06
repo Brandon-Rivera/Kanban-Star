@@ -9,9 +9,6 @@ import Collapse from 'react-bootstrap/Collapse';
 import ksLogo from '../images/ksLogo.PNG'
 import ColorCheckbox from "./ColorCheckbox";
 
-//import { changeLanguage } from "i18next";
-
-
 export const Login = ( { api }) => {
 
     // Asignacion de variables y hooks
