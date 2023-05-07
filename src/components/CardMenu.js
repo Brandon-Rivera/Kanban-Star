@@ -64,7 +64,7 @@ function CardMenu({ show, title, onHide, cardID, dataWorkspace, workflowPos, api
 
       {/* Modales */}
       <MoveCardModal show={modalShowMove} onHide={() => setModalShowMove(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} api={api}/>
-      <CommentsModal show={modalShowComments} onHide = {() => setModalShowComments(false)} cardID = {cardID} api={api} />
+      {/*<CommentsModal show={modalShowComments} onHide = {() => setModalShowComments(false)} cardID = {cardID} api={api} />*/}
     </>
   )
 }

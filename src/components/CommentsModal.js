@@ -54,6 +54,7 @@ import DOMPurify from 'dompurify';
         }
       </ModalBody>
       <ModalFooter>
+        <Button onClick={onHide}>Salir</Button>
         <Button>Añadir comentario</Button>
       </ModalFooter>
      </Modal>
