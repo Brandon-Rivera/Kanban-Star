@@ -20,8 +20,8 @@ function Workflow({ title, col, dataWorkspace, workflowPos, api}) {
           <Accordion.Item eventKey="0">
             <Accordion.Header>{title}</Accordion.Header>
             <Accordion.Body className='acc-body'>
-              {col.mycards.map(card => (
-                <Cards nCard={card.name} cardID = {card.id} duedate={card.duedate} dataWorkspace={dataWorkspace} workflowPos={workflowPos} api={api}></Cards>
+              {col.mycards.map(col => (
+                <Cards nCard={col.name} duedate={col.duedate} dataWorkspace={dataWorkspace} workflowPos={workflowPos} idCard={col.id} cCard={title} api={api}></Cards>
               ))
               }
               <Button 

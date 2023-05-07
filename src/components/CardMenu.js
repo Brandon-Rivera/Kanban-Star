@@ -1,3 +1,4 @@
+// Se importan las librerías y componentes necesarios
 import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -6,21 +7,26 @@ import { useTranslation } from "react-i18next";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
 import MoveCardModal from './MoveCardModal';
 import CommentsModal from './CommentsModal';
+import ViewCardModal from './ViewCardModal';
 
-function CardMenu({ show, title, onHide, cardID, dataWorkspace, workflowPos, api }) {
-
+function CardMenu({ show, title, onHide, dataWorkspace, workflowPos, columnCard, cardDetails, api }) {
+  // Traducciones
   const [t] = useTranslation("global");
+
+  // Estados para los modales
   const [modalShowMove, setModalShowMove] = useState(false);
   const [modalShowComments, setModalShowComments] = useState(false);
 
+  const [viewModalShow, setViewModalShow] = useState(false);
 
+  // Funcion que muestra el modal de consultar tarjetas
   const consultar = () => {
-    console.log("Consultar")
+    setViewModalShow(true);
   }
 
+  // Funcion que muestra el modal de mover tarjetas
   const mover = () => {
     setModalShowMove(true)
   }
@@ -65,6 +71,7 @@ function CardMenu({ show, title, onHide, cardID, dataWorkspace, workflowPos, api
       {/* Modales */}
       <MoveCardModal show={modalShowMove} onHide={() => setModalShowMove(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} api={api}/>
       {/*<CommentsModal show={modalShowComments} onHide = {() => setModalShowComments(false)} cardID = {cardID} api={api} />*/}
+      <ViewCardModal show={viewModalShow} onHide={() => setViewModalShow(false)} cardColumn={columnCard} cardDetails={cardDetails}/>
     </>
   )
 }

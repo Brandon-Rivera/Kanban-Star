@@ -9,9 +9,10 @@ import DatePickerComponent from './DatePicker';
 import Dropdown from 'react-bootstrap/Dropdown';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal'
-import ResInsertCardModal from "./ResInsertCardModal";
-import ErrInsertCardModal from "./ErrInsertCardModal"
+import SuccessCardModal from "./SuccessCardModal";
+import ErrorCardModal from "./ErrorCardModal"
 import getCorrectDate from "../utils/getCorrectDay";
+import getShortName from "../utils/getShortName";
 
 // Funcion que contiene el componente del formulario para la creación de tarjetas
 function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }) {
@@ -32,6 +33,13 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
   // Variable que contiene los owners del board
   const cardOwners = JSON.parse(localStorage.getItem('owners'));
 
+  function insertInitialState(){
+    setCardName('');
+    setSelectedOwner(`${t("insertcard.choose-owner")}`);
+    setCardDueDate(null);
+    setCardDescription('');
+  }
+
   // Funcion para hacer la peticion POST para insertar la tarjeta
   const handleCardSubmit = async (e) => {
     e.preventDefault();
@@ -41,7 +49,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
       columnid: columnID,
       workflowid: workflowID,
       title: cardName,
-      description: cardDescription,
+      description: '<p>' + cardDescription + '</p>',
       ownerid: cardOwner,
       duedate: getCorrectDate(cardDueDate)
     };
@@ -57,22 +65,14 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
       });
 
     const data = await response.json();
-
+    insertInitialState();
+    
     if (data.error) {
-      setErrModal(true)
+      setErrModal(true);
     }
     else {
       setResModal(true);
     }
-  }
-
-  // Funcion para limitar el tamaño del texto mostrado en la tarjeta
-  const nameShortener = (name) => {;
-    const maxLength = 15;
-    if (name.length >= maxLength) {
-      name = name.substring(0, maxLength) + '...';
-    }
-    return name;
   }
 
   return (
@@ -81,22 +81,23 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
       <Modal
         backdrop="static"
         show={show}
-        onHide={onHide}
-        aria-labelledby="contained-modal-title-vcenter"
+        onHide={() => {onHide(); insertInitialState();}}
         centered
       >
         {/* Componente de tipo Form */}
         <Form onSubmit={handleCardSubmit}>
           {/* Componente Header del modal, contiene cuadro de texto tipo input y botón de cierre */}
-          <Modal.Header closeButton className='modalHeader'>
-            <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Header closeButton className='bg-success'>
+            <Modal.Title>
               <Form.Control
                 value={cardName}
                 onChange={(e) => setCardName(e.target.value)}
-                className='cardInputBox'
+                className='cardInputBox bg-success fw-bold'
                 type='text'
                 placeholder={t("insertcard.card-title")}
                 size='lg'
+                as='textarea'
+                rows={2}
                 autoFocus
               />
             </Modal.Title>
@@ -105,80 +106,79 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
           <Modal.Body>
             {/* Componente que contiene el dropdown para elegir propietario */}
             <InputGroup className="mb-2">
-              <InputGroup.Text
-                id="basic-addon1"
-                className='insertDropdown'>
+              <InputGroup.Text className='fw-bold'>
                 {t("insertcard.card-owner")}
               </InputGroup.Text>
-                <Dropdown>
-                  <Dropdown.Toggle
-                    title={selectedOwner}
-                    value={cardOwner}
-                    variant="primary drop1"
-                    style={{ width: 'auto', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
-                    >
-                     {nameShortener(selectedOwner)} 
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '24em' }} >
-                    {
-                      cardOwners.data.map(data => (
-                        <Dropdown.Item key={data.user_id} onClick={() => {setCardOwner(data.user_id); setSelectedOwner(data.realname)}} >
-                          <div style={{ width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                            {data.realname}
-                          </div>
-                        </Dropdown.Item>
-                      ))
-                    }
-                  </Dropdown.Menu>
-                </Dropdown>
+              <Dropdown>
+                <Dropdown.Toggle
+                  title={selectedOwner}
+                  value={cardOwner}
+                  variant="primary drop1 fw-bold"
+                  style={{ width: 'fit-content', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                  >
+                    { getShortName(selectedOwner) }
+                </Dropdown.Toggle>
+                <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '20em' }} >
+                  {
+                    cardOwners.data.map(data => (
+                      <Dropdown.Item className='fw-bold' key={data.user_id} onClick={() => {setCardOwner(data.user_id); setSelectedOwner(data.username)}} >
+                        <div style={{ width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          { data.username }
+                        </div>
+                      </Dropdown.Item>
+                    ))
+                  }
+                </Dropdown.Menu>
+              </Dropdown>
             </InputGroup>
             {/* Componente que contiene el date picker */}
             <InputGroup className="mb-2">
-              <InputGroup.Text
-                id="basic-addon1">
+              <InputGroup.Text className='fw-bold'>
                 {t("insertcard.due-date")}
               </InputGroup.Text>
               <div id="datepicker"
                 value={cardDueDate}
                 onChange={(e) => setCardDueDate(e.target.value)}
                 type='date'>
-                <DatePickerComponent/>
+                <DatePickerComponent readMode={false} />
               </div>
             </InputGroup>
             {/* Componente que contiene el dropdown para elegir carril */}
             <InputGroup className="mb-2">
-              <InputGroup.Text>
+              <InputGroup.Text className='fw-bold' >
                 {t("insertcard.workflow")}
               </InputGroup.Text>
               <Dropdown>
                   <Dropdown.Toggle
                     title={columnName}
-                    variant="primary drop1"
-                    style={{ width: 'auto', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                    variant="primary drop1 fw-bold"
+                    style={{ width: 'fit-content', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
                     >
-                     {nameShortener(columnName)} 
+                     { getShortName(columnName) }
                   </Dropdown.Toggle>
-                  <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '24em' }} >
+                  <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '20em' }} >
                     {
                       <Dropdown.Item >
                         <div style={{ width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                          {columnName}
+                          { columnName }
                         </div>
                       </Dropdown.Item>
                     }
                   </Dropdown.Menu>
                 </Dropdown>
             </InputGroup>
-            {/* Componente que contiene el cuadro de texto para escribir el comentario de la tarjeta */}
+            {/* Componente que contiene el cuadro de texto para escribir la descripcion de la tarjeta */}
             <InputGroup className="mb-2">
-              <InputGroup.Text>
+              <InputGroup.Text className='fw-bold'>
                 {t("insertcard.description")}
               </InputGroup.Text>
               <Form.Control
                 value={cardDescription}
                 onChange={(e) => setCardDescription(e.target.value)}
-                className='cardDescriptionBox'
+                className='cardDescriptionBox fw-bold'
                 type="text"
+                as='textarea'
+                rows={2}
                 placeholder={t("insertcard.description-placeholder")}
               />
             </InputGroup>
@@ -187,7 +187,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
           <Modal.Footer className='modalFooter'>
             <Button
               type="submit"
-              variant="primary"
+              variant="primary fw-bold"
               onClick={onHide}
             >
               {t("insertcard.add-card")}
@@ -195,12 +195,19 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
           </Modal.Footer>
         </Form>
       </Modal>
-      <ResInsertCardModal
+      {/* Modales de respuesta y error */}
+      <SuccessCardModal
         show={resModal}
-        onHide={() => setResModal(false)} />
-      <ErrInsertCardModal
+        onHide={() => setResModal(false)}
+        title={ t("insertcard.insert-success") }
+        message={ t("insertcard.insert-message") }
+        button={ t("insertcard.insert-button") } />
+      <ErrorCardModal
         show={errModal}
-        onHide={() => setErrModal(false)} />
+        onHide={() => setErrModal(false)}
+        title={ t("insertcard.insert-success-er") }
+        message={ t("insertcard.insert-message-er") }
+        button ={ t("insertcard.insert-button-er") } />
     </>
   );
 }
