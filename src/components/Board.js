@@ -47,11 +47,7 @@ export const Board = ({ api }) => {
                         <Button variant="dark" className="search">
                             <BiSearchAlt size={25} color={'white'} />
                         </Button>
-                        <Form.Control
-                            className="search"
-                            aria-label="Example text with button addon"
-                            aria-describedby="basic-addon1"
-                        />
+                        <Form.Control className="search" aria-label="Example text with button addon" aria-describedby="basic-addon1"/>
                     </InputGroup>
                 </ListGroup.Item>
 

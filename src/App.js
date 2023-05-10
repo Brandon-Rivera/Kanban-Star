@@ -49,7 +49,7 @@ function App() {
               <Route path="board" index element={<Board api = {apiLink}/>}></Route>
               
             </Route>
-            <Route path="/newboard" index element={<BoardTable/>}></Route>
+            <Route path="/newboard" index element={<BoardTable api = {apiLink}/>}></Route>
           </Routes>
         </Router>
       </div>
