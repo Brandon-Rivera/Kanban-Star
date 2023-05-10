@@ -18,7 +18,7 @@ export function BoardTable() {
     <div className="container-fluid">
       <h2 className="mt-1">Horizontal Scrolling</h2>
       <div className="scrolling-wrapper row flex-row flex-nowrap" ref={scrollingWrapperRef}>
-        <div className="col-11">
+        <div className="col-11 col-md-4">
           <Card className="text-light w-100 p-0" style={{ backgroundColor: '#2665BB' }} >
             <Card.Header>Nombre columna</Card.Header>
             <Card.Body style={{ backgroundColor: '#92B6E9' }}>
@@ -29,7 +29,7 @@ export function BoardTable() {
             </Card.Body>
           </Card>
         </div>
-        <div className="col-11">
+        <div className="col-11 col-md-4">
           <Card className="text-light w-100 p-0" style={{ backgroundColor: '#2665BB' }} >
             <Card.Header>Nombre columna</Card.Header>
             <Card.Body style={{ backgroundColor: '#92B6E9' }}>
@@ -40,7 +40,18 @@ export function BoardTable() {
             </Card.Body>
           </Card>
         </div>
-        <div className="col-11">
+        <div className="col-11 col-md-4">
+          <Card className="text-light w-100 p-0" style={{ backgroundColor: '#2665BB' }} >
+            <Card.Header>Nombre columna</Card.Header>
+            <Card.Body style={{ backgroundColor: '#92B6E9' }}>
+              <Card.Text>
+                <CardTable />
+                <CardTable />
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+        <div className="col-11 col-md-4">
           <Card className="text-light w-100 p-0" style={{ backgroundColor: '#2665BB' }} >
             <Card.Header>Nombre columna</Card.Header>
             <Card.Body style={{ backgroundColor: '#92B6E9' }}>
