@@ -1,3 +1,5 @@
-/* .list-group-item:last-child {
-    border-bottom-right-radius: initial;
-} */
+.list-group-item.active {
+    background-color: #2665BB;
+    border-color: #2665BB;
+}
+  
