@@ -1,59 +1,79 @@
- import React, { useState, useEffect } from 'react'
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'react-bootstrap'
-import DOMPurify from 'dompurify';
+import './css/CommentsModal.css'
  
- const CommentsModal = ({show, onHide, cardID, api}) => {
+ const CommentsModal = ({show, onHide, cardID, api, comments}) => {
 
-  const [comments, setComments] = useState({data: []});
+  const userID = localStorage.getItem('userid');
+  
 
-  useEffect(() => {
+  /*Obtenemos owners del localStorage y comparamos sus IDs con el ID del autor
+   de cada comentario para regresar el nombre del autor*/
+  const cardOwners = JSON.parse(localStorage.getItem('owners'));
+  const ownersArray = Object.values(cardOwners);
+  const ownersBuenos = ownersArray[0];
+  let author = "";
 
-    //Valores necesarios para la peticion get de workspace
-    const values = {
-        domain: localStorage.getItem('domain'),
-        apikey: localStorage.getItem('apikey'),
-        cardid: cardID
-    }
+  const getAuthor = (authorID) => {
+    ownersBuenos.forEach(owner => {
+      
+        if(authorID === owner.user_id){
+          author = owner.realname;
+        }
+      
+    });
+  }
 
-    //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
-    const getComments = async () => {
+  //Convertimos la fecha de creación del comentario a el siguiente formato: YYYY/MM/DD HH:MM:SS
+  const getDate = (commentDate) => {
+    let cDate = new Date(commentDate);
+    let z = cDate.getTimezoneOffset() * 60 * 1000;
+    let localDate = cDate-z;
+    localDate = new Date(localDate).toISOString().split(".")[0];
+    localDate = localDate.replace('T', ' ');
+    return localDate;
+  }
 
-        const response = await fetch("http://localhost:3001/comment/get", {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: 'POST',
-            mode: "cors",
-            body: JSON.stringify(values)
-        })
-        const data = await response.json()
-        setComments(data)
-    }
+/*Por cada comentario, comparamos el id del autor de cada uno con el del actual usuario, 
+y aplicamos el estilo correspondiente a cada comentario*/
 
-    //llamada a la funcion
-    getComments()
-}, [api, cardID])
+  let commentStyle = "";
+  let authDateStyle = "";
+
+  const getCommentStyle = (authorID) => {
+    let authToString = authorID.toString();
+      
+      (authToString === userID ? commentStyle = "ownComment" : commentStyle = "tp_comment");
+      (authToString === userID ? authDateStyle = "ownAuthorDate" : authDateStyle = "tp_authorDate");
+  }
 
    return (
-     <Modal show={show} onHide={onHide}>
+     <Modal show={show} onHide={onHide} scrollable centered>
       <ModalHeader>
-        Comentarios
+        Comentarios de CardID: {cardID}
       </ModalHeader>
       <ModalBody>
         {
           comments.data.map(comment => (
-              <div>
-                Author: {comment.author.value}
-                Date: {comment.created_at}
+            <>
+            {getCommentStyle(comment.author.value)}
+              <div className={authDateStyle}>
+                {getAuthor(comment.author.value)}
+                {author} 
                 <br></br>
-                {comment.text.replace(/<\/?p[^>]*>|&nbsp;|&lt;|&gt;|amp;/g, '')}
-                <br></br>
-                CardID: {cardID}
-              </div>        
+                {getDate(comment.created_at)}
+              </div>
+              
+              <div dangerouslySetInnerHTML={{__html:comment.text}} className={commentStyle}>
+              </div>    
+              <br></br>
+           </>
           ))
         }
       </ModalBody>
       <ModalFooter>
+        <div>
+          Input
+        </div>
         <Button onClick={onHide}>Salir</Button>
         <Button>Añadir comentario</Button>
       </ModalFooter>

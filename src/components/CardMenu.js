@@ -11,13 +11,14 @@ import MoveCardModal from './MoveCardModal';
 import CommentsModal from './CommentsModal';
 import ViewCardModal from './ViewCardModal';
 
-function CardMenu({ show, title, onHide, dataWorkspace, workflowPos, columnCard, cardDetails, api }) {
+function CardMenu({ show, title, onHide, dataWorkspace, workflowPos, idCard, columnCard, cardDetails, api }) {
   // Traducciones
   const [t] = useTranslation("global");
 
   // Estados para los modales
   const [modalShowMove, setModalShowMove] = useState(false);
   const [modalShowComments, setModalShowComments] = useState(false);
+  const [comments, setComments] = useState({ data: [] });
 
   const [viewModalShow, setViewModalShow] = useState(false);
 
@@ -35,7 +36,25 @@ function CardMenu({ show, title, onHide, dataWorkspace, workflowPos, columnCard,
     console.log("Actualizar")
   }
 
-  const comentarios = () => {
+  const comentarios = async () => {
+    //Valores necesarios para la peticion get de workspace
+    const values = {
+      domain: localStorage.getItem('domain'),
+      apikey: localStorage.getItem('apikey'),
+      cardid: idCard
+    }
+
+    //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
+      const response = await fetch("http://localhost:3001/comment/get", {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(values)
+      })
+      const data = await response.json()
+      setComments(data)
+  
     setModalShowComments(true);
   }
 
@@ -47,7 +66,7 @@ function CardMenu({ show, title, onHide, dataWorkspace, workflowPos, columnCard,
     <>
       <Modal show={show} onHide={onHide} size='lg' centered className='text-center'>
         <Modal.Header className='bg-success'>
-          <Modal.Title className='fw-bold text-white'>{title}</Modal.Title><CloseButton onClick={onHide}/>
+          <Modal.Title className='fw-bold text-white'>{title}</Modal.Title><CloseButton onClick={onHide} />
         </Modal.Header>
         <Modal.Body className='p-1'>
           <Container>
@@ -69,9 +88,9 @@ function CardMenu({ show, title, onHide, dataWorkspace, workflowPos, columnCard,
       </Modal>
 
       {/* Modales */}
-      <MoveCardModal show={modalShowMove} onHide={() => setModalShowMove(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} api={api}/>
-      {/*<CommentsModal show={modalShowComments} onHide = {() => setModalShowComments(false)} cardID = {cardID} api={api} />*/}
-      <ViewCardModal show={viewModalShow} onHide={() => setViewModalShow(false)} cardColumn={columnCard} cardDetails={cardDetails}/>
+      <MoveCardModal show={modalShowMove} onHide={() => setModalShowMove(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} api={api} />
+      <CommentsModal show={modalShowComments} onHide={() => setModalShowComments(false)} cardID={idCard} api={api} comments={comments}/>
+      <ViewCardModal show={viewModalShow} onHide={() => setViewModalShow(false)} cardColumn={columnCard} cardDetails={cardDetails} />
     </>
   )
 }
