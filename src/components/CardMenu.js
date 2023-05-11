@@ -11,7 +11,7 @@ import MoveCardModal from './MoveCardModal';
 import CommentsModal from './CommentsModal';
 import ViewCardModal from './ViewCardModal';
 
-function CardMenu({ show, title, onHide, dataWorkspace, workflowPos, idCard, columnCard, cardDetails, api }) {
+function CardMenu({ show, title, onHide, dataWorkspace, workflowPos, idCard, cardName, columnCard, cardDetails, api }) {
   // Traducciones
   const [t] = useTranslation("global");
 
@@ -89,7 +89,7 @@ function CardMenu({ show, title, onHide, dataWorkspace, workflowPos, idCard, col
 
       {/* Modales */}
       <MoveCardModal show={modalShowMove} onHide={() => setModalShowMove(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} api={api} />
-      <CommentsModal show={modalShowComments} onHide={() => setModalShowComments(false)} cardID={idCard} api={api} comments={comments}/>
+      <CommentsModal show={modalShowComments} onHide={() => setModalShowComments(false)} cardID={idCard} cardName= {cardName} api={api} comments={comments} getComments = {comentarios}/>
       <ViewCardModal show={viewModalShow} onHide={() => setViewModalShow(false)} cardColumn={columnCard} cardDetails={cardDetails} />
     </>
   )

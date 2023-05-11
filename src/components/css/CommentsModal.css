@@ -1,15 +1,21 @@
+.ownAD{
+    justify-content: right;
+}
 
-.tp_authorDate{
-    
-    max-width: fit-content;
-    font-size: small;
+.tp_AD{
+    justify-content: left;
 }
 
 .ownAuthorDate{
-    margin-left: 64%;
-    max-width: fit-content;
     font-size: small;
+    text-align: right;
 }
+
+.tp_authorDate{
+    font-size: small;
+    text-align: left;
+}
+
 
 .ownComment{
     margin-left: 30%;
@@ -28,4 +34,19 @@
     max-width: 70%;
     word-wrap: break-word;
     text-align: left;
+}
+
+.commentStyle{
+    white-space: pre;
+    text-rendering: auto;
+}
+
+.modalTitle{
+    margin: 0;
+    text-align: center;
+}
+
+.footer{
+    display: block;
+    text-align: right;
 }
