@@ -69,5 +69,13 @@
         "btn-accept": "Aceptar",
         "btn-edit": "Editar tarjeta",
         "card-blocked": "Tarjeta bloqueada"
+    },
+
+    "comments":{
+        "title": "Comentarios de la tarjeta",
+        "add": "Agregar comentario",
+        "empty": "El comentario no puede estar vacío",
+        "accept": "Aceptar",
+        "placeholder": "Escribe aquí tu comentario..."
     }
 }

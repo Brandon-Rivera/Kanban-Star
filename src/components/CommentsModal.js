@@ -8,8 +8,10 @@ import {
   ModalHeader,
 } from "react-bootstrap";
 import "./css/CommentsModal.css";
-import { useState } from "react";
-import ErrorModal from "./ErrorModal";
+import { useContext, useState } from "react";
+import ErrorCardModal from "./ErrorCardModal";
+import { useTranslation } from "react-i18next";
+import { ThemeContext } from "../Contexts/ThemeContext";
 
 const CommentsModal = ({
   show,
@@ -20,6 +22,8 @@ const CommentsModal = ({
   comments,
   getComments,
 }) => {
+  const [t] = useTranslation("global");
+  const { theme } = useContext(ThemeContext);
   const userID = localStorage.getItem("userid");
   const [newComment, setNewComment] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
@@ -82,7 +86,9 @@ const CommentsModal = ({
 
   // Funcion para hacer la peticion POST para insertar el comentario.
   const handleFormSubmit = async (e) => {
-    const encodedText = newComment.replace(/ /g, '&nbsp;').replace(/\n/g, '<br/>');
+    const encodedText = newComment
+      .replace(/ /g, "&nbsp;")
+      .replace(/\n/g, "<br/>");
     e.preventDefault();
     const values = {
       domain: localStorage.getItem("domain"),
@@ -108,17 +114,17 @@ const CommentsModal = ({
         getComments();
       }
     } else {
-      setErrorMessage("El comentario no puede estar vacío");
+      setErrorMessage(t("comments.empty"));
       setShowErrorModal(true);
     }
   };
 
   return (
     <>
-      <Modal show={show} onHide={onHide} scrollable centered>
-        <ModalHeader closeButton>
+      <Modal id={theme} show={show} onHide={onHide} scrollable centered>
+        <ModalHeader className="modal-header">
           <Modal.Title className="modalTitle">
-            Comentarios de la tarjeta {cardName} ({cardID})
+            {t("comments.title")}: {cardName} ({cardID})
           </Modal.Title>
         </ModalHeader>
         <ModalBody>
@@ -130,7 +136,9 @@ const CommentsModal = ({
                   {getAuthor(comment.author.value)}
                   {author}
                   <br></br>
-                  {getDate(comment.created_at)}
+                  <div className="dateComment">
+                    {getDate(comment.created_at)}
+                  </div>
                 </div>
               </div>
 
@@ -145,23 +153,26 @@ const CommentsModal = ({
         <ModalFooter className="footer">
           <Form className="commentForm" onSubmit={handleFormSubmit}>
             <FormControl
+              placeholder={t("comments.placeholder")}
               as="textarea"
               rows={3}
               className="commentForm"
               value={newComment}
               onChange={handleFormControlChange}
-              // style={{ whiteSpace: "pre-wrap" }}
             ></FormControl>
             <br></br>
-            {/* <Button onClick={onHide}>Salir</Button> */}
-            <Button type="submit">Añadir comentario</Button>
+            <div className="footerButtons">
+              <Button onClick={onHide}>Salir</Button>
+              <Button type="submit">{t("comments.add")}</Button>
+            </div>
           </Form>
         </ModalFooter>
       </Modal>
-      <ErrorModal
+      <ErrorCardModal
         show={showErrorModal}
         title="Error"
         message={errorMessage}
+        button={t("comments.accept")}
         onHide={() => setShowErrorModal(false)}
       />
     </>
