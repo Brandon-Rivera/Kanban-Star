@@ -1,18 +1,19 @@
 // Se importan las librerías y componentes necesarios
-import "./css/InsertCardModal.css"
+import "./css/InsertCardModal.css";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import DatePickerComponent from './DatePicker';
 import Dropdown from 'react-bootstrap/Dropdown';
 import InputGroup from 'react-bootstrap/InputGroup';
-import Modal from 'react-bootstrap/Modal'
+import Modal from 'react-bootstrap/Modal';
 import SuccessCardModal from "./SuccessCardModal";
-import ErrorCardModal from "./ErrorCardModal"
+import ErrorCardModal from "./ErrorCardModal";
 import getCorrectDate from "../utils/getCorrectDay";
 import getShortName from "../utils/getShortName";
+import getCurrentDate from "../utils/getCurrentDate";
 
 // Funcion que contiene el componente del formulario para la creación de tarjetas
 function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }) {
@@ -22,7 +23,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
   // Asignar variables y hooks
   const [cardName, setCardName] = useState('');
   const [cardOwner, setCardOwner] = useState(null);
-  const [cardDueDate, setCardDueDate] = useState(null);
+  const [cardDueDate, setCardDueDate] = useState(getCurrentDate());
   const [cardDescription, setCardDescription] = useState('');
   const [selectedOwner, setSelectedOwner] = useState(`${t("insertcard.choose-owner")}`);
 
@@ -36,7 +37,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
   function insertInitialState(){
     setCardName('');
     setSelectedOwner(`${t("insertcard.choose-owner")}`);
-    setCardDueDate(null);
+    setCardDueDate(getCurrentDate());
     setCardDescription('');
   }
 
@@ -140,7 +141,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
                 value={cardDueDate}
                 onChange={(e) => setCardDueDate(e.target.value)}
                 type='date'>
-                <DatePickerComponent readMode={false} />
+                <DatePickerComponent readMode={false}/>
               </div>
             </InputGroup>
             {/* Componente que contiene el dropdown para elegir carril */}
