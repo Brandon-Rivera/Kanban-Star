@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 const ErrorModal = ({show, title, message, onHide}) => {
   return (
-    <Modal show={show} onHide={onHide} size='lg' centered>
+    <Modal show={show} onHide={onHide} size='lg' centered backdrop="static" keyboard={false}>
         <Modal.Header>{title}</Modal.Header>
         <Modal.Body>{message}</Modal.Body>
         <Modal.Footer>
