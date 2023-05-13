@@ -1,11 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Card, Container, Button, Dropdown, DropdownButton } from 'react-bootstrap';
-import CardTable from './CardTable';
-import "./css/BoardTable.css"
+import React, { useState, useEffect, useMemo  } from 'react';
+import { Container, Dropdown, DropdownButton } from 'react-bootstrap';
+import BoardTable2 from './BoardTable2';
 
 export function BoardTable({ api }) {
   //Variable para obtener los datos del workspace en un hook
   const [dataWorkspace, setDataWorkspace] = useState({ data: [] });
+  const [selectedName, setSelectedName] = useState(null);
+
+  const handleSelection = useMemo(() => {
+    return (name) => {
+      setSelectedName(name);
+    };
+  }, []);
 
   useEffect(() => {
 
@@ -34,77 +40,17 @@ export function BoardTable({ api }) {
     getWorkSpace()
   }, [api])
 
-  const scrollingWrapperRef = useRef(null);
-
-  const handleNext = () => {
-    scrollingWrapperRef.current.scrollLeft += scrollingWrapperRef.current.offsetWidth - 28;
-  };
-
-  const handlePrev = () => {
-    scrollingWrapperRef.current.scrollLeft -= scrollingWrapperRef.current.offsetWidth - 28;
-  };
-
-  console.log(dataWorkspace)
 
   return (
     <Container fluid>
       <DropdownButton id="dropdown-basic-button" title="Workspaces">
         {
           dataWorkspace.data.map(data => (
-            <Dropdown.Item href="#/action-1">{data.name}</Dropdown.Item>
-      ))
-      }
+            <Dropdown.Item key={data.id} onClick={() => handleSelection(data.name)} >{data.name}</Dropdown.Item>
+          ))
+        }
       </DropdownButton>
-      {
-        dataWorkspace.data.map(data => (
-          <div>
-
-            <div className="row scrolling-wrapper flex-row flex-nowrap" ref={scrollingWrapperRef}>
-              {
-                data.columns.map(columns => (
-                  columns.kids.length > 0 ? (
-                    <div className="col-11 col-md-4">
-                      <Card className="text-light w-100 p-0" style={{ backgroundColor: '#2665BB' }} >
-                        <Card.Header>{columns.name}</Card.Header>
-                        <Card.Body style={{ backgroundColor: '#92B6E9' }}>
-                          <Card.Text>
-                            {
-                              columns.kids.map(kids => (
-                                kids.mycards.map(mycards => (
-                                  <CardTable id={mycards.id} nCard={mycards.name} duedate={mycards.duedate} />
-                                ))
-                              ))
-                            }
-                          </Card.Text>
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  ) : (
-                    <div className="col-11 col-md-4">
-                      <Card className="text-light w-100 p-0" style={{ backgroundColor: '#2665BB' }} >
-                        <Card.Header>{columns.name}</Card.Header>
-                        <Card.Body style={{ backgroundColor: '#92B6E9' }}>
-                          <Card.Text>
-                            {
-                              columns.mycards.map(mycards => (
-                                <CardTable id={mycards.id} nCard={mycards.name} duedate={mycards.duedate} />
-                              ))
-                            }
-                          </Card.Text>
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  )
-                ))
-              }
-            </div>
-          </div>
-        ))
-      }
-      <div className="d-flex justify-content-between mt-3">
-        <button className="btn btn-primary" onClick={handlePrev}>Anterior</button>
-        <button className="btn btn-primary" onClick={handleNext}>Siguiente</button>
-      </div>
+      {selectedName && (<BoardTable2 nameWF={selectedName} dataWorkspace={dataWorkspace} />)}
     </Container>
   );
 }

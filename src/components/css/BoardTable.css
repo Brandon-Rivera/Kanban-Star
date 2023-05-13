@@ -1,5 +1,6 @@
 .scrolling-wrapper {
-  overflow-x: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 .pre-btn,

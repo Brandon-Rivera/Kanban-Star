@@ -1,6 +1,5 @@
 import React from 'react'
 import { Container, ListGroup} from 'react-bootstrap';
-
 import "./css/CardTable.css"
 import nextArrow from "../images/nextArrow.png"
 
