@@ -6,19 +6,14 @@ import { BsRecordCircleFill } from "react-icons/bs"
 
 import ErrorModal from "./ErrorModal";
 
-function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, onMove, api }) {
+function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }) {
 
     const [checked, setChecked] = useState(false);
     // Modales de respuesta y error
     const [resModal, setResModal] = useState(false);
     const [errModal, setErrModal] = useState(false);
-    const [errModal2, setErrModal2] = useState(false);
 
     const handleCardMove = async () => {
-
-        if (!checked) {
-            setErrModal(true);
-        }
 
         const values = {
             domain: localStorage.getItem('domain'),
@@ -27,8 +22,6 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, onMove, api })
             columnid: column.id,
             workflowid: column.workflow_id,
         }; //208 y 101
-
-        console.log('values', values)
 
         // Funcion que manda la petición tipo POST para mover la tarjeta
         const response = await fetch(`${api}/update/move`,
@@ -54,7 +47,11 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, onMove, api })
 
     useEffect(() => {
 
-    }, []);
+        if(cardWid === column.id){
+            setChecked(true);
+        }
+
+    }, [cardWid,column.id]);
 
     return (
         <>
@@ -81,8 +78,7 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, onMove, api })
             </div>
 
             <ErrorModal show={resModal} title='Todo bien!' message='Se movio la tarjeta' onHide={() => setResModal(false)} backdrop="static" />
-            <ErrorModal show={errModal} title='Ups!' message='No esta seleccionada ninguna columna' onHide={() => setErrModal(false)} backdrop="static" />
-            <ErrorModal show={errModal2} title='Error!' message='Otro error' onHide={() => setErrModal2(false)} backdrop="static" />
+            <ErrorModal show={errModal} title='Ups!' message='Descripción del error' onHide={() => setErrModal(false)} backdrop="static" />
         </>
     )
 }

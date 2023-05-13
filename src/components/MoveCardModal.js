@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import MoveColumn from './MoveColumn';
 import Form from 'react-bootstrap/Form';
 
-function MoveCardModal({ show, onHide, dataWorkspace, workflowPos, cardid, api }) {
+function MoveCardModal({ show, onHide, dataWorkspace, workflowPos, cardid, cardWid, api }) {
 
     const [wPos, setWPos] = useState(0);
     const [move, setMove] = useState(false);
@@ -15,11 +15,6 @@ function MoveCardModal({ show, onHide, dataWorkspace, workflowPos, cardid, api }
         setWPos(workflowPos)
         setMove(false);
     }, [workflowPos, move])
-
-    const moveButton = () => {
-        setMove(true);
-        onHide();
-    }
 
     return (
         <Modal show={show} onHide={onHide} size='lg' centered>
@@ -34,16 +29,16 @@ function MoveCardModal({ show, onHide, dataWorkspace, workflowPos, cardid, api }
                             dataWorkspace.data[wPos].columns.map(columns => (
                                 columns.kids.length > 0 ? (
                                     <>
-                                        <MoveColumn column={columns} tabCol1={2} tabCol2={8} dotColor={colors[columns.sec]} cardid={cardid} onMove={move} api={api}/>
+                                        <MoveColumn column={columns} tabCol1={2} tabCol2={8} dotColor={colors[columns.sec]} cardid={cardid} cardWid={cardWid} api={api}/>
                                         {
                                             columns.kids.map(kids => (
-                                                <MoveColumn column={kids} tabCol1={4} tabCol2={6} dotColor={colors[columns.sec]} cardid={cardid} onMove={move} api={api}/>
+                                                <MoveColumn column={kids} tabCol1={4} tabCol2={6} dotColor={colors[columns.sec]} cardid={cardid} cardWid={cardWid} api={api}/>
                                             ))
                                         }
                                     </>
                                 ) : (
                                     <>
-                                        <MoveColumn column={columns} tabCol1={2} tabCol2={8} dotColor={colors[columns.sec]} cardid={cardid} onMove={move} api={api}/>
+                                        <MoveColumn column={columns} tabCol1={2} tabCol2={8} dotColor={colors[columns.sec]} cardid={cardid} cardWid={cardWid} api={api}/>
                                     </>
                                 )
                             ))
@@ -53,7 +48,7 @@ function MoveCardModal({ show, onHide, dataWorkspace, workflowPos, cardid, api }
 
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={() => moveButton()}>Aceptar</Button>
+                <Button onClick={onHide}>Cerrar</Button>
             </Modal.Footer>
         </Modal>
     )
