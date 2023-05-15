@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+//Importación de contextos
 import i18next from "./i18n";
 import { I18nextProvider } from "react-i18next";
 import ThemeContextProvider from "./Contexts/ThemeContext";

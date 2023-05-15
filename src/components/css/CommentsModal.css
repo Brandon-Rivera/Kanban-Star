@@ -1,0 +1,90 @@
+.ownAD{
+    justify-content: right;
+}
+
+.tp_AD{
+    justify-content: left;
+}
+
+.ownAuthorDate{
+    font-size: small;
+    text-align: right;
+}
+
+.tp_authorDate{
+    font-size: small;
+    text-align: left;
+}
+
+#light .ownComment{
+    margin-left: 30%;
+    background-color: rgba(172, 211, 223,0.6);
+    padding: 2%;
+    border-radius: 20px;
+    max-width: 70%;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+#light .tp_comment{
+    background-color: rgba(206, 212, 218, 0.5) ;
+    padding: 2%;
+    border-radius: 20px;
+    max-width: 70%;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+#dark .ownComment{
+    color: black;
+    margin-left: 30%;
+    background-color: rgba(205, 221, 226, 0.9);
+    padding: 2%;
+    border-radius: 20px;
+    max-width: 70%;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+#dark .tp_comment{
+    background-color: rgba(206, 212, 218, 0.5) ;
+    padding: 2%;
+    border-radius: 20px;
+    max-width: 70%;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.commentStyle{
+    white-space: pre;
+    text-rendering: auto;
+}
+
+#light .commentForm{
+    color: black;
+    background-color: white;
+}
+
+#dark .commentForm{
+    color: white;
+    background-color: #484f5d;
+}
+
+.modalTitle{
+    margin: 0;
+    text-align: center;
+}
+
+.footer{
+    display: block;
+    text-align: right;
+}
+
+.dateComment{
+    color: #dcdee0;
+}
+
+.footerButtons{
+    display: flex;
+    justify-content: space-evenly;
+}

@@ -75,8 +75,8 @@ function Cards({ nCard, cardid, cardWid, duedate, dataWorkspace, workflowPos, id
                 </ListGroup.Item>
             </ListGroup>
 
-            {/* Modales */} 
-            <CardMenu show={modalShow} title={t("cardMenu.title")} onHide={() => setModalShow(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} cardid={cardid} cardWid={cardWid} idCard={idCard} columnCard={cCard} cardDetails={cardDetails} api={api}/>
+            {/* Modales */}
+            <CardMenu show={modalShow} title={t("cardMenu.title")} onHide={() => setModalShow(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} idCard={idCard} cardName={nCard} columnCard={cCard} cardDetails={cardDetails} cardid={cardid} cardWid={cardWid} api={api}/>
             </>
         </>
     )
