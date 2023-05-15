@@ -19,7 +19,7 @@ function Cards({ nCard, duedate, dataWorkspace, workflowPos, idCard, cCard, api 
     // Petición para obtener los detalles de una tarjeta
     // Una vez que se obtienen los datos, se muestra el modal CardMenu
     const getCardDetails = async (cardID) => {
-        const response = await fetch("http://localhost:3001/card", {
+        const response = await fetch(`${api}/card`, {
             headers: {
                 'Content-Type': 'application/json'
             },
