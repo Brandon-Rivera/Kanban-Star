@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Container, Dropdown, DropdownButton } from 'react-bootstrap';
-import { NewBoardTable } from "./newBoardTable"
+import NewBoardTable from "./newBoardTable"
 
 export function NewBoard({ api }) {
   //Variable para obtener los datos del workspace en un hook
