@@ -97,7 +97,7 @@ const CommentsModal = ({
       comment: encodedText,
     };
     if (newComment !== "") {
-      const response = await fetch("http://localhost:3001/comment", {
+      const response = await fetch(`${api}/comment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
