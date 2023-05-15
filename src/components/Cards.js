@@ -34,6 +34,8 @@ function Cards({ nCard, duedate, dataWorkspace, workflowPos, idCard, cCard, api 
         })
         const data = await response.json();
         setCardDetails(data);
+        localStorage.setItem('cardDeadline', JSON.stringify(data.data.deadline));
+        checkDate(data.data.deadline);
         MenuClick();
     }
 
@@ -50,6 +52,14 @@ function Cards({ nCard, duedate, dataWorkspace, workflowPos, idCard, cCard, api 
 			return "primary";
 		}
 	}
+
+    const checkDate = (date) => {
+        if(date === "" || date == null){
+            localStorage.setItem('isDeadline', false);
+        } else{
+            localStorage.setItem('isDeadline', true);
+        }
+    }
 
     return (
         <>

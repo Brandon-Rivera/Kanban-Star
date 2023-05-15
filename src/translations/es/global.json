@@ -76,6 +76,8 @@
         "add": "Agregar comentario",
         "empty": "El comentario no puede estar vacío",
         "accept": "Aceptar",
-        "placeholder": "Escribe aquí tu comentario..."
+        "placeholder": "Escribe aquí tu comentario...",
+        "card-blocked": "Tarjeta bloqueada",
+        "no-deadline": "Sin fecha 🗓️"
     }
 }
