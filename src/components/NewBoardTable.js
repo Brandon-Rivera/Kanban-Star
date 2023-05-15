@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
 import { Container, Button } from 'react-bootstrap';
-import ColumnsTable from './ColumnsTable';
-import "./css/BoardTable.css"
+import NewColumnsTable from './NewColumnsTable';
+import "./css/NewBoardTable.css"
 
-export function BoardTable2({ nameWF, dataWorkspace }) {
-
+export function NewBoardTable({ nameWF, dataWorkspace }) {
     const scrollingWrapperRef = useRef(null);
 
     const handleNext = () => {
@@ -32,13 +31,12 @@ export function BoardTable2({ nameWF, dataWorkspace }) {
                                     columns.kids.length > 0 ? (
                                         columns.kids.map(kids => (
                                             <div className="col-11 col-md-3">
-                                                <ColumnsTable key={data.id} kids={kids} nameCol={kids.name} mycards={kids.mycards} />
+                                                <NewColumnsTable key={data.id} kids={kids} nameCol={kids.name} mycards={kids.mycards} />
                                             </div>
                                         ))
-
                                     ) : (
                                         <div className="col-11 col-md-3">
-                                            <ColumnsTable key={data.id} kids={[]} mycards={columns.mycards} nameCol={columns.name} />
+                                            <NewColumnsTable key={data.id} kids={[]} mycards={columns.mycards} nameCol={columns.name} />
                                         </div>
                                     )
                                 ))
@@ -51,4 +49,4 @@ export function BoardTable2({ nameWF, dataWorkspace }) {
     );
 }
 
-export default BoardTable2;
+export default NewBoardTable;

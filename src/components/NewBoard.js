@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo  } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Container, Dropdown, DropdownButton } from 'react-bootstrap';
-import BoardTable2 from './BoardTable2';
+import { NewBoardTable } from "./newBoardTable"
 
-export function BoardTable({ api }) {
+export function NewBoard({ api }) {
   //Variable para obtener los datos del workspace en un hook
   const [dataWorkspace, setDataWorkspace] = useState({ data: [] });
   const [selectedName, setSelectedName] = useState(null);
@@ -19,7 +19,7 @@ export function BoardTable({ api }) {
     const values = {
       domain: localStorage.getItem('domain'),
       apikey: localStorage.getItem('apikey'),
-      boardid: 19
+      boardid: 19 //actualizar
     }
 
     //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
@@ -50,9 +50,9 @@ export function BoardTable({ api }) {
           ))
         }
       </DropdownButton>
-      {selectedName && (<BoardTable2 nameWF={selectedName} dataWorkspace={dataWorkspace} />)}
+      {selectedName && (<NewBoardTable nameWF={selectedName} dataWorkspace={dataWorkspace} />)}
     </Container>
   );
 }
 
-export default BoardTable;
+export default NewBoard;

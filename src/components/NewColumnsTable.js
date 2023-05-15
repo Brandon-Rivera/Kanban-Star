@@ -1,8 +1,8 @@
 import React from 'react'
 import { Card } from 'react-bootstrap';
-import CardTable from './CardTable';
+import NewCardTable from './NewCardTable';
 
-function ColumnsTable({ kids, nameCol, mycards }) {
+function NewColumnsTable({ kids, nameCol, mycards }) {
     return (
         <Card className="text-light w-100 p-0" style={{ backgroundColor: '#2665BB' }} >
             <Card.Header>{nameCol}</Card.Header>
@@ -12,12 +12,12 @@ function ColumnsTable({ kids, nameCol, mycards }) {
                         kids.length > 0 ? (
                             kids.map(kids => (
                                 kids.mycards.map(mycards => (
-                                    <CardTable key={mycards.id} id={mycards.id} nCard={mycards.name} duedate={mycards.duedate} />
+                                    <NewCardTable key={mycards.id} id={mycards.id} nCard={mycards.name} duedate={mycards.duedate} />
                                 ))
                             ))
                         ) : (
                             mycards.map(mycards => (
-                                <CardTable key={mycards.id} id={mycards.id} nCard={mycards.name} duedate={mycards.duedate} />
+                                <NewCardTable key={mycards.id} id={mycards.id} nCard={mycards.name} duedate={mycards.duedate} />
                             ))
 
                         )
@@ -29,4 +29,4 @@ function ColumnsTable({ kids, nameCol, mycards }) {
     )
 }
 
-export default ColumnsTable
+export default NewColumnsTable

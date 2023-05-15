@@ -1,9 +1,9 @@
 import React from 'react'
 import { Container, ListGroup} from 'react-bootstrap';
-import "./css/CardTable.css"
+import "./css/NewCardTable.css"
 import nextArrow from "../images/nextArrow.png"
 
-function CardTable({id, nCard, duedate}) {
+function NewCardTable({id, nCard, duedate}) {
 
     return (
         <Container fluid className='px-0 p-1' >
@@ -28,4 +28,4 @@ function CardTable({id, nCard, duedate}) {
     )
 }
 
-export default CardTable
+export default NewCardTable
