@@ -1,6 +1,16 @@
+#datepicker{
+    margin: 0px;
+    padding: 0px;
+    color: rgb(49, 108, 244);
+}
+
+#datepicker::placeholder{
+    color: rgb(49, 108, 244);
+}
+
 .btn-flat{
     background-color: rgb(56, 101, 182);
-    color: rgb(97, 171, 85);
+    color: rgb(40, 167, 69);
     border-radius: 50%;
     width: fit-content;
     border-color: white;
@@ -15,10 +25,6 @@
     font-size: small;
 }
 
-.modalHeader{
-    background-color: rgb(97, 171, 85);
-}
-
 .modalFooter{
     background-color: rgb(56, 101, 182) !important;
     align-items: center !important;
@@ -27,17 +33,17 @@
 .cardInputBox{
     margin: 0px !important;
     padding: 3% !important;
-    background-color: rgb(97, 171, 85) !important;
     border-width: 1px !important;
-    border-color: rgba(1, 1, 1, 0.1) !important;
-    color: black !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
 }
 
 .cardInputBox::placeholder{
-    color: rgba(0, 0, 0, 0.7) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .drop1{
+    max-width:fit-content !important;
     margin: 0px !important;
     padding: 3% !important;
     background-color: rgb(209, 52, 106) !important;
@@ -48,6 +54,7 @@
 .cardDescriptionBox{
     margin: 0px !important;
     padding: 3% !important;
+    color: rgb(49, 108, 244) !important;
 }
 
 .cardDescriptionBox::placeholder{
