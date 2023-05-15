@@ -77,7 +77,7 @@ const SettingsModal = ({show, onHide}) => {
                     </Table>
                 </Modal.Body>
                 <Modal.Footer className="modal-footer">
-                    <Button variant="danger" onClick={() => handleClose()}>Salir</Button>
+                    <Button variant="danger" onClick={() => handleClose()}>{t("settings.close")}</Button>
                     <Button variant="primary" onClick={onHide}>{t("settings.save")}</Button>
                 </Modal.Footer>
             </Modal>

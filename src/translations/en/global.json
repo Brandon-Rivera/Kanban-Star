@@ -26,7 +26,8 @@
         "lang": "Language",
         "palette": "Color palette",
         "view": "View",
-        "save": "Save changes"
+        "save": "Save changes",
+        "close": "Don't save"
     },
 
     "langcheck":{
@@ -67,6 +68,15 @@
         "no-description": "No description",
         "btn-accept": "Accept",
         "btn-edit": "Edit card",
+        "card-blocked": "Card is blocked"
+    },
+
+    "comments":{
+        "title": "Comments of card",
+        "add": "Add comment",
+        "empty": "Comment can't be empty",
+        "accept": "Accept",
+        "placeholder": "Write your comment here...",
         "card-blocked": "Card is blocked",
         "no-deadline": "No date 🗓️"
     }

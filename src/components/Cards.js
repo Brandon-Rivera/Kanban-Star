@@ -19,7 +19,7 @@ function Cards({ nCard, duedate, dataWorkspace, workflowPos, idCard, cCard, api 
     // Petición para obtener los detalles de una tarjeta
     // Una vez que se obtienen los datos, se muestra el modal CardMenu
     const getCardDetails = async (cardID) => {
-        const response = await fetch(`${api}/card`, {
+        const response = await fetch("http://localhost:3001/card", {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -76,7 +76,7 @@ function Cards({ nCard, duedate, dataWorkspace, workflowPos, idCard, cCard, api 
             </ListGroup>
 
             {/* Modales */}
-            <CardMenu show={modalShow} title={t("cardMenu.title")} onHide={() => setModalShow(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} idCard={idCard} columnCard={cCard} cardDetails={cardDetails} api={api}/>
+            <CardMenu show={modalShow} title={t("cardMenu.title")} onHide={() => setModalShow(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} idCard={idCard} cardName={nCard} columnCard={cCard} cardDetails={cardDetails} api={api}/>
             </>
         </>
     )
