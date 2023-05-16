@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import ErrorModal from "./ErrorModal";
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
-// import ksLogo from '../images/ksLogo.PNG'
 import ColorCheckbox from "./ColorCheckbox";
 import { Image } from "react-bootstrap";
 
