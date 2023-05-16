@@ -4,7 +4,9 @@ import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { BsRecordCircleFill } from "react-icons/bs"
 
-import ErrorModal from "./ErrorModal";
+// import ErrorModal from "./ErrorModal";
+import SuccessCardModal from "./SuccessCardModal";
+import ErrorCardModal from "./ErrorCardModal";
 
 function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }) {
 
@@ -12,6 +14,8 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
     // Modales de respuesta y error
     const [resModal, setResModal] = useState(false);
     const [errModal, setErrModal] = useState(false);
+    const [errModal2, setErrModal2] = useState(false);
+    const [errModal3, setErrModal3] = useState(false);
 
     const handleCardMove = async () => {
 
@@ -36,8 +40,16 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
         const data = await response.json();
 
         if (data.error) {
-            setErrModal(true);
-            console.log('Error al mover');
+
+            if (data.error.message === `The card with id ${cardid} cannot be moved because it is blocked.`) {
+                console.log('fue por bloqueo')
+                setErrModal(true);
+            }
+            if (data.error.message === `The card with id ${cardid} cannot be moved because some of the exit criteria for the column with id ${cardWid} on the board with id ${localStorage.getItem('boardid')} are not checked off.`) {
+                console.log('fue por criterio')
+                setErrModal2(true);
+            }
+
         }
         else {
             setResModal(true);
@@ -47,11 +59,11 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
 
     useEffect(() => {
 
-        if(cardWid === column.id){
+        if (cardWid === column.id) {
             setChecked(true);
         }
 
-    }, [cardWid,column.id]);
+    }, [cardWid, column.id]);
 
     return (
         <>
@@ -71,14 +83,39 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
                             type='radio'
                             id={`reverse-checkbox-1`}
                             checked={checked}
-                            onChange={(e) => {setChecked(e.target.checked); handleCardMove();}}
+                            onChange={(e) => { setChecked(e.target.checked); handleCardMove(); }}
                         />
                     </Col>
                 </Row>
             </div>
 
-            <ErrorModal show={resModal} title='Todo bien!' message='Se movio la tarjeta' onHide={() => setResModal(false)} backdrop="static" />
-            <ErrorModal show={errModal} title='Ups!' message='Descripción del error' onHide={() => setErrModal(false)} backdrop="static" />
+            {/* <ErrorModal show={resModal} title='Todo bien!' message='Se movio la tarjeta' onHide={() => setResModal(false)} backdrop="static" />
+            <ErrorModal show={errModal} title='Ups!' message='Descripción del error' onHide={() => setErrModal(false)} backdrop="static" /> */}
+            <SuccessCardModal
+                show={resModal}
+                onHide={() => setResModal(false)}
+                title={'Todo bien!'}
+                message={'Se movio la tarjeta'}
+                button={'Cerrar'} />
+            <ErrorCardModal
+                show={errModal}
+                onHide={() => setErrModal(false)}
+                title={'Ups!'}
+                message={'La tarjeta no se puede mover por que está bloqueada'}
+                button={'Cerrar'} />
+            <ErrorCardModal
+                show={errModal2}
+                onHide={() => setErrModal2(false)}
+                title={'Ups!'}
+                message={'La tarjeta no se puede mover por un criterio de aceptación'}
+                button={'Cerrar'} />
+            <ErrorCardModal
+                show={errModal3}
+                onHide={() => setErrModal3(false)}
+                title={'Ups!'}
+                message={'La tarjeta no se puede mover por un error'}
+                button={'Cerrar'} />
+
         </>
     )
 }
