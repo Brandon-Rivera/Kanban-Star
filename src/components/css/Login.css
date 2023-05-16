@@ -67,7 +67,7 @@ button {
 
 @font-face {
   font-family: "MontHeavy";
-  src: local(MontHeavy), url(../../fonts/montHeavy.otf) format("truetype");
+  src: local(MontHeavy), url(../../fonts/montHeavy.otf) format("opentype");
 }
 
 #font-face-mb{
