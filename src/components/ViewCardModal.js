@@ -47,17 +47,23 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }) {
     }
   }
 
-  function renderDeadline(){
-    if(isDeadline === "true"){
-      return <div id="datepicker" type="date"><DatePickerComponent readMode={true}/></div>
-    } else{
-      return <Form.Control
-      readOnly
-      value={t("viewcard.no-deadline")}
-      id="datepicker"
-      className="cardDescriptionBox fw-bold"
-      type="text"
-    />
+  function renderDeadline() {
+    if (isDeadline === "true") {
+      return (
+        <div id="datepicker" type="date">
+          <DatePickerComponent readMode={true} />
+        </div>
+      );
+    } else {
+      return (
+        <Form.Control
+          readOnly
+          value={t("viewcard.no-deadline")}
+          id="datepicker"
+          className="cardDescriptionBox fw-bold"
+          type="text"
+        />
+      );
     }
   }
 
@@ -121,7 +127,7 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }) {
                 <InputGroup.Text className="fw-bold">
                   {t("insertcard.due-date")}
                 </InputGroup.Text>
-                { renderDeadline() } 
+                {renderDeadline()}
               </InputGroup>
               {/* Componente que contiene la informacion de la columna */}
               <InputGroup className="mb-2">
