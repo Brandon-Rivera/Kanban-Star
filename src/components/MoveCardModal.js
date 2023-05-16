@@ -4,6 +4,7 @@ import CloseButton from 'react-bootstrap/CloseButton';
 import Button from 'react-bootstrap/Button';
 import MoveColumn from './MoveColumn';
 import Form from 'react-bootstrap/Form';
+import MoveColumnCheckless from './MoveColumnCheckless';
 
 function MoveCardModal({ show, onHide, dataWorkspace, workflowPos, cardid, cardWid, api }) {
 
@@ -29,7 +30,7 @@ function MoveCardModal({ show, onHide, dataWorkspace, workflowPos, cardid, cardW
                             dataWorkspace.data[wPos].columns.map(columns => (
                                 columns.kids.length > 0 ? (
                                     <>
-                                        <MoveColumn column={columns} tabCol1={2} tabCol2={8} dotColor={colors[columns.sec]} cardid={cardid} cardWid={cardWid} api={api}/>
+                                        <MoveColumnCheckless column={columns} tabCol1={2} tabCol2={8} dotColor={colors[columns.sec]} cardid={cardid} cardWid={cardWid} api={api}/>
                                         {
                                             columns.kids.map(kids => (
                                                 <MoveColumn column={kids} tabCol1={4} tabCol2={6} dotColor={colors[columns.sec]} cardid={cardid} cardWid={cardWid} api={api}/>

@@ -4,7 +4,6 @@ import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { BsRecordCircleFill } from "react-icons/bs"
 
-// import ErrorModal from "./ErrorModal";
 import SuccessCardModal from "./SuccessCardModal";
 import ErrorCardModal from "./ErrorCardModal";
 

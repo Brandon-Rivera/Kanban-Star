@@ -20,8 +20,7 @@ function CardMenu({
   idCard,
   cardName,
   columnCard,
-  cardDetails, 
-  cardid, 
+  cardDetails,  
   cardWid,
   api,
 }) {
@@ -149,7 +148,7 @@ function CardMenu({
         onHide={() => setModalShowMove(false)} 
         dataWorkspace={dataWorkspace} 
         workflowPos={workflowPos} 
-        cardid={cardid} 
+        cardid={idCard} 
         cardWid={cardWid} 
         api={api}
       />
