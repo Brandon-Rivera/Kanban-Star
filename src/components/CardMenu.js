@@ -20,7 +20,8 @@ function CardMenu({
   idCard,
   cardName,
   columnCard,
-  cardDetails,
+  cardDetails,  
+  cardWid,
   api,
 }) {
   // Traducciones
@@ -142,11 +143,13 @@ function CardMenu({
       </Modal>
 
       {/* Modales */}
-      <MoveCardModal
-        show={modalShowMove}
-        onHide={() => setModalShowMove(false)}
-        dataWorkspace={dataWorkspace}
-        workflowPos={workflowPos}
+      <MoveCardModal 
+        show={modalShowMove} 
+        onHide={() => setModalShowMove(false)} 
+        dataWorkspace={dataWorkspace} 
+        workflowPos={workflowPos} 
+        cardid={idCard} 
+        cardWid={cardWid} 
         api={api}
       />
       <CommentsModal
