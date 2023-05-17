@@ -1,17 +1,26 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Container, Dropdown, DropdownButton } from 'react-bootstrap';
 import NewBoardTable from "./newBoardTable"
+import "./css/newBoard.css"
 
 export function NewBoard({ api }) {
   //Variable para obtener los datos del workspace en un hook
   const [dataWorkspace, setDataWorkspace] = useState({ data: [] });
   const [selectedName, setSelectedName] = useState(null);
+  const [, setSelectedWorkspace] = useState('');
 
   const handleSelection = useMemo(() => {
     return (name) => {
       setSelectedName(name);
     };
   }, []);
+
+  useEffect(() => {
+    if (dataWorkspace.data.length > 0) {
+      setSelectedWorkspace(dataWorkspace.data[0].name);
+      handleSelection(dataWorkspace.data[0].name);
+    }
+  }, [dataWorkspace.data, handleSelection]);
 
   useEffect(() => {
 
@@ -43,7 +52,7 @@ export function NewBoard({ api }) {
 
   return (
     <Container fluid>
-      <DropdownButton id="dropdown-basic-button" title="Workspaces">
+      <DropdownButton id="dropdown-basic-button" title="Workspaces" className="d-flex justify-content-center w-100 m-2">
         {
           dataWorkspace.data.map(data => (
             <Dropdown.Item key={data.id} onClick={() => handleSelection(data.name)} >{data.name}</Dropdown.Item>

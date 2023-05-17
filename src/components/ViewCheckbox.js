@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import './css/ViewCheckbox.css'
-import {CiViewTable, CiViewList} from 'react-icons/ci'
+import { CiViewTable, CiViewList } from 'react-icons/ci'
 
 const ViewCheckbox = () => {
 
@@ -25,17 +25,17 @@ const ViewCheckbox = () => {
     useEffect(() => {
         localStorage.setItem('viewChecked', JSON.stringify(viewChecked));
     }, [viewChecked]);
-    
-  return (
-    <div>
-        <label className="switch">
-            <input id="view-toggle" className="check-toggle check-toggle-round-flat" type="checkbox" checked={viewChecked} onChange={handleViewCheckboxChange} ></input>
-            <label htmlFor="view-toggle"></label>
-            <span className="on"><CiViewTable size={16}/></span>
-            <span className="off"><CiViewList size={16}/></span>
-        </label>
-    </div>
-  )
+
+    return (
+        <div>
+            <label className="switch">
+                <input id="view-toggle" className="check-toggle check-toggle-round-flat" type="checkbox" checked={viewChecked} onChange={handleViewCheckboxChange} ></input>
+                <label htmlFor="view-toggle"></label>
+                <span className="on"><CiViewTable size={16} /></span>
+                <span className="off"><CiViewList size={16} /></span>
+            </label>
+        </div>
+    )
 }
 
 export default ViewCheckbox

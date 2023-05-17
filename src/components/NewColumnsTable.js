@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card } from 'react-bootstrap';
 import NewCardTable from './NewCardTable';
+import "./css/NewColumnsTable.css"
 
 function NewColumnsTable({ kids, nameCol, mycards }) {
     return (
@@ -12,12 +13,12 @@ function NewColumnsTable({ kids, nameCol, mycards }) {
                         kids.length > 0 ? (
                             kids.map(kids => (
                                 kids.mycards.map(mycards => (
-                                    <NewCardTable key={mycards.id} id={mycards.id} nCard={mycards.name} duedate={mycards.duedate} />
+                                    <NewCardTable key={mycards.id} id={mycards.id} nCard={mycards.name} duedate={mycards.duedate} idOwner={mycards.owner_id} />
                                 ))
                             ))
                         ) : (
                             mycards.map(mycards => (
-                                <NewCardTable key={mycards.id} id={mycards.id} nCard={mycards.name} duedate={mycards.duedate} />
+                                <NewCardTable key={mycards.id} id={mycards.id} nCard={mycards.name} duedate={mycards.duedate} idOwner={mycards.owner_id}/>
                             ))
 
                         )

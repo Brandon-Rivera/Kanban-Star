@@ -1,5 +1,5 @@
 .scrolling-wrapper {
-  overflow-x: hidden;
+  overflow-x: auto;
   scroll-behavior: smooth;
 }
 

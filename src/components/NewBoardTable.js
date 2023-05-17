@@ -14,7 +14,7 @@ export function NewBoardTable({ nameWF, dataWorkspace }) {
         scrollingWrapperRef.current.scrollLeft -= scrollingWrapperRef.current.offsetWidth - 31;
     };
 
-    const result = dataWorkspace.data.find(data => data.name === nameWF)
+    const result = dataWorkspace.data.find(data => data.name === nameWF);
 
     return (
         <Container fluid>
@@ -24,8 +24,8 @@ export function NewBoardTable({ nameWF, dataWorkspace }) {
             </div>
             {
                 result ? [result].map(data => (
-                    <div>
-                        <div className="row scrolling-wrapper flex-row flex-nowrap" ref={scrollingWrapperRef}>
+                    <div key={data.id}>
+                        <div className="scrolling-wrapper row flex-row flex-nowrap" ref={scrollingWrapperRef}>
                             {
                                 data.columns.map(columns => (
                                     columns.kids.length > 0 ? (
