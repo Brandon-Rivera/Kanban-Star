@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "./components/Login";
 import { Workspace } from "./components/Workspace";
 import { Board } from "./components/Board";
-import { NewBoard } from "./components/newBoard"
+import { NewBoard } from "./components/NewBoard"
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MainLayout } from "./components/MainLayout";
@@ -23,7 +23,6 @@ function App() {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <ThemeContext.Provider value={{ theme, setDark, setLight }}>
       <div className="App2" id={theme}>
         <Router>
           <Routes>
@@ -36,7 +35,6 @@ function App() {
           </Routes>
         </Router>
       </div>
-    </ThemeContext.Provider>
   );
 }
 

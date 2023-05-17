@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Container, Dropdown, DropdownButton } from 'react-bootstrap';
-import NewBoardTable from "./newBoardTable"
+import NewBoardTable from "./NewBoardTable"
 import "./css/newBoard.css"
 
 export function NewBoard({ api }) {
@@ -28,7 +28,7 @@ export function NewBoard({ api }) {
     const values = {
       domain: localStorage.getItem('domain'),
       apikey: localStorage.getItem('apikey'),
-      boardid: 19 //actualizar
+      boardid: localStorage.getItem('boardid') //actualizar
     }
 
     //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
