@@ -1,42 +1,26 @@
-import React, { createContext, useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "./components/Login";
 import { Workspace } from "./components/Workspace";
 import { Board } from "./components/Board";
 import { NewBoard } from "./components/newBoard"
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { MainLayout } from "./components/MainLayout";
-import './App.css'
+import "./App.css";
+import { ThemeContext } from "./Contexts/ThemeContext";
 
-export const ThemeContext = createContext(null);
 
 function App() {
-
   //Funcion para borrar el APIKEY despues de 1 hora
   setTimeout(() => {
-    localStorage.removeItem('apikey');
+    localStorage.removeItem("apikey");
   }, 36000000);
 
   //Link del api
-  const apiLink = "https://kvxrvsgw6c.execute-api.us-east-1.amazonaws.com"
+  const apiLink = "https://kvxrvsgw6c.execute-api.us-east-1.amazonaws.com";
 
-  const [theme, setTheme] = useState(() => {
-    const savedState = JSON.parse(localStorage.getItem('Theme'));
-    return savedState ?? false;
-  });
-
-  const setDark = () => {
-    setTheme("dark");
-  }
-
-  const setLight = () => {
-    setTheme("light");
-  }
-
-  useEffect(() => {
-    localStorage.setItem('Theme', JSON.stringify(theme));
-  }, [theme]);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <ThemeContext.Provider value={{ theme, setDark, setLight }}>

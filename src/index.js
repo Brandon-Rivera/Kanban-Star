@@ -1,19 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import i18next from './i18n'
-import { I18nextProvider} from 'react-i18next';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+//Importación de contextos
+import i18next from "./i18n";
+import { I18nextProvider } from "react-i18next";
+import ThemeContextProvider from "./Contexts/ThemeContext";
+import LanguageCheckedContextProvider from "./Contexts/LanguageCheckedContext";
+import ColorCheckedContextProvider from "./Contexts/ColorCheckedContext";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <I18nextProvider i18n = {i18next}>
-
-      <App />
-    </I18nextProvider>
+    <ThemeContextProvider>
+      {
+        <LanguageCheckedContextProvider>
+          {
+            <ColorCheckedContextProvider>
+              {
+                <I18nextProvider i18n={i18next}>
+                  <App />
+                </I18nextProvider>
+              }
+            </ColorCheckedContextProvider>
+          }
+        </LanguageCheckedContextProvider>
+      }
+    </ThemeContextProvider>
   </React.StrictMode>
 );
 

@@ -1,34 +1,32 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
 import './css/ErrInsertCardModal.css'
 
 // Funcion que contiene el componente del modal de error al insertar una tarjeta
-function ErrInsertCardModal({ show, onHide }) {
+function ErrorCardModal({ show, onHide, title, message, button }) {
 
-    const [t] = useTranslation("global")
     return (
         <Modal
             show={show} 
             onHide={onHide}
             centered
             backdrop = 'static'>
-            <Modal.Header className="modalHeaderError">
+            <Modal.Header className="bg-danger fw-bold text-white">
                 <Modal.Title>
-                    {t("insertcard.insert-success-er")}
+                    { title }
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {t("insertcard.insert-message-er")}
+                <p className="fw-bold"> { message } </p>
             </Modal.Body>
             <Modal.Footer className='modalFooter'>
-                <Button onClick={onHide}>
-                    {t("insertcard.insert-button-er")}
+                <Button onClick={onHide} className="fw-bold">
+                    { button }
                 </Button>
             </Modal.Footer>
         </Modal>
     );
 }
 
-export default ErrInsertCardModal;
+export default ErrorCardModal;

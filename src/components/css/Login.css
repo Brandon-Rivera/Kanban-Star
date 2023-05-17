@@ -42,7 +42,7 @@ label {
 input {
   margin: 0.5rem !important;
   padding: 1rem;
-  border: none;
+  border: 2px solid #484f5d;
   border-radius: 10px;
 }
 
@@ -53,7 +53,6 @@ button {
   border-radius: 10px;
   cursor: pointer;
   color: white;
-  /* margin: 0.5em !important; */
 }
 
 .link-btn {
@@ -67,12 +66,12 @@ button {
 }
 
 @font-face {
-  font-family: mont;
-  src: url(../../fonts/montHeavy.otf);
+  font-family: "MontHeavy";
+  src: url("../../fonts/montHeavy.otf") format("opentype")
 }
 
-.mont{
-  font-family: mont;
+#font-face-mb{
+  font-family: "MontHeavy";
 }
 
 .kanbanStarLogo{

@@ -9,7 +9,7 @@
 
 #light .title{
     background-color: #0d6efd;
-    color: black
+    color: white;
 }
 
 #dark .title{
@@ -17,6 +17,31 @@
     color: white;
 }
 
+#dark .cont{
+    background-color: #212529;
+    color: white;
+}
+
+#light .cont{
+    background-color: white;
+    color: #464f57;
+}
+
 .search{
     margin: 0px !important;   
+}
+
+.btn-flat {
+    display: block !important;
+    border-radius: 50% !important;
+    padding: 0.9rem !important;
+    border-color: white !important;
+    background-color: rgb(209, 52, 106) !important;
+}
+.btn-flat:hover {
+    background: rgb(209, 52, 106) !important;
+}
+.btn-flat:active {
+    border-color: white !important;
+    background-color: rgb(209, 52, 106) !important;
 }
