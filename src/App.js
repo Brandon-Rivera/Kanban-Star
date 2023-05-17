@@ -23,7 +23,6 @@ function App() {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <ThemeContext.Provider value={{ theme, setDark, setLight }}>
       <div className="App2" id={theme}>
         <Router>
           <Routes>
@@ -36,7 +35,6 @@ function App() {
           </Routes>
         </Router>
       </div>
-    </ThemeContext.Provider>
   );
 }
 
