@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "./components/Login";
 import { Workspace } from "./components/Workspace";
 import { Board } from "./components/Board";
+import { NewBoard } from "./components/NewBoard"
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MainLayout } from "./components/MainLayout";
@@ -22,17 +23,18 @@ function App() {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <div className="App2" id={theme}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login api={apiLink} />}></Route>
-          <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
-            <Route path="workspace" index element={<Workspace api={apiLink} />}></Route>
-            <Route path="board" index element={<Board api={apiLink} />}></Route>
-          </Route>
-        </Routes>
-      </Router>
-    </div>
+      <div className="App2" id={theme}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Login api = {apiLink}/>}></Route>
+            <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
+              <Route path="workspace" index element={<Workspace api = {apiLink}/>}></Route>
+              <Route path="board" index element={<Board api = {apiLink}/>}></Route>
+              <Route path="newBoard" index element={<NewBoard api = {apiLink}/>}></Route>
+            </Route>
+          </Routes>
+        </Router>
+      </div>
   );
 }
 

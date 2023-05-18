@@ -1,0 +1,11 @@
+.list-group-item.active {
+    background-color: #2665BB;
+    border-color: #2665BB;
+}
+  
+.img-thumbnail {
+    padding: 0.25rem;
+    background-color: #fff;
+    max-width: 25%;
+    height: 25%;
+}
