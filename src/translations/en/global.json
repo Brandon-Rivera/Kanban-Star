@@ -3,6 +3,7 @@
         "hello": "Hello",
         "welcome": "Welcome!",
         "login-with-credentials": "Log in with your Kanbanize account",
+        "bad-credentials": "Username or password incorrect, try again please.",
         "e-mail": "E-mail",
         "e-mail-placeholder": "yourmail@mail.com",
         "password": "Password",
@@ -36,7 +37,7 @@
     },
 
     "cardMenu":{
-        "title": "What you like to do?",
+        "title": "What would you like to do?",
         "show": "Show",
         "move": "Move",
         "update": "Update",

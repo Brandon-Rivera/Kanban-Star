@@ -9,6 +9,8 @@ import { I18nextProvider } from "react-i18next";
 import ThemeContextProvider from "./Contexts/ThemeContext";
 import LanguageCheckedContextProvider from "./Contexts/LanguageCheckedContext";
 import ColorCheckedContextProvider from "./Contexts/ColorCheckedContext";
+import ViewContextProvider from "./Contexts/ViewContext";
+import ViewCheckedContextProvider from "./Contexts/ViewCheckedContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -16,17 +18,25 @@ root.render(
   <React.StrictMode>
     <ThemeContextProvider>
       {
-        <LanguageCheckedContextProvider>
+        <ViewContextProvider>
           {
-            <ColorCheckedContextProvider>
+            <LanguageCheckedContextProvider>
               {
-                <I18nextProvider i18n={i18next}>
-                  <App />
-                </I18nextProvider>
+                <ColorCheckedContextProvider>
+                  {
+                    <ViewCheckedContextProvider>
+                      {
+                        <I18nextProvider i18n={i18next}>
+                          <App />
+                        </I18nextProvider>
+                      }
+                    </ViewCheckedContextProvider>
+                  }
+                </ColorCheckedContextProvider>
               }
-            </ColorCheckedContextProvider>
+            </LanguageCheckedContextProvider>
           }
-        </LanguageCheckedContextProvider>
+        </ViewContextProvider>
       }
     </ThemeContextProvider>
   </React.StrictMode>

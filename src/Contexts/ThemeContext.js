@@ -7,7 +7,7 @@ const ThemeContextProvider = ({children}) => {
     //Estado del tema de la aplicación
     const [theme, setTheme] = useState(() => {
         const savedState = JSON.parse(localStorage.getItem("Theme"));
-        return savedState ?? false;
+        return savedState ?? "light";
       });
     
       const toggleTheme = () => {

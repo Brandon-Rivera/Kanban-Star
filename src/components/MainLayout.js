@@ -5,12 +5,14 @@ import SettingsModal from './SettingsModal';
 import './css/MainLayout.css'
 import { ThemeContext } from '../Contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { ViewContext } from '../Contexts/ViewContext';
 
 
 
 export const MainLayout = () => {
 
   const {theme} = useContext(ThemeContext);
+  const {view} = useContext(ViewContext);
 
   const [t,i18n] = useTranslation("global");
 
@@ -23,8 +25,9 @@ export const MainLayout = () => {
 
   const toggleShowModal = () => {
     setShowSettingsModal(!showSettingsModal);
-    localStorage.setItem("CurrentTheme", theme);
     localStorage.setItem("CurrentLanguage", i18n.language);
+    localStorage.setItem("CurrentTheme", theme);
+    localStorage.setItem("CurrentView", view)
   }
 
   return (
