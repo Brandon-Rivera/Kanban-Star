@@ -52,7 +52,7 @@ export function NewBoard({ api }) {
 
   return (
     <Container fluid>
-      <DropdownButton id="dropdown-basic-button" title="Workspaces" className="d-flex justify-content-center w-100 m-2">
+      <DropdownButton id="dropdown-basic-button" title="Workspaces" className="d-flex justify-content-center m-2">
         {
           dataWorkspace.data.map(data => (
             <Dropdown.Item key={data.id} onClick={() => handleSelection(data.name)} >{data.name}</Dropdown.Item>
