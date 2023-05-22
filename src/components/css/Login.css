@@ -66,12 +66,12 @@ button {
 }
 
 @font-face {
-  font-family: mont;
-  src: url(../../fonts/montHeavy.otf);
+  font-family: "MontHeavy";
+  src: url("../../fonts/montHeavy.otf") format("opentype")
 }
 
-.mont{
-  font-family: mont;
+#font-face-mb{
+  font-family: "MontHeavy";
 }
 
 .kanbanStarLogo{

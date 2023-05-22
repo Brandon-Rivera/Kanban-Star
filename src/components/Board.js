@@ -32,6 +32,7 @@ export const Board = ({ api }) => {
             setDataWorkspace(data)
         }
 
+
         //llamada a la funcion
         getWorkSpace()
     }, [api])
@@ -45,11 +46,7 @@ export const Board = ({ api }) => {
                         <Button variant="dark" className="search">
                             <BiSearchAlt size={25} color={'white'} />
                         </Button>
-                        <Form.Control
-                            className="search"
-                            aria-label="Example text with button addon"
-                            aria-describedby="basic-addon1"
-                        />
+                        <Form.Control className="search" aria-label="Example text with button addon" aria-describedby="basic-addon1"/>
                     </InputGroup>
                 </ListGroup.Item>
 
@@ -70,7 +67,7 @@ export const Board = ({ api }) => {
                                                 ))
                                             }
                                         </div>
-                                        
+
                                     ) : (
                                     <div>
                                         <h3 className="text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>

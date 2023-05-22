@@ -68,7 +68,8 @@
         "no-description": "No description",
         "btn-accept": "Accept",
         "btn-edit": "Edit card",
-        "card-blocked": "Card is blocked"
+        "card-blocked": "Card is blocked",
+        "no-deadline": "No date 🗓️"
     },
 
     "comments":{
