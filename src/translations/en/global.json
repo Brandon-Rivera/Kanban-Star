@@ -79,5 +79,15 @@
         "placeholder": "Write your comment here...",
         "card-blocked": "Card is blocked",
         "no-deadline": "No date 🗓️"
+    },
+
+    "move": {
+        "title-res": "Everything fine!",
+        "title-err": "Ups!",
+        "message-res": "The card was move",
+        "message-block": "The card can't be move for a block reason",
+        "message-ac": "The card can't be move for an acceptance criteria",
+        "message-err": "It was an error to move the card",
+        "button-close": "Close"
     }
 }
