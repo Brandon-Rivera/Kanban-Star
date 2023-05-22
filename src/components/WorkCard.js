@@ -16,14 +16,13 @@ function WorkCard({ title, id, api }) {
   const getBoardOwners = async () => {
     const response = await fetch(`${api}/owners`, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'supra-access-token': localStorage.getItem('token')
       },
       method: 'POST',
       body: JSON.stringify(
         {
-          boardid: id,
-          domain: localStorage.getItem('domain'),
-          apikey: localStorage.getItem('apikey')
+          boardid: id
         }
       )
     })

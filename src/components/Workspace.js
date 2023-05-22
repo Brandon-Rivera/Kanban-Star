@@ -14,9 +14,7 @@ export function Workspace({ api }) {
 
         //Valores necesarios para la peticion get de workspace
         const values = {
-            domain: localStorage.getItem('domain'),
-            userid: localStorage.getItem('userid'),
-            apikey: localStorage.getItem('apikey')
+            userid: localStorage.getItem('userid')
         }
 
         //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
@@ -24,7 +22,8 @@ export function Workspace({ api }) {
 
             const response = await fetch(`${api}/dashboard`, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'supra-access-token': localStorage.getItem('token')
                 },
                 method: 'POST',
                 body: JSON.stringify(values)

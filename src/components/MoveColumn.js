@@ -21,8 +21,6 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
     const handleCardMove = async () => {
 
         const values = {
-            domain: localStorage.getItem('domain'),
-            apikey: localStorage.getItem('apikey'),
             cardid: cardid,
             columnid: column.id,
             workflowid: column.workflow_id,
@@ -33,7 +31,8 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
             {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'supra-access-token': localStorage.getItem('token')
                 },
                 body: JSON.stringify(values)
             });
@@ -87,8 +86,6 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
                 </Row>
             </div>
 
-            {/* <ErrorModal show={resModal} title='Todo bien!' message='Se movio la tarjeta' onHide={() => setResModal(false)} backdrop="static" />
-            <ErrorModal show={errModal} title='Ups!' message='Descripción del error' onHide={() => setErrModal(false)} backdrop="static" /> */}
             <SuccessCardModal
                 show={resModal}
                 onHide={() => setResModal(false)}
