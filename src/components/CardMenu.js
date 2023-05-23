@@ -51,8 +51,6 @@ function CardMenu({
   const comentarios = async () => {
     //Valores necesarios para la peticion get de workspace
     const values = {
-      domain: localStorage.getItem("domain"),
-      apikey: localStorage.getItem("apikey"),
       cardid: idCard,
     };
 
@@ -60,6 +58,7 @@ function CardMenu({
     const response = await fetch(`${api}/comment/get`, {
       headers: {
         "Content-Type": "application/json",
+        'supra-access-token': localStorage.getItem('token')
       },
       method: "POST",
       body: JSON.stringify(values),

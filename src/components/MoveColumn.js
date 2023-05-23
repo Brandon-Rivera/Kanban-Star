@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from "react-i18next";
 import Form from 'react-bootstrap/Form';
 import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
@@ -10,6 +11,7 @@ import ErrorCardModal from "./ErrorCardModal";
 function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }) {
 
     const [checked, setChecked] = useState(false);
+    const [t] = useTranslation("global");
     // Modales de respuesta y error
     const [resModal, setResModal] = useState(false);
     const [errModal, setErrModal] = useState(false);
@@ -19,8 +21,6 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
     const handleCardMove = async () => {
 
         const values = {
-            domain: localStorage.getItem('domain'),
-            apikey: localStorage.getItem('apikey'),
             cardid: cardid,
             columnid: column.id,
             workflowid: column.workflow_id,
@@ -31,7 +31,8 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
             {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'supra-access-token': localStorage.getItem('token')
                 },
                 body: JSON.stringify(values)
             });
@@ -41,18 +42,15 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
         if (data.error) {
 
             if (data.error.message === `The card with id ${cardid} cannot be moved because it is blocked.`) {
-                console.log('fue por bloqueo')
                 setErrModal(true);
             }
             if (data.error.message === `The card with id ${cardid} cannot be moved because some of the exit criteria for the column with id ${cardWid} on the board with id ${localStorage.getItem('boardid')} are not checked off.`) {
-                console.log('fue por criterio')
                 setErrModal2(true);
             }
 
         }
         else {
             setResModal(true);
-            console.log('Todo chill');
         }
     }
 
@@ -88,32 +86,30 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
                 </Row>
             </div>
 
-            {/* <ErrorModal show={resModal} title='Todo bien!' message='Se movio la tarjeta' onHide={() => setResModal(false)} backdrop="static" />
-            <ErrorModal show={errModal} title='Ups!' message='Descripción del error' onHide={() => setErrModal(false)} backdrop="static" /> */}
             <SuccessCardModal
                 show={resModal}
                 onHide={() => setResModal(false)}
-                title={'Todo bien!'}
-                message={'Se movio la tarjeta'}
-                button={'Cerrar'} />
+                title={t("move.title-res")}
+                message={t("move.message-res")}
+                button={t("move.button-close")} />
             <ErrorCardModal
                 show={errModal}
                 onHide={() => setErrModal(false)}
-                title={'Ups!'}
-                message={'La tarjeta no se puede mover por que está bloqueada'}
-                button={'Cerrar'} />
+                title={t("move.title-err")}
+                message={t("move.message-block")}
+                button={t("move.button-close")} />
             <ErrorCardModal
                 show={errModal2}
                 onHide={() => setErrModal2(false)}
-                title={'Ups!'}
-                message={'La tarjeta no se puede mover por un criterio de aceptación'}
-                button={'Cerrar'} />
+                title={t("move.title-err")}
+                message={t("move.message-ac")}
+                button={t("move.button-close")} />
             <ErrorCardModal
                 show={errModal3}
                 onHide={() => setErrModal3(false)}
-                title={'Ups!'}
-                message={'La tarjeta no se puede mover por un error'}
-                button={'Cerrar'} />
+                title={t("move.title-err")}
+                message={t("move.message-err")}
+                button={t("move.button-close")} />
 
         </>
     )

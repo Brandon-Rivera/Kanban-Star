@@ -14,11 +14,12 @@ import { ThemeContext } from "./Contexts/ThemeContext";
 function App() {
   //Funcion para borrar el APIKEY despues de 1 hora
   setTimeout(() => {
-    localStorage.removeItem("apikey");
+    localStorage.removeItem("token");
   }, 36000000);
 
   //Link del api
   const apiLink = "https://kvxrvsgw6c.execute-api.us-east-1.amazonaws.com";
+  // const apiLink = "http://localhost:3001";
 
   const { theme } = useContext(ThemeContext);
 

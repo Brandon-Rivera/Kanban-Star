@@ -14,9 +14,7 @@ export const MainLayout = () => {
   const {theme} = useContext(ThemeContext);
   const {view} = useContext(ViewContext);
 
-  const [t,i18n] = useTranslation("global");
-
-  console.log('t Main Layout',t)
+  const [i18n] = useTranslation("global");
 
   const [showSettingsModal, setShowSettingsModal] = useState(false);
 
