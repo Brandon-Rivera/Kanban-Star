@@ -4,7 +4,7 @@ import nextArrow from "../images/nextArrow.png"
 import WFace from "../images/blank-face.jpeg"
 import "./css/NewCardTable.css"
 
-function NewCardTable({ id, nCard, duedate, idOwner, index, onCardMove }) {
+function NewCardTable({ id, nCard, duedate, idOwner, index, indeK, onCardMove }) {
     const [own, setOwn] = useState('');
     const [isFlipped, setIsFlipped] = useState(false);
 
@@ -14,9 +14,9 @@ function NewCardTable({ id, nCard, duedate, idOwner, index, onCardMove }) {
 
     const [animate, setAnimate] = useState(false);
 
-    const handleButtonClick = (cardId, cardIndex) => {
+    const handleButtonClick = (cardId, cardIndex, indeK) => {
         setAnimate(true);
-        onCardMove(cardId, cardIndex); // Pasa el ID de la tarjeta y el índice a onCardMove
+        onCardMove(cardId, cardIndex, indeK); // Pasa el ID de la tarjeta y el índice a onCardMove
     };
 
     useEffect(() => {
@@ -31,6 +31,7 @@ function NewCardTable({ id, nCard, duedate, idOwner, index, onCardMove }) {
                 <ListGroup.Item className='d-flex justify-content-between' >
                     <p className='m-0 fw-bold'>{id}</p>
                     <p className='m-0 fw-bold'>{index}</p>
+                    <p className='m-0 fw-bold'>{indeK}</p>
                     <p className='m-0 fw-bold'>{own ? own.realname : "Sin Asignar"}</p>
                 </ListGroup.Item>
                 <ListGroup.Item className='d-flex justify-content-between custom-container'>
@@ -41,7 +42,7 @@ function NewCardTable({ id, nCard, duedate, idOwner, index, onCardMove }) {
                     <p className='m-0 fw-bold'>Fecha Limite: <span className='fw-normal'>{duedate ? duedate : "Sin Fecha"}</span></p>
                 </ListGroup.Item>
                 <ListGroup.Item action href="#link1" className='text-center'>Seleccionar Flujo De Trabajo</ListGroup.Item>
-                <ListGroup.Item action href="#link2" className='d-flex align-items-center justify-content-center' onClick={() => handleButtonClick(id, index)} style={{ backgroundColor: "#42AD49" }}>
+                <ListGroup.Item action href="#link2" className='d-flex align-items-center justify-content-center' onClick={() => handleButtonClick(id, index, indeK)} style={{ backgroundColor: "#42AD49" }}>
                     <img style={{ width: '2rem', height: '2rem' }} src={nextArrow} alt='nextArrrow'></img>
                 </ListGroup.Item>
             </ListGroup>

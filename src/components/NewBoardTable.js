@@ -8,7 +8,7 @@ import "./css/NewBoardTable.css";
 export function NewBoardTable({ nameWF, dataWorkspace }) {
     const scrollingWrapperRef = useRef(null);
     const [resultNWF, setResultNWF] = useState('');
-    const [ram, setRam] = useState('')
+    const [ram, setRam] = useState({});
 
     useEffect(() => {
         const res = (dataWorkspace.data.find(data => data.name === nameWF))
@@ -23,29 +23,64 @@ export function NewBoardTable({ nameWF, dataWorkspace }) {
         scrollingWrapperRef.current.scrollLeft -= scrollingWrapperRef.current.offsetWidth - 31;
     };
 
-    // function moveon() {
-    //      const result0 = nameWF.columns.mycards.filter(item => item.id !== 55); //elimino la card
-    //      console.log(result0);
-    //      mycards = result0;                                                     //copio las demás cards
-    //      const result1 = nameWF.columns.mycards.filter(item => item.id === 55); //copio la card
-    //      const result2 = nameWF.columns[index+1].mycards.unshift(result1);      //Quiero pegar la card en el array siguiente
-    // }
-    // const result0 = nameWF.columns.mycards.filter(item => item.id !== 55); // elimino la card
-    // nameWF.columns.mycards = result0;
-    // const result1 = nameWF.columns.mycards.find(item => item.id === 55); // encuentro la card a pegar
-    // if (result1) {
-    //     const ram = nameWF.columns[0 + 1].mycards.unshift(result1); // agrego la card al array siguiente
-    //     console.log(ram);
-    // }
-
-    const handleCardMove = (cardId, index) => {
+    const handleCardMove = (cardId, index, indeK) => {
         if (index < resultNWF.columns.length) {
-            const res0 = resultNWF.columns[index].mycards.filter(item => item.id !== cardId); //elimino la card ctrl-x
-            const result1 = resultNWF.columns[index].mycards.find(item => item.id === cardId); // encuentro la card a pegar ctrl-x
-            resultNWF.columns[index].mycards = res0;
-            if (result1) {
-                setRam(resultNWF.columns[index + 1].mycards.unshift(result1)); // agrego la card al array siguiente
-                console.log(resultNWF.columns);
+            if (resultNWF.columns[index].kids.length > 0) {
+                const res0 = resultNWF.columns[index].kids[indeK].mycards.filter(item => item.id !== cardId);
+                const result1 = resultNWF.columns[index].kids[indeK].mycards.find(item => item.id === cardId); // encuentro la card a pegar ctrl-x
+                resultNWF.columns[index].kids[indeK].mycards = res0;                                            //Nuevo valores de mycards
+                if (result1) {
+                    console.log(index, indeK);
+                    if (resultNWF.columns[index + 1].kids.length > 0) {                                       //si la siguiente columna tiene kids
+                        // setRam(resultNWF.columns[index + 1].kids[index].mycards.unshift(result1));
+                        // console.log("1,2,3", ram)
+                        const newMycards = [...resultNWF.columns[index + 1].mycards];
+                        newMycards.unshift(result1);
+                        resultNWF.columns[index + 1].kids[index].mycards = newMycards;
+                        setRam(newMycards);
+                        console.log("1,2,3", ram);
+                    }
+                    else {
+                        if (resultNWF.columns[index].kids[indeK + 1]) {
+                            // setRam(resultNWF.columns[index].kids[indeK + 1].mycards.unshift(result1));
+                            const newMycards = [...resultNWF.columns[index + 1].mycards];
+                            newMycards.unshift(result1);
+                            resultNWF.columns[index].kids[indeK + 1].mycards = newMycards;
+                            setRam(newMycards);
+                            console.log("1,2,3,4", ram)
+                        }
+                        else {
+                            const newMycards = [...resultNWF.columns[index + 1].mycards];
+                            newMycards.unshift(result1);
+                            resultNWF.columns[index + 1].mycards = newMycards;
+                            setRam(newMycards);
+                        }
+                    }
+                }
+                console.log("resA", indeK, resultNWF);
+            }
+            else {
+                const res0 = resultNWF.columns[index].mycards.filter(item => item.id !== cardId); //elimino la card ctrl-x
+                const result1 = resultNWF.columns[index].mycards.find(item => item.id === cardId); // encuentro la card a pegar ctrl-x
+                resultNWF.columns[index].mycards = res0;                                           //Nuevo valores de mycards
+                if (result1) {
+                    if (resultNWF.columns[index + 1].kids.length > 0) {                                       //si la columna tiene kids
+                        // setRam(resultNWF.columns[index + 1].kids[index].mycards.unshift(result1));
+                        // console.log("1,2,3")
+                        const newMycards = [...resultNWF.columns[index + 1].mycards];
+                        newMycards.unshift(result1);
+                        resultNWF.columns[index].kids[indeK + 1].mycards = newMycards;
+                        setRam(newMycards);
+                        console.log("1,2,3")
+                    }
+                    else {
+                        const newMycards = [...resultNWF.columns[index + 1].mycards];
+                        newMycards.unshift(result1);
+                        resultNWF.columns[index + 1].mycards = newMycards;
+                        setRam(newMycards);
+                    }
+                }
+                console.log("resB", indeK, resultNWF);
             }
         }
     }
@@ -64,14 +99,14 @@ export function NewBoardTable({ nameWF, dataWorkspace }) {
                             {
                                 data.columns.map((columns, index) => (
                                     columns.kids.length > 0 ? (
-                                        columns.kids.map(kids => (
+                                        columns.kids.map((kids, indeK) => (
                                             <div className="col-11 col-md-3">
-                                                <NewColumnsTable key={data.id} kids={kids} nameCol={kids.name} mycards={kids.mycards} />
+                                                <NewColumnsTable key={data.id} kids={kids} nameCol={kids.name} mycards={kids.mycards} index={index} indeK={indeK} onCardMove={handleCardMove} />
                                             </div>
                                         ))
                                     ) : (
                                         <div className="col-11 col-md-3">
-                                            <NewColumnsTable key={data.id} kids={[]} mycards={columns.mycards} nameCol={columns.name} index={index} onCardMove={handleCardMove} />
+                                            <NewColumnsTable key={data.id} kids={[]} mycards={columns.mycards} nameCol={columns.name} index={index} indeK={-1} onCardMove={handleCardMove} />
                                         </div>
                                     )
                                 ))
