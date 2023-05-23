@@ -45,8 +45,6 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
   const handleCardSubmit = async (e) => {
     e.preventDefault();
     const values = {
-      domain: localStorage.getItem('domain'),
-      apikey: localStorage.getItem('apikey'),
       columnid: columnID,
       workflowid: workflowID,
       title: cardName,
@@ -60,7 +58,8 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'supra-access-token': localStorage.getItem('token')
         },
         body: JSON.stringify(values)
       });

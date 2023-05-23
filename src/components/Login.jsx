@@ -44,7 +44,7 @@ export const Login = ( { api }) => {
             setModalShow(true);
         }
         else {
-            localStorage.setItem('apikey', data.apikey);
+            localStorage.setItem('token', data.token);
             localStorage.setItem('domain', data.companyname);
             localStorage.setItem('userid', data.userid);
             localStorage.setItem('realname', data.realname);

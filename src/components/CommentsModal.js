@@ -91,8 +91,6 @@ const CommentsModal = ({
       .replace(/\n/g, "<br/>");
     e.preventDefault();
     const values = {
-      domain: localStorage.getItem("domain"),
-      apikey: localStorage.getItem("apikey"),
       cardid: cardID,
       comment: encodedText,
     };
@@ -101,6 +99,7 @@ const CommentsModal = ({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'supra-access-token': localStorage.getItem('token')
         },
         body: JSON.stringify(values),
       });
