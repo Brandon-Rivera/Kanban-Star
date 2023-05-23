@@ -14,7 +14,7 @@ import { ThemeContext } from "./Contexts/ThemeContext";
 function App() {
   //Funcion para borrar el APIKEY despues de 1 hora
   setTimeout(() => {
-    localStorage.removeItem("apikey");
+    localStorage.removeItem("token");
   }, 36000000);
 
   //Link del api

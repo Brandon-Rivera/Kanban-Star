@@ -10,6 +10,7 @@ function WorkCard({ title, id, api }) {
   const GotoBoard = () => {
     navigate('/board')
     localStorage.setItem('boardid', id)
+    localStorage.setItem('boardname', title)
   }
 
   // Funcion para obtener los owners de un board
