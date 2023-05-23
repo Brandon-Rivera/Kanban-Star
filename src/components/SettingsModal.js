@@ -59,9 +59,12 @@ const SettingsModal = ({show, onHide}) => {
 
     const handleSave = () => {
         const currentView = localStorage.getItem("CurrentView");
-        if(view !== currentView){
-            navigate(view);
-        }
+        const currentPath = window.location.pathname;
+        if(currentPath === "/board" || currentPath === "/newboard"){
+            if(view !== currentView){
+                navigate(view);
+            }
+        } 
         onHide();
     }
 
