@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import { Container, ListGroup, Button, InputGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import { BiSearchAlt } from "react-icons/bi";
 import Workflow from './Workflow.js'
@@ -11,6 +12,17 @@ export const Board = ({ api }) => {
     const [ownerTitle, setOwnerTitle] = useState('Todas las cartas');
     const [ownerID, setOwnerID] = useState(0);
     const cardOwners = JSON.parse(localStorage.getItem('owners'));
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("domain");
+        localStorage.removeItem("userid");
+    };
+
+    if (cardOwners.mensaje === 'Token inválido') {
+        handleLogout()
+    }
 
     useEffect(() => {
 
@@ -31,13 +43,22 @@ export const Board = ({ api }) => {
                 body: JSON.stringify(values)
             })
             const data = await response.json()
+
+            if (data.mensaje === 'Token inválido') {
+                localStorage.removeItem("token");
+                localStorage.removeItem("domain");
+                localStorage.removeItem("userid");
+                navigate("/");
+            }
+
             setDataWorkspace(data)
         }
 
 
+
         //llamada a la funcion
         getWorkSpace()
-    }, [api])
+    }, [api, navigate])
 
     return (
         <>
@@ -50,16 +71,16 @@ export const Board = ({ api }) => {
                         </Button>
                         {/* Seccion para el filtro */}
                         <DropdownButton variant="info" id="dropdown-basic-button" title={ownerTitle} className="d-flex justify-content-center w-100 m-2">
-                        <Dropdown.Item key='0' onClick={() => {setOwnerTitle('Todas las cartas'); setOwnerID(0);}} >Todas las cartas</Dropdown.Item>
+                            <Dropdown.Item key='0' onClick={() => { setOwnerTitle('Todas las cartas'); setOwnerID(0); }} >Todas las cartas</Dropdown.Item>
                             {
                                 cardOwners.data.map(data => (
-                                    <Dropdown.Item key={data.user_id} onClick={() => {setOwnerTitle(data.username); setOwnerID(data.user_id);}} >{data.username}</Dropdown.Item>
+                                    <Dropdown.Item key={data.user_id} onClick={() => { setOwnerTitle(data.username); setOwnerID(data.user_id); }} >{data.username}</Dropdown.Item>
                                 ))
                             }
                         </DropdownButton>
-                </InputGroup>
-            </ListGroup.Item>
-        </ListGroup >
+                    </InputGroup>
+                </ListGroup.Item>
+            </ListGroup >
 
             <Container fluid>
                 {

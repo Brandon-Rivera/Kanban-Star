@@ -28,8 +28,14 @@ function WorkCard({ title, id, api }) {
       )
     })
     const data = await response.json()
-    localStorage.setItem('owners', JSON.stringify(data))
-    GotoBoard();
+
+    if (data.mensaje === 'Token inválido') {
+      navigate('/');
+    }
+    else{
+      localStorage.setItem('owners', JSON.stringify(data))
+      GotoBoard();
+    }
   }
 
   return (

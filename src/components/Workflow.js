@@ -13,8 +13,6 @@ function Workflow({ ownerID, title, col, dataWorkspace, workflowPos, api }) {
 
   const [t] = useTranslation("global");
 
-  console.log(ownerID)
-
   return (
     <>
       <Container fluid="xs">
