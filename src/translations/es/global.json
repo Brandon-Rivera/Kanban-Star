@@ -82,6 +82,16 @@
         "no-deadline": "Sin fecha 🗓️"
     },
 
+    "move": {
+        "title-res": "Todo bien!",
+        "title-err": "Ups!",
+        "message-res": "Se movio la tarjeta",
+        "message-block": "La tarjeta no se puede mover por que está bloqueada",
+        "message-ac": "La tarjeta no se puede mover por un criterio de aceptación",
+        "message-err": "Hubo un error al mover la tarjeta",
+        "button-close": "Cerrar"
+    },
+
     "updatecard":{
         "no-deadline": "Sin fecha 🗓️",
         "no-owner": "Ninguno",

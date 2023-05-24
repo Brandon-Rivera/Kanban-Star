@@ -14,9 +14,7 @@ export function Workspace({ api }) {
 
         //Valores necesarios para la peticion get de workspace
         const values = {
-            domain: localStorage.getItem('domain'),
-            userid: localStorage.getItem('userid'),
-            apikey: localStorage.getItem('apikey')
+            userid: localStorage.getItem('userid')
         }
 
         //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
@@ -24,7 +22,8 @@ export function Workspace({ api }) {
 
             const response = await fetch(`${api}/dashboard`, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'supra-access-token': localStorage.getItem('token')
                 },
                 method: 'POST',
                 body: JSON.stringify(values)
@@ -38,27 +37,35 @@ export function Workspace({ api }) {
     }, [api])
 
     //Función que ayuda a dar color random al background del tablero
-    const colorRandom = () => {
-        const color = [("#E4186A"), ("#F08830"), ("#2665BB"), ("#42AD49")]
-        return color[Math.floor(Math.random() * color.length)]
-    }
+    const color = (() => {
+        const colors = ['#42AD49', '#E4186A', '#2665BB', '#F08830'];
+        let index = 0;
+        return () => {
+            const color = colors[index];
+            index = (index + 1) % colors.length;
+            return color;
+        };
+    })();
+
 
     //Función que crea y hace dinamica la presentación de tableros
     return (
         <div className="box">
             {
                 dataBoard.data.map(data => (
-                    <div className='workspaceItem rounded' style={{ backgroundColor: colorRandom() }}>
-                        <h2 key={data.workspace_id}>{data.name}</h2>
-                        <div className="row w-100">
-                            {
-                                data.boards.map(boards => (
-                                    <div className="col-md-4 mb-3" key={boards.board_id}>
-                                        <WorkCard title={boards.name} id={boards.board_id} api={api}/>
-                                    </div>
-                                ))
-                            }
-                        </div>
+                    <div className="m-2 rounded workspaceItem" style={{ backgroundColor: color() }}>
+                        <h2 className='text-center text-light' key={data.workspace_id}>{data.name}</h2>
+                        
+                            <div className="row w-100">
+                                {
+                                    data.boards.map(boards => (
+                                        <div className="col-md-4 mb-3" key={boards.board_id}>
+                                            <WorkCard title={boards.name} id={boards.board_id} api={api}/>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        
                     </div>
                 ))
             }

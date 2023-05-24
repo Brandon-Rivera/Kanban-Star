@@ -23,14 +23,13 @@ function Cards({ nCard, cardWid, duedate, dataWorkspace, workflowPos, idCard, cC
     const getCardDetails = async (cardID) => {
         const response = await fetch(`${api}/card`, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'supra-access-token': localStorage.getItem('token')
             },
             method: 'POST',
             body: JSON.stringify(
                 {
-                    cardid: cardID,
-                    domain: localStorage.getItem('domain'),
-                    apikey: localStorage.getItem('apikey')
+                    cardid: cardID
                 }
             )
         })

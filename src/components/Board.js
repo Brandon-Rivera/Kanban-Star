@@ -16,8 +16,6 @@ export const Board = ({ api }) => {
 
         //Valores necesarios para la peticion get de workspace
         const values = {
-            domain: localStorage.getItem('domain'),
-            apikey: localStorage.getItem('apikey'),
             boardid: localStorage.getItem('boardid')
         }
 
@@ -26,7 +24,8 @@ export const Board = ({ api }) => {
 
             const response = await fetch(`${api}/board`, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'supra-access-token': localStorage.getItem('token')
                 },
                 method: 'POST',
                 body: JSON.stringify(values)
@@ -36,6 +35,7 @@ export const Board = ({ api }) => {
             updateDataW(data)
         }
 
+
         //llamada a la funcion
         getWorkSpace()
     }, [api])
@@ -44,20 +44,22 @@ export const Board = ({ api }) => {
         <>
             <ListGroup>
                 <ListGroup.Item className='title'>
-                    <h4>Tablero 1</h4>
+                    <h4>Tablero: {localStorage.getItem('boardname')}</h4>
                     <InputGroup className="mb-6">
                         <Button variant="dark" className="search">
                             <BiSearchAlt size={25} color={'white'} />
                         </Button>
-                        <Form.Control
-                            className="search"
-                            aria-label="Example text with button addon"
-                            aria-describedby="basic-addon1"
-                        />
+                        {/* Seccion para el filtro */}
+                        <Form.Control className="search" list="datalistOptions" aria-label="Example text with button addon" aria-describedby="basic-addon1" placeholder="Type to search..."/>
+                        <datalist id="datalistOptions">
+                            <option value="San Francisco"/>
+                            <option value="New York"/>
+                            <option value="Seattle"/>
+                        </datalist>
                     </InputGroup>
                 </ListGroup.Item>
-
             </ListGroup>
+
             <Container fluid>
                 {
                     dataWorkspace.data.map(data => (
@@ -74,12 +76,12 @@ export const Board = ({ api }) => {
                                                 ))
                                             }
                                         </div>
-                                        
+
                                     ) : (
-                                    <div>
-                                        <h3 className="text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
-                                        <Workflow title={columns.name} col={columns} dataWorkspace={dataWorkspace} workflowPos={data.pos} api={api}></Workflow>
-                                    </div>
+                                        <div>
+                                            <h3 className="text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
+                                            <Workflow title={columns.name} col={columns} dataWorkspace={dataWorkspace} workflowPos={data.pos} api={api}></Workflow>
+                                        </div>
                                     )
                                 ))
                             }
