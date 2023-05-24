@@ -123,7 +123,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api, 
                   >
                     { getShortName(selectedOwner) }
                 </Dropdown.Toggle>
-                <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '20em' }} >
+                <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '13em' }} >
                   {
                     cardOwners.data.map(data => (
                       <Dropdown.Item className='fw-bold' key={data.user_id} onClick={() => {setCardOwner(data.user_id); setSelectedOwner(data.username)}} >
@@ -161,7 +161,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api, 
                     >
                      { getShortName(columnName) }
                   </Dropdown.Toggle>
-                  <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '20em' }} >
+                  <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '13em' }} >
                     {
                       <Dropdown.Item >
                         <div style={{ width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -183,7 +183,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api, 
                 className='cardDescriptionBox fw-bold'
                 type="text"
                 as='textarea'
-                rows={3}
+                rows={4}
                 placeholder={t("insertcard.description-placeholder")}
               />
             </InputGroup>

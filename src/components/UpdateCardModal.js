@@ -174,7 +174,7 @@ function UpdateCardModal({ show, onHide, api }) {
                   style={{
                     maxHeight: "12em",
                     overflowY: "scroll",
-                    maxWidth: "20em",
+                    maxWidth: "13em",
                   }}
                 >
                   {cardOwners.data.map((data) => (
@@ -188,7 +188,7 @@ function UpdateCardModal({ show, onHide, api }) {
                     >
                       <div
                         style={{
-                          width: "fit-content",
+                          width: "100%",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
                           whiteSpace: "nowrap",
@@ -226,7 +226,7 @@ function UpdateCardModal({ show, onHide, api }) {
                 className="cardDescriptionBox fw-bold"
                 type="text"
                 as="textarea"
-                rows={3}
+                rows={4}
                 placeholder={t("insertcard.description-placeholder")}
               />
             </InputGroup>
