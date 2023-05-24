@@ -14,6 +14,7 @@ import getShortName from "../utils/getShortName";
 import getUsername from "../utils/getUsername";
 import { DataContext } from "../Contexts/DataContext";
 import getCorrectDate from "../utils/getCorrectDay";
+import "./css/InsertCardModal.css";
 
 function UpdateCardModal({ show, onHide, api }) {
   // Variable que contiene el mapa de traducciones
@@ -94,8 +95,6 @@ function UpdateCardModal({ show, onHide, api }) {
   async function handleUpdateSubmit(confirmUpdate) {
     if (confirmUpdate) {
       const values = {
-        domain: localStorage.getItem("domain"),
-        apikey: localStorage.getItem("apikey"),
         cardid: cardId,
         title: cardName,
         description: "<p>" + cardDescription + "</p>",
@@ -108,6 +107,7 @@ function UpdateCardModal({ show, onHide, api }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "supra-access-token": localStorage.getItem("token"),
           },
           body: JSON.stringify(values),
         });
@@ -188,7 +188,7 @@ function UpdateCardModal({ show, onHide, api }) {
                     >
                       <div
                         style={{
-                          width: "100%",
+                          width: "fit-content",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
                           whiteSpace: "nowrap",
