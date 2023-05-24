@@ -31,23 +31,20 @@ export function NewBoardTable({ nameWF, dataWorkspace }) {
                 resultNWF.columns[index].kids[indeK].mycards = res0;                                            //Nuevo valores de mycards
                 if (result1) {
                     console.log(index, indeK);
-                    if (resultNWF.columns[index + 1].kids.length > 0) {                                       //si la siguiente columna tiene kids
-                        setRam(resultNWF.columns[index + 1].kids[index].mycards.unshift(result1));
-                        console.log("1,2,3", ram)
-                        // const newMycards = [...columns[index + 1].kids[index].mycards];
-                        // newMycards.unshift(result1);
-                        // resultNWF.columns[index + 1].kids[index].mycards = newMycards;
-                        // setRam(newMycards);
-                        // console.log("1,2,3", ram);
+                    if (resultNWF.columns[index].kids[indeK + 1]) {
+                        const newMycards = [...resultNWF.columns[index].kids[indeK + 1].mycards];
+                        newMycards.unshift(result1);
+                        resultNWF.columns[index].kids[indeK + 1].mycards = newMycards;
+                        setRam(newMycards);
+                        console.log("1,2,3,4", newMycards);
                     }
                     else {
-                        if (resultNWF.columns[index].kids[indeK + 1]) {
-                            setRam(resultNWF.columns[index].kids[indeK + 1].mycards.unshift(result1));
-                            // const newMycards = [...resultNWF.columns[index + 1].mycards];
-                            // newMycards.unshift(result1);
-                            // resultNWF.columns[index].kids[indeK + 1].mycards = newMycards;
-                            // setRam(newMycards);
-                            console.log("1,2,3,4", ram)
+                        if (resultNWF.columns[index + 1].kids.length > 0) {                                       //si la siguiente columna tiene kids;
+                            const newMycards = [...resultNWF.columns[index + 1].kids[0].mycards];
+                            newMycards.unshift(result1);
+                            resultNWF.columns[index + 1].kids[0].mycards = newMycards;
+                            setRam(newMycards);
+                            console.log("1,2,3", ram);
                         }
                         else {
                             const newMycards = [...resultNWF.columns[index + 1].mycards];
@@ -57,7 +54,7 @@ export function NewBoardTable({ nameWF, dataWorkspace }) {
                         }
                     }
                 }
-                console.log("resA", indeK, resultNWF);
+                console.log("resA", index,indeK, resultNWF);
             }
             else {
                 const res0 = resultNWF.columns[index].mycards.filter(item => item.id !== cardId); //elimino la card ctrl-x
@@ -65,12 +62,11 @@ export function NewBoardTable({ nameWF, dataWorkspace }) {
                 resultNWF.columns[index].mycards = res0;                                           //Nuevo valores de mycards
                 if (result1) {
                     if (resultNWF.columns[index + 1].kids.length > 0) {                                       //si la columna tiene kids
-                        setRam(resultNWF.columns[index + 1].kids[index].mycards.unshift(result1));
-                        // const newMycards = [...resultNWF.columns[index + 1].mycards];
-                        // newMycards.unshift(result1);
-                        // resultNWF.columns[index].kids[indeK + 1].mycards = newMycards;
-                        // setRam(newMycards);
-                        console.log("1,2,3")
+                        const newMycards = [...resultNWF.columns[index + 1].kids[0].mycards];
+                        newMycards.unshift(result1);
+                        resultNWF.columns[index + 1].kids[0].mycards = newMycards;
+                        setRam(newMycards);
+                        console.log("1,2,3");
                     }
                     else {
                         const newMycards = [...resultNWF.columns[index + 1].mycards];
@@ -82,7 +78,9 @@ export function NewBoardTable({ nameWF, dataWorkspace }) {
                 console.log("resB", indeK, resultNWF);
             }
         }
-    }
+    }   
+
+
 
     return (
         <Container fluid>
