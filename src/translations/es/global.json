@@ -68,7 +68,8 @@
         "no-description": "Sin descripción",
         "btn-accept": "Aceptar",
         "btn-edit": "Editar tarjeta",
-        "card-blocked": "Tarjeta bloqueada"
+        "card-blocked": "Tarjeta bloqueada",
+        "no-deadline": "Sin fecha 🗓️"
     },
 
     "comments":{
@@ -79,5 +80,17 @@
         "placeholder": "Escribe aquí tu comentario...",
         "card-blocked": "Tarjeta bloqueada",
         "no-deadline": "Sin fecha 🗓️"
+    },
+
+    "updatecard":{
+        "no-deadline": "Sin fecha 🗓️",
+        "no-owner": "Ninguno",
+        "btn-accept": "Actualizar tarjeta",
+        "btn-cancel": "Cancelar",
+        "modal-title": "Actualizar tarjeta",
+        "modal-description": "Está actualizando la información de esta tarjeta. ¿Desea continuar?",
+        "modal-success": "Esta tarjeta ha sido actualizada exitosamente",
+        "modal-accept": "Aceptar",
+        "modal-error": "Esta tarjeta no ha sido actualizada"
     }
 }

@@ -16,11 +16,11 @@ import getShortName from "../utils/getShortName";
 import getCurrentDate from "../utils/getCurrentDate";
 
 // Funcion que contiene el componente del formulario para la creación de tarjetas
-function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }) {
+function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api, dataWorkspace }) {
   // Variable que contiene el mapa de traducciones
   const [t] = useTranslation("global")
 
-  // Asignar variables y hooks
+  // Asignar hooks
   const [cardName, setCardName] = useState('');
   const [cardOwner, setCardOwner] = useState(null);
   const [cardDueDate, setCardDueDate] = useState(getCurrentDate());
@@ -76,6 +76,10 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
     }
   }
 
+  const updateWorkspace = () => {
+    dataWorkspace.data[1].columns[0].mycards[0].name = "local edit";
+  }
+
   return (
     // Creacion del modal que contiene el formulario de insercion de tarjetas
     <>
@@ -83,6 +87,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
         backdrop="static"
         show={show}
         onHide={() => {onHide(); insertInitialState();}}
+        scrollable
         centered
       >
         {/* Componente de tipo Form */}
@@ -141,7 +146,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
                 value={cardDueDate}
                 onChange={(e) => setCardDueDate(e.target.value)}
                 type='date'>
-                <DatePickerComponent readMode={false}/>
+                <DatePickerComponent readMode={false} update={false}/>
               </div>
             </InputGroup>
             {/* Componente que contiene el dropdown para elegir carril */}
@@ -179,7 +184,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }
                 className='cardDescriptionBox fw-bold'
                 type="text"
                 as='textarea'
-                rows={2}
+                rows={3}
                 placeholder={t("insertcard.description-placeholder")}
               />
             </InputGroup>

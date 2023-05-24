@@ -5,6 +5,7 @@ import { ThemeContext } from '../Contexts/ThemeContext';
 import './css/Cards.css'
 import { useTranslation } from "react-i18next";
 import CardMenu from './CardMenu';
+import { DataContext } from '../Contexts/DataContext';
 
 // Funcion que contiene el componente de las tarjetas
 function Cards({ nCard, cardWid, duedate, dataWorkspace, workflowPos, idCard, cCard, api }) {
@@ -15,6 +16,7 @@ function Cards({ nCard, cardWid, duedate, dataWorkspace, workflowPos, idCard, cC
     const {theme} = useContext(ThemeContext)
     // Variable para guardar los detalles de una tarjeta
     const [cardDetails, setCardDetails] = useState({});
+    const { updateDataC } = useContext(DataContext);
 
     // Petición para obtener los detalles de una tarjeta
     // Una vez que se obtienen los datos, se muestra el modal CardMenu
@@ -34,8 +36,7 @@ function Cards({ nCard, cardWid, duedate, dataWorkspace, workflowPos, idCard, cC
         })
         const data = await response.json();
         setCardDetails(data);
-        localStorage.setItem('cardDeadline', JSON.stringify(data.data.deadline));
-        checkDate(data.data.deadline);
+        updateDataC(data);
         MenuClick();
     }
 
@@ -52,14 +53,6 @@ function Cards({ nCard, cardWid, duedate, dataWorkspace, workflowPos, idCard, cC
 			return "primary";
 		}
 	}
-
-    const checkDate = (date) => {
-        if(date === "" || date == null){
-            localStorage.setItem('isDeadline', false);
-        } else{
-            localStorage.setItem('isDeadline', true);
-        }
-    }
 
     return (
         <>

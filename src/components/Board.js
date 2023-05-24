@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Container, ListGroup, Button, Form, InputGroup } from 'react-bootstrap';
 import { BiSearchAlt } from "react-icons/bi";
 import Workflow from './Workflow.js'
 import "./css/Board.css"
+import { DataContext } from '../Contexts/DataContext.js';
 
 export const Board = ({ api }) => {
 
     //Variable para obtener los datos del workspace en un hook
     const [dataWorkspace, setDataWorkspace] = useState({ data: [] });
+    
+    const { updateDataW } = useContext(DataContext);
 
     useEffect(() => {
 
@@ -30,6 +33,7 @@ export const Board = ({ api }) => {
             })
             const data = await response.json()
             setDataWorkspace(data)
+            updateDataW(data)
         }
 
         //llamada a la funcion

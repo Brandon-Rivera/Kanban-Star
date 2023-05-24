@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import MoveCardModal from "./MoveCardModal";
 import CommentsModal from "./CommentsModal";
 import ViewCardModal from "./ViewCardModal";
+import UpdateCardModal from "./UpdateCardModal";
 
 function CardMenu({
   show,
@@ -33,6 +34,7 @@ function CardMenu({
   const [comments, setComments] = useState({ data: [] });
 
   const [viewModalShow, setViewModalShow] = useState(false);
+  const [editModalShow, setEditModalShow] = useState(false);
 
   // Funcion que muestra el modal de consultar tarjetas
   const consultar = () => {
@@ -45,7 +47,7 @@ function CardMenu({
   };
 
   const actualizar = () => {
-    console.log("Actualizar");
+    setEditModalShow(true);
   };
 
   const comentarios = async () => {
@@ -166,6 +168,13 @@ function CardMenu({
         onHide={() => setViewModalShow(false)}
         cardColumn={columnCard}
         cardDetails={cardDetails}
+      />
+      <UpdateCardModal
+        show={editModalShow}
+        onHide={() => setEditModalShow(false)}
+        cardDetails={cardDetails}
+        cardColumn={columnCard}
+        api={api}
       />
     </>
   );

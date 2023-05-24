@@ -54,6 +54,7 @@
   margin: 0px !important;
   padding: 3% !important;
   color: rgb(49, 108, 244) !important;
+  max-height: 50% !important;
 }
 
 .cardDescriptionBox::placeholder{

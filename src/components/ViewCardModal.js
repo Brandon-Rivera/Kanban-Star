@@ -51,7 +51,7 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }) {
     if (isDeadline === "true") {
       return (
         <div id="datepicker" type="date">
-          <DatePickerComponent readMode={true} />
+          <DatePickerComponent readMode={true} update={false}/>
         </div>
       );
     } else {
@@ -172,9 +172,9 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }) {
           </fieldset>
           {/* Componente footer del modal, conteniendo los botones de editar y aceptar */}
           <Modal.Footer className="modalFooter">
-            <Button variant="primary fw-bold" onClick={onHide}>
+            {/* <Button variant="primary fw-bold" onClick={onHide}>
               {t("viewcard.btn-edit")}
-            </Button>
+            </Button> */}
             <Button variant="primary fw-bold" onClick={onHide}>
               {t("viewcard.btn-accept")}
             </Button>

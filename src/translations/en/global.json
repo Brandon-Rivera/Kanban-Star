@@ -68,7 +68,8 @@
         "no-description": "No description",
         "btn-accept": "Accept",
         "btn-edit": "Edit card",
-        "card-blocked": "Card is blocked"
+        "card-blocked": "Card is blocked",
+        "no-deadline": "No date 🗓️"
     },
 
     "comments":{
@@ -79,5 +80,17 @@
         "placeholder": "Write your comment here...",
         "card-blocked": "Card is blocked",
         "no-deadline": "No date 🗓️"
+    },
+
+    "updatecard":{
+        "no-deadline": "No date 🗓️",
+        "no-owner": "None",
+        "btn-accept": "Update card",
+        "btn-cancel": "Cancel",
+        "modal-title": "Update card",
+        "modal-description": "You are updating this card info. Would you like to continue?",
+        "modal-success": "This card was successfully updated",
+        "modal-accept": "Dismiss",
+        "modal-error": "This card was not updated"
     }
 }

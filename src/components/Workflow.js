@@ -38,6 +38,7 @@ function Workflow({ title, col, dataWorkspace, workflowPos, api}) {
                 columnName={col.name}
                 workflowID={col.workflow_id}
                 api={api}
+                dataWorkspace={dataWorkspace}
             />
               
             </Accordion.Body>
