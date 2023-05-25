@@ -45,15 +45,6 @@ function UpdateCardModal({ show, onHide, api }) {
   // Variable que contiene los owners del board
   const cardOwners = JSON.parse(localStorage.getItem("owners"));
 
-  // Funcion que devuelve el titulo de la tarjeta
-  function getTitle(title) {
-    if (title === "" || title === null || title === undefined) {
-      return `${t("viewcard.no-title")}`;
-    } else {
-      return title;
-    }
-  }
-
   // Funcion que devuelve el username del owner de la tarjeta
   function getCorrectUsername(username) {
     if (username === "" || username === null) {
@@ -137,7 +128,7 @@ function UpdateCardModal({ show, onHide, api }) {
           <Modal.Header closeButton className="bg-success">
             <Modal.Title>
               <Form.Control
-                value={getTitle(cardName)}
+                value={cardName}
                 onChange={(e) => setCardName(e.target.value)}
                 className="cardInputBox bg-success fw-bold"
                 type="text"

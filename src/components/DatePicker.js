@@ -9,10 +9,12 @@ function DatePickerComponent({ readMode, update }) {
   const dataC = React.useContext(DataContext);
 
   function getCorrectday() {
-    if (!readMode || update) {
-      return getDeadline(dataC.dataC.data.deadline);
-    } else {
+    if (!readMode && update) {
+      return getDeadline(dataC.dataC?.data.deadline);
+    } else if (!readMode) {
       return getCurrentDate();
+    } else {
+      return getDeadline(dataC.dataC?.data.deadline);
     }
   }
 
