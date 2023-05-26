@@ -12,7 +12,7 @@ import ErrorCardModal from "./ErrorCardModal";
 import ConfirmCardModal from "./ConfirmCardModal";
 import getShortName from "../utils/getShortName";
 import getUsername from "../utils/getUsername";
-import { DataContext } from "../Contexts/DataContext";
+import { DataContext } from "../Contexts/DataContext.js";
 import getCorrectDate from "../utils/getCorrectDay";
 import "./css/InsertCardModal.css";
 
@@ -21,21 +21,21 @@ function UpdateCardModal({ show, onHide, api }) {
   const [t] = useTranslation("global");
 
   // Variable que contiene dataWorkspace y cardDetails
-  const dataW = useContext(DataContext);
+  const { dataC }= useContext(DataContext);
 
   // Asignar hooks
-  const [cardName, setCardName] = useState(dataW.dataC?.data.title);
+  const [cardName, setCardName] = useState(dataC?.data.title);
   const [cardOwnerId, setCardOwnerId] = useState(
-    dataW.dataC?.data.owner_user_id
+    dataC?.data.owner_user_id
   );
   const [ownerUsername, setOwnerUsername] = useState(
     getCorrectUsername(getShortName(getUsername(cardOwnerId)))
   );
-  const [cardDueDate, setCardDueDate] = useState(dataW.dataC?.data.deadline);
+  const [cardDueDate, setCardDueDate] = useState(dataC?.data.deadline);
   const [cardDescription, setCardDescription] = useState(
-    parseDescription(dataW.dataC?.data.description)
+    parseDescription(dataC?.data.description)
   );
-  const [cardId, setCardId] = useState(dataW.dataC?.data.card_id);
+  const [cardId, setCardId] = useState(dataC?.data.card_id);
   const [confirmModal, setConfirmModal] = useState(false);
 
   // Modales de respuesta y error
@@ -69,17 +69,17 @@ function UpdateCardModal({ show, onHide, api }) {
 
   // Recarga el modal cada vez que se accede a una nueva tarjeta
   useEffect(() => {
-    setCardName(dataW.dataC?.data.title);
-    setCardOwnerId(dataW.dataC?.data.owner_user_id);
+    setCardName(dataC?.data.title);
+    setCardOwnerId(dataC?.data.owner_user_id);
     setOwnerUsername(
       getCorrectUsername(
-        getShortName(getUsername(dataW.dataC?.data.owner_user_id))
+        getShortName(getUsername(dataC?.data.owner_user_id))
       )
     );
-    setCardDueDate(dataW.dataC?.data.deadline);
-    setCardDescription(parseDescription(dataW.dataC?.data.description));
-    setCardId(dataW.dataC?.data.card_id);
-  }, [dataW]);
+    setCardDueDate(dataC?.data.deadline);
+    setCardDescription(parseDescription(dataC?.data.description));
+    setCardId(dataC?.data.card_id);
+  }, [dataC]);
 
   // Funcion para hacer la peticion POST para actualizar la tarjeta
   // Recibe la confirmacion del modal 

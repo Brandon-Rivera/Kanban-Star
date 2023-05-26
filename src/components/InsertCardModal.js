@@ -1,6 +1,6 @@
 // Se importan las librerías y componentes necesarios
 import "./css/InsertCardModal.css";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -14,13 +14,15 @@ import ErrorCardModal from "./ErrorCardModal";
 import getCorrectDate from "../utils/getCorrectDay";
 import getShortName from "../utils/getShortName";
 import getCurrentDate from "../utils/getCurrentDate";
+import { DataContext } from "../Contexts/DataContext.js";
+import getDeadline from "../utils/getDeadline";
 
 // Funcion que contiene el componente del formulario para la creación de tarjetas
-function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api, dataWorkspace }) {
+function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api }) {
   // Variable que contiene el mapa de traducciones
   const [t] = useTranslation("global")
 
-  // Asignar hooks
+  // Asignar hooks para los campos del formulario
   const [cardName, setCardName] = useState('');
   const [cardOwner, setCardOwner] = useState(null);
   const [cardDueDate, setCardDueDate] = useState(getCurrentDate());
@@ -33,6 +35,8 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api, 
 
   // Variable que contiene los owners del board
   const cardOwners = JSON.parse(localStorage.getItem('owners'));
+
+  const { insertNewCard, dataOw } = useContext(DataContext);
 
   function insertInitialState(){
     setCardName('');
@@ -71,12 +75,19 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api, 
       setErrModal(true);
     }
     else {
+      const newCard = {
+        id: data.data[0].card_id,
+        name: data.data[0].title,
+        description: data.data[0].description,
+        owner_id: data.data[0].owner_user_id,
+        duedate: getDeadline(data.data[0].deadline),
+        workflow_id: data.data[0].workflow_id,
+        column_id: data.data[0].column_id,
+        pos: null
+      }
+      insertNewCard(newCard);
       setResModal(true);
     }
-  }
-
-  const updateWorkspace = () => {
-    dataWorkspace.data[1].columns[0].mycards[0].name = "local edit";
   }
 
   return (
@@ -125,7 +136,7 @@ function InsertCardModal({ show, onHide, columnID, columnName, workflowID, api, 
                 </Dropdown.Toggle>
                 <Dropdown.Menu style={{ maxHeight: '12em', overflowY: 'scroll', maxWidth: '13em' }} >
                   {
-                    cardOwners.data.map(data => (
+                    dataOw?.data.map(data => (
                       <Dropdown.Item className='fw-bold' key={data.user_id} onClick={() => {setCardOwner(data.user_id); setSelectedOwner(data.username)}} >
                         <div style={{ width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                           { data.username }
