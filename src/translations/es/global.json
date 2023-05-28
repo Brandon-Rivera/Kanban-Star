@@ -79,6 +79,7 @@
         "empty": "El comentario no puede estar vacío",
         "accept": "Aceptar",
         "placeholder": "Escribe aquí tu comentario...",
+        "error-file": "No se pudo subir el/los archivo(s)",
         "card-blocked": "Tarjeta bloqueada",
         "no-deadline": "Sin fecha 🗓️"
     },

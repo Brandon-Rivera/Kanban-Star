@@ -7,8 +7,9 @@ import {
   ModalFooter,
   ModalHeader,
 } from "react-bootstrap";
+import { BsCardImage } from 'react-icons/bs'
 import "./css/CommentsModal.css";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import ErrorCardModal from "./ErrorCardModal";
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../Contexts/ThemeContext";
@@ -22,16 +23,42 @@ const CommentsModal = ({
   comments,
   getComments,
 }) => {
+
   const [t] = useTranslation("global");
   const { theme } = useContext(ThemeContext);
   const userID = localStorage.getItem("userid");
+  //Estados
   const [newComment, setNewComment] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [userFiles, setUserFiles] = useState([]);
+  const [filesNamesAndLinks, setFilesNamesAndLinks] = useState([]);
+
+  const divRef = useRef(null);
+
+  //Función para que aparezcan los comentarios más recientes en el modal cuando se abre.
+  const scrollDown = () => {
+    if (show) {
+      divRef.current.scrollTop = divRef.current.scrollHeight;
+    }
+  }
+
+  useEffect(() => {
+    scrollDown();
+  });
+
 
   const insertInitialState = () => {
     setNewComment("");
+    setFilesNamesAndLinks([]);
   };
+
+  const exitModal = () => {
+    insertInitialState();
+    onHide();
+  }
+
 
   /*Obtenemos owners del localStorage y comparamos sus IDs con el ID del autor
    de cada comentario para regresar el nombre del autor*/
@@ -83,18 +110,65 @@ const CommentsModal = ({
   const handleFormControlChange = (event) => {
     setNewComment(event.target.value);
   };
+  //Función que establece el los archivos adjuntos en el form en un estado "newComment"
+  const handleFileControlChange = (event) => {
+    const selectedFiles = Array.from(event.target.files);
+    setUserFiles(selectedFiles);
+  }
+
+  //Cada que se adjuntan archivos, se mandan a la base de datos y se obtiene su link
+  useEffect(() => {    
+  }, [userFiles])
+  
+  const getFileLinks = async () => {
+
+    const filesLength = userFiles.length;
+    for (let i = 0; i < filesLength; i++) {
+
+      const formData = new FormData();
+      formData.append("toUpload", userFiles[i]);
+      formData.append("cardid", cardID);
+
+      const response = await fetch("http://localhost:3001/upload", {
+        method: "POST",
+        headers: {
+          'supra-access-token': localStorage.getItem('token')
+        },
+        body: formData
+      })
+      
+      const data = await response.json();
+    
+      if(data.error){
+        setErrorMessage(t("comment.error-file"));
+        setShowErrorModal(true);
+      }
+      else{ 
+        const fileNameAndLink = {
+          file_name: userFiles[i].name,
+          link: data
+        }
+        filesNamesAndLinks.push(fileNameAndLink);
+      }
+    }
+  }
 
   // Funcion para hacer la peticion POST para insertar el comentario.
   const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
     const encodedText = newComment
       .replace(/ /g, "&nbsp;")
       .replace(/\n/g, "<br/>");
-    e.preventDefault();
+    
     const values = {
       cardid: cardID,
       comment: encodedText,
+      files: filesNamesAndLinks
     };
-    if (newComment !== "") {
+    if (newComment !== "" || filesNamesAndLinks !== []) {
+      setIsLoading(true);
+      await getFileLinks();
       const response = await fetch(`${api}/comment`, {
         method: "POST",
         headers: {
@@ -108,7 +182,9 @@ const CommentsModal = ({
 
       if (data.error) {
         setShowErrorModal(true);
+        setIsLoading(false)
       } else {
+        setIsLoading(false);
         insertInitialState();
         getComments();
       }
@@ -118,6 +194,17 @@ const CommentsModal = ({
     }
   };
 
+  //Itera por cada attachment del comentario y muestra su nombre en forma de link para descargar.
+  const showAttachments = (attachments) => {
+    if (attachments.length !== 0) {
+      return attachments.map(attachment => (
+        <a key={attachment.id} href={attachment.link}>
+          {attachment.file_name}&nbsp;&nbsp;
+        </a>
+      ));
+    }
+  }
+
   return (
     <>
       <Modal id={theme} show={show} onHide={onHide} scrollable centered>
@@ -126,7 +213,7 @@ const CommentsModal = ({
             {t("comments.title")}: {cardName} ({cardID})
           </Modal.Title>
         </ModalHeader>
-        <ModalBody>
+        <ModalBody ref={divRef}>
           {comments.data.map((comment) => (
             <>
               {getCommentStyle(comment.author.value)}
@@ -140,28 +227,34 @@ const CommentsModal = ({
                   </div>
                 </div>
               </div>
-
-              <div
-                dangerouslySetInnerHTML={{ __html: comment.text }}
-                className={commentStyle}
-              ></div>
+              <div className={commentStyle}>
+                <div
+                  dangerouslySetInnerHTML={{ __html: comment.text }}
+                ></div>
+                <div>
+                  {showAttachments(comment.attachments)}
+                </div>
+              </div>
               <br></br>
             </>
           ))}
         </ModalBody>
         <ModalFooter className="footer">
           <Form className="commentForm" onSubmit={handleFormSubmit}>
-            <FormControl
-              placeholder={t("comments.placeholder")}
-              as="textarea"
-              rows={3}
-              className="commentForm"
-              value={newComment}
-              onChange={handleFormControlChange}
-            ></FormControl>
+            <div className="formControlAndButton">
+              <FormControl
+                placeholder={t("comments.placeholder")}
+                as="textarea"
+                rows={3}
+                className="commentForm"
+                value={newComment}
+                onChange={handleFormControlChange}
+              ></FormControl>
+              <Form.Control type="file" multiple id="fileInput" onChange={handleFileControlChange}/>
+            </div>
             <br></br>
             <div className="footerButtons">
-              <Button onClick={onHide}>Salir</Button>
+              <Button onClick={()=>exitModal()}>Salir</Button>
               <Button type="submit">{t("comments.add")}</Button>
             </div>
           </Form>
