@@ -21,6 +21,7 @@ function Workflow({ ownerID, title, col, dataWorkspace, workflowPos, api }) {
             <Accordion.Header>{title}</Accordion.Header>
             <Accordion.Body className='acc-body'>
 
+              {/* Muestra tarjetas cuando este activada la opcion de "Todas las tarjetas" */}
               {col.mycards.map(col => (
 
                 ownerID === 0 ? (
@@ -32,6 +33,7 @@ function Workflow({ ownerID, title, col, dataWorkspace, workflowPos, api }) {
               ))
               }
 
+              {/* Muestra las tarjetas de acuerdo al propietario seleccionado */}
               {col.mycards.map(col => (
 
                 ownerID === col.owner_id ? (

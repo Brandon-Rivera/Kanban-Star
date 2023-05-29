@@ -9,7 +9,7 @@ export const Board = ({ api }) => {
 
     //Variable para obtener los datos del workspace en un hook
     const [dataWorkspace, setDataWorkspace] = useState({ data: [] });
-    const [ownerTitle, setOwnerTitle] = useState('Todas las cartas');
+    const [ownerTitle, setOwnerTitle] = useState('Todas las tarjetas');
     const [ownerID, setOwnerID] = useState(0);
     const cardOwners = JSON.parse(localStorage.getItem('owners'));
     const navigate = useNavigate();
@@ -71,7 +71,7 @@ export const Board = ({ api }) => {
                         </Button>
                         {/* Seccion para el filtro */}
                         <DropdownButton variant="info" id="dropdown-basic-button" title={ownerTitle} className="d-flex justify-content-center w-100 m-2">
-                            <Dropdown.Item key='0' onClick={() => { setOwnerTitle('Todas las cartas'); setOwnerID(0); }} >Todas las cartas</Dropdown.Item>
+                            <Dropdown.Item key='0' onClick={() => { setOwnerTitle('Todas las tarjetas'); setOwnerID(0); }} >Todas las tarjetas</Dropdown.Item>
                             {
                                 cardOwners.data.map(data => (
                                     <Dropdown.Item key={data.user_id} onClick={() => { setOwnerTitle(data.username); setOwnerID(data.user_id); }} >{data.username}</Dropdown.Item>
