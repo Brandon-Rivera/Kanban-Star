@@ -87,7 +87,7 @@ export const Login = ( { api }) => {
                 </Collapse>
 
                 {/* Modal que avisa al usuario cuando tiene un error en el inicio de sesión */}
-                <ErrorModal show={modalShow} title='Error de inicio de sesión!' message='Usuario, contraseña o dominio incorrectos' onHide={() => setModalShow(false)} />
+                <ErrorModal show={modalShow} title='Error de inicio de sesión!' message={t("login.bad-credentials")}  onHide={() => setModalShow(false)} />
             </div>
         </div>
     )
