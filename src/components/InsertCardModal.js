@@ -97,6 +97,10 @@ function InsertCardModal({
     }
   };
 
+  const handleConfirm = () => {
+    return
+  }
+
   return (
     // Creacion del modal que contiene el formulario de insercion de tarjetas
     <>
@@ -264,6 +268,7 @@ function InsertCardModal({
       <SuccessCardModal
         show={resModal}
         onHide={() => setResModal(false)}
+        onConfirm={handleConfirm}
         title={t("insertcard.insert-success")}
         message={t("insertcard.insert-message")}
         button={t("insertcard.insert-button")}
