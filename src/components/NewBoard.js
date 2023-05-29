@@ -36,7 +36,8 @@ export function NewBoard({ api }) {
 
       const response = await fetch(`${api}/board`, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'supra-access-token': localStorage.getItem('token')
         },
         method: 'POST',
         body: JSON.stringify(values)
