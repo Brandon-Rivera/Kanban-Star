@@ -4,7 +4,11 @@ import { Modal } from "react-bootstrap";
 import './css/ResInsertCardModal.css'
 
 // Funcion que contiene el componente del modal de exito al insertar una tarjeta
-function SuccessCardModal({ show, onHide, title, message, button }) {
+function SuccessCardModal({ show, onHide, onConfirm, title, message, button }) {
+
+    const handleMoveCard = () => {
+        onConfirm(true);
+    }
 
     return (
         <Modal
@@ -21,7 +25,7 @@ function SuccessCardModal({ show, onHide, title, message, button }) {
                 <p className="fw-bold"> { message } </p>
             </Modal.Body>
             <Modal.Footer className='modalFooter'>
-                <Button onClick={onHide} className="fw-bold">
+                <Button onClick={() => {onHide(); handleMoveCard()}} className="fw-bold">
                     { button }
                 </Button>
             </Modal.Footer>

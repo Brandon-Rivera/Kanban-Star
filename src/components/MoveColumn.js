@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useTranslation } from "react-i18next";
 import Form from 'react-bootstrap/Form';
 import { Col } from 'react-bootstrap';
@@ -7,6 +7,8 @@ import { BsRecordCircleFill } from "react-icons/bs"
 
 import SuccessCardModal from "./SuccessCardModal";
 import ErrorCardModal from "./ErrorCardModal";
+import { DataContext } from "../Contexts/DataContext.js";
+import getDeadline from '../utils/getDeadline';
 
 function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }) {
 
@@ -17,6 +19,11 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
     const [errModal, setErrModal] = useState(false);
     const [errModal2, setErrModal2] = useState(false);
     const [errModal3, setErrModal3] = useState(false);
+
+    const { moveCard, dataC, updateDataC } = useContext(DataContext);
+    const [oldCard, setOldCard] = useState(null);
+    const [newCard, setNewCard] = useState(null);
+    const [cardResponse, setCardResponse] = useState(null);
 
     const handleCardMove = async () => {
 
@@ -38,6 +45,7 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
             });
 
         const data = await response.json();
+        setCardResponse(data);
 
         if (data.error) {
 
@@ -50,8 +58,28 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
 
         }
         else {
+            setOldCard({
+                id: dataC?.card_id,
+                workflow_id: dataC?.workflow_id,
+                column_id: dataC?.column_id
+            });
+            setNewCard({
+                id: data.data[0].card_id,
+                name: data.data[0].title,
+                description: data.data[0].description,
+                owner_id: data.data[0].owner_user_id,
+                duedate: getDeadline(data.data[0].deadline),
+                workflow_id: data.data[0].workflow_id,
+                column_id: data.data[0].column_id,
+                pos: null,
+            })
             setResModal(true);
         }
+    }
+
+    const handleLocalMove = () => {
+        moveCard(oldCard, newCard);
+        updateDataC(cardResponse?.data[0]);
     }
 
     useEffect(() => {
@@ -89,6 +117,7 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
             <SuccessCardModal
                 show={resModal}
                 onHide={() => setResModal(false)}
+                onConfirm={handleLocalMove}
                 title={t("move.title-res")}
                 message={t("move.message-res")}
                 button={t("move.button-close")} />

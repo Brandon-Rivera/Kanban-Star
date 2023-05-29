@@ -146,6 +146,58 @@ export const DataProvider = ({ children }) => {
     });
   };
 
+  // Funcion para mover una tarjeta
+  const moveCard = (oldCard, newCard) => {
+    setDataW((prevData) => {
+      const newData = { ...prevData };
+
+      const workflow = newData.data.find(
+        (workflow) => workflow.id === oldCard.workflow_id
+      );
+      if (!workflow) {
+        return newData;
+      }
+
+      const column = workflow.columns.find(
+        (column) => column.id === oldCard.column_id
+      );
+      if (!column) {
+        const subcolumn = findSubcolumn(workflow.columns, oldCard.column_id);
+        if (!subcolumn) {
+          return newData;
+        }
+        const updatedSubcolumn = {
+          ...subcolumn,
+          mycards: subcolumn.mycards.filter((card) => card.id !== oldCard.id),
+        };
+        newData.data = newData.data.map((workflow) =>
+          workflow.id === oldCard.workflow_id
+            ? {
+                ...workflow,
+                columns: updateColumns(workflow.columns, updatedSubcolumn),
+              }
+            : workflow
+        );
+      } else {
+        const updatedColumn = {
+          ...column,
+          mycards: column.mycards.filter((card) => card.id !== oldCard.id),
+        };
+        newData.data = newData.data.map((workflow) =>
+          workflow.id === oldCard.workflow_id
+            ? {
+                ...workflow,
+                columns: updateColumns(workflow.columns, updatedColumn),
+              }
+            : workflow
+        );
+      }
+
+      return newData;
+    });
+    insertNewCard(newCard);
+  };
+
   // Valores que se pasan al contexto
   const contextValues = {
     dataW,
@@ -156,6 +208,7 @@ export const DataProvider = ({ children }) => {
     updateDataOw,
     insertNewCard,
     updateCard,
+    moveCard,
   };
 
   return (

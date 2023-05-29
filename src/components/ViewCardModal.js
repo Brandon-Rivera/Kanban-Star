@@ -114,7 +114,7 @@ function ViewCardModal({ show, onHide, cardColumn }) {
                   >
                     {dataC
                       ? getCorrectUsername(
-                          getShortName(getUsername(dataC.owner_user_id, dataOw))
+                          getShortName(getUsername(dataC?.owner_user_id, dataOw))
                         )
                       : ""}
                   </Dropdown.Toggle>
@@ -155,7 +155,7 @@ function ViewCardModal({ show, onHide, cardColumn }) {
                   readOnly
                   dangerouslySetInnerHTML={{
                     __html: dataC
-                      ? getDescription(getCorrectDescription(dataC.description))
+                      ? getDescription(getCorrectDescription(dataC?.description))
                       : "",
                   }}
                   className="cardDescriptionBox fw-bold"

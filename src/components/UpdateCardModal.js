@@ -107,7 +107,7 @@ function UpdateCardModal({ show, onHide, api }) {
           workflow_id: dataC?.workflow_id,
           column_id: dataC?.column_id,
         };
-        updateDataC(data.data[0]);
+        updateDataC(data?.data[0]);
         updateCard(newCard);
         setResModal(true);
         onHide();
