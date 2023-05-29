@@ -7,7 +7,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from "react-bootstrap";
-import { BsCardImage } from 'react-icons/bs'
+// import { BsCardImage } from 'react-icons/bs'
 import "./css/CommentsModal.css";
 import { useContext, useState, useRef, useEffect } from "react";
 import ErrorCardModal from "./ErrorCardModal";
@@ -46,6 +46,7 @@ const CommentsModal = ({
 
   useEffect(() => {
     scrollDown();
+    console.log('isLoading', isLoading);
   });
 
 
@@ -129,7 +130,7 @@ const CommentsModal = ({
       formData.append("toUpload", userFiles[i]);
       formData.append("cardid", cardID);
 
-      const response = await fetch("http://localhost:3001/upload", {
+      const response = await fetch(`${api}/upload`, {
         method: "POST",
         headers: {
           'supra-access-token': localStorage.getItem('token')
