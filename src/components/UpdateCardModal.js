@@ -20,30 +20,25 @@ function UpdateCardModal({ show, onHide, api }) {
   // Variable que contiene el mapa de traducciones
   const [t] = useTranslation("global");
 
-  // Variable que contiene dataWorkspace y cardDetails
-  const { dataC }= useContext(DataContext);
+  // Variable que contiene cardDetails
+  const { dataC, dataOw, updateCard, updateDataC } = useContext(DataContext);
 
-  // Asignar hooks
-  const [cardName, setCardName] = useState(dataC?.data.title);
-  const [cardOwnerId, setCardOwnerId] = useState(
-    dataC?.data.owner_user_id
-  );
+  // Asignar hooks para los campos del formulario
+  const [cardName, setCardName] = useState(dataC?.title);
+  const [cardOwnerId, setCardOwnerId] = useState(dataC?.owner_user_id);
   const [ownerUsername, setOwnerUsername] = useState(
-    getCorrectUsername(getShortName(getUsername(cardOwnerId)))
+    getCorrectUsername(getShortName(getUsername(cardOwnerId, dataOw)))
   );
-  const [cardDueDate, setCardDueDate] = useState(dataC?.data.deadline);
+  const [cardDueDate, setCardDueDate] = useState(dataC?.deadline);
   const [cardDescription, setCardDescription] = useState(
-    parseDescription(dataC?.data.description)
+    parseDescription(dataC?.description)
   );
-  const [cardId, setCardId] = useState(dataC?.data.card_id);
+  const [cardId, setCardId] = useState(dataC?.card_id);
   const [confirmModal, setConfirmModal] = useState(false);
 
   // Modales de respuesta y error
   const [resModal, setResModal] = useState(false);
   const [errModal, setErrModal] = useState(false);
-
-  // Variable que contiene los owners del board
-  const cardOwners = JSON.parse(localStorage.getItem("owners"));
 
   // Funcion que devuelve el username del owner de la tarjeta
   function getCorrectUsername(username) {
@@ -69,20 +64,20 @@ function UpdateCardModal({ show, onHide, api }) {
 
   // Recarga el modal cada vez que se accede a una nueva tarjeta
   useEffect(() => {
-    setCardName(dataC?.data.title);
-    setCardOwnerId(dataC?.data.owner_user_id);
+    setCardName(dataC?.title);
+    setCardOwnerId(dataC?.owner_user_id);
     setOwnerUsername(
       getCorrectUsername(
-        getShortName(getUsername(dataC?.data.owner_user_id))
+        getShortName(getUsername(dataC?.owner_user_id, dataOw))
       )
     );
-    setCardDueDate(dataC?.data.deadline);
-    setCardDescription(parseDescription(dataC?.data.description));
-    setCardId(dataC?.data.card_id);
+    setCardDueDate(dataC?.deadline);
+    setCardDescription(parseDescription(dataC?.description));
+    setCardId(dataC?.card_id);
   }, [dataC]);
 
   // Funcion para hacer la peticion POST para actualizar la tarjeta
-  // Recibe la confirmacion del modal 
+  // Recibe la confirmacion del modal
   async function handleUpdateSubmit(confirmUpdate) {
     if (confirmUpdate) {
       const values = {
@@ -94,7 +89,7 @@ function UpdateCardModal({ show, onHide, api }) {
       };
       try {
         // Funcion que manda la petición tipo POST para actualizar la tarjeta
-        await fetch(`${api}/update`, {
+        const response = await fetch(`${api}/update`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -102,12 +97,26 @@ function UpdateCardModal({ show, onHide, api }) {
           },
           body: JSON.stringify(values),
         });
+        const data = await response.json();
+        const newCard = {
+          id: cardId,
+          name: cardName,
+          description: "<p>" + cardDescription + "</p>",
+          owner_id: cardOwnerId,
+          duedate: cardDueDate,
+          workflow_id: dataC?.workflow_id,
+          column_id: dataC?.column_id,
+        };
+        updateDataC(data.data[0]);
+        updateCard(newCard);
         setResModal(true);
         onHide();
       } catch (error) {
+        console.log(error);
         setErrModal(true);
       }
     } else {
+      console.log(1);
       setErrModal(true);
     }
   }
@@ -168,7 +177,7 @@ function UpdateCardModal({ show, onHide, api }) {
                     maxWidth: "13em",
                   }}
                 >
-                  {cardOwners.data.map((data) => (
+                  {dataOw?.data.map((data) => (
                     <Dropdown.Item
                       className="fw-bold"
                       key={data.user_id}

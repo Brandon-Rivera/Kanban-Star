@@ -29,22 +29,30 @@ export const DataProvider = ({ children }) => {
       (workflow) => workflow.id === newCard.workflow_id
     );
 
+    if (!workflow) {
+      return;
+    }
+
     const column = workflow.columns.find(
       (column) => column.id === newCard.column_id
     );
-    if (!column) {
-      const subcolumn = findSubcolumn(workflow.columns, newCard.column_id);
-      if(!subcolumn){
-        return;
-      }
-      newCard.pos = subcolumn.mycards.length;
-      subcolumn.mycards.push(newCard);
-      setDataW({ ...dataW });
+
+    const subcolumn = column
+      ? null
+      : findSubcolumn(workflow.columns, newCard.column_id);
+
+    if (!column && !subcolumn) {
       return;
     }
-    newCard.pos = column.mycards.length;
-    column.mycards.push(newCard);
-    setDataW({ ...dataW });
+
+    const target = column || subcolumn;
+    newCard.pos = target.mycards.length;
+    target.mycards.push(newCard);
+
+    setDataW((prevDataW) => ({
+      ...prevDataW,
+      data: [...prevDataW.data],
+    }));
   };
 
   // Funcion para buscar una subcolumna en un workflow
@@ -65,6 +73,79 @@ export const DataProvider = ({ children }) => {
     return null;
   };
 
+  // Funcion para actualizar los datos de una tarjeta
+  const updateCard = (newCard) => {
+    setDataW((prevData) => {
+      const newData = { ...prevData };
+
+      const workflow = newData.data.find(
+        (workflow) => workflow.id === newCard.workflow_id
+      );
+      if (!workflow) {
+        return newData;
+      }
+
+      const column = workflow.columns.find(
+        (column) => column.id === newCard.column_id
+      );
+      if (!column) {
+        const subcolumn = findSubcolumn(workflow.columns, newCard.column_id);
+        if (!subcolumn) {
+          return newData;
+        }
+        const updatedSubcolumn = {
+          ...subcolumn,
+          mycards: subcolumn.mycards.map((card) =>
+            card.id === newCard.id ? { ...card, ...newCard } : card
+          ),
+        };
+        newData.data = newData.data.map((workflow) =>
+          workflow.id === newCard.workflow_id
+            ? {
+                ...workflow,
+                columns: updateColumns(workflow.columns, updatedSubcolumn),
+              }
+            : workflow
+        );
+      } else {
+        const updatedColumn = {
+          ...column,
+          mycards: column.mycards.map((card) =>
+            card.id === newCard.id ? { ...card, ...newCard } : card
+          ),
+        };
+        newData.data = newData.data.map((workflow) =>
+          workflow.id === newCard.workflow_id
+            ? {
+                ...workflow,
+                columns: updateColumns(workflow.columns, updatedColumn),
+              }
+            : workflow
+        );
+      }
+
+      return newData;
+    });
+  };
+
+  // Funcion que actualiza las columnas de un workflow
+  const updateColumns = (columns, updatedColumn) => {
+    return columns.map((column) => {
+      if (column.id === updatedColumn.id) {
+        return updatedColumn;
+      }
+
+      if (column.kids && column.kids.length > 0) {
+        return {
+          ...column,
+          kids: updateColumns(column.kids, updatedColumn),
+        };
+      }
+
+      return column;
+    });
+  };
+
   // Valores que se pasan al contexto
   const contextValues = {
     dataW,
@@ -73,7 +154,8 @@ export const DataProvider = ({ children }) => {
     updateDataC,
     dataOw,
     updateDataOw,
-    insertNewCard
+    insertNewCard,
+    updateCard,
   };
 
   return (

@@ -166,13 +166,10 @@ function CardMenu({
         show={viewModalShow}
         onHide={() => setViewModalShow(false)}
         cardColumn={columnCard}
-        cardDetails={cardDetails}
       />
       <UpdateCardModal
         show={editModalShow}
         onHide={() => setEditModalShow(false)}
-        cardDetails={cardDetails}
-        cardColumn={columnCard}
         api={api}
       />
     </>

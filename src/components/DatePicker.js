@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { Form } from "react-bootstrap";
 import getCurrentDate from "../utils/getCurrentDate";
 import getDeadline from "../utils/getDeadline";
@@ -6,15 +6,17 @@ import { DataContext } from "../Contexts/DataContext";
 
 // Componente para seleccionar la fecha de vencimiento de una tarjeta
 function DatePickerComponent({ readMode, update }) {
-  const dataC = React.useContext(DataContext);
+  const { dataC }= useContext(DataContext);
+
+  useEffect(() => {}, [dataC])
 
   function getCorrectday() {
     if (!readMode && update) {
-      return getDeadline(dataC.dataC?.data.deadline);
+      return getDeadline(dataC?.deadline);
     } else if (!readMode) {
       return getCurrentDate();
     } else {
-      return getDeadline(dataC.dataC?.data.deadline);
+      return getDeadline(dataC?.deadline);
     }
   }
 
