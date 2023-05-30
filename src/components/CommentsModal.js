@@ -196,10 +196,11 @@ const CommentsModal = ({
           insertInitialState();
           getComments();
         }
-      } else {
-        setErrorMessage(t("comments.empty"));
-        setShowErrorModal(true);
-      }
+      } 
+    }
+    else {
+      setErrorMessage(t("comments.empty"));
+      setShowErrorModal(true);
     }
   };
 
