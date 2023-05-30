@@ -4,6 +4,7 @@ import { Container, ListGroup, Button, InputGroup, Dropdown, DropdownButton } fr
 import { BiSearchAlt } from "react-icons/bi";
 import Workflow from './Workflow.js'
 import "./css/Board.css"
+import { useTranslation } from 'react-i18next';
 
 export const Board = ({ api }) => {
 
@@ -11,6 +12,7 @@ export const Board = ({ api }) => {
     const [dataWorkspace, setDataWorkspace] = useState({ data: [] });
     const [ownerTitle, setOwnerTitle] = useState('Todas las tarjetas');
     const [ownerID, setOwnerID] = useState(0);
+    const [t] = useTranslation("global");
     const cardOwners = JSON.parse(localStorage.getItem('owners'));
     const navigate = useNavigate();
 
@@ -64,7 +66,7 @@ export const Board = ({ api }) => {
         <>
             <ListGroup>
                 <ListGroup.Item className='title'>
-                    <h4>Tablero: {localStorage.getItem('boardname')}</h4>
+                    <h4>{t("workspace.board")}{localStorage.getItem('boardname')}</h4>
                     <InputGroup className="mb-6">
                         <Button variant="dark" className="search">
                             <BiSearchAlt size={25} color={'white'} />

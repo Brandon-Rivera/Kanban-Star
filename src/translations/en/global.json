@@ -15,7 +15,8 @@
     },
 
     "workspace":{
-        "workspace": "Workspace"
+        "workspace": "Workspace",
+        "board": "Board: "
     },
 
     "navbar":{
@@ -79,9 +80,16 @@
         "empty": "Comment can't be empty",
         "accept": "Accept",
         "placeholder": "Write your comment here...",
-        "error-file": "File(s) could not be uploaded",
+        "error-file": "File or files could not be uploaded, try again.",
+        "error-413": "One or more files are too large",
         "card-blocked": "Card is blocked",
-        "no-deadline": "No date 🗓️"
+        "no-deadline": "No date 🗓️",
+        "exit": "Exit"
+    },
+
+    "loading": {
+        "title": "Loading...",
+        "comment": "Your comment is being uploaded"
     },
 
     "move": {
