@@ -15,7 +15,8 @@
     },
 
     "workspace":{
-        "workspace": "Workspace"
+        "workspace": "Workspace",
+        "board": "Board: "
     },
 
     "navbar":{
