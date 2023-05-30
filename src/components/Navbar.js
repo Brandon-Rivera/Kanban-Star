@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../Contexts/ThemeContext";
+import { Image } from "react-bootstrap";
 import "./css/Navbar.css"
 
 //Importaciones de bootstrap
@@ -29,6 +30,10 @@ const NavBar = ({ onClickSettings }) => {
     navigate("/");
   };
 
+  const redirectToKanbanize = () => {
+    window.location.href = `https://${localStorage.getItem("domain")}.kanbanize.com/ctrl_dashboard`;
+  };
+
   const navBarTheme = () => {
     if (theme === "dark") {
       return theme;
@@ -42,13 +47,7 @@ const NavBar = ({ onClickSettings }) => {
       <Navbar collapseOnSelect expand="lg" bg={navBarTheme()} fixed="top">
         <Container>
           <Navbar.Brand onClick={() => navigate("/workspace")}>
-            <img
-              src="/assets/Kanbanize-blanco.png"
-              width="150"
-              height="60"
-              className="d-inline-block align-top"
-              alt="React Bootstrap logo"
-            />
+            <p className='d-flex justify-content-start m-1 text-white' id="font-face-mb"><Image className="kanbanStarLogo" src="https://i.ibb.co/kmWdCNM/ksLogo.png" alt="KanbanStar Logo" />kanban star</p>
           </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="responsive-navbar-nav"
@@ -56,6 +55,16 @@ const NavBar = ({ onClickSettings }) => {
           />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
+              <Button variant={navBarTheme()} onClick={() => redirectToKanbanize()}>
+                <img
+                  src="/assets/Kanbanize-blanco.png"
+                  width="150"
+                  height="60"
+                  className="d-inline-block align-top"
+                  alt="React Bootstrap logo"
+                />
+              </Button>
+
               <Button variant={navBarTheme()} onClick={onClickSettings}>
                 <BsFillGearFill size={45} variant={theme} />{" "}
                 {t("navbar.config")}{" "}

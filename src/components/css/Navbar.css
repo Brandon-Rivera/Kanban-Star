@@ -2,20 +2,40 @@
     background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27white%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e");
 }
 
-.navbar-toggler{
+.navbar-toggler {
     border: 1px solid rgba(255, 255, 255, 30%);
 }
+
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
 
 :root {
-    --mainColor: #29335c; /*29335c*/
+    --mainColor: #29335c;
+    /*29335c*/
     --mainColorLight: #5767aa;
     --secondaryColor: #db2b39;
     --textColor: #eee;
 }
 
-.Navbar{
+.Navbar {
     background-color: #29335c;
 }
 
+@font-face {
+    font-family: "MontHeavy";
+    src: url("../../fonts/montHeavy.otf") format("opentype")
+}
+
+#font-face-mb {
+    font-family: "MontHeavy";
+}
+
+.kanbanStarLogo {
+    max-width: 10%;
+    height: auto;
+}
+
+.navbar-brand {
+    margin: 0;
+    max-width: 80%;
+}
 
