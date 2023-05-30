@@ -5,11 +5,12 @@ import Cards from "./Cards.js"
 import "./css/Workflow.css"
 import { useTranslation } from 'react-i18next';
 
-
 //Esto en realidad es la columna, NO EL WORKFLOW
 function Workflow({ title, col, dataWorkspace, workflowPos, api}) {
   // Hook para el modal de insertar tarjetas
   const [insertModalShow, setInsertModalShow] = useState(false);
+  
+  const laneId = col.mycards ? col?.mycards[0]?.lane_id : null;
 
   const [t] = useTranslation("global");
 
@@ -37,10 +38,10 @@ function Workflow({ title, col, dataWorkspace, workflowPos, api}) {
                 columnID={col.id}
                 columnName={col.name}
                 workflowID={col.workflow_id}
+                laneID={laneId}
                 api={api}
                 dataWorkspace={dataWorkspace}
             />
-              
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

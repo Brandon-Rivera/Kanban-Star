@@ -22,6 +22,7 @@ function InsertCardModal({
   show,
   onHide,
   columnID,
+  laneID,
   columnName,
   workflowID,
   api,
@@ -60,12 +61,14 @@ function InsertCardModal({
     const values = {
       columnid: columnID,
       workflowid: workflowID,
+      laneid: laneID,
       title: cardName,
       description: "<p>" + cardDescription + "</p>",
       ownerid: cardOwner,
       duedate: getCorrectDate(cardDueDate),
     };
 
+    console.log(values);
     // Funcion que manda la petición tipo POST para insertar la tarjeta
     const response = await fetch(`${api}/create`, {
       method: "POST",
@@ -80,6 +83,7 @@ function InsertCardModal({
     insertInitialState();
 
     if (data.error) {
+      console.log(data);
       setErrModal(true);
     } else {
       const newCard = {
