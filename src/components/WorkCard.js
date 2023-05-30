@@ -2,19 +2,23 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/WorkCard.css";
 import { DataContext } from "../Contexts/DataContext";
+import { ViewContext } from '../Contexts/ViewContext';
 
 //Funcion para crear los botones de cada tablero
 function WorkCard({ title, id, api }) {
+
+  const {view} = useContext(ViewContext);
+
   const navigate = useNavigate();
 
   // Hook para actualizar el estado de informacion en Board
   const { updateDataW, updateDataOw } = useContext(DataContext);
 
   const GotoBoard = () => {
-    navigate("/board");
-    localStorage.setItem("boardid", id);
-    localStorage.setItem("boardname", title);
-  };
+    navigate(view)
+    localStorage.setItem('boardid', id)
+    localStorage.setItem('boardname', title)
+  }
 
   // Funcion para obtener la informacion de un board
   const getWorkSpace = async () => {
@@ -50,9 +54,15 @@ function WorkCard({ title, id, api }) {
     });
     const data = await response.json();
     updateDataOw(data);
-    localStorage.setItem("owners", JSON.stringify(data));
-    GotoBoard();
-  };
+
+    if (data.mensaje === 'Token inválido') {
+      navigate('/');
+    }
+    else{
+      localStorage.setItem("owners", JSON.stringify(data));
+      GotoBoard();
+    };
+  }
 
   return (
     <div className="card text-center">

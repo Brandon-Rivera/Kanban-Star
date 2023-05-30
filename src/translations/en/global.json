@@ -3,6 +3,7 @@
         "hello": "Hello",
         "welcome": "Welcome!",
         "login-with-credentials": "Log in with your Kanbanize account",
+        "bad-credentials": "Username or password incorrect, try again please.",
         "e-mail": "E-mail",
         "e-mail-placeholder": "yourmail@mail.com",
         "password": "Password",
@@ -14,7 +15,8 @@
     },
 
     "workspace":{
-        "workspace": "Workspace"
+        "workspace": "Workspace",
+        "board": "Board: "
     },
 
     "navbar":{
@@ -36,7 +38,7 @@
     },
 
     "cardMenu":{
-        "title": "What you like to do?",
+        "title": "What would you like to do?",
         "show": "Show",
         "move": "Move",
         "update": "Update",
@@ -78,17 +80,25 @@
         "empty": "Comment can't be empty",
         "accept": "Accept",
         "placeholder": "Write your comment here...",
+        "error-file": "File or files could not be uploaded, try again.",
+        "error-413": "One or more files are too large",
         "card-blocked": "Card is blocked",
-        "no-deadline": "No date 🗓️"
+        "no-deadline": "No date 🗓️",
+        "exit": "Exit"
+    },
+
+    "loading": {
+        "title": "Loading...",
+        "comment": "Your comment is being uploaded"
     },
 
     "move": {
         "title-res": "Everything fine!",
-        "title-err": "Ups!",
-        "message-res": "The card was move",
-        "message-block": "The card can't be move for a block reason",
-        "message-ac": "The card can't be move for an acceptance criteria",
-        "message-err": "It was an error to move the card",
+        "title-err": "Oops!",
+        "message-res": "The card was moved",
+        "message-block": "The card can't be moved for a block reason",
+        "message-ac": "The card can't be moved for an acceptance criteria",
+        "message-err": "Card could not be moved",
         "button-close": "Close"
     },
 
