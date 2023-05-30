@@ -79,9 +79,16 @@
         "empty": "El comentario no puede estar vacío",
         "accept": "Aceptar",
         "placeholder": "Escribe aquí tu comentario...",
-        "error-file": "No se pudo subir el/los archivo(s)",
+        "error-file": "No se pudo subir el o los archivos, intenta de nuevo",
+        "error-413": "Uno o más archivos son demasiado grandes",
         "card-blocked": "Tarjeta bloqueada",
-        "no-deadline": "Sin fecha 🗓️"
+        "no-deadline": "Sin fecha 🗓️",
+        "exit": "Salir"
+    },
+
+    "loading": {
+        "title": "Cargando...",
+        "comment": "Tu comentario se está subiendo"
     },
 
     "move": {

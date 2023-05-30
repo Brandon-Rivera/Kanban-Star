@@ -7,7 +7,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from "react-bootstrap";
-// import { BsCardImage } from 'react-icons/bs'
+import LoadingModal from "./LoadingModal";
 import "./css/CommentsModal.css";
 import { useContext, useState, useRef, useEffect } from "react";
 import ErrorCardModal from "./ErrorCardModal";
@@ -46,12 +46,12 @@ const CommentsModal = ({
 
   useEffect(() => {
     scrollDown();
-    console.log('isLoading', isLoading);
   });
 
 
   const insertInitialState = () => {
     setNewComment("");
+    setUserFiles([]);
     setFilesNamesAndLinks([]);
   };
 
@@ -118,11 +118,11 @@ const CommentsModal = ({
   }
 
   //Cada que se adjuntan archivos, se mandan a la base de datos y se obtiene su link
-  useEffect(() => {    
+  useEffect(() => {
   }, [userFiles])
-  
-  const getFileLinks = async () => {
 
+  const getFileLinks = async () => {
+    setErrorMessage("hola");
     const filesLength = userFiles.length;
     for (let i = 0; i < filesLength; i++) {
 
@@ -137,14 +137,19 @@ const CommentsModal = ({
         },
         body: formData
       })
-      
-      const data = await response.json();
-    
-      if(data.error){
-        setErrorMessage(t("comment.error-file"));
+
+      if (!response.ok) {
+        if (response.status === 413) {
+          setErrorMessage(t("comments.error-413"));
+        }
+        else{
+          setErrorMessage(t("comments.error-file"));
+        }
         setShowErrorModal(true);
+        setIsLoading(false);
       }
-      else{ 
+      else {
+        const data = await response.json();
         const fileNameAndLink = {
           file_name: userFiles[i].name,
           link: data
@@ -161,37 +166,40 @@ const CommentsModal = ({
     const encodedText = newComment
       .replace(/ /g, "&nbsp;")
       .replace(/\n/g, "<br/>");
-    
+
     const values = {
       cardid: cardID,
       comment: encodedText,
       files: filesNamesAndLinks
     };
-    if (newComment !== "" || filesNamesAndLinks !== []) {
+    if (userFiles.length !== 0) {
       setIsLoading(true);
-      await getFileLinks();
-      const response = await fetch(`${api}/comment`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          'supra-access-token': localStorage.getItem('token')
-        },
-        body: JSON.stringify(values),
-      });
+    }
+    await getFileLinks();
+    if (newComment !== "" || filesNamesAndLinks.length !== 0) {
+      if (showErrorModal !== true) {
+        const response = await fetch(`${api}/comment`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            'supra-access-token': localStorage.getItem('token')
+          },
+          body: JSON.stringify(values),
+        });
 
-      const data = await response.json();
-
-      if (data.error) {
-        setShowErrorModal(true);
-        setIsLoading(false)
+        const data = await response.json();
+        if (data.error) {
+          setShowErrorModal(true);
+          setIsLoading(false)
+        } else {
+          setIsLoading(false);
+          insertInitialState();
+          getComments();
+        }
       } else {
-        setIsLoading(false);
-        insertInitialState();
-        getComments();
+        setErrorMessage(t("comments.empty"));
+        setShowErrorModal(true);
       }
-    } else {
-      setErrorMessage(t("comments.empty"));
-      setShowErrorModal(true);
     }
   };
 
@@ -255,7 +263,7 @@ const CommentsModal = ({
             </div>
             <br></br>
             <div className="footerButtons">
-              <Button onClick={()=>exitModal()}>Salir</Button>
+              <Button onClick={() => exitModal()}>{t("comments.exit")}</Button>
               <Button type="submit">{t("comments.add")}</Button>
             </div>
           </Form>
@@ -267,6 +275,11 @@ const CommentsModal = ({
         message={errorMessage}
         button={t("comments.accept")}
         onHide={() => setShowErrorModal(false)}
+      />
+      <LoadingModal
+        show={isLoading}
+        title = {t("loading.title")}
+        message = {t("loading.comment")}
       />
     </>
   );
