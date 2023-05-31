@@ -6,11 +6,11 @@ import "./css/NewCardTable.css"
 
 function NewCardTable({ id, nCard, duedate, idOwner, index, indeK, onCardMove, Idworkflow }) {
     const [own, setOwn] = useState('');
-    const [isFlipped, setIsFlipped] = useState(false);
+    // const [isFlipped, setIsFlipped] = useState(false);
 
-    const handleFlip = () => {
-        setIsFlipped(!isFlipped);
-    };
+    // const handleFlip = () => {
+    //     setIsFlipped(!isFlipped);
+    // };
 
     const handleButtonClick = (cardId, cardIndex, indeK, Idworkflow) => {
         onCardMove(cardId, cardIndex, indeK, Idworkflow); // Pasa el ID de la tarjeta y el índice de columna y el indice de kids a onCardMove

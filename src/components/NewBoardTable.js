@@ -115,6 +115,8 @@ export function NewBoardTable({ nameWF, dataWorkspace, api }) {
 
         if (data.error) {
 
+            console.log('ram', ram);
+
             if (data.error.message === `The card with id ${cardId} cannot be moved because it is blocked.`) {
                 setErrModal(true);
             }
