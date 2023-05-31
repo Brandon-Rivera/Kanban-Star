@@ -4,7 +4,7 @@ import nextArrow from "../images/nextArrow.png"
 import WFace from "../images/blank-face.jpeg"
 import "./css/NewCardTable.css"
 
-function NewCardTable({ id, nCard, duedate, idOwner, index, indeK, onCardMove }) {
+function NewCardTable({ id, nCard, duedate, idOwner, index, indeK, onCardMove, Idworkflow }) {
     const [own, setOwn] = useState('');
     const [isFlipped, setIsFlipped] = useState(false);
 
@@ -12,11 +12,8 @@ function NewCardTable({ id, nCard, duedate, idOwner, index, indeK, onCardMove })
         setIsFlipped(!isFlipped);
     };
 
-    const [animate, setAnimate] = useState(false);
-
-    const handleButtonClick = (cardId, cardIndex, indeK) => {
-        setAnimate(true);
-        onCardMove(cardId, cardIndex, indeK); // Pasa el ID de la tarjeta y el índice a onCardMove
+    const handleButtonClick = (cardId, cardIndex, indeK, Idworkflow) => {
+        onCardMove(cardId, cardIndex, indeK, Idworkflow); // Pasa el ID de la tarjeta y el índice de columna y el indice de kids a onCardMove
     };
 
     useEffect(() => {
@@ -27,11 +24,11 @@ function NewCardTable({ id, nCard, duedate, idOwner, index, indeK, onCardMove })
 
     return (
         <Container fluid className='px-0 p-1' >
-            <ListGroup defaultActiveKey="#link1" className={`animated-element ${animate ? 'animate' : ''}`}>
+            <ListGroup defaultActiveKey="#link1">
                 <ListGroup.Item className='d-flex justify-content-between' >
                     <p className='m-0 fw-bold'>{id}</p>
                     <p className='m-0 fw-bold'>{index}</p>
-                    <p className='m-0 fw-bold'>{indeK}</p>
+                    <p className='m-0 fw-bold'>{Idworkflow}</p>
                     <p className='m-0 fw-bold'>{own ? own.realname : "Sin Asignar"}</p>
                 </ListGroup.Item>
                 <ListGroup.Item className='d-flex justify-content-between custom-container'>
@@ -42,7 +39,7 @@ function NewCardTable({ id, nCard, duedate, idOwner, index, indeK, onCardMove })
                     <p className='m-0 fw-bold'>Fecha Limite: <span className='fw-normal'>{duedate ? duedate : "Sin Fecha"}</span></p>
                 </ListGroup.Item>
                 <ListGroup.Item action href="#link1" className='text-center'>Seleccionar Flujo De Trabajo</ListGroup.Item>
-                <ListGroup.Item action href="#link2" className='d-flex align-items-center justify-content-center' onClick={() => handleButtonClick(id, index, indeK)} style={{ backgroundColor: "#42AD49" }}>
+                <ListGroup.Item action href="#link2" className='d-flex align-items-center justify-content-center' onClick={() => handleButtonClick(id, index, indeK, Idworkflow)} style={{ backgroundColor: "#42AD49" }}>
                     <img style={{ width: '2rem', height: '2rem' }} src={nextArrow} alt='nextArrrow'></img>
                 </ListGroup.Item>
             </ListGroup>
