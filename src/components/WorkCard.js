@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './css/WorkCard.css'
+import { ViewContext } from '../Contexts/ViewContext';
 
 //Funcion para crear los botones de cada tablero
 function WorkCard({ title, id, api }) {
 
+  const {view} = useContext(ViewContext);
+
   const navigate = useNavigate();
 
   const GotoBoard = () => {
-    navigate('/board')
+    navigate(view)
     localStorage.setItem('boardid', id)
     localStorage.setItem('boardname', title)
   }
@@ -28,8 +31,14 @@ function WorkCard({ title, id, api }) {
       )
     })
     const data = await response.json()
-    localStorage.setItem('owners', JSON.stringify(data))
-    GotoBoard();
+
+    if (data.mensaje === 'Token inválido') {
+      navigate('/');
+    }
+    else{
+      localStorage.setItem('owners', JSON.stringify(data))
+      GotoBoard();
+    }
   }
 
   return (

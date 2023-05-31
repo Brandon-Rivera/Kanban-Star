@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 
 //Esto en realidad es la columna, NO EL WORKFLOW
-function Workflow({ title, col, dataWorkspace, workflowPos, api}) {
+function Workflow({ ownerID, title, col, dataWorkspace, workflowPos, api }) {
   // Hook para el modal de insertar tarjetas
   const [insertModalShow, setInsertModalShow] = useState(false);
 
@@ -20,15 +20,36 @@ function Workflow({ title, col, dataWorkspace, workflowPos, api}) {
           <Accordion.Item eventKey="0">
             <Accordion.Header>{title}</Accordion.Header>
             <Accordion.Body className='acc-body'>
+
+              {/* Muestra tarjetas cuando este activada la opcion de "Todas las tarjetas" */}
               {col.mycards.map(col => (
-                <Cards nCard={col.name} cardWid={col.column_id} duedate={col.duedate} dataWorkspace={dataWorkspace} workflowPos={workflowPos} idCard={col.id} cCard={title} api={api}></Cards>
+
+                ownerID === 0 ? (
+                  <Cards nCard={col.name} cardWid={col.column_id} duedate={col.duedate} dataWorkspace={dataWorkspace} workflowPos={workflowPos} idCard={col.id} cCard={title} api={api}></Cards>
+                ) : (
+                  <></>
+                )
+
               ))
               }
-              <Button 
+
+              {/* Muestra las tarjetas de acuerdo al propietario seleccionado */}
+              {col.mycards.map(col => (
+
+                ownerID === col.owner_id ? (
+                  <Cards nCard={col.name} cardWid={col.column_id} duedate={col.duedate} dataWorkspace={dataWorkspace} workflowPos={workflowPos} idCard={col.id} cCard={title} api={api}></Cards>
+                ) : (
+                  <></>
+                )
+
+              ))
+              }
+
+              <Button
                 className='d-flex w-100 text-center'
                 onClick={() => setInsertModalShow(true)}
-                >
-                  {t("insertcard.add-card")}
+              >
+                {t("insertcard.add-card")}
               </Button>
               {/* Modal para insertar tarjetas */}
               <InsertCardModal
@@ -38,8 +59,8 @@ function Workflow({ title, col, dataWorkspace, workflowPos, api}) {
                 columnName={col.name}
                 workflowID={col.workflow_id}
                 api={api}
-            />
-              
+              />
+
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

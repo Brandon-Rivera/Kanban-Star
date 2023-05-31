@@ -11,14 +11,20 @@ import { useContext } from "react";
 import { ThemeContext } from "../Contexts/ThemeContext";
 import { LanguageCheckedContext } from "../Contexts/LanguageCheckedContext";
 import { ColorCheckedContext} from "../Contexts/ColorCheckedContext";
+import { ViewContext } from "../Contexts/ViewContext";
+import { ViewCheckedContext } from "../Contexts/ViewCheckedContext";
+import { useNavigate } from "react-router-dom";
 
 
 const SettingsModal = ({show, onHide}) => {
     const [t, i18n] = useTranslation("global");
+    const navigate = useNavigate();
 
     const {theme, setTheme} = useContext(ThemeContext);
+    const {view, setView} = useContext(ViewContext)
     const {setLanguageChecked} = useContext(LanguageCheckedContext);
     const {setColorChecked} = useContext(ColorCheckedContext);
+    const {setViewChecked} = useContext(ViewCheckedContext);
 
     const resetLanguage = () => {
         //Reseteamos idioma al que estaba antes de cambiarlo en el modal.
@@ -32,12 +38,33 @@ const SettingsModal = ({show, onHide}) => {
         //Reseteamos tema al que estaba antes de cambiarlo en el modal.
         const currentTheme = localStorage.getItem("CurrentTheme");
         setTheme(currentTheme);
+        //Reseteamos el checkbox
         (currentTheme === "dark" ? setColorChecked(true) : setColorChecked(false));
+    }
+
+    const resetView = () => {
+        //Reseteamos vista a la que estaba antes de cambiarlo en el modal.
+        const currentView = localStorage.getItem("CurrentView");
+        setView(currentView);
+        //Reseteamos el checkbox
+        (currentView === "/newboard" ? setViewChecked(true) : setViewChecked(false));
     }
 
     const handleClose = () => {
         resetLanguage();
         resetTheme();
+        resetView();
+        onHide();
+    }
+
+    const handleSave = () => {
+        const currentView = localStorage.getItem("CurrentView");
+        const currentPath = window.location.pathname;
+        if(currentPath === "/board" || currentPath === "/newboard"){
+            if(view !== currentView){
+                navigate(view);
+            }
+        } 
         onHide();
     }
 
@@ -78,7 +105,7 @@ const SettingsModal = ({show, onHide}) => {
                 </Modal.Body>
                 <Modal.Footer className="modal-footer">
                     <Button variant="danger" onClick={() => handleClose()}>{t("settings.close")}</Button>
-                    <Button variant="primary" onClick={onHide}>{t("settings.save")}</Button>
+                    <Button variant="primary" onClick={() => handleSave()}>{t("settings.save")}</Button>
                 </Modal.Footer>
             </Modal>
         </div>

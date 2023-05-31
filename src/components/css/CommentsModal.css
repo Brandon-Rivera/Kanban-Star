@@ -1,3 +1,13 @@
+.modalTitle{
+    margin: 0;
+    text-align: center;
+}
+
+.commentStyle{
+    white-space: pre;
+    text-rendering: auto;
+}
+
 .ownAD{
     justify-content: right;
 }
@@ -14,6 +24,10 @@
 .tp_authorDate{
     font-size: small;
     text-align: left;
+}
+
+.dateComment{
+    color: #b0b1b4;
 }
 
 #light .ownComment{
@@ -55,9 +69,8 @@
     text-align: left;
 }
 
-.commentStyle{
-    white-space: pre;
-    text-rendering: auto;
+.footer{
+    display: block;
 }
 
 #light .commentForm{
@@ -70,18 +83,8 @@
     background-color: #484f5d;
 }
 
-.modalTitle{
-    margin: 0;
-    text-align: center;
-}
-
-.footer{
-    display: block;
-    text-align: right;
-}
-
-.dateComment{
-    color: #dcdee0;
+#fileInput{
+    width:auto;
 }
 
 .footerButtons{
