@@ -3,12 +3,6 @@
   scroll-behavior: smooth;
 }
 
-.pre-btn,
-.nxt-btn {
-  width: 2vw;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+.pre-btn {
+  transform: rotate(180deg);
 }
