@@ -26,8 +26,6 @@ export function NewBoard({ api }) {
 
     //Valores necesarios para la peticion get de workspace
     const values = {
-      domain: localStorage.getItem('domain'),
-      apikey: localStorage.getItem('apikey'),
       boardid: localStorage.getItem('boardid') //actualizar
     }
 
@@ -53,14 +51,15 @@ export function NewBoard({ api }) {
 
   return (
     <Container fluid>
-      <DropdownButton id="dropdown-basic-button" title="Workspaces" className="d-flex justify-content-center w-100 m-2">
+      <DropdownButton id="dropdown-basic-button" title="Workspaces" className="d-flex justify-content-center m-2">
         {
           dataWorkspace.data.map(data => (
-            <Dropdown.Item key={data.id} onClick={() => handleSelection(data.name)} >{data.name}</Dropdown.Item>
+             data.type === 0 || data.type === 1 ? <Dropdown.Item key={data.id} onClick={() => handleSelection(data.name)} >{data.name}</Dropdown.Item> : []  
+
           ))
         }
       </DropdownButton>
-      {selectedName && (<NewBoardTable nameWF={selectedName} dataWorkspace={dataWorkspace} />)}
+      {selectedName && (<NewBoardTable nameWF={selectedName} dataWorkspace={dataWorkspace} api={api} />)}
     </Container>
   );
 }
