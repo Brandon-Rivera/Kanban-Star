@@ -22,7 +22,7 @@ function InsertCardModal({
   show,
   onHide,
   columnID,
-  laneID,
+  wPos,
   columnName,
   workflowID,
   api,
@@ -45,7 +45,9 @@ function InsertCardModal({
 
   // Contexto que contiene la data de los owners
   // y la funcion para insertar una nueva tarjeta
-  const { insertNewCard, dataOw } = useContext(DataContext);
+  const { insertNewCard, dataOw, dataW } = useContext(DataContext);
+  // Constante que contiene el id del lane
+  const laneId = dataW?.data[wPos]?.lanes[0]?.id;
 
   // Funcion para estado inicial del formulario
   function insertInitialState() {
@@ -61,14 +63,13 @@ function InsertCardModal({
     const values = {
       columnid: columnID,
       workflowid: workflowID,
-      laneid: laneID,
+      laneid: laneId,
       title: cardName,
       description: "<p>" + cardDescription + "</p>",
       ownerid: cardOwner,
       duedate: getCorrectDate(cardDueDate),
     };
 
-    console.log(values);
     // Funcion que manda la petición tipo POST para insertar la tarjeta
     const response = await fetch(`${api}/create`, {
       method: "POST",
@@ -83,7 +84,6 @@ function InsertCardModal({
     insertInitialState();
 
     if (data.error) {
-      console.log(data);
       setErrModal(true);
     } else {
       const newCard = {
@@ -205,7 +205,7 @@ function InsertCardModal({
             {/* Componente que contiene el dropdown para elegir carril */}
             <InputGroup className="mb-2">
               <InputGroup.Text className="fw-bold">
-                {t("insertcard.workflow")}
+                {t("insertcard.column")}
               </InputGroup.Text>
               <Dropdown>
                 <Dropdown.Toggle

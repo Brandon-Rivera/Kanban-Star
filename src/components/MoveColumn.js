@@ -10,7 +10,7 @@ import ErrorCardModal from "./ErrorCardModal";
 import { DataContext } from "../Contexts/DataContext.js";
 import getDeadline from '../utils/getDeadline';
 
-function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }) {
+function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api, wPos }) {
 
     const [checked, setChecked] = useState(false);
     const [t] = useTranslation("global");
@@ -20,10 +20,13 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
     const [errModal2, setErrModal2] = useState(false);
     const [errModal3, setErrModal3] = useState(false);
 
-    const { moveCard, dataC, updateDataC } = useContext(DataContext);
+    const { moveCard, dataC, updateDataC, dataW } = useContext(DataContext);
     const [oldCard, setOldCard] = useState(null);
     const [newCard, setNewCard] = useState(null);
     const [cardResponse, setCardResponse] = useState(null);
+
+    // Constante que contiene laneId
+    const laneId = dataW?.data[wPos]?.lanes[0]?.id;
 
     const handleCardMove = async () => {
 
@@ -31,6 +34,7 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
             cardid: cardid,
             columnid: column.id,
             workflowid: column.workflow_id,
+            laneid: laneId,
         }; //208 y 101
 
         // Funcion que manda la petición tipo POST para mover la tarjeta

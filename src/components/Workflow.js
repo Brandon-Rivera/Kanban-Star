@@ -9,8 +9,6 @@ import { useTranslation } from 'react-i18next';
 function Workflow({ ownerID, title, col, dataWorkspace, workflowPos, api }) {
   // Hook para el modal de insertar tarjetas
   const [insertModalShow, setInsertModalShow] = useState(false);
-  
-  const laneId = col.mycards ? col?.mycards[0]?.lane_id : null;
 
   const [t] = useTranslation("global");
 
@@ -59,7 +57,7 @@ function Workflow({ ownerID, title, col, dataWorkspace, workflowPos, api }) {
                 columnID={col.id}
                 columnName={col.name}
                 workflowID={col.workflow_id}
-                laneID={laneId}
+                wPos = {workflowPos}
                 api={api}
               />
 

@@ -14,6 +14,7 @@ import getShortName from "../utils/getShortName";
 import getUsername from "../utils/getUsername";
 import { DataContext } from "../Contexts/DataContext.js";
 import getCorrectDate from "../utils/getCorrectDay";
+import getDeadline from "../utils/getDeadline";
 import "./css/InsertCardModal.css";
 
 function UpdateCardModal({ show, onHide, api }) {
@@ -87,6 +88,7 @@ function UpdateCardModal({ show, onHide, api }) {
         ownerid: cardOwnerId,
         duedate: getCorrectDate(cardDueDate),
       };
+
       try {
         // Funcion que manda la petición tipo POST para actualizar la tarjeta
         const response = await fetch(`${api}/update`, {
@@ -103,7 +105,7 @@ function UpdateCardModal({ show, onHide, api }) {
           name: cardName,
           description: "<p>" + cardDescription + "</p>",
           owner_id: cardOwnerId,
-          duedate: cardDueDate,
+          duedate: getDeadline(cardDueDate),
           workflow_id: dataC?.workflow_id,
           column_id: dataC?.column_id,
         };
@@ -112,11 +114,9 @@ function UpdateCardModal({ show, onHide, api }) {
         setResModal(true);
         onHide();
       } catch (error) {
-        console.log(error);
         setErrModal(true);
       }
     } else {
-      console.log(1);
       setErrModal(true);
     }
   }

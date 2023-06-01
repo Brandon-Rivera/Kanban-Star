@@ -50,7 +50,7 @@
         "card-title": "Introduce título de la tarjeta",
         "card-owner": "Propietario",
         "due-date": "Fecha límite",
-        "workflow": "Flujo de trabajo",
+        "column": "Columna",
         "swimlane": "Carril",
         "description": "Descripción",
         "description-placeholder": "Ingrese la descripción de la tarjeta",

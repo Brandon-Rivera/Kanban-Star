@@ -35,7 +35,6 @@ function WorkCard({ title, id, api }) {
       body: JSON.stringify(values),
     });
     const data = await response.json();
-    console.log(data);
     updateDataW(data);
     getBoardOwners();
   };

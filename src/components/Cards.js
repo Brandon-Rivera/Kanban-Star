@@ -36,7 +36,6 @@ function Cards({ nCard, cardWid, duedate, dataWorkspace, workflowPos, idCard, cC
         const data = await response.json();
         setCardDetails(data);
         updateDataC(data.data);
-        console.log(data.data);
         MenuClick();
     }
 

@@ -130,7 +130,7 @@ function ViewCardModal({ show, onHide, cardColumn }) {
               {/* Componente que contiene la informacion de la columna */}
               <InputGroup className="mb-2">
                 <InputGroup.Text className="fw-bold">
-                  {t("insertcard.workflow")}
+                  {t("insertcard.column")}
                 </InputGroup.Text>
                 <Dropdown>
                   <Dropdown.Toggle

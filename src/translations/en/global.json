@@ -50,7 +50,7 @@
         "card-title": "Enter card title",
         "card-owner": "Owner",
         "due-date": "Deadline",
-        "workflow": "Workflow",
+        "column": "Column",
         "swimlane": "Swimlane",
         "description": "Description",
         "description-placeholder": "Enter card description",

@@ -21,6 +21,8 @@ export const Board = ({ api }) => {
         localStorage.removeItem("token");
         localStorage.removeItem("domain");
         localStorage.removeItem("userid");
+        navigate("/");
+
     };
 
     if (cardOwners.mensaje === 'Token inválido') {
@@ -28,7 +30,11 @@ export const Board = ({ api }) => {
     }
 
     // Se refresca cada vez que se actualiza el estado de dataW
-    useEffect(() => {}, [dataW]);
+    useEffect(() => {
+        if (cardOwners.mensaje === 'Token inválido') {
+            handleLogout()
+        }
+    }, [dataW]);
 
     return (
         <>
