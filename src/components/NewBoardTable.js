@@ -32,6 +32,45 @@ export function NewBoardTable({ nameWF, dataWorkspace, api }) {
         scrollingWrapperRef.current.scrollLeft -= scrollingWrapperRef.current.offsetWidth - 31;
     };
 
+    // Mandar petición de Actualizar
+    const handleCardMoveAPI = async (cardId, columnId, Idworkflow) => {
+
+        const values = {
+            cardid: cardId,
+            columnid: columnId,
+            workflowid: Idworkflow,
+        };
+
+        // Funcion que manda la petición tipo POST para mover la tarjeta
+        const response = await fetch(`${api}/update/move`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'supra-access-token': localStorage.getItem('token')
+                },
+                body: JSON.stringify(values)
+            });
+
+        const data = await response.json();
+
+        if (data.error) {
+
+            console.log('ram', ram);
+
+            if (data.error.message === `The card with id ${cardId} cannot be moved because it is blocked.`) {
+                setErrModal(true);
+            }
+            if (data.error.message === `The card with id ${cardId} cannot be moved because some of the exit criteria for the column with id ${Idworkflow} on the board with id ${localStorage.getItem('boardid')} are not checked off.`) {
+                setErrModal2(true);
+            }
+
+        }
+        else {
+            setResModal(true);
+        }
+    }
+
     const handleCardMove = (cardId, index, indeK, Idworkflow) => {
         let columnId = 0;
         if (index < (resultNWF.columns.length - 1)) {
@@ -91,44 +130,15 @@ export function NewBoardTable({ nameWF, dataWorkspace, api }) {
         }
     }
 
-    // Mandar petición de Actualizar
-    const handleCardMoveAPI = async (cardId, columnId, Idworkflow) => {
-
-        const values = {
-            cardid: cardId,
-            columnid: columnId,
-            workflowid: Idworkflow,
+    const color = (() => {
+        const colors = ['#42AD49', '#E4186A','#2665BB', '#F08830'];
+        let index = 0;
+        return () => {
+            const color = colors[index];
+            index = (index + 1) % colors.length;
+            return color;
         };
-
-        // Funcion que manda la petición tipo POST para mover la tarjeta
-        const response = await fetch(`${api}/update/move`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'supra-access-token': localStorage.getItem('token')
-                },
-                body: JSON.stringify(values)
-            });
-
-        const data = await response.json();
-
-        if (data.error) {
-
-            console.log('ram', ram);
-
-            if (data.error.message === `The card with id ${cardId} cannot be moved because it is blocked.`) {
-                setErrModal(true);
-            }
-            if (data.error.message === `The card with id ${cardId} cannot be moved because some of the exit criteria for the column with id ${Idworkflow} on the board with id ${localStorage.getItem('boardid')} are not checked off.`) {
-                setErrModal2(true);
-            }
-
-        }
-        else {
-            setResModal(true);
-        }
-    }
+    })();
 
 
     return (
@@ -146,12 +156,12 @@ export function NewBoardTable({ nameWF, dataWorkspace, api }) {
                                     columns.kids.length > 0 ? (
                                         columns.kids.map((kids, indeK) => (
                                             <div className="col-11 col-md-3">
-                                                <NewColumnsTable key={data.id} kids={kids} nameCol={kids.name} mycards={kids.mycards} index={index} indeK={indeK} onCardMove={handleCardMove} />
+                                                <NewColumnsTable key={data.id} kids={kids} nameCol={kids.name} mycards={kids.mycards} index={index} indeK={indeK} onCardMove={handleCardMove} color={color()} />
                                             </div>
                                         ))
                                     ) : (
                                         <div className="col-11 col-md-3">
-                                            <NewColumnsTable key={data.id} kids={[]} mycards={columns.mycards} nameCol={columns.name} index={index} indeK={-1} onCardMove={handleCardMove} />
+                                            <NewColumnsTable key={data.id} kids={[]} mycards={columns.mycards} nameCol={columns.name} index={index} indeK={-1} onCardMove={handleCardMove} color={color()} />
                                         </div>
                                     )
                                 ))

@@ -4,13 +4,12 @@ import NewCardTable from './NewCardTable';
 import plusIcon from "../images/plus.png";
 import "./css/NewColumnsTable.css"
 
-function NewColumnsTable({ kids, nameCol, mycards, index, indeK, onCardMove}) {
-    // const [rol, setRol] = useState('');
+function NewColumnsTable({ kids, nameCol, mycards, index, indeK, onCardMove, color}) {
 
     return (
-        <Card className="text-light w-100 p-0" style={{ backgroundColor: '#2665BB' }} >
+        <Card className="text-light w-100 p-0" style={{ backgroundColor: color }} >
             <Card.Header>{nameCol}</Card.Header>
-            <Card.Body style={{ backgroundColor: '#92B6E9' }}>
+            <Card.Body style={{ backgroundColor: '#FFFAFA' }}>
                 <Card.Text>
                     {
                         kids.length > 0 ? (

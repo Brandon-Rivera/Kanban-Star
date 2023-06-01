@@ -87,7 +87,7 @@ export const Board = ({ api }) => {
             <Container fluid>
                 {
                     dataWorkspace.data.map(data => (
-                        <div className="cont border border-secondary rounded my-3 p-2 text-secondary">
+                        data.type === 0 || data.type === 1 ? <div className="cont border border-secondary rounded my-3 p-2 text-secondary">
                             <h4 className='cont text-center' key={data.id}>{data.name}</h4>
                             {
                                 data.columns.map(columns => (
@@ -110,8 +110,7 @@ export const Board = ({ api }) => {
                                 ))
                             }
                         </div>
-
-                    ))
+                    : []))
                 }
             </Container>
         </>

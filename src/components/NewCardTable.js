@@ -6,11 +6,6 @@ import "./css/NewCardTable.css"
 
 function NewCardTable({ id, nCard, duedate, idOwner, index, indeK, onCardMove, Idworkflow }) {
     const [own, setOwn] = useState('');
-    // const [isFlipped, setIsFlipped] = useState(false);
-
-    // const handleFlip = () => {
-    //     setIsFlipped(!isFlipped);
-    // };
 
     const handleButtonClick = (cardId, cardIndex, indeK, Idworkflow) => {
         onCardMove(cardId, cardIndex, indeK, Idworkflow); // Pasa el ID de la tarjeta y el índice de columna y el indice de kids a onCardMove
@@ -38,7 +33,7 @@ function NewCardTable({ id, nCard, duedate, idOwner, index, indeK, onCardMove, I
                 <ListGroup.Item className='text-start'>
                     <p className='m-0 fw-bold'>Fecha Limite: <span className='fw-normal'>{duedate ? duedate : "Sin Fecha"}</span></p>
                 </ListGroup.Item>
-                <ListGroup.Item action href="#link1" className='text-center'>Seleccionar Flujo De Trabajo</ListGroup.Item>
+                <ListGroup.Item action href="#link1" className='text-center'>Menú</ListGroup.Item>
                 <ListGroup.Item action href="#link2" className='d-flex align-items-center justify-content-center' onClick={() => handleButtonClick(id, index, indeK, Idworkflow)} style={{ backgroundColor: "#42AD49" }}>
                     <img style={{ width: '2rem', height: '2rem' }} src={nextArrow} alt='nextArrrow'></img>
                 </ListGroup.Item>
