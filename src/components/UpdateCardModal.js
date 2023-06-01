@@ -63,6 +63,14 @@ function UpdateCardModal({ show, onHide, api }) {
     setConfirmModal(true);
   }
 
+  const dateValue = (date) =>{
+    if(date.length !== 20){
+      getCorrectDate(date)
+      return date;
+    }
+    return date;
+  };
+
   // Recarga el modal cada vez que se accede a una nueva tarjeta
   useEffect(() => {
     setCardName(dataC?.title);
@@ -86,7 +94,7 @@ function UpdateCardModal({ show, onHide, api }) {
         title: cardName,
         description: "<p>" + cardDescription + "</p>",
         ownerid: cardOwnerId,
-        duedate: getCorrectDate(cardDueDate),
+        duedate: dateValue(getCorrectDate(cardDueDate)),
       };
 
       try {
