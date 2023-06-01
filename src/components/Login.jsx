@@ -45,7 +45,7 @@ export const Login = ( { api }) => {
         }
         else {
             localStorage.setItem('token', data.token);
-            localStorage.setItem('domain', data.companyname);
+            localStorage.setItem('domain', domain);
             localStorage.setItem('userid', data.userid);
             localStorage.setItem('realname', data.realname);
             navigate('/workspace');
