@@ -35,9 +35,9 @@ export const Board = ({ api }) => {
             forceDataW(api, localStorage.getItem('boardid'));
         }
         if (cardOwners.mensaje === 'Token inválido') {
-            handleLogout()
+            localStorage.removeItem("token");
         }
-    }, [dataW]);
+    }, [dataW, api, cardOwners.mensaje, forceDataW]);
 
     return (
         <>

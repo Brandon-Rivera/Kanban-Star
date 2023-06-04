@@ -1,16 +1,13 @@
-import React, { useRef, useEffect, useState, useContext } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import NewColumnsTable from './NewColumnsTable';
 import nextArr from "../images/Siguiente.png";
-
-import { useTranslation } from "react-i18next";
 
 import "./css/NewBoardTable.css";
 
 export function NewBoardTable({ nameWF, dataWorkspace, api }) {
     const scrollingWrapperRef = useRef(null);
     const [resultNWF, setResultNWF] = useState('');
-    const [t] = useTranslation("global");
 
     useEffect(() => {
         const res = (dataWorkspace.data.find(data => data.name === nameWF))

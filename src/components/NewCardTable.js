@@ -5,7 +5,6 @@ import WFace from "../images/blank-face.jpeg";
 import CardMenu from "./CardMenu";
 import "./css/NewCardTable.css";
 import { useTranslation } from "react-i18next";
-import { CiSquareChevDown } from "react-icons/ci";
 import { DataContext } from "../Contexts/DataContext";
 import findNextColumn from "../utils/findNextColumn";
 import getDeadline from "../utils/getDeadline";
@@ -28,7 +27,6 @@ function NewCardTable({
   colId,
 }) {
   const [own, setOwn] = useState("");
-  const [ram, setRam] = useState({});
   const [showCardMenu, setShowCardMenu] = useState(false);
   const [t] = useTranslation("global");
   const { moveCard, updateDataC, dataW, moveCardInfo, updateMoveCardInfo } =
@@ -39,12 +37,6 @@ function NewCardTable({
   const [resModal, setResModal] = useState(false);
   const [errModal3, setErrModal3] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-
-  // const [isFlipped, setIsFlipped] = useState(false);
-
-  // const handleFlip = () => {
-  //     setIsFlipped(!isFlipped);
-  // };
 
   useEffect(() => {
     const ownersjs = JSON.parse(localStorage.getItem("owners"));
@@ -105,7 +97,6 @@ function NewCardTable({
       const data = await response.json();
 
       if (data.error) {
-        console.log("ram", ram);
 
         if (
           data.error.message ===

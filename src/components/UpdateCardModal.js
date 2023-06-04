@@ -74,6 +74,15 @@ function UpdateCardModal({ show, onHide, api }) {
 
   // Recarga el modal cada vez que se accede a una nueva tarjeta
   useEffect(() => {
+    // Funcion que devuelve el username del owner de la tarjeta
+    function getCorrectUsername(username) {
+      if (username === "" || username === null) {
+        return `${t("insertcard.choose-owner")}`;
+      } else {
+        return username;
+      }
+    }
+
     setCardName(dataC?.title);
     setCardOwnerId(dataC?.owner_user_id);
     setOwnerUsername(
@@ -84,7 +93,7 @@ function UpdateCardModal({ show, onHide, api }) {
     setCardDueDate(dataC?.deadline);
     setCardDescription(parseDescription(dataC?.description));
     setCardId(dataC?.card_id);
-  }, [dataC]);
+  }, [dataC, dataOw, t]);
 
   // Funcion para hacer la peticion POST para actualizar la tarjeta
   // Recibe la confirmacion del modal

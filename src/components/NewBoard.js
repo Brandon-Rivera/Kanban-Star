@@ -19,34 +19,30 @@ export function NewBoard({ api }) {
     };
   }, []);
 
-  useEffect(() => {
-    if (dataW?.data.length > 0) {
-      setSelectedWorkspace(dataW.data[0].name);
-      handleSelection(dataW.data[0].name);
-    }
-  }, [handleSelection]);
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("domain");
     localStorage.removeItem("userid");
     navigate("/");
+  };
 
-};
-
-if (cardOwners.mensaje === 'Token inválido') {
+  if (cardOwners.mensaje === 'Token inválido') {
     handleLogout()
-}
+  }
 
-// Se refresca cada vez que se actualiza el estado de dataW
-useEffect(() => {
-  if( dataW === undefined || dataW === null){
-    forceDataW(api, localStorage.getItem('boardid'));
-}
-    if (cardOwners.mensaje === 'Token inválido') {
-        handleLogout()
+  // Se refresca cada vez que se actualiza el estado de dataW
+  useEffect(() => {
+    if (dataW?.data.length > 0) {
+      setSelectedWorkspace(dataW.data[0].name);
+      handleSelection(dataW.data[0].name);
     }
-}, [dataW]);
+    if (dataW === undefined || dataW === null) {
+      forceDataW(api, localStorage.getItem('boardid'));
+    }
+    if (cardOwners.mensaje === 'Token inválido') {
+      localStorage.removeItem("token");
+    }
+  }, [dataW, api, cardOwners.mensaje, forceDataW, handleSelection]);
 
 
   return (
@@ -54,7 +50,7 @@ useEffect(() => {
       <DropdownButton id="dropdown-basic-button" title="Workspaces" className="d-flex justify-content-center m-2">
         {
           dataW?.data.map(data => (
-             data.type === 0 || data.type === 1 ? <Dropdown.Item key={data.id} onClick={() => handleSelection(data.name)} >{data.name}</Dropdown.Item> : []  
+            data.type === 0 || data.type === 1 ? <Dropdown.Item key={data.id} onClick={() => handleSelection(data.name)} >{data.name}</Dropdown.Item> : []
 
           ))
         }
