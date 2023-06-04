@@ -16,7 +16,8 @@
 
     "workspace":{
         "workspace": "Espacio de trabajo",
-        "board": "Tablero: "
+        "board": "Tablero: ",
+        "filter": "Todas las tarjetas"
     },
 
     "navbar":{

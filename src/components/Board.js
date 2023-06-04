@@ -10,10 +10,10 @@ import { DataContext } from '../Contexts/DataContext.js';
 export const Board = ({ api }) => {
     
     // Estado que contiene los datos de Board
-    const { dataW, forceDataW } = useContext(DataContext);
-    const [ownerTitle, setOwnerTitle] = useState('Todas las tarjetas');
-    const [ownerID, setOwnerID] = useState(0);
     const [t] = useTranslation("global");
+    const { dataW, forceDataW } = useContext(DataContext);
+    const [ownerTitle, setOwnerTitle] = useState(t("workspace.filter"));
+    const [ownerID, setOwnerID] = useState(0);
     const cardOwners = JSON.parse(localStorage.getItem('owners'));
     const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ export const Board = ({ api }) => {
                         </Button>
                         {/* Seccion para el filtro */}
                         <DropdownButton variant="info" id="dropdown-basic-button" title={ownerTitle} className="d-flex justify-content-center w-100 m-2">
-                            <Dropdown.Item key='0' onClick={() => { setOwnerTitle('Todas las tarjetas'); setOwnerID(0); }} >Todas las tarjetas</Dropdown.Item>
+                            <Dropdown.Item key='0' onClick={() => { setOwnerTitle(t("workspace.filter")); setOwnerID(0); }} >{t("workspace.filter")}</Dropdown.Item>
                             {
                                 cardOwners.data.map(data => (
                                     <Dropdown.Item key={data.user_id} onClick={() => { setOwnerTitle(data.username); setOwnerID(data.user_id); }} >{data.username}</Dropdown.Item>

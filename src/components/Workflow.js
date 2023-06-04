@@ -57,7 +57,7 @@ function Workflow({ ownerID, title, col, dataWorkspace, workflowPos, api }) {
                 columnID={col.id}
                 columnName={col.name}
                 workflowID={col.workflow_id}
-                wPos = {workflowPos}
+                wPos={workflowPos}
                 api={api}
               />
 
