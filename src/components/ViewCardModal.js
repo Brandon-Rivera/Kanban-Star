@@ -1,5 +1,5 @@
 // Se importan las librerías y componentes necesarios
-import React from "react";
+import React, { useContext } from "react";
 import "./css/ViewCardModal.css";
 import { useTranslation } from "react-i18next";
 import Button from "react-bootstrap/Button";
@@ -11,15 +11,15 @@ import DatePickerComponent from "./DatePicker";
 import getUsername from "../utils/getUsername";
 import getCorrectDescription from "../utils/getCorrectDescription";
 import getShortName from "../utils/getShortName";
+import { DataContext } from "../Contexts/DataContext";
 
 // Funcion que contiene el componente del modal de comsulta de tarjetas
-function ViewCardModal({ show, onHide, cardDetails, cardColumn }) {
+function ViewCardModal({ show, onHide, cardColumn }) {
+  const { dataC, dataOw } = useContext(DataContext);
   // Variable que contiene el mapa de traducciones
   const [t] = useTranslation("global");
   // Variable que contiene el estado de la tarjeta
-  const isBloqued = cardDetails.data ? cardDetails.data.is_blocked : false;
-  // Variable que el estado de la fecha limite
-  const isDeadline = localStorage.getItem("isDeadline");
+  const isBloqued = dataC ? dataC.is_blocked : 0;
   // Funcion que devuelve el username del owner de la tarjeta
   function getCorrectUsername(username) {
     if (username === "" || username === null) {
@@ -48,10 +48,10 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }) {
   }
 
   function renderDeadline() {
-    if (isDeadline === "true") {
+    if (dataC?.deadline !== "" && dataC?.deadline !== null) {
       return (
         <div id="datepicker" type="date">
-          <DatePickerComponent readMode={true} />
+          <DatePickerComponent readMode={true} update={false} />
         </div>
       );
     } else {
@@ -78,7 +78,7 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }) {
             <Modal.Header className="bg-success text-white">
               <Modal.Title>
                 <h2 className="fw-bold">
-                  {getTitle(cardDetails.data ? cardDetails.data.title : "")}
+                  {getTitle(dataC ? dataC.title : "")}
                 </h2>
               </Modal.Title>
             </Modal.Header>
@@ -112,11 +112,9 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }) {
                       whiteSpace: "nowrap",
                     }}
                   >
-                    {cardDetails.data
+                    {dataC
                       ? getCorrectUsername(
-                          getShortName(
-                            getUsername(cardDetails.data.owner_user_id)
-                          )
+                          getShortName(getUsername(dataC?.owner_user_id, dataOw))
                         )
                       : ""}
                   </Dropdown.Toggle>
@@ -132,7 +130,7 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }) {
               {/* Componente que contiene la informacion de la columna */}
               <InputGroup className="mb-2">
                 <InputGroup.Text className="fw-bold">
-                  {t("insertcard.workflow")}
+                  {t("insertcard.column")}
                 </InputGroup.Text>
                 <Dropdown>
                   <Dropdown.Toggle
@@ -156,13 +154,10 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }) {
                 <Form.Control
                   readOnly
                   dangerouslySetInnerHTML={{
-                    __html: cardDetails.data
-                      ? getDescription(
-                          getCorrectDescription(cardDetails.data.description)
-                        )
+                    __html: dataC
+                      ? getDescription(getCorrectDescription(dataC?.description))
                       : "",
                   }}
-                  // value={cardDetails.data ? getDescription(getCorrectDescription(cardDetails.data.description)) : ''}
                   className="cardDescriptionBox fw-bold"
                   type="text"
                   as="div"
@@ -172,9 +167,9 @@ function ViewCardModal({ show, onHide, cardDetails, cardColumn }) {
           </fieldset>
           {/* Componente footer del modal, conteniendo los botones de editar y aceptar */}
           <Modal.Footer className="modalFooter">
-            <Button variant="primary fw-bold" onClick={onHide}>
+            {/* <Button variant="primary fw-bold" onClick={onHide}>
               {t("viewcard.btn-edit")}
-            </Button>
+            </Button> */}
             <Button variant="primary fw-bold" onClick={onHide}>
               {t("viewcard.btn-accept")}
             </Button>

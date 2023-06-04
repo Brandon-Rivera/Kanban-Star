@@ -33,13 +33,13 @@ function MoveCardModal({ show, onHide, dataWorkspace, workflowPos, cardid, cardW
                                         <MoveColumnCheckless column={columns} tabCol1={2} tabCol2={8} dotColor={colors[columns.sec]} cardid={cardid} cardWid={cardWid} api={api}/>
                                         {
                                             columns.kids.map(kids => (
-                                                <MoveColumn column={kids} tabCol1={4} tabCol2={6} dotColor={colors[columns.sec]} cardid={cardid} cardWid={cardWid} api={api}/>
+                                                <MoveColumn column={kids} tabCol1={4} tabCol2={6} dotColor={colors[columns.sec]} cardid={cardid} cardWid={cardWid} api={api} wPos={wPos}/>
                                             ))
                                         }
                                     </>
                                 ) : (
                                     <>
-                                        <MoveColumn column={columns} tabCol1={2} tabCol2={8} dotColor={colors[columns.sec]} cardid={cardid} cardWid={cardWid} api={api}/>
+                                        <MoveColumn column={columns} tabCol1={2} tabCol2={8} dotColor={colors[columns.sec]} cardid={cardid} cardWid={cardWid} api={api} wPos={wPos}/>
                                     </>
                                 )
                             ))

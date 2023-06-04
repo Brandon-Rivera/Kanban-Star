@@ -3,7 +3,7 @@ export default function getCorrectDate(date){
     if(date === null){
         return null;
     } else{
-        date += "T23:59:59.727Z";
+        date += "T23:59:59Z";
     }
     return date;
 }

@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { Container, ListGroup, Button, InputGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import { BiSearchAlt } from "react-icons/bi";
 import Workflow from './Workflow.js'
 import "./css/Board.css"
 import { useTranslation } from 'react-i18next';
+import { DataContext } from '../Contexts/DataContext.js';
 
 export const Board = ({ api }) => {
-
-    //Variable para obtener los datos del workspace en un hook
-    const [dataWorkspace, setDataWorkspace] = useState({ data: [] });
+    
+    // Estado que contiene los datos de Board
+    const { dataW, forceDataW } = useContext(DataContext);
     const [ownerTitle, setOwnerTitle] = useState('Todas las tarjetas');
     const [ownerID, setOwnerID] = useState(0);
     const [t] = useTranslation("global");
@@ -20,47 +21,23 @@ export const Board = ({ api }) => {
         localStorage.removeItem("token");
         localStorage.removeItem("domain");
         localStorage.removeItem("userid");
+        navigate("/");
+
     };
 
     if (cardOwners.mensaje === 'Token inválido') {
         handleLogout()
     }
 
+    // Se refresca cada vez que se actualiza el estado de dataW
     useEffect(() => {
-
-        //Valores necesarios para la peticion get de workspace
-        const values = {
-            boardid: localStorage.getItem('boardid')
+        if( dataW === undefined || dataW === null){
+            forceDataW(api, localStorage.getItem('boardid'));
         }
-
-        //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
-        const getWorkSpace = async () => {
-
-            const response = await fetch(`${api}/board`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'supra-access-token': localStorage.getItem('token')
-                },
-                method: 'POST',
-                body: JSON.stringify(values)
-            })
-            const data = await response.json()
-
-            if (data.mensaje === 'Token inválido') {
-                localStorage.removeItem("token");
-                localStorage.removeItem("domain");
-                localStorage.removeItem("userid");
-                navigate("/");
-            }
-
-            setDataWorkspace(data)
+        if (cardOwners.mensaje === 'Token inválido') {
+            handleLogout()
         }
-
-
-
-        //llamada a la funcion
-        getWorkSpace()
-    }, [api, navigate])
+    }, [dataW]);
 
     return (
         <>
@@ -86,7 +63,7 @@ export const Board = ({ api }) => {
 
             <Container fluid>
                 {
-                    dataWorkspace.data.map(data => (
+                    dataW?.data.map(data => (
                         <div className="cont border border-secondary rounded my-3 p-2 text-secondary">
                             <h4 className='cont text-center' key={data.id}>{data.name}</h4>
                             {
@@ -96,7 +73,7 @@ export const Board = ({ api }) => {
                                             <h3 className="cont text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
                                             {
                                                 columns.kids.map(kids => (
-                                                    <Workflow ownerID={ownerID} title={kids.name} col={kids} dataWorkspace={dataWorkspace} workflowPos={data.pos} api={api}></Workflow>
+                                                    <Workflow ownerID={ownerID} title={kids.name} col={kids} dataWorkspace={dataW} workflowPos={data.pos} api={api}></Workflow>
                                                 ))
                                             }
                                         </div>
@@ -104,7 +81,7 @@ export const Board = ({ api }) => {
                                     ) : (
                                         <div>
                                             <h3 className="text-sm-start bg-success text-light rounded-top m-0 mt-2 ps-3 p-2" >{columns.name}</h3>
-                                            <Workflow ownerID={ownerID} title={columns.name} col={columns} dataWorkspace={dataWorkspace} workflowPos={data.pos} api={api}></Workflow>
+                                            <Workflow ownerID={ownerID} title={columns.name} col={columns} dataWorkspace={dataW} workflowPos={data.pos} api={api}></Workflow>
                                         </div>
                                     )
                                 ))
