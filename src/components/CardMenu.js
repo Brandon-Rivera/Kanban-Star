@@ -70,10 +70,6 @@ function CardMenu({
     setModalShowComments(true);
   };
 
-  const eliminar = () => {
-    console.log("Eliminar");
-  };
-
   return (
     <>
       <Modal
@@ -124,19 +120,6 @@ function CardMenu({
                   {t("cardMenu.comment")}
                 </Button>
               </Col>
-            </Row>
-            <Row className="d-flex justify-content-center">
-              <Col className="p-0"></Col>
-              <Col>
-                <Button
-                  variant="danger"
-                  className="fw-bold text-white border border-3 border-dark pl-5 pr-5"
-                  onClick={() => eliminar()}
-                >
-                  {t("cardMenu.delete")}
-                </Button>
-              </Col>
-              <Col className="p-0"></Col>
             </Row>
           </Container>
         </Modal.Body>
