@@ -161,14 +161,14 @@ function NewCardTable({
           </ListGroup.Item>
           <ListGroup.Item className="text-start">
             <p className="m-0 fw-bold">
-              Fecha Limite:{" "}
+              {t("workspace.deadline")}{" "}
               <span className="fw-normal">
                 {duedate ? duedate : "Sin Fecha"}
               </span>
             </p>
           </ListGroup.Item>
-          <ListGroup.Item action href="#link1" className="text-center">
-            Seleccionar Flujo De Trabajo
+          <ListGroup.Item action href="#link1" className="text-center" onClick={() => {getCardDetails(id);}}>
+            Menu
           </ListGroup.Item>
           <ListGroup.Item
             action

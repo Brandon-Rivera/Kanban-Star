@@ -17,7 +17,8 @@
     "workspace":{
         "workspace": "Espacio de trabajo",
         "board": "Tablero: ",
-        "filter": "Todas las tarjetas"
+        "filter": "Todas las tarjetas",
+        "deadline": "Fecha limite: "
     },
 
     "navbar":{
