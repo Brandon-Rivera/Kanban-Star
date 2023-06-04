@@ -87,8 +87,10 @@ function InsertCardModal({
     if (data.error) {
       if(data.error.code === 'TI07'){
         setErrModal2(true);
+
+      } else{
+        setErrModal(true);
       }
-      setErrModal(true);
     } else {
       const newCard = {
         id: data.data[0].card_id,

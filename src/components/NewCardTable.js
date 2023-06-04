@@ -113,7 +113,7 @@ function NewCardTable({
         ) {
           setErrModal(true);
         }
-        if (data.error.code === "C191") {
+        else if (data.error.code === "C191") {
           setErrModal2(true);
         }
       } else {
