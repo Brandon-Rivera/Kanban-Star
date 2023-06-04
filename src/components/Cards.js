@@ -15,7 +15,6 @@ function Cards({ nCard, cardWid, duedate, dataWorkspace, workflowPos, idCard, cC
     const [t] = useTranslation("global");
     const {theme} = useContext(ThemeContext)
     // Variable para guardar los detalles de una tarjeta
-    const [cardDetails, setCardDetails] = useState({});
     const { updateDataC } = useContext(DataContext);
 
     // Petición para obtener los detalles de una tarjeta
@@ -34,7 +33,6 @@ function Cards({ nCard, cardWid, duedate, dataWorkspace, workflowPos, idCard, cC
             )
         })
         const data = await response.json();
-        setCardDetails(data);
         updateDataC(data.data);
         MenuClick();
     }
@@ -63,12 +61,12 @@ function Cards({ nCard, cardWid, duedate, dataWorkspace, workflowPos, idCard, cC
                         {duedate}
                     </div>
                     {/* Se obtienen los detalles de la tarjeta seleccionada */}
-                    <Button onClick={() => getCardDetails(idCard)}>Menu</Button>
+                    <Button onClick={() => {getCardDetails(idCard)}}>Menu</Button>
                 </ListGroup.Item>
             </ListGroup>
 
             {/* Modales */}
-            <CardMenu show={modalShow} title={t("cardMenu.title")} onHide={() => setModalShow(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} idCard={idCard} cardName={nCard} columnCard={cCard} cardDetails={cardDetails} cardWid={cardWid} api={api}/>
+            <CardMenu show={modalShow} title={t("cardMenu.title")} onHide={() => setModalShow(false)} dataWorkspace={dataWorkspace} workflowPos={workflowPos} idCard={idCard} cardName={nCard} columnCard={cCard} cardWid={cardWid} api={api}/>
             </>
         </>
     )

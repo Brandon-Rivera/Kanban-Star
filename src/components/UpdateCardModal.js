@@ -63,12 +63,13 @@ function UpdateCardModal({ show, onHide, api }) {
     setConfirmModal(true);
   }
 
-  const dateValue = (date) =>{
-    if(date.length !== 20){
-      getCorrectDate(date)
-      return date;
+  // Funcion que devuelve la fecha en el formato correcto
+  const dateValue = () => {
+    if (cardDueDate[10] === "T" && cardDueDate[19] === "Z") {
+      return;
     }
-    return date;
+    setCardDueDate(getCorrectDate(cardDueDate));
+    return;
   };
 
   // Recarga el modal cada vez que se accede a una nueva tarjeta
@@ -94,9 +95,8 @@ function UpdateCardModal({ show, onHide, api }) {
         title: cardName,
         description: "<p>" + cardDescription + "</p>",
         ownerid: cardOwnerId,
-        duedate: dateValue(getCorrectDate(cardDueDate)),
+        duedate: cardDueDate,
       };
-
       try {
         // Funcion que manda la petición tipo POST para actualizar la tarjeta
         const response = await fetch(`${api}/update`, {
@@ -117,8 +117,10 @@ function UpdateCardModal({ show, onHide, api }) {
           workflow_id: dataC?.workflow_id,
           column_id: dataC?.column_id,
         };
-        updateDataC(data?.data[0]);
-        updateCard(newCard);
+        if (data?.data[0]?.title) {
+          updateDataC(data?.data[0]);
+          updateCard(newCard);
+        }
         setResModal(true);
         onHide();
       } catch (error) {
@@ -245,6 +247,7 @@ function UpdateCardModal({ show, onHide, api }) {
               variant="primary fw-bold"
               onClick={() => {
                 onHide();
+                dateValue();
                 confirmUpdate();
               }}
             >

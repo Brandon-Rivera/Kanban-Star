@@ -10,6 +10,8 @@ export const DataProvider = ({ children }) => {
   const [dataC, setDataC] = useState(null);
   // Datos de Owner
   const [dataOw, setDataOw] = useState(null);
+  // Datos de moveCard
+  const [moveCardInfo, setMoveCardInfo] = useState({});
 
   const updateDataW = (newData) => {
     setDataW(newData);
@@ -23,10 +25,14 @@ export const DataProvider = ({ children }) => {
     setDataOw(newData);
   };
 
+  const updateMoveCardInfo = (oldCard, newCard) => {
+    setMoveCardInfo({ oldCard, newCard });
+  };
+
   // Funcion para insertar una nueva tarjeta
   const insertNewCard = (newCard) => {
     const workflow = dataW.data.find(
-      (workflow) => workflow.id === newCard.workflow_id
+      (workflow) => workflow.id === newCard?.workflow_id
     );
 
     if (!workflow) {
@@ -152,7 +158,7 @@ export const DataProvider = ({ children }) => {
       const newData = { ...prevData };
 
       const workflow = newData.data.find(
-        (workflow) => workflow.id === oldCard.workflow_id
+        (workflow) => workflow.id === oldCard?.workflow_id
       );
       if (!workflow) {
         return newData;
@@ -198,6 +204,37 @@ export const DataProvider = ({ children }) => {
     insertNewCard(newCard);
   };
 
+  // Funcion para obtener los datos del board
+  // en caso de que no existan.
+  const forceDataW = async (api, id) => {
+    const values = {
+      boardid: id,
+    };
+
+    const response = await fetch(`${api}/board`, {
+      headers: {
+        "Content-Type": "application/json",
+        "supra-access-token": localStorage.getItem("token"),
+      },
+      method: "POST",
+      body: JSON.stringify(values),
+    });
+    const data = await response.json();
+    updateDataW(data);
+
+    const response1 = await fetch(`${api}/owners`, {
+      headers: {
+        "Content-Type": "application/json",
+        "supra-access-token": localStorage.getItem("token"),
+      },
+      method: "POST",
+      body: JSON.stringify(values),
+    });
+    const data1 = await response1.json();
+    updateDataOw(data1);
+    localStorage.setItem("owners", JSON.stringify(data));
+  };
+
   // Valores que se pasan al contexto
   const contextValues = {
     dataW,
@@ -205,10 +242,13 @@ export const DataProvider = ({ children }) => {
     dataC,
     updateDataC,
     dataOw,
+    moveCardInfo,
     updateDataOw,
     insertNewCard,
     updateCard,
     moveCard,
+    updateMoveCardInfo,
+    forceDataW
   };
 
   return (

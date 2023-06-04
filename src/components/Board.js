@@ -10,7 +10,7 @@ import { DataContext } from '../Contexts/DataContext.js';
 export const Board = ({ api }) => {
     
     // Estado que contiene los datos de Board
-    const { dataW } = useContext(DataContext);
+    const { dataW, forceDataW } = useContext(DataContext);
     const [ownerTitle, setOwnerTitle] = useState('Todas las tarjetas');
     const [ownerID, setOwnerID] = useState(0);
     const [t] = useTranslation("global");
@@ -31,6 +31,9 @@ export const Board = ({ api }) => {
 
     // Se refresca cada vez que se actualiza el estado de dataW
     useEffect(() => {
+        if( dataW === undefined || dataW === null){
+            forceDataW(api, localStorage.getItem('boardid'));
+        }
         if (cardOwners.mensaje === 'Token inválido') {
             handleLogout()
         }

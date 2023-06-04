@@ -42,6 +42,7 @@ function InsertCardModal({
   // Modales de respuesta y error
   const [resModal, setResModal] = useState(false);
   const [errModal, setErrModal] = useState(false);
+  const [errModal2, setErrModal2] = useState(false);
 
   // Contexto que contiene la data de los owners
   // y la funcion para insertar una nueva tarjeta
@@ -84,6 +85,9 @@ function InsertCardModal({
     insertInitialState();
 
     if (data.error) {
+      if(data.error.code === 'TI07'){
+        setErrModal2(true);
+      }
       setErrModal(true);
     } else {
       const newCard = {
@@ -282,6 +286,13 @@ function InsertCardModal({
         onHide={() => setErrModal(false)}
         title={t("insertcard.insert-success-er")}
         message={t("insertcard.insert-message-er")}
+        button={t("insertcard.insert-button-er")}
+      />
+      <ErrorCardModal
+        show={errModal2}
+        onHide={() => setErrModal2(false)}
+        title={t("insertcard.insert-success-er")}
+        message={t("insertcard.insert-message-er2")}
         button={t("insertcard.insert-button-er")}
       />
     </>

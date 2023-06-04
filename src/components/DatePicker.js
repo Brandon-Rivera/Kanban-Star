@@ -12,6 +12,9 @@ function DatePickerComponent({ readMode, update }) {
 
   function getCorrectday() {
     if (!readMode && update) {
+      if (dataC?.deadline === null) {
+        return getCurrentDate();
+      }
       return getDeadline(dataC?.deadline);
     } else if (!readMode) {
       return getCurrentDate();

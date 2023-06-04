@@ -52,7 +52,9 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api, 
         setCardResponse(data);
 
         if (data.error) {
-
+            if(data.error.code === 'TI02'){
+                setErrModal3(true);
+            }
             if (data.error.message === `The card with id ${cardid} cannot be moved because it is blocked.`) {
                 setErrModal(true);
             }
@@ -141,7 +143,7 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api, 
                 show={errModal3}
                 onHide={() => setErrModal3(false)}
                 title={t("move.title-err")}
-                message={t("move.message-err")}
+                message={t("move.message-time")}
                 button={t("move.button-close")} />
 
         </>

@@ -20,8 +20,7 @@ function CardMenu({
   workflowPos,
   idCard,
   cardName,
-  columnCard,
-  cardDetails,  
+  columnCard, 
   cardWid,
   api,
 }) {

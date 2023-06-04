@@ -62,7 +62,8 @@
         "insert-button": "Aceptar",
         "insert-success-er": "Resultado de la operación",
         "insert-message-er": "La tarjeta no fue añadida.",
-        "insert-button-er": "Aceptar"
+        "insert-button-er": "Aceptar",
+        "insert-message-er2": "No se pueden añadir tarjetas a los Flujos de Trabajo de tipo Línea del Tiempo."
     },
 
     "viewcard":{
@@ -95,11 +96,16 @@
     "move": {
         "title-res": "Todo bien!",
         "title-err": "Ups!",
+        "title-conf": "Mover tarjeta",
         "message-res": "Se movio la tarjeta",
         "message-block": "La tarjeta no se puede mover por que está bloqueada",
         "message-ac": "La tarjeta no se puede mover por un criterio de aceptación",
-        "message-err": "Hubo un error al mover la tarjeta",
-        "button-close": "Cerrar"
+        "message-time": "La tarjeta no se puede mover por que está en un Flujo de Trabajo de tipo Línea del Tiempo",
+        "message-err": "La tarjeta no fue movida",
+        "message-conf": "Estás seguro que deseas mover la tarjeta?",
+        "button-close": "Cerrar",
+        "button-accept": "Aceptar",
+        "button-cancel": "Cancelar"
     },
 
     "updatecard":{
