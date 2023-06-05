@@ -45,11 +45,11 @@ export const Board = ({ api }) => {
                 <ListGroup.Item className='title'>
                     <h4>{t("workspace.board")}{localStorage.getItem('boardname')}</h4>
                     <InputGroup className="mb-6">
-                        <Button variant="dark" className="search">
+                        <Button className="search">
                             <BiSearchAlt size={25} color={'white'} />
                         </Button>
                         {/* Seccion para el filtro */}
-                        <DropdownButton variant="info" id="dropdown-basic-button" title={ownerTitle} className="d-flex justify-content-center w-100 m-2">
+                        <DropdownButton id="dropdown-basic-button" title={ownerTitle} className="d-flex justify-content-center w-100 m-2">
                             <Dropdown.Item key='0' onClick={() => { setOwnerTitle(t("workspace.filter")); setOwnerID(0); }} >{t("workspace.filter")}</Dropdown.Item>
                             {
                                 cardOwners.data.map(data => (
@@ -59,7 +59,7 @@ export const Board = ({ api }) => {
                         </DropdownButton>
                     </InputGroup>
                 </ListGroup.Item>
-            </ListGroup >
+            </ListGroup>
 
             <Container fluid>
                 {
