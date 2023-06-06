@@ -37,7 +37,11 @@ export const Board = ({ api }) => {
         if (cardOwners.mensaje === 'Token inválido') {
             localStorage.removeItem("token");
         }
-    }, [dataW, api, cardOwners.mensaje, forceDataW]);
+
+        if(localStorage.getItem("i18nextLng") === "en" || localStorage.getItem("i18nextLng") === "es"){
+            setOwnerTitle(t("workspace.filter"));
+        }
+    }, [dataW, api, cardOwners.mensaje, forceDataW, t]);
 
     return (
         <>
