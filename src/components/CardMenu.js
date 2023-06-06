@@ -55,6 +55,7 @@ function CardMenu({
     };
 
     //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
+    //const response = await fetch(`http://localhost:3001/comment/get`
     const response = await fetch(`${api}/comment/get`, {
       headers: {
         "Content-Type": "application/json",

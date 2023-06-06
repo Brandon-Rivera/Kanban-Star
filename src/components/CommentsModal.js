@@ -8,6 +8,7 @@ import {
   ModalHeader,
 } from "react-bootstrap";
 import LoadingModal from "./LoadingModal";
+import {AiOutlineFileAdd} from 'react-icons/ai'
 import "./css/CommentsModal.css";
 import { useContext, useState, useRef, useEffect } from "react";
 import ErrorCardModal from "./ErrorCardModal";
@@ -33,6 +34,7 @@ const CommentsModal = ({
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [userFiles, setUserFiles] = useState([]);
+  const [labelText, setLabelText] = useState(t("comments.file-input"));
   const [filesNamesAndLinks, setFilesNamesAndLinks] = useState([]);
 
   const divRef = useRef(null);
@@ -48,8 +50,12 @@ const CommentsModal = ({
     scrollDown();
   });
 
+  useEffect(() => {
+    setLabelText(t("comments.file-input"));
+  },[t]);
 
   const insertInitialState = () => {
+    setLabelText(t("comments.file-input"))
     setNewComment("");
     setUserFiles([]);
     setFilesNamesAndLinks([]);
@@ -59,7 +65,6 @@ const CommentsModal = ({
     insertInitialState();
     onHide();
   }
-
 
   /*Obtenemos owners del localStorage y comparamos sus IDs con el ID del autor
    de cada comentario para regresar el nombre del autor*/
@@ -114,6 +119,7 @@ const CommentsModal = ({
   //Función que establece el los archivos adjuntos en el form en un estado "newComment"
   const handleFileControlChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
+    setLabelText(selectedFiles.length + t("comments.file-selected"));
     setUserFiles(selectedFiles);
   }
 
@@ -147,6 +153,7 @@ const CommentsModal = ({
         }
         setShowErrorModal(true);
         setIsLoading(false);
+        insertInitialState();
       }
       else {
         const data = await response.json();
@@ -162,7 +169,6 @@ const CommentsModal = ({
   // Funcion para hacer la peticion POST para insertar el comentario.
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
     const encodedText = newComment
       .replace(/ /g, "&nbsp;")
       .replace(/\n/g, "<br/>");
@@ -177,7 +183,6 @@ const CommentsModal = ({
     }
     await getFileLinks();
     if (newComment !== "" || filesNamesAndLinks.length !== 0) {
-      if (showErrorModal !== true) {
         const response = await fetch(`${api}/comment`, {
           method: "POST",
           headers: {
@@ -196,12 +201,11 @@ const CommentsModal = ({
           insertInitialState();
           getComments();
         }
-      } 
     }
-    else {
-      setErrorMessage(t("comments.empty"));
-      setShowErrorModal(true);
-    }
+      else if(userFiles.length === 0 && newComment === ""){
+        setErrorMessage(t("comments.empty"));
+        setShowErrorModal(true); 
+      }
   };
 
   //Itera por cada attachment del comentario y muestra su nombre en forma de link para descargar.
@@ -260,7 +264,11 @@ const CommentsModal = ({
                 value={newComment}
                 onChange={handleFormControlChange}
               ></FormControl>
-              <Form.Control type="file" multiple id="fileInput" onChange={handleFileControlChange}/>
+              <Form.Label htmlFor="filesInput" id="filesInputLabel">
+                <AiOutlineFileAdd/>&nbsp;
+                {labelText}
+              </Form.Label>
+              <Form.Control type="file" multiple id="filesInput" onChange={handleFileControlChange}/>
             </div>
             <br></br>
             <div className="footerButtons">

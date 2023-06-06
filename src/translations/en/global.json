@@ -80,6 +80,8 @@
         "empty": "Comment can't be empty",
         "accept": "Accept",
         "placeholder": "Write your comment here...",
+        "file-input": "Add file(s)",
+        "file-selected": " File(s) selected",
         "error-file": "File or files could not be uploaded, try again.",
         "error-413": "One or more files are too large",
         "card-blocked": "Card is blocked",
