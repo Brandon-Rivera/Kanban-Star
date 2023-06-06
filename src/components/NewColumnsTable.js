@@ -25,7 +25,7 @@ function NewColumnsTable({ kids, nameCol, mycards, index, indeK, onCardMove, col
                         )
                     }
                 </Card.Text>
-                <Button className="btn-danger rounded-circle p-0"><img width="50" src={plusIcon} alt='nextArrrow' /></Button>
+                <Button className="btn-danger rounded-circle p-0 plusicon"><img width="50" src={plusIcon} alt='nextArrrow' /></Button>
             </Card.Body>
         </Card>
     )
