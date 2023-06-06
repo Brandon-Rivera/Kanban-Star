@@ -36,6 +36,7 @@ function NewCardTable({
   const [errModal2, setErrModal2] = useState(false);
   const [resModal, setResModal] = useState(false);
   const [errModal3, setErrModal3] = useState(false);
+  const [errModal4, setErrModal4] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   useEffect(() => {
@@ -97,15 +98,15 @@ function NewCardTable({
       const data = await response.json();
 
       if (data.error) {
-
         if (
           data.error.message ===
           `The card with id ${id} cannot be moved because it is blocked.`
         ) {
           setErrModal(true);
-        }
-        else if (data.error.code === "C191") {
+        } else if (data.error.code === "C191") {
           setErrModal2(true);
+        } else if (data.error.code === "TI02") {
+          setErrModal4(true);
         }
       } else {
         const oldCard = {
@@ -167,7 +168,14 @@ function NewCardTable({
               </span>
             </p>
           </ListGroup.Item>
-          <ListGroup.Item action href="#link1" className="text-center" onClick={() => {getCardDetails(id);}}>
+          <ListGroup.Item
+            action
+            href="#link1"
+            className="text-center"
+            onClick={() => {
+              getCardDetails(id);
+            }}
+          >
             Menu
           </ListGroup.Item>
           <ListGroup.Item
@@ -235,6 +243,13 @@ function NewCardTable({
         message={t("move.message-conf")}
         acceptButton={t("move.button-accept")}
         denyButton={t("move.button-cancel")}
+      />
+      <ErrorCardModal
+        show={errModal4}
+        onHide={() => setErrModal4(false)}
+        title={t("move.title-err")}
+        message={t("move.message-time")}
+        button={t("move.button-close")}
       />
     </>
   );
