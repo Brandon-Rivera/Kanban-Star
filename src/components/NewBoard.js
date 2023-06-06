@@ -26,23 +26,23 @@ export function NewBoard({ api }) {
     navigate("/");
   };
 
-  if (cardOwners.mensaje === 'Token inválido') {
-    handleLogout()
-  }
-
-  // Se refresca cada vez que se actualiza el estado de dataW
   useEffect(() => {
     if (dataW?.data.length > 0) {
       setSelectedWorkspace(dataW.data[0].name);
       handleSelection(dataW.data[0].name);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[handleSelection])
+
+  // Se refresca cada vez que se actualiza el estado de dataW
+  useEffect(() => {
     if (dataW === undefined || dataW === null) {
       forceDataW(api, localStorage.getItem('boardid'));
     }
     if (cardOwners.mensaje === 'Token inválido') {
-      localStorage.removeItem("token");
+      handleLogout();
     }
-  }, [dataW, api, cardOwners.mensaje, forceDataW, handleSelection]);
+  });
 
 
   return (

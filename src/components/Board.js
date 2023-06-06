@@ -70,6 +70,7 @@ export const Board = ({ api }) => {
                     dataW?.data.map(data => (
                         <div className="cont border border-secondary rounded my-3 p-2 text-secondary">
                             <h4 className='cont text-center' key={data.id}>{data.name}</h4>
+                            <h4 className='cont text-center bg-primary text-white rounded' key={data.lanes[0].id}>{data.lanes[0].name}</h4>
                             {
                                 data.columns.map(columns => (
                                     columns.kids.length > 0 ? (
