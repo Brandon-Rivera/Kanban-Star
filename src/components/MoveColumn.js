@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useTranslation } from "react-i18next";
 import Form from 'react-bootstrap/Form';
 import { Col } from 'react-bootstrap';
@@ -7,8 +7,10 @@ import { BsRecordCircleFill } from "react-icons/bs"
 
 import SuccessCardModal from "./SuccessCardModal";
 import ErrorCardModal from "./ErrorCardModal";
+import { DataContext } from "../Contexts/DataContext.js";
+import getDeadline from '../utils/getDeadline';
 
-function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }) {
+function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api, wPos }) {
 
     const [checked, setChecked] = useState(false);
     const [t] = useTranslation("global");
@@ -18,12 +20,21 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
     const [errModal2, setErrModal2] = useState(false);
     const [errModal3, setErrModal3] = useState(false);
 
+    const { moveCard, dataC, updateDataC, dataW } = useContext(DataContext);
+    const [oldCard, setOldCard] = useState(null);
+    const [newCard, setNewCard] = useState(null);
+    const [cardResponse, setCardResponse] = useState(null);
+
+    // Constante que contiene laneId
+    const laneId = dataW?.data[wPos]?.lanes[0]?.id;
+
     const handleCardMove = async () => {
 
         const values = {
             cardid: cardid,
             columnid: column.id,
             workflowid: column.workflow_id,
+            laneid: laneId,
         }; //208 y 101
 
         // Funcion que manda la petición tipo POST para mover la tarjeta
@@ -38,9 +49,12 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
             });
 
         const data = await response.json();
+        setCardResponse(data);
 
         if (data.error) {
-
+            if(data.error.code === 'TI02'){
+                setErrModal3(true);
+            }
             if (data.error.message === `The card with id ${cardid} cannot be moved because it is blocked.`) {
                 setErrModal(true);
             }
@@ -50,8 +64,28 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
 
         }
         else {
+            setOldCard({
+                id: dataC?.card_id,
+                workflow_id: dataC?.workflow_id,
+                column_id: dataC?.column_id
+            });
+            setNewCard({
+                id: data.data[0].card_id,
+                name: data.data[0].title,
+                description: data.data[0].description,
+                owner_id: data.data[0].owner_user_id,
+                duedate: getDeadline(data.data[0].deadline),
+                workflow_id: data.data[0].workflow_id,
+                column_id: data.data[0].column_id,
+                pos: null,
+            })
             setResModal(true);
         }
+    }
+
+    const handleLocalMove = () => {
+        moveCard(oldCard, newCard);
+        updateDataC(cardResponse?.data[0]);
     }
 
     useEffect(() => {
@@ -89,6 +123,7 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
             <SuccessCardModal
                 show={resModal}
                 onHide={() => setResModal(false)}
+                onConfirm={handleLocalMove}
                 title={t("move.title-res")}
                 message={t("move.message-res")}
                 button={t("move.button-close")} />
@@ -108,7 +143,7 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api }
                 show={errModal3}
                 onHide={() => setErrModal3(false)}
                 title={t("move.title-err")}
-                message={t("move.message-err")}
+                message={t("move.message-time")}
                 button={t("move.button-close")} />
 
         </>

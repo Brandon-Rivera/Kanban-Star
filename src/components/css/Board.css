@@ -7,12 +7,22 @@
     border-radius: 10px;  
 }
 
-#light .title{
+.search {
+    background-color: #59d099;
+}
+
+.dropdown-toggle {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+#light .title.list-group-item {
     background-color: #0d6efd;
+    border-color: #0d6efd !important;
     color: white;
 }
 
-#dark .title{
+#dark .title {
     background-color: #212529;
     color: white;
 }

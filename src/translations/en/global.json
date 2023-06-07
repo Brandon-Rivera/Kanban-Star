@@ -16,7 +16,9 @@
 
     "workspace":{
         "workspace": "Workspace",
-        "board": "Board: "
+        "board": "Board: ",
+        "filter": "All cards",
+        "deadline": "Deadline: "
     },
 
     "navbar":{
@@ -50,7 +52,7 @@
         "card-title": "Enter card title",
         "card-owner": "Owner",
         "due-date": "Deadline",
-        "workflow": "Workflow",
+        "column": "Column",
         "swimlane": "Swimlane",
         "description": "Description",
         "description-placeholder": "Enter card description",
@@ -62,7 +64,8 @@
         "insert-button": "Dismiss",
         "insert-success-er": "Operation result",
         "insert-message-er": "The card was not added.",
-        "insert-button-er": "Dismiss"
+        "insert-button-er": "Dismiss",
+        "insert-message-er2": "Cards cannot be added into Timeline Workflows."
     },
 
     "viewcard":{
@@ -95,10 +98,27 @@
     "move": {
         "title-res": "Everything fine!",
         "title-err": "Oops!",
+        "title-conf": "Move card",
         "message-res": "The card was moved",
-        "message-block": "The card can't be moved for a block reason",
-        "message-ac": "The card can't be moved for an acceptance criteria",
-        "message-err": "Card could not be moved",
-        "button-close": "Close"
+        "message-block": "The card can't be moved becasue it is blocked",
+        "message-ac": "The card can't be moved because of an exit criteria",
+        "message-time": "Cards cannot be moved into Timeline Workflows.",
+        "message-err": "The card was not moved",
+        "message-conf": "You are moving this card. Would you like to continue?",
+        "button-close": "Close",
+        "button-accept": "Accept",
+        "button-cancel": "Cancel"
+    },
+
+    "updatecard":{
+        "no-deadline": "No date 🗓️",
+        "no-owner": "None",
+        "btn-accept": "Update card",
+        "btn-cancel": "Cancel",
+        "modal-title": "Update card",
+        "modal-description": "You are updating this card info. Would you like to continue?",
+        "modal-success": "This card was successfully updated",
+        "modal-accept": "Dismiss",
+        "modal-error": "This card was not updated"
     }
 }

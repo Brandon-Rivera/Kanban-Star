@@ -1,13 +1,17 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { Container, Dropdown, DropdownButton } from 'react-bootstrap';
 import NewBoardTable from "./NewBoardTable"
 import "./css/newBoard.css"
+import { DataContext } from '../Contexts/DataContext.js';
+import { useNavigate } from "react-router-dom";
 
 export function NewBoard({ api }) {
   //Variable para obtener los datos del workspace en un hook
-  const [dataWorkspace, setDataWorkspace] = useState({ data: [] });
+  const { dataW, forceDataW } = useContext(DataContext);
   const [selectedName, setSelectedName] = useState(null);
   const [, setSelectedWorkspace] = useState('');
+  const cardOwners = JSON.parse(localStorage.getItem('owners'));
+  const navigate = useNavigate();
 
   const handleSelection = useMemo(() => {
     return (name) => {
@@ -15,52 +19,43 @@ export function NewBoard({ api }) {
     };
   }, []);
 
-  useEffect(() => {
-    if (dataWorkspace.data.length > 0) {
-      setSelectedWorkspace(dataWorkspace.data[0].name);
-      handleSelection(dataWorkspace.data[0].name);
-    }
-  }, [dataWorkspace.data, handleSelection]);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("domain");
+    localStorage.removeItem("userid");
+    navigate("/");
+  };
 
   useEffect(() => {
-
-    //Valores necesarios para la peticion get de workspace
-    const values = {
-      domain: localStorage.getItem('domain'),
-      apikey: localStorage.getItem('apikey'),
-      boardid: localStorage.getItem('boardid') //actualizar
+    if (dataW?.data.length > 0) {
+      setSelectedWorkspace(dataW.data[0].name);
+      handleSelection(dataW.data[0].name);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[handleSelection])
 
-    //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
-    const getWorkSpace = async () => {
-
-      const response = await fetch(`${api}/board`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'supra-access-token': localStorage.getItem('token')
-        },
-        method: 'POST',
-        body: JSON.stringify(values)
-      })
-      const data = await response.json()
-      setDataWorkspace(data)
+  // Se refresca cada vez que se actualiza el estado de dataW
+  useEffect(() => {
+    if (dataW === undefined || dataW === null) {
+      forceDataW(api, localStorage.getItem('boardid'));
     }
-
-    //llamada a la funcion
-    getWorkSpace()
-  }, [api])
+    if (cardOwners.mensaje === 'Token inválido') {
+      handleLogout();
+    }
+  });
 
 
   return (
     <Container fluid>
-      <DropdownButton id="dropdown-basic-button" title="Workspaces" className="d-flex justify-content-center w-100 m-2">
+      <DropdownButton id="dropdown-basic-button" title="Workspaces" className="d-flex justify-content-center m-2">
         {
-          dataWorkspace.data.map(data => (
-            <Dropdown.Item key={data.id} onClick={() => handleSelection(data.name)} >{data.name}</Dropdown.Item>
+          dataW?.data.map(data => (
+            data.type === 0 || data.type === 1 ? <Dropdown.Item key={data.id} onClick={() => handleSelection(data.name)} >{data.name}</Dropdown.Item> : []
+
           ))
         }
       </DropdownButton>
-      {selectedName && (<NewBoardTable nameWF={selectedName} dataWorkspace={dataWorkspace} />)}
+      {selectedName && (<NewBoardTable nameWF={selectedName} dataWorkspace={dataW} api={api} />)}
     </Container>
   );
 }

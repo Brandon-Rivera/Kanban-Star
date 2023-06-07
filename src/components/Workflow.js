@@ -5,7 +5,6 @@ import Cards from "./Cards.js"
 import "./css/Workflow.css"
 import { useTranslation } from 'react-i18next';
 
-
 //Esto en realidad es la columna, NO EL WORKFLOW
 function Workflow({ ownerID, title, col, dataWorkspace, workflowPos, api }) {
   // Hook para el modal de insertar tarjetas
@@ -58,6 +57,7 @@ function Workflow({ ownerID, title, col, dataWorkspace, workflowPos, api }) {
                 columnID={col.id}
                 columnName={col.name}
                 workflowID={col.workflow_id}
+                wPos={workflowPos}
                 api={api}
               />
 

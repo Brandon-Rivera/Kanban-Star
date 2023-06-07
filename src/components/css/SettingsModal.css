@@ -5,11 +5,12 @@
 .btn-close{
     width: 2em;
 }
-#dark .title{
+
+#dark .title {
     background-color: #212529 ;
 }
 
-#light .title{
+#light .title {
     color: #212529;
     background-color:#eeefef ;
 }
