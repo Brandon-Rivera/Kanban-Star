@@ -8,7 +8,7 @@ import {
   ModalHeader,
 } from "react-bootstrap";
 import LoadingModal from "./LoadingModal";
-import {AiOutlineFileAdd} from 'react-icons/ai'
+import { AiOutlineFileAdd, AiOutlineClose } from 'react-icons/ai'
 import "./css/CommentsModal.css";
 import { useContext, useState, useRef, useEffect } from "react";
 import ErrorCardModal from "./ErrorCardModal";
@@ -35,6 +35,7 @@ const CommentsModal = ({
   const [errorMessage, setErrorMessage] = useState("");
   const [userFiles, setUserFiles] = useState([]);
   const [labelText, setLabelText] = useState(t("comments.file-input"));
+  const [deleteFilesDisabled, setDeleteFilesDisabled] = useState(true);
   const [filesNamesAndLinks, setFilesNamesAndLinks] = useState([]);
 
   const divRef = useRef(null);
@@ -52,13 +53,14 @@ const CommentsModal = ({
 
   useEffect(() => {
     setLabelText(t("comments.file-input"));
-  },[t]);
+  }, [t]);
 
   const insertInitialState = () => {
     setLabelText(t("comments.file-input"))
     setNewComment("");
     setUserFiles([]);
     setFilesNamesAndLinks([]);
+    setDeleteFilesDisabled(true);
   };
 
   const exitModal = () => {
@@ -119,8 +121,17 @@ const CommentsModal = ({
   //Función que establece el los archivos adjuntos en el form en un estado "newComment"
   const handleFileControlChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
-    setLabelText(selectedFiles.length + t("comments.file-selected"));
-    setUserFiles(selectedFiles);
+    if(selectedFiles.length !== 0){
+      setLabelText(selectedFiles.length + t("comments.file-selected"));
+      setUserFiles(selectedFiles);
+      setDeleteFilesDisabled(false);
+    } 
+  }
+
+  const deleteSelectedFiles = () => {
+    setUserFiles([]);
+    setLabelText(t("comments.file-input"));
+    setDeleteFilesDisabled(true);
   }
 
   //Cada que se adjuntan archivos, se mandan a la base de datos y se obtiene su link
@@ -148,7 +159,7 @@ const CommentsModal = ({
         if (response.status === 413) {
           setErrorMessage(t("comments.error-413"));
         }
-        else{
+        else {
           setErrorMessage(t("comments.error-file"));
         }
         setShowErrorModal(true);
@@ -183,29 +194,29 @@ const CommentsModal = ({
     }
     await getFileLinks();
     if (newComment !== "" || filesNamesAndLinks.length !== 0) {
-        const response = await fetch(`${api}/comment`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            'supra-access-token': localStorage.getItem('token')
-          },
-          body: JSON.stringify(values),
-        });
+      const response = await fetch(`${api}/comment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          'supra-access-token': localStorage.getItem('token')
+        },
+        body: JSON.stringify(values),
+      });
 
-        const data = await response.json();
-        if (data.error) {
-          setShowErrorModal(true);
-          setIsLoading(false)
-        } else {
-          setIsLoading(false);
-          insertInitialState();
-          getComments();
-        }
-    }
-      else if(userFiles.length === 0 && newComment === ""){
-        setErrorMessage(t("comments.empty"));
-        setShowErrorModal(true); 
+      const data = await response.json();
+      if (data.error) {
+        setShowErrorModal(true);
+        setIsLoading(false)
+      } else {
+        setIsLoading(false);
+        insertInitialState();
+        getComments();
       }
+    }
+    else if (userFiles.length === 0 && newComment === "") {
+      setErrorMessage(t("comments.empty"));
+      setShowErrorModal(true);
+    }
   };
 
   //Itera por cada attachment del comentario y muestra su nombre en forma de link para descargar.
@@ -265,10 +276,18 @@ const CommentsModal = ({
                 onChange={handleFormControlChange}
               ></FormControl>
               <Form.Label htmlFor="filesInput" id="filesInputLabel">
-                <AiOutlineFileAdd/>&nbsp;
+                <AiOutlineFileAdd />&nbsp;
                 {labelText}
+                <Form.Control type="file" multiple id="filesInput" onChange={handleFileControlChange} />
               </Form.Label>
-              <Form.Control type="file" multiple id="filesInput" onChange={handleFileControlChange}/>
+              <Button 
+                id="deleteFiles" 
+                variant="danger" 
+                disabled={deleteFilesDisabled} 
+                onClick={() => deleteSelectedFiles()}
+              >
+                  <AiOutlineClose />
+              </Button>
             </div>
             <br></br>
             <div className="footerButtons">
@@ -287,8 +306,8 @@ const CommentsModal = ({
       />
       <LoadingModal
         show={isLoading}
-        title = {t("loading.title")}
-        message = {t("loading.comment")}
+        title={t("loading.title")}
+        message={t("loading.comment")}
       />
     </>
   );

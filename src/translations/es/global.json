@@ -80,12 +80,10 @@
         "empty": "El comentario no puede estar vacío",
         "accept": "Aceptar",
         "placeholder": "Escribe aquí tu comentario...",
-        "file-input": "Agregar archivo(s)",
-        "file-selected": " Archivo(s) seleccionado(s)",
+        "file-input": "  Agregar archivo(s)",
+        "file-selected": "  Archivo(s) seleccionado(s)",
         "error-file": "No se pudo subir el o los archivos, intenta de nuevo",
         "error-413": "Uno o más archivos son demasiado grandes",
-        "card-blocked": "Tarjeta bloqueada",
-        "no-deadline": "Sin fecha 🗓️",
         "exit": "Salir"
     },
 
