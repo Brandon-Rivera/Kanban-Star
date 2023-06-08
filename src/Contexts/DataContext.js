@@ -232,7 +232,6 @@ export const DataProvider = ({ children }) => {
     });
     const data1 = await response1.json();
     updateDataOw(data1);
-    localStorage.setItem("owners", JSON.stringify(data));
   };
 
   // Valores que se pasan al contexto

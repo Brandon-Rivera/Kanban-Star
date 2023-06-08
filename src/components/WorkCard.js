@@ -58,7 +58,6 @@ function WorkCard({ title, id, api }) {
       navigate('/');
     }
     else{
-      localStorage.setItem("owners", JSON.stringify(data));
       GotoBoard();
     };
   }

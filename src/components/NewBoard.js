@@ -39,7 +39,7 @@ export function NewBoard({ api }) {
     if (dataW === undefined || dataW === null) {
       forceDataW(api, localStorage.getItem('boardid'));
     }
-    if (cardOwners.mensaje === 'Token inválido') {
+    if (cardOwners?.mensaje === 'Token inválido') {
       handleLogout();
     }
   });

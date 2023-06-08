@@ -13,6 +13,7 @@ import { useContext, useState, useRef, useEffect } from "react";
 import ErrorCardModal from "./ErrorCardModal";
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../Contexts/ThemeContext";
+import { DataContext } from "../Contexts/DataContext";
 
 const CommentsModal = ({
   show,
@@ -34,6 +35,7 @@ const CommentsModal = ({
   const [errorMessage, setErrorMessage] = useState("");
   const [userFiles, setUserFiles] = useState([]);
   const [filesNamesAndLinks, setFilesNamesAndLinks] = useState([]);
+  const { dataOw } = useContext(DataContext);
 
   const divRef = useRef(null);
 
@@ -63,8 +65,11 @@ const CommentsModal = ({
 
   /*Obtenemos owners del localStorage y comparamos sus IDs con el ID del autor
    de cada comentario para regresar el nombre del autor*/
-  const cardOwners = JSON.parse(localStorage.getItem("owners"));
-  const ownersArray = Object.values(cardOwners);
+  let ownersArray = [];
+  if (dataOw !== null) {
+    ownersArray = Object.values(dataOw);
+  }
+    // Rest of your code using the ownersArray
   const ownersBuenos = ownersArray[0];
   let author = "";
 

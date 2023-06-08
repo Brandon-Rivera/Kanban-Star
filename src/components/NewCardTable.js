@@ -29,7 +29,7 @@ function NewCardTable({
   const [own, setOwn] = useState("");
   const [showCardMenu, setShowCardMenu] = useState(false);
   const [t] = useTranslation("global");
-  const { moveCard, updateDataC, dataW, moveCardInfo, updateMoveCardInfo } =
+  const { moveCard, updateDataC, dataW, moveCardInfo, updateMoveCardInfo, dataOw } =
     useContext(DataContext);
   const laneId = dataW?.data[workflowPos]?.lanes[0]?.id;
   const [errModal, setErrModal] = useState(false);
@@ -40,8 +40,8 @@ function NewCardTable({
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   useEffect(() => {
-    const ownersjs = JSON.parse(localStorage.getItem("owners"));
-    setOwn(ownersjs.data.find((data) => data.user_id === idOwner));
+    setOwn(dataOw.data.find((data) => data.user_id === idOwner));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idOwner]);
 
   // Petición para obtener los detalles de una tarjeta

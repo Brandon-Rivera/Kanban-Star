@@ -11,10 +11,9 @@ export const Board = ({ api }) => {
     
     // Estado que contiene los datos de Board
     const [t] = useTranslation("global");
-    const { dataW, forceDataW } = useContext(DataContext);
+    const { dataW, forceDataW, dataOw } = useContext(DataContext);
     const [ownerTitle, setOwnerTitle] = useState(t("workspace.filter"));
     const [ownerID, setOwnerID] = useState(0);
-    const cardOwners = JSON.parse(localStorage.getItem('owners'));
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -25,7 +24,7 @@ export const Board = ({ api }) => {
 
     };
 
-    if (cardOwners.mensaje === 'Token inválido') {
+    if (dataOw?.mensaje === 'Token inválido') {
         handleLogout()
     }
 
@@ -34,14 +33,14 @@ export const Board = ({ api }) => {
         if( dataW === undefined || dataW === null){
             forceDataW(api, localStorage.getItem('boardid'));
         }
-        if (cardOwners.mensaje === 'Token inválido') {
+        if (dataOw?.mensaje === 'Token inválido') {
             localStorage.removeItem("token");
         }
 
         if(localStorage.getItem("i18nextLng") === "en" || localStorage.getItem("i18nextLng") === "es"){
             setOwnerTitle(t("workspace.filter"));
         }
-    }, [dataW, api, cardOwners.mensaje, forceDataW, t]);
+    }, [dataW, api, dataOw?.mensaje, forceDataW, t]);
 
     return (
         <>
@@ -56,7 +55,7 @@ export const Board = ({ api }) => {
                         <DropdownButton id="dropdown-basic-button" title={ownerTitle} className="d-flex justify-content-center w-100 m-2">
                             <Dropdown.Item key='0' onClick={() => { setOwnerTitle(t("workspace.filter")); setOwnerID(0); }} >{t("workspace.filter")}</Dropdown.Item>
                             {
-                                cardOwners.data.map(data => (
+                                dataOw?.data.map(data => (
                                     <Dropdown.Item key={data.user_id} onClick={() => { setOwnerTitle(data.username); setOwnerID(data.user_id); }} >{data.username}</Dropdown.Item>
                                 ))
                             }
