@@ -1,3 +1,7 @@
+a {
+    color: #2f3ecf;
+}
+
 .modalTitle{
     margin: 0;
     text-align: center;
@@ -83,8 +87,30 @@
     background-color: #484f5d;
 }
 
-#fileInput{
-    width:auto;
+.formControlAndButton{
+    text-align: right;
+}
+
+#deleteFiles{
+    margin: 0;
+    border-top-left-radius: 0; 
+    border-bottom-left-radius: 0;
+}
+
+#filesInputLabel{
+    background-color: #0d6efd; 
+    color: white;
+    border-top-left-radius: 0.375rem; 
+    border-bottom-left-radius: 0.375rem;
+    display: inline-block;
+    padding: 5px 12px 9px;
+    margin-top: 0;
+    margin-right: 0px;
+    cursor: pointer;
+}
+
+input[type="file"]{
+    display: none;
 }
 
 .footerButtons{
