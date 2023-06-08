@@ -33,7 +33,7 @@ export function NewBoardTable({ nameWF, dataWorkspace, api }) {
     })();
 
     return (
-        <Container fluid>
+        <Container fluid className='mb-5'>
             <div className="d-flex justify-content-between my-2 fixed-bottom">
                 <Button className="btn-info rounded-circle p-0 pre-btn" onClick={handlePrev}><img width="50" src={nextArr} alt='nextArrrow' /></Button>
                 <Button className="btn-info rounded-circle p-0 nxt-btn" onClick={handleNext}><img width="50" src={nextArr} alt='nextArrrow' /></Button>
