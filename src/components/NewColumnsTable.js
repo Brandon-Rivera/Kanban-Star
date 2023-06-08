@@ -5,16 +5,16 @@ import plusIcon from "../images/plus.png";
 import "./css/NewColumnsTable.css"
 import InsertCardModal from './InsertCardModal';
 
-function NewColumnsTable({ kids, nameCol, idCol, idWork, cols, mycards, index, indeK, dataWorkspace, workflowPos, api}) {
+function NewColumnsTable({ kids, nameCol, idCol, idWork, cols, mycards, index, indeK, dataWorkspace, workflowPos, api, color}) {
     // const [rol, setRol] = useState('');
     // Hook para mostrar el modal de insertar tarjeta
     const [showInsertCard, setShowInsertCard] = useState(false)
 
     return (
         <>
-        <Card className="text-light w-100 p-0" style={{ backgroundColor: '#2665BB' }} >
+        <Card className="text-light w-100 p-0" style={{ backgroundColor: color }} >
             <Card.Header>{nameCol}</Card.Header>
-            <Card.Body style={{ backgroundColor: '#92B6E9' }}>
+            <Card.Body style={{ backgroundColor: "#ffffe0" }}>
                 <Card.Text>
                     {
                         kids.length > 0 ? (
