@@ -68,7 +68,7 @@ export const Board = ({ api }) => {
             <Container fluid>
                 {
                     dataW?.data.map(data => (
-                        <div className="cont border border-secondary rounded my-3 p-2 text-secondary">
+                        data.type === 0 || data.type === 1 ? <div className="cont border border-secondary rounded my-3 p-2 text-secondary">
                             <h4 className='cont text-center' key={data.id}>{data.name}</h4>
                             <h4 className='cont text-center bg-primary text-white rounded' key={data.lanes[0].id}>{data.lanes[0].name}</h4>
                             {
@@ -92,8 +92,7 @@ export const Board = ({ api }) => {
                                 ))
                             }
                         </div>
-
-                    ))
+                    : []))
                 }
             </Container>
         </>

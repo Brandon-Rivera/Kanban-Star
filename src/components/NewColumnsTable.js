@@ -5,16 +5,15 @@ import plusIcon from "../images/plus.png";
 import "./css/NewColumnsTable.css"
 import InsertCardModal from './InsertCardModal';
 
-function NewColumnsTable({ kids, nameCol, idCol, idWork, cols, mycards, index, indeK, dataWorkspace, workflowPos, api}) {
-    // const [rol, setRol] = useState('');
+function NewColumnsTable({ kids, nameCol, idCol, idWork, cols, mycards, index, indeK, dataWorkspace, workflowPos, api, color}) {
     // Hook para mostrar el modal de insertar tarjeta
     const [showInsertCard, setShowInsertCard] = useState(false)
 
     return (
         <>
-        <Card className="text-light w-100 p-0" style={{ backgroundColor: '#2665BB' }} >
+        <Card className="text-light w-100 p-0" style={{ backgroundColor: color }} >
             <Card.Header>{nameCol}</Card.Header>
-            <Card.Body style={{ backgroundColor: '#92B6E9' }}>
+            <Card.Body style={{ backgroundColor: "#ffffe0" }}>
                 <Card.Text>
                     {
                         kids.length > 0 ? (
@@ -30,7 +29,7 @@ function NewColumnsTable({ kids, nameCol, idCol, idWork, cols, mycards, index, i
                         )
                     }
                 </Card.Text>
-                <Button className="btn-danger rounded-circle p-0"><img width="50" src={plusIcon} alt='nextArrrow' onClick={() => setShowInsertCard(true)}/></Button>
+                <Button className="btn-danger rounded-circle p-0 plusicon"><img width="50" src={plusIcon} alt='nextArrrow' onClick={() => setShowInsertCard(true)}/></Button>
             </Card.Body>
         </Card>
         <InsertCardModal show={showInsertCard} onHide={() => setShowInsertCard(false)} columnID={idCol} wPos={workflowPos} columnName={nameCol} workflowID={idWork} api={api}/>
