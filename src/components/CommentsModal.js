@@ -14,6 +14,8 @@ import { useContext, useState, useRef, useEffect } from "react";
 import ErrorCardModal from "./ErrorCardModal";
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../Contexts/ThemeContext";
+import { DataContext } from "../Contexts/DataContext";
+import Cookies from "js-cookie";
 
 const CommentsModal = ({
   show,
@@ -27,7 +29,7 @@ const CommentsModal = ({
 
   const [t] = useTranslation("global");
   const { theme } = useContext(ThemeContext);
-  const userID = localStorage.getItem("userid");
+  const userID = Cookies.get("userid");
   //Estados
   const [newComment, setNewComment] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
@@ -37,6 +39,7 @@ const CommentsModal = ({
   const [labelText, setLabelText] = useState(t("comments.file-input"));
   const [deleteFilesDisabled, setDeleteFilesDisabled] = useState(true);
   const [filesNamesAndLinks, setFilesNamesAndLinks] = useState([]);
+  const { dataOw } = useContext(DataContext);
 
   const divRef = useRef(null);
 
@@ -70,8 +73,11 @@ const CommentsModal = ({
 
   /*Obtenemos owners del localStorage y comparamos sus IDs con el ID del autor
    de cada comentario para regresar el nombre del autor*/
-  const cardOwners = JSON.parse(localStorage.getItem("owners"));
-  const ownersArray = Object.values(cardOwners);
+  let ownersArray = [];
+  if (dataOw !== null) {
+    ownersArray = Object.values(dataOw);
+  }
+    // Rest of your code using the ownersArray
   const ownersBuenos = ownersArray[0];
   let author = "";
 
@@ -150,7 +156,7 @@ const CommentsModal = ({
       const response = await fetch(`${api}/upload`, {
         method: "POST",
         headers: {
-          'supra-access-token': localStorage.getItem('token')
+          'supra-access-token': Cookies.get('token')
         },
         body: formData
       })
@@ -198,7 +204,7 @@ const CommentsModal = ({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          'supra-access-token': localStorage.getItem('token')
+          'supra-access-token': Cookies.get('token')
         },
         body: JSON.stringify(values),
       });

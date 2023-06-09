@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./css/WorkCard.css";
 import { DataContext } from "../Contexts/DataContext";
 import { ViewContext } from '../Contexts/ViewContext';
+import Cookies from "js-cookie";
 
 //Funcion para crear los botones de cada tablero
 function WorkCard({ title, id, api }) {
@@ -15,9 +16,10 @@ function WorkCard({ title, id, api }) {
   const { updateDataW, updateDataOw } = useContext(DataContext);
 
   const GotoBoard = () => {
+    const expireCookie = 1/24;
+    Cookies.set('boardid', id, { expires: expireCookie, secure: true, sameSite: 'strict' });
+    Cookies.set('boardname', title, { expires: expireCookie, secure: true, sameSite: 'strict' });
     navigate(view)
-    localStorage.setItem('boardid', id)
-    localStorage.setItem('boardname', title)
   }
 
   // Funcion para obtener la informacion de un board
@@ -29,7 +31,7 @@ function WorkCard({ title, id, api }) {
     const response = await fetch(`${api}/board`, {
       headers: {
         "Content-Type": "application/json",
-        "supra-access-token": localStorage.getItem("token"),
+        "supra-access-token": Cookies.get("token"),
       },
       method: "POST",
       body: JSON.stringify(values),
@@ -44,7 +46,7 @@ function WorkCard({ title, id, api }) {
     const response = await fetch(`${api}/owners`, {
       headers: {
         "Content-Type": "application/json",
-        "supra-access-token": localStorage.getItem("token"),
+        "supra-access-token": Cookies.get("token"),
       },
       method: "POST",
       body: JSON.stringify({
@@ -58,7 +60,6 @@ function WorkCard({ title, id, api }) {
       navigate('/');
     }
     else{
-      localStorage.setItem("owners", JSON.stringify(data));
       GotoBoard();
     };
   }

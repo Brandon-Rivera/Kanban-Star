@@ -4,6 +4,7 @@ import './css/Workspace.css'
 
 //Importación de componentes
 import WorkCard from './WorkCard'
+import Cookies from 'js-cookie';
 
 
 export function Workspace({ api }) {
@@ -16,7 +17,7 @@ export function Workspace({ api }) {
 
         //Valores necesarios para la peticion get de workspace
         const values = {
-            userid: localStorage.getItem('userid')
+            userid: Cookies.get('userid')
         }
 
         //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
@@ -25,7 +26,7 @@ export function Workspace({ api }) {
             const response = await fetch(`${api}/dashboard`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'supra-access-token': localStorage.getItem('token')
+                    'supra-access-token': Cookies.get('token')
                 },
                 method: 'POST',
                 body: JSON.stringify(values)
@@ -33,9 +34,11 @@ export function Workspace({ api }) {
             const data = await response.json()
 
             if (data.mensaje === 'Token inválido') {
-                localStorage.removeItem("token");
-                localStorage.removeItem("domain");
-                localStorage.removeItem("userid");
+                Cookies.remove("token");
+                Cookies.remove("domain");
+                Cookies.remove("userid");
+                Cookies.remove("boardid");
+                Cookies.remove("boardname");
                 navigate("/");
             }
 

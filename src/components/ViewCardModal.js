@@ -15,7 +15,7 @@ import { DataContext } from "../Contexts/DataContext";
 
 // Funcion que contiene el componente del modal de comsulta de tarjetas
 function ViewCardModal({ show, onHide, cardColumn }) {
-  const { dataC, dataOw } = useContext(DataContext);
+  const { dataC, dataOw, dataW } = useContext(DataContext);
   // Variable que contiene el mapa de traducciones
   const [t] = useTranslation("global");
   // Variable que contiene el estado de la tarjeta
@@ -47,6 +47,14 @@ function ViewCardModal({ show, onHide, cardColumn }) {
     }
   }
 
+  // Funcion que devuelve el nombre de lane de la tarjeta
+  function getLane(lane) {
+    return dataW?.data
+      .find((data) => data.lanes.find((l) => l.id === lane))
+      ?.lanes.find((l) => l.id === lane)?.name;
+  }
+
+  // Funcion que renderiza un componente con la info de deadline
   function renderDeadline() {
     if (dataC?.deadline !== "" && dataC?.deadline !== null) {
       return (
@@ -60,7 +68,7 @@ function ViewCardModal({ show, onHide, cardColumn }) {
           readOnly
           value={t("viewcard.no-deadline")}
           id="datepicker"
-          className="cardDescriptionBox fw-bold"
+          className="cardDescriptionBox fw-bold bg-white"
           type="text"
         />
       );
@@ -114,7 +122,9 @@ function ViewCardModal({ show, onHide, cardColumn }) {
                   >
                     {dataC
                       ? getCorrectUsername(
-                          getShortName(getUsername(dataC?.owner_user_id, dataOw))
+                          getShortName(
+                            getUsername(dataC?.owner_user_id, dataOw)
+                          )
                         )
                       : ""}
                   </Dropdown.Toggle>
@@ -146,6 +156,25 @@ function ViewCardModal({ show, onHide, cardColumn }) {
                   </Dropdown.Toggle>
                 </Dropdown>
               </InputGroup>
+              {/* Componente que contiene la informacion del lane */}
+              <InputGroup className="mb-2">
+                <InputGroup.Text className="fw-bold">
+                  {t("insertcard.lane")}
+                </InputGroup.Text>
+                <Dropdown>
+                  <Dropdown.Toggle
+                    variant="primary drop1 fw-bold"
+                    style={{
+                      width: "fit-content",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {getShortName(getLane(dataC ? dataC.lane_id : ""))}
+                  </Dropdown.Toggle>
+                </Dropdown>
+              </InputGroup>
               {/* Componente que contiene la descripcion de la tarjeta */}
               <InputGroup className="mb-2">
                 <InputGroup.Text className="fw-bold">
@@ -155,7 +184,9 @@ function ViewCardModal({ show, onHide, cardColumn }) {
                   readOnly
                   dangerouslySetInnerHTML={{
                     __html: dataC
-                      ? getDescription(getCorrectDescription(dataC?.description))
+                      ? getDescription(
+                          getCorrectDescription(dataC?.description)
+                        )
                       : "",
                   }}
                   className="cardDescriptionBox fw-bold"
@@ -167,9 +198,6 @@ function ViewCardModal({ show, onHide, cardColumn }) {
           </fieldset>
           {/* Componente footer del modal, conteniendo los botones de editar y aceptar */}
           <Modal.Footer className="modalFooter">
-            {/* <Button variant="primary fw-bold" onClick={onHide}>
-              {t("viewcard.btn-edit")}
-            </Button> */}
             <Button variant="primary fw-bold" onClick={onHide}>
               {t("viewcard.btn-accept")}
             </Button>

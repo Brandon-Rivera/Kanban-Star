@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import React, { createContext, useState } from "react";
 
 export const DataContext = createContext();
@@ -214,7 +215,7 @@ export const DataProvider = ({ children }) => {
     const response = await fetch(`${api}/board`, {
       headers: {
         "Content-Type": "application/json",
-        "supra-access-token": localStorage.getItem("token"),
+        "supra-access-token": Cookies.get("token"),
       },
       method: "POST",
       body: JSON.stringify(values),
@@ -225,14 +226,13 @@ export const DataProvider = ({ children }) => {
     const response1 = await fetch(`${api}/owners`, {
       headers: {
         "Content-Type": "application/json",
-        "supra-access-token": localStorage.getItem("token"),
+        "supra-access-token": Cookies.get("token"),
       },
       method: "POST",
       body: JSON.stringify(values),
     });
     const data1 = await response1.json();
     updateDataOw(data1);
-    localStorage.setItem("owners", JSON.stringify(data));
   };
 
   // Valores que se pasan al contexto

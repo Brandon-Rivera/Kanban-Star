@@ -6,6 +6,7 @@ import './css/Cards.css'
 import { useTranslation } from "react-i18next";
 import CardMenu from './CardMenu';
 import { DataContext } from '../Contexts/DataContext';
+import Cookies from 'js-cookie';
 
 // Funcion que contiene el componente de las tarjetas
 function Cards({ nCard, cardWid, duedate, dataWorkspace, workflowPos, idCard, cCard, api }) {
@@ -23,7 +24,7 @@ function Cards({ nCard, cardWid, duedate, dataWorkspace, workflowPos, idCard, cC
         const response = await fetch(`${api}/card`, {
             headers: {
                 'Content-Type': 'application/json',
-                'supra-access-token': localStorage.getItem('token')
+                'supra-access-token': Cookies.get('token')
             },
             method: 'POST',
             body: JSON.stringify(

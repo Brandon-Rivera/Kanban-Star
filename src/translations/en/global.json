@@ -65,7 +65,8 @@
         "insert-success-er": "Operation result",
         "insert-message-er": "The card was not added.",
         "insert-button-er": "Dismiss",
-        "insert-message-er2": "Cards cannot be added into Timeline Workflows."
+        "insert-message-er2": "Cards cannot be added into Timeline Workflows.",
+        "lane": "Lane"
     },
 
     "viewcard":{
@@ -74,7 +75,7 @@
         "btn-accept": "Accept",
         "btn-edit": "Edit card",
         "card-blocked": "Card is blocked",
-        "no-deadline": "No date 🗓️"
+        "no-deadline": "No date"
     },
 
     "comments":{
