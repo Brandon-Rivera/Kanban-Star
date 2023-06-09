@@ -64,6 +64,10 @@ function UpdateCardModal({ show, onHide, api }) {
     setConfirmModal(true);
   }
 
+  function handleUpdate() {
+    return;
+  }
+
   // Funcion que devuelve la fecha en el formato correcto
   const dateValue = () => {
     if (cardDueDate[10] === "T" && cardDueDate[19] === "Z") {
@@ -270,6 +274,7 @@ function UpdateCardModal({ show, onHide, api }) {
       <SuccessCardModal
         show={resModal}
         onHide={() => setResModal(false)}
+        onConfirm={handleUpdate}
         title={t("updatecard.modal-title")}
         message={t("updatecard.modal-success")}
         button={t("updatecard.modal-accept")}

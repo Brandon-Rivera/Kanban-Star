@@ -17,8 +17,8 @@ function WorkCard({ title, id, api }) {
 
   const GotoBoard = () => {
     const expireCookie = 1/24;
-    Cookies.set('boardid', id, { expires: expireCookie, secure: true });
-    Cookies.set('boardname', title, { expires: expireCookie, secure: true });
+    Cookies.set('boardid', id, { expires: expireCookie, secure: true, sameSite: 'strict' });
+    Cookies.set('boardname', title, { expires: expireCookie, secure: true, sameSite: 'strict' });
     navigate(view)
   }
 

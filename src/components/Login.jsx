@@ -46,9 +46,9 @@ export const Login = ( { api }) => {
         }
         else {
             const expireCookie = 1/24;
-            Cookies.set('token', data.token, { expires: expireCookie, secure: true });
-            Cookies.set('domain', domain, { expires: expireCookie, secure: true });
-            Cookies.set('userid', data.userid, { expires: expireCookie, secure: true });
+            Cookies.set('token', data.token, { expires: expireCookie, secure: true, sameSite: 'strict' });
+            Cookies.set('domain', domain, { expires: expireCookie, secure: true, sameSite: 'strict' });
+            Cookies.set('userid', data.userid, { expires: expireCookie, secure: true, sameSite: 'strict' });
             navigate('/workspace');
         }
 
