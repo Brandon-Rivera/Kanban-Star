@@ -12,7 +12,7 @@ function NewColumnsTable({ kids, nameCol, idCol, idWork, cols, mycards, index, i
         <>
         <Card className="text-light w-100 p-0" style={{ backgroundColor: color }} >
             <Card.Header>{nameCol}</Card.Header>
-            <Card.Body style={{ backgroundColor: '#FFFAFA' }}>
+            <Card.Body style={{ backgroundColor: '#ffffe0' }}>
                 <Card.Text>
                     {
                         kids.length > 0 ? (
