@@ -16,6 +16,7 @@ import { DataContext } from "../Contexts/DataContext.js";
 import getCorrectDate from "../utils/getCorrectDay";
 import getDeadline from "../utils/getDeadline";
 import "./css/InsertCardModal.css";
+import Cookies from "js-cookie";
 
 function UpdateCardModal({ show, onHide, api }) {
   // Variable que contiene el mapa de traducciones
@@ -112,7 +113,7 @@ function UpdateCardModal({ show, onHide, api }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "supra-access-token": localStorage.getItem("token"),
+            "supra-access-token": Cookies.get("token"),
           },
           body: JSON.stringify(values),
         });

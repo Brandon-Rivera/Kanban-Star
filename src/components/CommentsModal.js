@@ -15,6 +15,7 @@ import ErrorCardModal from "./ErrorCardModal";
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../Contexts/ThemeContext";
 import { DataContext } from "../Contexts/DataContext";
+import Cookies from "js-cookie";
 
 const CommentsModal = ({
   show,
@@ -28,7 +29,7 @@ const CommentsModal = ({
 
   const [t] = useTranslation("global");
   const { theme } = useContext(ThemeContext);
-  const userID = localStorage.getItem("userid");
+  const userID = Cookies.get("userid");
   //Estados
   const [newComment, setNewComment] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
@@ -155,7 +156,7 @@ const CommentsModal = ({
       const response = await fetch(`${api}/upload`, {
         method: "POST",
         headers: {
-          'supra-access-token': localStorage.getItem('token')
+          'supra-access-token': Cookies.get('token')
         },
         body: formData
       })
@@ -203,7 +204,7 @@ const CommentsModal = ({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          'supra-access-token': localStorage.getItem('token')
+          'supra-access-token': Cookies.get('token')
         },
         body: JSON.stringify(values),
       });

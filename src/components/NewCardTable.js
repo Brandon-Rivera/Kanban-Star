@@ -11,6 +11,7 @@ import getDeadline from "../utils/getDeadline";
 import ErrorCardModal from "./ErrorCardModal";
 import SuccessCardModal from "./SuccessCardModal";
 import ConfirmCardModal from "./ConfirmCardModal";
+import Cookies from "js-cookie";
 
 function NewCardTable({
   id,
@@ -18,7 +19,6 @@ function NewCardTable({
   cols,
   duedate,
   idOwner,
-  index,
   Idworkflow,
   workflowPos,
   dataWorkspace,
@@ -50,7 +50,7 @@ function NewCardTable({
     const response = await fetch(`${api}/card`, {
       headers: {
         "Content-Type": "application/json",
-        "supra-access-token": localStorage.getItem("token"),
+        "supra-access-token": Cookies.get("token"),
       },
       method: "POST",
       body: JSON.stringify({
@@ -90,7 +90,7 @@ function NewCardTable({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "supra-access-token": localStorage.getItem("token"),
+          "supra-access-token": Cookies.get("token"),
         },
         body: JSON.stringify(values),
       });
@@ -142,9 +142,7 @@ function NewCardTable({
         <ListGroup defaultActiveKey="#link1">
           <ListGroup.Item className="d-flex justify-content-between">
             <p className="m-0 fw-bold">{id}</p>
-            <p className="m-0 fw-bold">{index}</p>
-            <p className="m-0 fw-bold">{Idworkflow}</p>
-            <p className="m-0 fw-bold">{own ? own.realname : "Sin Asignar"}</p>
+            <p className="m-0 fw-bold">{own ? own.realname : t("insertcard.choose-owner")}</p>
           </ListGroup.Item>
           <ListGroup.Item
             className="d-flex justify-content-between custom-container"
@@ -164,7 +162,7 @@ function NewCardTable({
             <p className="m-0 fw-bold">
               {t("workspace.deadline")}{" "}
               <span className="fw-normal">
-                {duedate ? duedate : "Sin Fecha"}
+                {duedate ? duedate : t("viewcard.no-deadline")}
               </span>
             </p>
           </ListGroup.Item>

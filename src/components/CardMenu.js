@@ -11,6 +11,7 @@ import MoveCardModal from "./MoveCardModal";
 import CommentsModal from "./CommentsModal";
 import ViewCardModal from "./ViewCardModal";
 import UpdateCardModal from "./UpdateCardModal";
+import Cookies from "js-cookie";
 
 function CardMenu({
   show,
@@ -60,7 +61,7 @@ function CardMenu({
     const response = await fetch(`${api}/comment/get`, {
       headers: {
         "Content-Type": "application/json",
-        'supra-access-token': localStorage.getItem('token')
+        'supra-access-token': Cookies.get('token')
       },
       method: "POST",
       body: JSON.stringify(values),
@@ -148,6 +149,7 @@ function CardMenu({
         show={viewModalShow}
         onHide={() => setViewModalShow(false)}
         cardColumn={columnCard}
+        workflowPos={workflowPos}
       />
       <UpdateCardModal
         show={editModalShow}

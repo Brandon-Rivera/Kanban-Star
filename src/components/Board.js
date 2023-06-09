@@ -6,6 +6,7 @@ import Workflow from './Workflow.js'
 import "./css/Board.css"
 import { useTranslation } from 'react-i18next';
 import { DataContext } from '../Contexts/DataContext.js';
+import Cookies from 'js-cookie';
 
 export const Board = ({ api }) => {
     
@@ -17,9 +18,11 @@ export const Board = ({ api }) => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("domain");
-        localStorage.removeItem("userid");
+        Cookies.remove("token");
+        Cookies.remove("domain");
+        Cookies.remove("userid");
+        Cookies.remove("boardid");
+        Cookies.remove("boardname");
         navigate("/");
 
     };
@@ -31,10 +34,10 @@ export const Board = ({ api }) => {
     // Se refresca cada vez que se actualiza el estado de dataW
     useEffect(() => {
         if( dataW === undefined || dataW === null){
-            forceDataW(api, localStorage.getItem('boardid'));
+            forceDataW(api, Cookies.get('boardid'));
         }
         if (dataOw?.mensaje === 'Token inválido') {
-            localStorage.removeItem("token");
+            Cookies.remove("token");
         }
 
         if(localStorage.getItem("i18nextLng") === "en" || localStorage.getItem("i18nextLng") === "es"){
@@ -46,7 +49,7 @@ export const Board = ({ api }) => {
         <>
             <ListGroup>
                 <ListGroup.Item className='title'>
-                    <h4>{t("workspace.board")}{localStorage.getItem('boardname')}</h4>
+                    <h4>{t("workspace.board")}{Cookies.get('boardname')}</h4>
                     <InputGroup className="mb-6">
                         <Button className="search">
                             <BiSearchAlt size={25} color={'white'} />
@@ -69,7 +72,6 @@ export const Board = ({ api }) => {
                     dataW?.data.map(data => (
                         data.type === 0 || data.type === 1 ? <div className="cont border border-secondary rounded my-3 p-2 text-secondary">
                             <h4 className='cont text-center' key={data.id}>{data.name}</h4>
-                            <h4 className='cont text-center bg-primary text-white rounded' key={data.lanes[0].id}>{data.lanes[0].name}</h4>
                             {
                                 data.columns.map(columns => (
                                     columns.kids.length > 0 ? (

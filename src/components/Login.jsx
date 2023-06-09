@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ColorCheckbox from "./ColorCheckbox";
 import { Image } from "react-bootstrap";
+import Cookies from "js-cookie";
 
 export const Login = ( { api }) => {
 
@@ -44,9 +45,10 @@ export const Login = ( { api }) => {
             setModalShow(true);
         }
         else {
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('domain', domain);
-            localStorage.setItem('userid', data.userid);
+            const expireCookie = 1/24;
+            Cookies.set('token', data.token, { expires: expireCookie, secure: true });
+            Cookies.set('domain', domain, { expires: expireCookie, secure: true });
+            Cookies.set('userid', data.userid, { expires: expireCookie, secure: true });
             navigate('/workspace');
         }
 

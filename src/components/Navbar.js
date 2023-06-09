@@ -14,6 +14,7 @@ import { Button } from "react-bootstrap";
 import { BiLogOut } from "react-icons/bi";
 import { BsFillGearFill } from "react-icons/bs";
 import { useContext } from "react";
+import Cookies from "js-cookie";
 
 const NavBar = ({ onClickSettings }) => {
   const { theme } = useContext(ThemeContext);
@@ -24,14 +25,16 @@ const NavBar = ({ onClickSettings }) => {
 
   //Funcion para cerrar sesion
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("domain");
-    localStorage.removeItem("userid");
+    Cookies.remove("token");
+    Cookies.remove("domain");
+    Cookies.remove("userid");
+    Cookies.remove("boardid");
+    Cookies.remove("boardname");
     navigate("/");
   };
 
   const redirectToKanbanize = () => {
-    window.location.href = `https://${localStorage.getItem("domain")}.kanbanize.com/ctrl_dashboard`;
+    window.location.href = `https://${Cookies.get("domain")}.kanbanize.com/ctrl_dashboard`;
   };
 
   const navBarTheme = () => {
