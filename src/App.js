@@ -13,7 +13,7 @@ import { DataProvider } from "./Contexts/DataContext";
 
 function App() {
   //Link del api
-  const apiLink = "https://kvxrvsgw6c.execute-api.us-east-1.amazonaws.com";
+  const apiLink = process.env.REACT_APP_API_LINK;
   //const apiLink = "http://localhost:3001";
 
   const { theme } = useContext(ThemeContext);

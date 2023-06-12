@@ -3,7 +3,6 @@ import './css/Login.css'
 import LanguageCheckbox from "./LanguageCheckbox";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import ErrorModal from "./ErrorModal";
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ColorCheckbox from "./ColorCheckbox";
@@ -89,7 +88,6 @@ export const Login = ({ api }) => {
                 </Collapse>
 
                 {/* Modal que avisa al usuario cuando tiene un error en el inicio de sesión */}
-                <ErrorModal show={modalShow} title='Error de inicio de sesión!' message={t("login.bad-credentials")} onHide={() => setModalShow(false)} />
                 <ErrorCardModal
                     show={modalShow}
                     onHide={() => setModalShow(false)}
