@@ -8,9 +8,10 @@ import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ColorCheckbox from "./ColorCheckbox";
 import { Image } from "react-bootstrap";
+import ErrorCardModal from "./ErrorCardModal";
 import Cookies from "js-cookie";
 
-export const Login = ( { api }) => {
+export const Login = ({ api }) => {
 
     // Asignacion de variables y hooks
     const navigate = useNavigate();
@@ -45,7 +46,7 @@ export const Login = ( { api }) => {
             setModalShow(true);
         }
         else {
-            const expireCookie = 1/24;
+            const expireCookie = 1 / 24;
             Cookies.set('token', data.token, { expires: expireCookie, secure: true, sameSite: 'strict' });
             Cookies.set('domain', domain, { expires: expireCookie, secure: true, sameSite: 'strict' });
             Cookies.set('userid', data.userid, { expires: expireCookie, secure: true, sameSite: 'strict' });
@@ -58,13 +59,13 @@ export const Login = ( { api }) => {
         <div className="App">
             <div className="auth-form-container">
                 <center className="language-checkbox">
-                {/* Boton para cambiar de español a ingles */}
-                    <ColorCheckbox/>
-                    <LanguageCheckbox/>
+                    {/* Boton para cambiar de español a ingles */}
+                    <ColorCheckbox />
+                    <LanguageCheckbox />
                 </center>
 
                 {/* Formulario de inicio de sesion */}
-                <h1 id="font-face-mb"><Image className="kanbanStarLogo" src="https://i.ibb.co/kmWdCNM/ksLogo.png" alt="KanbanStar Logo"/>kanban star</h1>
+                <h1 id="font-face-mb"><Image className="kanbanStarLogo" src="https://i.ibb.co/kmWdCNM/ksLogo.png" alt="KanbanStar Logo" />kanban star</h1>
                 <h1>{t("login.welcome")}</h1>
                 <h2>{t("login.login-with-credentials")}</h2>
                 <form className="login-form" onSubmit={handleSubmit}>
@@ -88,7 +89,13 @@ export const Login = ( { api }) => {
                 </Collapse>
 
                 {/* Modal que avisa al usuario cuando tiene un error en el inicio de sesión */}
-                <ErrorModal show={modalShow} title='Error de inicio de sesión!' message={t("login.bad-credentials")}  onHide={() => setModalShow(false)} />
+                <ErrorModal show={modalShow} title='Error de inicio de sesión!' message={t("login.bad-credentials")} onHide={() => setModalShow(false)} />
+                <ErrorCardModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    title={t("login.bad-credentials-t")}
+                    message={t("login.bad-credentials")}
+                    button={t("move.button-close")} />
             </div>
         </div>
     )

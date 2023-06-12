@@ -3,14 +3,10 @@ import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../Contexts/ThemeContext";
 import { Image } from "react-bootstrap";
 import "./css/Navbar.css"
-
-//Importaciones de bootstrap
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
-
-//Importaciones de iconos
 import { BiLogOut } from "react-icons/bi";
 import { BsFillGearFill } from "react-icons/bs";
 import { useContext } from "react";
@@ -23,7 +19,6 @@ const NavBar = ({ onClickSettings }) => {
 
   const navigate = useNavigate();
 
-  //Funcion para cerrar sesion
   const handleLogout = () => {
     Cookies.remove("token");
     Cookies.remove("domain");

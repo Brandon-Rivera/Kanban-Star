@@ -25,7 +25,6 @@ function CardMenu({
   cardWid,
   api,
 }) {
-  // Traducciones
   const [t] = useTranslation("global");
 
   // Estados para los modales

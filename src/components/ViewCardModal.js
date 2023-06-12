@@ -1,4 +1,3 @@
-// Se importan las librerías y componentes necesarios
 import React, { useContext } from "react";
 import "./css/ViewCardModal.css";
 import { useTranslation } from "react-i18next";

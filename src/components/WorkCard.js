@@ -9,7 +9,6 @@ import Cookies from "js-cookie";
 function WorkCard({ title, id, api }) {
 
   const {view} = useContext(ViewContext);
-
   const navigate = useNavigate();
 
   // Hook para actualizar el estado de informacion en Board

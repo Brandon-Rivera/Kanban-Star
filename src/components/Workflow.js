@@ -50,6 +50,7 @@ function Workflow({ ownerID, title, col, dataWorkspace, workflowPos, api }) {
               >
                 {t("insertcard.add-card")}
               </Button>
+
               {/* Modal para insertar tarjetas */}
               <InsertCardModal
                 show={insertModalShow}

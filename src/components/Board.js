@@ -10,7 +10,6 @@ import Cookies from 'js-cookie';
 
 export const Board = ({ api }) => {
     
-    // Estado que contiene los datos de Board
     const [t] = useTranslation("global");
     const { dataW, forceDataW, dataOw } = useContext(DataContext);
     const [ownerTitle, setOwnerTitle] = useState(t("workspace.filter"));

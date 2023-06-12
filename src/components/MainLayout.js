@@ -13,9 +13,7 @@ export const MainLayout = () => {
 
   const {theme} = useContext(ThemeContext);
   const {view} = useContext(ViewContext);
-
   const [i18n] = useTranslation("global");
-
   const [showSettingsModal, setShowSettingsModal] = useState(false);
 
   //Método para mostrar el modal de configuración en el layout. 

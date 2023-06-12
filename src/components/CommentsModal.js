@@ -30,7 +30,6 @@ const CommentsModal = ({
   const [t] = useTranslation("global");
   const { theme } = useContext(ThemeContext);
   const userID = Cookies.get("userid");
-  //Estados
   const [newComment, setNewComment] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +39,6 @@ const CommentsModal = ({
   const [deleteFilesDisabled, setDeleteFilesDisabled] = useState(true);
   const [filesNamesAndLinks, setFilesNamesAndLinks] = useState([]);
   const { dataOw } = useContext(DataContext);
-
   const divRef = useRef(null);
 
   //Función para que aparezcan los comentarios más recientes en el modal cuando se abre.

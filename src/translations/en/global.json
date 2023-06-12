@@ -3,6 +3,7 @@
         "hello": "Hello",
         "welcome": "Welcome!",
         "login-with-credentials": "Log in with your Kanbanize account",
+        "bad-credentials-t": "Failed to log in!",
         "bad-credentials": "Username or password incorrect, try again please.",
         "e-mail": "E-mail",
         "e-mail-placeholder": "yourmail@mail.com",

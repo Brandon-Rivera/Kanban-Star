@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import './css/Workspace.css'
-
-//Importación de componentes
 import WorkCard from './WorkCard'
 import Cookies from 'js-cookie';
 
-
 export function Workspace({ api }) {
 
-    //Variable para obtener los datos del workspace en un hook
-    const [dataBoard, setDataBoard] = useState({ data: [] });
+    const [dataBoard, setDataBoard] = useState({ data: [] }); //Variable para obtener los datos del workspace en un hook
     const navigate = useNavigate();
 
     useEffect(() => {
 
-        //Valores necesarios para la peticion get de workspace
+        //Valores necesarios para la peticion get
         const values = {
             userid: Cookies.get('userid')
         }
@@ -45,7 +41,6 @@ export function Workspace({ api }) {
             setDataBoard(data)
         }
 
-        //llamada a la funcion
         getBoards()
     }, [api, navigate])
 
@@ -60,8 +55,6 @@ export function Workspace({ api }) {
         };
     })();
 
-
-    //Función que crea y hace dinamica la presentación de tableros
     return (
         <div className="box">
             {

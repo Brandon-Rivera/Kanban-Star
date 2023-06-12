@@ -41,7 +41,7 @@ function NewCardTable({
 
   useEffect(() => {
     setOwn(dataOw.data.find((data) => data.user_id === idOwner));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idOwner]);
 
   // Petición para obtener los detalles de una tarjeta
@@ -62,8 +62,7 @@ function NewCardTable({
     setShowCardMenu(true);
   };
 
-  // Funcion que envia la peticion para
-  // mover la tarjeta a la siguiente columna
+  // Funcion que envia la peticion para mover la tarjeta a la siguiente columna
   const handleCardMoveAPI = async (confirmMove) => {
     if (confirmMove) {
       const { adjacentColumnID, adjacentSubcolumnID } = findNextColumn(
