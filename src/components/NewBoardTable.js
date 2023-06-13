@@ -14,14 +14,17 @@ export function NewBoardTable({ nameWF, dataWorkspace, api }) {
         setResultNWF(res);
     }, [nameWF, dataWorkspace]);
 
+    // Funcion para el movimiento hacia adelante de tarjeta
     const handleNext = () => {
         scrollingWrapperRef.current.scrollLeft += scrollingWrapperRef.current.offsetWidth - 31;
     };
 
+    // Funcion para el movimiento hacia adelante de tarjeta
     const handlePrev = () => {
         scrollingWrapperRef.current.scrollLeft -= scrollingWrapperRef.current.offsetWidth - 31;
     };
 
+    // Función que ayuda a dar color random al background del tablero
     const color = (() => {
         const colors = ['#42AD49', '#E4186A','#2665BB', '#F08830'];
         let index = 0;

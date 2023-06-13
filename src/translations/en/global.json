@@ -3,6 +3,7 @@
         "hello": "Hello",
         "welcome": "Welcome!",
         "login-with-credentials": "Log in with your Kanbanize account",
+        "bad-credentials-t": "Failed to log in!",
         "bad-credentials": "Username or password incorrect, try again please.",
         "e-mail": "E-mail",
         "e-mail-placeholder": "yourmail@mail.com",
@@ -65,7 +66,8 @@
         "insert-success-er": "Operation result",
         "insert-message-er": "The card was not added.",
         "insert-button-er": "Dismiss",
-        "insert-message-er2": "Cards cannot be added into Timeline Workflows."
+        "insert-message-er2": "Cards cannot be added into Timeline Workflows.",
+        "lane": "Lane"
     },
 
     "viewcard":{
@@ -74,7 +76,7 @@
         "btn-accept": "Accept",
         "btn-edit": "Edit card",
         "card-blocked": "Card is blocked",
-        "no-deadline": "No date 🗓️"
+        "no-deadline": "No date"
     },
 
     "comments":{
@@ -83,10 +85,10 @@
         "empty": "Comment can't be empty",
         "accept": "Accept",
         "placeholder": "Write your comment here...",
+        "file-input": "  Add file(s)",
+        "file-selected": "  File(s) selected",
         "error-file": "File or files could not be uploaded, try again.",
         "error-413": "One or more files are too large",
-        "card-blocked": "Card is blocked",
-        "no-deadline": "No date 🗓️",
         "exit": "Exit"
     },
 

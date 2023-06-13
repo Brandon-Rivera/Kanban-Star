@@ -11,6 +11,7 @@ import MoveCardModal from "./MoveCardModal";
 import CommentsModal from "./CommentsModal";
 import ViewCardModal from "./ViewCardModal";
 import UpdateCardModal from "./UpdateCardModal";
+import Cookies from "js-cookie";
 
 function CardMenu({
   show,
@@ -20,11 +21,10 @@ function CardMenu({
   workflowPos,
   idCard,
   cardName,
-  columnCard, 
+  columnCard,
   cardWid,
   api,
 }) {
-  // Traducciones
   const [t] = useTranslation("global");
 
   // Estados para los modales
@@ -56,17 +56,17 @@ function CardMenu({
     };
 
     //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
+  
     const response = await fetch(`${api}/comment/get`, {
       headers: {
         "Content-Type": "application/json",
-        'supra-access-token': localStorage.getItem('token')
+        'supra-access-token': Cookies.get('token')
       },
       method: "POST",
       body: JSON.stringify(values),
     });
     const data = await response.json();
     setComments(data);
-
     setModalShowComments(true);
   };
 
@@ -126,13 +126,13 @@ function CardMenu({
       </Modal>
 
       {/* Modales */}
-      <MoveCardModal 
-        show={modalShowMove} 
-        onHide={() => setModalShowMove(false)} 
-        dataWorkspace={dataWorkspace} 
-        workflowPos={workflowPos} 
-        cardid={idCard} 
-        cardWid={cardWid} 
+      <MoveCardModal
+        show={modalShowMove}
+        onHide={() => setModalShowMove(false)}
+        dataWorkspace={dataWorkspace}
+        workflowPos={workflowPos}
+        cardid={idCard}
+        cardWid={cardWid}
         api={api}
       />
       <CommentsModal
@@ -148,6 +148,7 @@ function CardMenu({
         show={viewModalShow}
         onHide={() => setViewModalShow(false)}
         cardColumn={columnCard}
+        workflowPos={workflowPos}
       />
       <UpdateCardModal
         show={editModalShow}

@@ -16,6 +16,7 @@ import getShortName from "../utils/getShortName";
 import getCurrentDate from "../utils/getCurrentDate";
 import { DataContext } from "../Contexts/DataContext.js";
 import getDeadline from "../utils/getDeadline";
+import Cookies from "js-cookie";
 
 // Funcion que contiene el componente del formulario para la creación de tarjetas
 function InsertCardModal({
@@ -76,7 +77,7 @@ function InsertCardModal({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "supra-access-token": localStorage.getItem("token"),
+        "supra-access-token": Cookies.get("token"),
       },
       body: JSON.stringify(values),
     });

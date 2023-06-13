@@ -4,13 +4,13 @@ import NewBoardTable from "./NewBoardTable"
 import "./css/newBoard.css"
 import { DataContext } from '../Contexts/DataContext.js';
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 export function NewBoard({ api }) {
   //Variable para obtener los datos del workspace en un hook
-  const { dataW, forceDataW } = useContext(DataContext);
+  const { dataW, forceDataW, dataOw } = useContext(DataContext);
   const [selectedName, setSelectedName] = useState(null);
   const [, setSelectedWorkspace] = useState('');
-  const cardOwners = JSON.parse(localStorage.getItem('owners'));
   const navigate = useNavigate();
 
   const handleSelection = useMemo(() => {
@@ -20,9 +20,11 @@ export function NewBoard({ api }) {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("domain");
-    localStorage.removeItem("userid");
+    Cookies.remove("token");
+    Cookies.remove("domain");
+    Cookies.remove("userid");
+    Cookies.remove("boardid");
+    Cookies.remove("boardname");
     navigate("/");
   };
 
@@ -37,9 +39,9 @@ export function NewBoard({ api }) {
   // Se refresca cada vez que se actualiza el estado de dataW
   useEffect(() => {
     if (dataW === undefined || dataW === null) {
-      forceDataW(api, localStorage.getItem('boardid'));
+      forceDataW(api, Cookies.get('boardid'));
     }
-    if (cardOwners.mensaje === 'Token inválido') {
+    if (dataOw?.mensaje === 'Token inválido') {
       handleLogout();
     }
   });

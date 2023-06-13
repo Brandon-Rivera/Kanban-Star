@@ -3,6 +3,7 @@
         "hello": "Hola",
         "welcome": "¡Bienvenido!",
         "login-with-credentials": "Ingresa con tu cuenta de Kanbanize",
+        "bad-credentials-t": "Error de inicio de sesión!",
         "bad-credentials": "Usuario o contraseña incorrectos, intenta de nuevo",
         "e-mail": "Correo electrónico",
         "e-mail-placeholder": "tucorreo@mail.com",
@@ -65,7 +66,8 @@
         "insert-success-er": "Resultado de la operación",
         "insert-message-er": "La tarjeta no fue añadida.",
         "insert-button-er": "Aceptar",
-        "insert-message-er2": "No se pueden añadir tarjetas a los Flujos de Trabajo de tipo Línea del Tiempo."
+        "insert-message-er2": "No se pueden añadir tarjetas a los Flujos de Trabajo de tipo Línea del Tiempo.",
+        "lane": "Carril"
     },
 
     "viewcard":{
@@ -83,10 +85,10 @@
         "empty": "El comentario no puede estar vacío",
         "accept": "Aceptar",
         "placeholder": "Escribe aquí tu comentario...",
+        "file-input": "  Agregar archivo(s)",
+        "file-selected": "  Archivo(s) seleccionado(s)",
         "error-file": "No se pudo subir el o los archivos, intenta de nuevo",
         "error-413": "Uno o más archivos son demasiado grandes",
-        "card-blocked": "Tarjeta bloqueada",
-        "no-deadline": "Sin fecha 🗓️",
         "exit": "Salir"
     },
 

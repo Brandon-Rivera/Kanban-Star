@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import './css/Workspace.css'
-
-//Importación de componentes
 import WorkCard from './WorkCard'
-
+import Cookies from 'js-cookie';
 
 export function Workspace({ api }) {
 
-    //Variable para obtener los datos del workspace en un hook
-    const [dataBoard, setDataBoard] = useState({ data: [] });
+    const [dataBoard, setDataBoard] = useState({ data: [] }); //Variable para obtener los datos del workspace en un hook
     const navigate = useNavigate();
 
     useEffect(() => {
 
-        //Valores necesarios para la peticion get de workspace
+        //Valores necesarios para la peticion get
         const values = {
-            userid: localStorage.getItem('userid')
+            userid: Cookies.get('userid')
         }
 
         //Funcion para realizar la peticion y almacenarlo en el hook dataBoard
@@ -25,7 +22,7 @@ export function Workspace({ api }) {
             const response = await fetch(`${api}/dashboard`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'supra-access-token': localStorage.getItem('token')
+                    'supra-access-token': Cookies.get('token')
                 },
                 method: 'POST',
                 body: JSON.stringify(values)
@@ -33,16 +30,17 @@ export function Workspace({ api }) {
             const data = await response.json()
 
             if (data.mensaje === 'Token inválido') {
-                localStorage.removeItem("token");
-                localStorage.removeItem("domain");
-                localStorage.removeItem("userid");
+                Cookies.remove("token");
+                Cookies.remove("domain");
+                Cookies.remove("userid");
+                Cookies.remove("boardid");
+                Cookies.remove("boardname");
                 navigate("/");
             }
 
             setDataBoard(data)
         }
 
-        //llamada a la funcion
         getBoards()
     }, [api, navigate])
 
@@ -57,8 +55,6 @@ export function Workspace({ api }) {
         };
     })();
 
-
-    //Función que crea y hace dinamica la presentación de tableros
     return (
         <div className="box">
             {

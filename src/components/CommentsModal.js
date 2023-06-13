@@ -8,11 +8,14 @@ import {
   ModalHeader,
 } from "react-bootstrap";
 import LoadingModal from "./LoadingModal";
+import { AiOutlineFileAdd, AiOutlineClose } from 'react-icons/ai'
 import "./css/CommentsModal.css";
 import { useContext, useState, useRef, useEffect } from "react";
 import ErrorCardModal from "./ErrorCardModal";
 import { useTranslation } from "react-i18next";
 import { ThemeContext } from "../Contexts/ThemeContext";
+import { DataContext } from "../Contexts/DataContext";
+import Cookies from "js-cookie";
 
 const CommentsModal = ({
   show,
@@ -26,15 +29,16 @@ const CommentsModal = ({
 
   const [t] = useTranslation("global");
   const { theme } = useContext(ThemeContext);
-  const userID = localStorage.getItem("userid");
-  //Estados
+  const userID = Cookies.get("userid");
   const [newComment, setNewComment] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [userFiles, setUserFiles] = useState([]);
+  const [labelText, setLabelText] = useState(t("comments.file-input"));
+  const [deleteFilesDisabled, setDeleteFilesDisabled] = useState(true);
   const [filesNamesAndLinks, setFilesNamesAndLinks] = useState([]);
-
+  const { dataOw } = useContext(DataContext);
   const divRef = useRef(null);
 
   //Función para que aparezcan los comentarios más recientes en el modal cuando se abre.
@@ -48,11 +52,16 @@ const CommentsModal = ({
     scrollDown();
   });
 
+  useEffect(() => {
+    setLabelText(t("comments.file-input"));
+  }, [t]);
 
   const insertInitialState = () => {
+    setLabelText(t("comments.file-input"))
     setNewComment("");
     setUserFiles([]);
     setFilesNamesAndLinks([]);
+    setDeleteFilesDisabled(true);
   };
 
   const exitModal = () => {
@@ -60,11 +69,13 @@ const CommentsModal = ({
     onHide();
   }
 
-
   /*Obtenemos owners del localStorage y comparamos sus IDs con el ID del autor
    de cada comentario para regresar el nombre del autor*/
-  const cardOwners = JSON.parse(localStorage.getItem("owners"));
-  const ownersArray = Object.values(cardOwners);
+  let ownersArray = [];
+  if (dataOw !== null) {
+    ownersArray = Object.values(dataOw);
+  }
+    // Rest of your code using the ownersArray
   const ownersBuenos = ownersArray[0];
   let author = "";
 
@@ -114,7 +125,17 @@ const CommentsModal = ({
   //Función que establece el los archivos adjuntos en el form en un estado "newComment"
   const handleFileControlChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
-    setUserFiles(selectedFiles);
+    if(selectedFiles.length !== 0){
+      setLabelText(selectedFiles.length + t("comments.file-selected"));
+      setUserFiles(selectedFiles);
+      setDeleteFilesDisabled(false);
+    } 
+  }
+
+  const deleteSelectedFiles = () => {
+    setUserFiles([]);
+    setLabelText(t("comments.file-input"));
+    setDeleteFilesDisabled(true);
   }
 
   //Cada que se adjuntan archivos, se mandan a la base de datos y se obtiene su link
@@ -133,7 +154,7 @@ const CommentsModal = ({
       const response = await fetch(`${api}/upload`, {
         method: "POST",
         headers: {
-          'supra-access-token': localStorage.getItem('token')
+          'supra-access-token': Cookies.get('token')
         },
         body: formData
       })
@@ -142,11 +163,12 @@ const CommentsModal = ({
         if (response.status === 413) {
           setErrorMessage(t("comments.error-413"));
         }
-        else{
+        else {
           setErrorMessage(t("comments.error-file"));
         }
         setShowErrorModal(true);
         setIsLoading(false);
+        insertInitialState();
       }
       else {
         const data = await response.json();
@@ -162,7 +184,6 @@ const CommentsModal = ({
   // Funcion para hacer la peticion POST para insertar el comentario.
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
     const encodedText = newComment
       .replace(/ /g, "&nbsp;")
       .replace(/\n/g, "<br/>");
@@ -177,29 +198,28 @@ const CommentsModal = ({
     }
     await getFileLinks();
     if (newComment !== "" || filesNamesAndLinks.length !== 0) {
-      if (showErrorModal !== true) {
-        const response = await fetch(`${api}/comment`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            'supra-access-token': localStorage.getItem('token')
-          },
-          body: JSON.stringify(values),
-        });
+      const response = await fetch(`${api}/comment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          'supra-access-token': Cookies.get('token')
+        },
+        body: JSON.stringify(values),
+      });
 
-        const data = await response.json();
-        if (data.error) {
-          setShowErrorModal(true);
-          setIsLoading(false)
-        } else {
-          setIsLoading(false);
-          insertInitialState();
-          getComments();
-        }
-      } else {
-        setErrorMessage(t("comments.empty"));
+      const data = await response.json();
+      if (data.error) {
         setShowErrorModal(true);
+        setIsLoading(false)
+      } else {
+        setIsLoading(false);
+        insertInitialState();
+        getComments();
       }
+    }
+    else if (userFiles.length === 0 && newComment === "") {
+      setErrorMessage(t("comments.empty"));
+      setShowErrorModal(true);
     }
   };
 
@@ -259,7 +279,19 @@ const CommentsModal = ({
                 value={newComment}
                 onChange={handleFormControlChange}
               ></FormControl>
-              <Form.Control type="file" multiple id="fileInput" onChange={handleFileControlChange}/>
+              <Form.Label htmlFor="filesInput" id="filesInputLabel">
+                <AiOutlineFileAdd />&nbsp;
+                {labelText}
+                <Form.Control type="file" multiple id="filesInput" onChange={handleFileControlChange} />
+              </Form.Label>
+              <Button 
+                id="deleteFiles" 
+                variant="danger" 
+                disabled={deleteFilesDisabled} 
+                onClick={() => deleteSelectedFiles()}
+              >
+                  <AiOutlineClose />
+              </Button>
             </div>
             <br></br>
             <div className="footerButtons">
@@ -278,8 +310,8 @@ const CommentsModal = ({
       />
       <LoadingModal
         show={isLoading}
-        title = {t("loading.title")}
-        message = {t("loading.comment")}
+        title={t("loading.title")}
+        message={t("loading.comment")}
       />
     </>
   );

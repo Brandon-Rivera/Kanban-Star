@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap';
 import NewCardTable from './NewCardTable';
 import plusIcon from "../images/plus.png";
-import "./css/NewColumnsTable.css"
 import InsertCardModal from './InsertCardModal';
 
 function NewColumnsTable({ kids, nameCol, idCol, idWork, cols, mycards, index, indeK, dataWorkspace, workflowPos, api, color}) {
@@ -13,7 +12,7 @@ function NewColumnsTable({ kids, nameCol, idCol, idWork, cols, mycards, index, i
         <>
         <Card className="text-light w-100 p-0" style={{ backgroundColor: color }} >
             <Card.Header>{nameCol}</Card.Header>
-            <Card.Body style={{ backgroundColor: "#ffffe0" }}>
+            <Card.Body style={{ backgroundColor: '#ffffe0' }}>
                 <Card.Text>
                     {
                         kids.length > 0 ? (
@@ -29,7 +28,9 @@ function NewColumnsTable({ kids, nameCol, idCol, idWork, cols, mycards, index, i
                         )
                     }
                 </Card.Text>
-                <Button className="btn-danger rounded-circle p-0 plusicon"><img width="50" src={plusIcon} alt='nextArrrow' onClick={() => setShowInsertCard(true)}/></Button>
+                <div  className='text-center'>
+                <Button className="btn-danger rounded-circle p-0"><img width="50" src={plusIcon} alt='nextArrrow' onClick={() => setShowInsertCard(true)}/></Button>
+                </div>
             </Card.Body>
         </Card>
         <InsertCardModal show={showInsertCard} onHide={() => setShowInsertCard(false)} columnID={idCol} wPos={workflowPos} columnName={nameCol} workflowID={idWork} api={api}/>

@@ -1,3 +1,5 @@
+//Archivo utilizado para la traduccion de textos
+
 import { initReactI18next } from 'react-i18next';
 import i18next from 'i18next';
 import global_en from "./translations/en/global.json"

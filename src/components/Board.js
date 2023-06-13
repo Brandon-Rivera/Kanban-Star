@@ -6,48 +6,49 @@ import Workflow from './Workflow.js'
 import "./css/Board.css"
 import { useTranslation } from 'react-i18next';
 import { DataContext } from '../Contexts/DataContext.js';
+import Cookies from 'js-cookie';
 
 export const Board = ({ api }) => {
     
-    // Estado que contiene los datos de Board
     const [t] = useTranslation("global");
-    const { dataW, forceDataW } = useContext(DataContext);
+    const { dataW, forceDataW, dataOw } = useContext(DataContext);
     const [ownerTitle, setOwnerTitle] = useState(t("workspace.filter"));
     const [ownerID, setOwnerID] = useState(0);
-    const cardOwners = JSON.parse(localStorage.getItem('owners'));
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("domain");
-        localStorage.removeItem("userid");
+        Cookies.remove("token");
+        Cookies.remove("domain");
+        Cookies.remove("userid");
+        Cookies.remove("boardid");
+        Cookies.remove("boardname");
         navigate("/");
 
     };
 
-    if (cardOwners.mensaje === 'Token inválido') {
+    if (dataOw?.mensaje === 'Token inválido') {
         handleLogout()
     }
 
     // Se refresca cada vez que se actualiza el estado de dataW
     useEffect(() => {
         if( dataW === undefined || dataW === null){
-            forceDataW(api, localStorage.getItem('boardid'));
+            forceDataW(api, Cookies.get('boardid'));
         }
-        if (cardOwners.mensaje === 'Token inválido') {
-            localStorage.removeItem("token");
+        if (dataOw?.mensaje === 'Token inválido') {
+            Cookies.remove("token");
         }
 
         if(localStorage.getItem("i18nextLng") === "en" || localStorage.getItem("i18nextLng") === "es"){
             setOwnerTitle(t("workspace.filter"));
         }
-    }, [dataW, api, cardOwners.mensaje, forceDataW, t]);
+    }, [dataW, api, dataOw?.mensaje, forceDataW, t]);
 
     return (
         <>
             <ListGroup>
                 <ListGroup.Item className='title'>
-                    <h4>{t("workspace.board")}{localStorage.getItem('boardname')}</h4>
+                    <h4>{t("workspace.board")}{Cookies.get('boardname')}</h4>
                     <InputGroup className="mb-6">
                         <Button className="search">
                             <BiSearchAlt size={25} color={'white'} />
@@ -56,7 +57,7 @@ export const Board = ({ api }) => {
                         <DropdownButton id="dropdown-basic-button" title={ownerTitle} className="d-flex justify-content-center w-100 m-2">
                             <Dropdown.Item key='0' onClick={() => { setOwnerTitle(t("workspace.filter")); setOwnerID(0); }} >{t("workspace.filter")}</Dropdown.Item>
                             {
-                                cardOwners.data.map(data => (
+                                dataOw?.data.map(data => (
                                     <Dropdown.Item key={data.user_id} onClick={() => { setOwnerTitle(data.username); setOwnerID(data.user_id); }} >{data.username}</Dropdown.Item>
                                 ))
                             }
@@ -70,7 +71,6 @@ export const Board = ({ api }) => {
                     dataW?.data.map(data => (
                         data.type === 0 || data.type === 1 ? <div className="cont border border-secondary rounded my-3 p-2 text-secondary">
                             <h4 className='cont text-center' key={data.id}>{data.name}</h4>
-                            <h4 className='cont text-center bg-primary text-white rounded' key={data.lanes[0].id}>{data.lanes[0].name}</h4>
                             {
                                 data.columns.map(columns => (
                                     columns.kids.length > 0 ? (

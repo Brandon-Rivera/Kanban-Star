@@ -4,11 +4,11 @@ import Form from 'react-bootstrap/Form';
 import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { BsRecordCircleFill } from "react-icons/bs"
-
 import SuccessCardModal from "./SuccessCardModal";
 import ErrorCardModal from "./ErrorCardModal";
 import { DataContext } from "../Contexts/DataContext.js";
 import getDeadline from '../utils/getDeadline';
+import Cookies from 'js-cookie';
 
 function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api, wPos }) {
 
@@ -43,7 +43,7 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api, 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'supra-access-token': localStorage.getItem('token')
+                    'supra-access-token': Cookies.get('token')
                 },
                 body: JSON.stringify(values)
             });
@@ -58,7 +58,7 @@ function MoveColumn({ column, tabCol1, tabCol2, dotColor, cardid, cardWid, api, 
             if (data.error.message === `The card with id ${cardid} cannot be moved because it is blocked.`) {
                 setErrModal(true);
             }
-            if (data.error.message === `The card with id ${cardid} cannot be moved because some of the exit criteria for the column with id ${cardWid} on the board with id ${localStorage.getItem('boardid')} are not checked off.`) {
+            if (data.error.message === `The card with id ${cardid} cannot be moved because some of the exit criteria for the column with id ${cardWid} on the board with id ${Cookies.get('boardid')} are not checked off.`) {
                 setErrModal2(true);
             }
 

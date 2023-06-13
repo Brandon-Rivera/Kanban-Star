@@ -16,6 +16,7 @@ import { DataContext } from "../Contexts/DataContext.js";
 import getCorrectDate from "../utils/getCorrectDay";
 import getDeadline from "../utils/getDeadline";
 import "./css/InsertCardModal.css";
+import Cookies from "js-cookie";
 
 function UpdateCardModal({ show, onHide, api }) {
   // Variable que contiene el mapa de traducciones
@@ -61,6 +62,10 @@ function UpdateCardModal({ show, onHide, api }) {
   // Funcion que muestra el modal de confirmación
   function confirmUpdate() {
     setConfirmModal(true);
+  }
+
+  function handleUpdate() {
+    return;
   }
 
   // Funcion que devuelve la fecha en el formato correcto
@@ -112,7 +117,7 @@ function UpdateCardModal({ show, onHide, api }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "supra-access-token": localStorage.getItem("token"),
+            "supra-access-token": Cookies.get("token"),
           },
           body: JSON.stringify(values),
         });
@@ -269,6 +274,7 @@ function UpdateCardModal({ show, onHide, api }) {
       <SuccessCardModal
         show={resModal}
         onHide={() => setResModal(false)}
+        onConfirm={handleUpdate}
         title={t("updatecard.modal-title")}
         message={t("updatecard.modal-success")}
         button={t("updatecard.modal-accept")}
