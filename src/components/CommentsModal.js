@@ -282,7 +282,7 @@ const CommentsModal = ({
               <Form.Label htmlFor="filesInput" id="filesInputLabel">
                 <AiOutlineFileAdd />&nbsp;
                 {labelText}
-                <Form.Control type="file" multiple id="filesInput" onChange={handleFileControlChange} />
+                <Form.Control type="file" multiple id="filesInput" onChange={handleFileControlChange} accept="image/*" />
               </Form.Label>
               <Button 
                 id="deleteFiles" 
