@@ -15,7 +15,7 @@ function Workflow({ ownerID, title, col, dataWorkspace, workflowPos, api }) {
   return (
     <>
       <Container fluid="xs">
-        <Accordion alwaysOpen >
+        <Accordion alwaysOpen defaultActiveKey="0">
           <Accordion.Item eventKey="0">
             <Accordion.Header>{title}</Accordion.Header>
             <Accordion.Body className='acc-body'>
