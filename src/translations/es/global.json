@@ -85,10 +85,10 @@
         "empty": "El comentario no puede estar vacío",
         "accept": "Aceptar",
         "placeholder": "Escribe aquí tu comentario...",
-        "file-input": "  Agregar archivo(s)",
-        "file-selected": "  Archivo(s) seleccionado(s)",
-        "error-file": "No se pudo subir el o los archivos, intenta de nuevo",
-        "error-413": "Uno o más archivos son demasiado grandes",
+        "file-input": "  Agregar imagen(es)",
+        "file-selected": "  Imagen(es) seleccionada(s)",
+        "error-file": "No se pudo subir la o las imágenes, intenta de nuevo",
+        "error-413": "Una o más imágenes son demasiado grandes",
         "exit": "Salir"
     },
 
@@ -98,7 +98,7 @@
     },
 
     "move": {
-        "title-res": "Todo bien!",
+        "title-res": "¡Todo bien!",
         "title-err": "Ups!",
         "title-conf": "Mover tarjeta",
         "message-res": "Se movio la tarjeta",
@@ -106,7 +106,7 @@
         "message-ac": "La tarjeta no se puede mover por un criterio de aceptación",
         "message-time": "La tarjeta no se puede mover por que está en un Flujo de Trabajo de tipo Línea del Tiempo",
         "message-err": "La tarjeta no fue movida",
-        "message-conf": "Estás seguro que deseas mover la tarjeta?",
+        "message-conf": "¿Estás seguro que deseas mover la tarjeta?",
         "button-close": "Cerrar",
         "button-accept": "Aceptar",
         "button-cancel": "Cancelar"
