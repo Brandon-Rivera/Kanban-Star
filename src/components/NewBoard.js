@@ -6,13 +6,16 @@ import { DataContext } from '../Contexts/DataContext.js';
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 
+//Función principal en la que se hace la peticíon del tablero y se usa el dropdown para filtrar workspaces
 export function NewBoard({ api }) {
+
   //Variable para obtener los datos del workspace en un hook
   const { dataW, forceDataW, dataOw } = useContext(DataContext);
   const [selectedName, setSelectedName] = useState(null);
   const [, setSelectedWorkspace] = useState('');
   const navigate = useNavigate();
 
+  //Función que guarda la opción que seleccionó el usuario en useMemo
   const handleSelection = useMemo(() => {
     return (name) => {
       setSelectedName(name);
@@ -27,7 +30,7 @@ export function NewBoard({ api }) {
     Cookies.remove("boardname");
     navigate("/");
   };
-
+  //Función que ayuda a despleglar el primer tablero que haya en workspaces
   useEffect(() => {
     if (dataW?.data.length > 0) {
       setSelectedWorkspace(dataW.data[0].name);
@@ -46,7 +49,8 @@ export function NewBoard({ api }) {
     }
   });
 
-
+  //el dropdown solo despliga los workspaces que cumplan con el tipo 0 o 1 y cuando selecciona alguna opcion de dropdown se guarda en usememo 
+  //también se manda los datos de la petición al componente NewBoardTable y se manda lo que haya en el hook selectedName
   return (
     <Container fluid>
       <DropdownButton id="dropdown-basic-button" title="Workspaces" className="d-flex justify-content-center m-2">

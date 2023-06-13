@@ -4,10 +4,15 @@ import NewCardTable from './NewCardTable';
 import plusIcon from "../images/plus.png";
 import InsertCardModal from './InsertCardModal';
 
+//Función que pinta todo los componentes dentro de una columna
 function NewColumnsTable({ kids, nameCol, idCol, idWork, cols, mycards, index, indeK, dataWorkspace, workflowPos, api, color}) {
     // Hook para mostrar el modal de insertar tarjeta
     const [showInsertCard, setShowInsertCard] = useState(false)
 
+    //Función que establece los elementos de la columna,  verifica si es padre o tiene kids para desplegar las tarjetas
+    //Se manda al componente NewCardTable los datos que debe contener las tarjetas
+    //Al final de la columna hay un botón para agregar más tarjetas
+    //El insertcardmodal ayuda a aparecer un modal con las distintas opciones para la tarjeta
     return (
         <>
         <Card className="text-light w-100 p-0" style={{ backgroundColor: color }} >
