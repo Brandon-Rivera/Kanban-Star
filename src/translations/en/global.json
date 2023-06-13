@@ -85,10 +85,10 @@
         "empty": "Comment can't be empty",
         "accept": "Accept",
         "placeholder": "Write your comment here...",
-        "file-input": "  Add file(s)",
-        "file-selected": "  File(s) selected",
-        "error-file": "File or files could not be uploaded, try again.",
-        "error-413": "One or more files are too large",
+        "file-input": "  Add image(s)",
+        "file-selected": "  Image(s) selected",
+        "error-file": "Image or images could not be uploaded, try again.",
+        "error-413": "One or more images are too large",
         "exit": "Exit"
     },
 

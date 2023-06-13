@@ -9,6 +9,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
 import { BiLogOut } from "react-icons/bi";
 import { BsFillGearFill } from "react-icons/bs";
+import { FiExternalLink } from "react-icons/fi";
 import { useContext } from "react";
 import Cookies from "js-cookie";
 
@@ -29,7 +30,7 @@ const NavBar = ({ onClickSettings }) => {
   };
 
   const redirectToKanbanize = () => {
-    window.location.href = `https://${Cookies.get("domain")}.kanbanize.com/ctrl_dashboard`;
+    window.open(`https://${Cookies.get("domain")}.kanbanize.com/ctrl_dashboard`, '_blank');
   };
 
   const navBarTheme = () => {
@@ -61,6 +62,7 @@ const NavBar = ({ onClickSettings }) => {
                   className="d-inline-block align-top"
                   alt="React Bootstrap logo"
                 />
+                <FiExternalLink/>
               </Button>
 
               <Button variant={navBarTheme()} onClick={onClickSettings}>
