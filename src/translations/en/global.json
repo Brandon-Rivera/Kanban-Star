@@ -108,13 +108,13 @@
         "message-time": "Cards cannot be moved into Timeline Workflows.",
         "message-err": "The card was not moved",
         "message-conf": "You are moving this card. Would you like to continue?",
-        "button-close": "Close",
-        "button-accept": "Dismiss",
+        "button-close": "Dismiss",
+        "button-accept": "Accept",
         "button-cancel": "Cancel"
     },
 
     "updatecard":{
-        "no-deadline": "No date 🗓️",
+        "no-deadline": "No date",
         "no-owner": "None",
         "btn-accept": "Update card",
         "btn-cancel": "Cancel",

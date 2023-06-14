@@ -53,7 +53,7 @@ export function NewBoard({ api }) {
   //también se manda los datos de la petición al componente NewBoardTable y se manda lo que haya en el hook selectedName
   return (
     <Container fluid>
-      <DropdownButton id="dropdown-basic-button" title="Workspaces" className="d-flex justify-content-center m-2">
+      <DropdownButton id="dropdown-basic-button" title="Workflows" className="d-flex justify-content-center m-2">
         {
           dataW?.data.map(data => (
             data.type === 0 || data.type === 1 ? <Dropdown.Item key={data.id} onClick={() => handleSelection(data.name)} >{data.name}</Dropdown.Item> : []

@@ -51,7 +51,7 @@ function MoveCardModal({ show, onHide, dataWorkspace, workflowPos, cardid, cardW
 
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={onHide}>Cerrar</Button>
+                <Button onClick={onHide}>{t('updatecard.modal-accept')}</Button>
             </Modal.Footer>
         </Modal>
     )

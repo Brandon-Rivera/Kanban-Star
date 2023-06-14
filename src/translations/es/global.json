@@ -76,7 +76,7 @@
         "btn-accept": "Aceptar",
         "btn-edit": "Editar tarjeta",
         "card-blocked": "Tarjeta bloqueada",
-        "no-deadline": "Sin fecha 🗓️"
+        "no-deadline": "Sin fecha"
     },
 
     "comments":{
@@ -114,7 +114,7 @@
     },
 
     "updatecard":{
-        "no-deadline": "Sin fecha 🗓️",
+        "no-deadline": "Sin fecha",
         "no-owner": "Ninguno",
         "btn-accept": "Actualizar tarjeta",
         "btn-cancel": "Cancelar",
