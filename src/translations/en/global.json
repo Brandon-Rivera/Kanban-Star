@@ -73,7 +73,7 @@
     "viewcard":{
         "no-title": "No title",
         "no-description": "No description",
-        "btn-accept": "Accept",
+        "btn-accept": "Dismiss",
         "btn-edit": "Edit card",
         "card-blocked": "Card is blocked",
         "no-deadline": "No date"
@@ -83,7 +83,7 @@
         "title": "Comments of card",
         "add": "Add comment",
         "empty": "Comment can't be empty",
-        "accept": "Accept",
+        "accept": "Dismiss",
         "placeholder": "Write your comment here...",
         "file-input": "  Add image(s)",
         "file-selected": "  Image(s) selected",
@@ -98,6 +98,7 @@
     },
 
     "move": {
+        "title-modal": "Select column",
         "title-res": "Everything fine!",
         "title-err": "Oops!",
         "title-conf": "Move card",
@@ -108,7 +109,7 @@
         "message-err": "The card was not moved",
         "message-conf": "You are moving this card. Would you like to continue?",
         "button-close": "Close",
-        "button-accept": "Accept",
+        "button-accept": "Dismiss",
         "button-cancel": "Cancel"
     },
 

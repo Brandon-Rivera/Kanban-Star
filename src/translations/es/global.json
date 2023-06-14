@@ -98,10 +98,11 @@
     },
 
     "move": {
+        "title-modal": "Seleccionar columna",
         "title-res": "¡Todo bien!",
         "title-err": "Ups!",
         "title-conf": "Mover tarjeta",
-        "message-res": "Se movio la tarjeta",
+        "message-res": "Se movió la tarjeta",
         "message-block": "La tarjeta no se puede mover por que está bloqueada",
         "message-ac": "La tarjeta no se puede mover por un criterio de aceptación",
         "message-time": "La tarjeta no se puede mover por que está en un Flujo de Trabajo de tipo Línea del Tiempo",
