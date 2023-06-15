@@ -5,9 +5,11 @@ import Button from 'react-bootstrap/Button';
 import MoveColumn from './MoveColumn';
 import Form from 'react-bootstrap/Form';
 import MoveColumnCheckless from './MoveColumnCheckless';
+import { useTranslation } from 'react-i18next';
 
 function MoveCardModal({ show, onHide, dataWorkspace, workflowPos, cardid, cardWid, api }) {
 
+    const [t] = useTranslation("global");
     const [wPos, setWPos] = useState(0);
     const [move, setMove] = useState(false);
     const colors = ["FFFFFF","#545454", "#2665BB", "#F08830", "#42AD49", "5E17EB"]
@@ -20,7 +22,7 @@ function MoveCardModal({ show, onHide, dataWorkspace, workflowPos, cardid, cardW
     return (
         <Modal show={show} onHide={onHide} size='lg' centered>
             <Modal.Header className='bg-success'>
-                <Modal.Title className='fw-bold text-white'>Selecciona columna</Modal.Title><CloseButton onClick={onHide} />
+                <Modal.Title className='fw-bold text-white'>{t('move.title-modal')}</Modal.Title><CloseButton onClick={onHide} />
             </Modal.Header>
             <Modal.Body className='p-1'>
 
@@ -49,7 +51,7 @@ function MoveCardModal({ show, onHide, dataWorkspace, workflowPos, cardid, cardW
 
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={onHide}>Cerrar</Button>
+                <Button onClick={onHide}>{t('updatecard.modal-accept')}</Button>
             </Modal.Footer>
         </Modal>
     )

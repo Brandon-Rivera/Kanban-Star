@@ -13,6 +13,7 @@ import SuccessCardModal from "./SuccessCardModal";
 import ConfirmCardModal from "./ConfirmCardModal";
 import Cookies from "js-cookie";
 
+//Función que ayuda a pintar la tarjeta y sus funcionalidades de cada elemento
 function NewCardTable({
   id,
   nCard,
@@ -32,6 +33,7 @@ function NewCardTable({
   const { moveCard, updateDataC, dataW, moveCardInfo, updateMoveCardInfo, dataOw } =
     useContext(DataContext);
   const laneId = dataW?.data[workflowPos]?.lanes[0]?.id;
+  //Hooks que ayudan a desplegar distintos modales
   const [errModal, setErrModal] = useState(false);
   const [errModal2, setErrModal2] = useState(false);
   const [resModal, setResModal] = useState(false);
@@ -130,11 +132,17 @@ function NewCardTable({
       setErrModal3(true);
     }
   };
-
+  //mueve la tarjeta local
   const handleLocalMove = () => {
     moveCard(moveCardInfo.oldCard, moveCardInfo.newCard);
   };
 
+  //Hacemos 5 secciones
+  //Seccion1 id y nombre del dueño de la tarjeta
+  //Seccion2 Tarea de la tarjeta y foto del dueño de la tarjeta
+  //seccion3 Fecha limite
+  //Seccion4 Menú
+  //SecciOn5 Mover la tarjeta
   return (
     <>
       <Container fluid className="px-0 p-1">

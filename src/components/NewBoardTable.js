@@ -5,10 +5,13 @@ import nextArr from "../images/Siguiente.png";
 
 import "./css/NewBoardTable.css";
 
+//Función principal en la que pinta todo los elementos del tablero
 export function NewBoardTable({ nameWF, dataWorkspace, api }) {
+    //Hooks que ayudan al Horizontal Scrolling y a gurdar datos de la petción del tablero
     const scrollingWrapperRef = useRef(null);
     const [resultNWF, setResultNWF] = useState('');
 
+    //Función que ayuda a filtar todos los datos del board en donde solo se guardan los datos del nombre del worksapce (NameWF)
     useEffect(() => {
         const res = (dataWorkspace.data.find(data => data.name === nameWF))
         setResultNWF(res);
@@ -35,6 +38,9 @@ export function NewBoardTable({ nameWF, dataWorkspace, api }) {
         };
     })();
 
+    //Función que pinta los botones izq y der de la pantalla con su funcionalidad
+    //Con los datos del hook resultNWF se hace un .map() que ayuda a desplegar en primera instancia todas las columnas y manda datos a los demás componentes
+    //En este caso verifica si es padre o tiene kids para desplegar las columnas
     return (
         <Container fluid className='mb-5'>
             <div className="d-flex justify-content-between my-2 fixed-bottom">
